@@ -1,0 +1,33 @@
+<!--Message Logging external-->
+<div class='row pt-3 d-block'>
+    <h5>Message Logging</h5>
+    <div class='pl-5 ml-5'>
+       <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="dbgReceiver" onclick="LBDebugLog(this)" >
+          <label class="form-check-label"for="flexSwitchCheckDefault">Receiver</label>
+       </div>
+       <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="dbgPubsub" onclick="LBDebugLog(this)">
+          <label class="form-check-label" for="flexSwitchCheckDefault">PubSub</label>
+       </div>
+       <ul class="nav nav-tabs mt-3" id="debugLog" role="tablist">
+          <li class="nav-item" role="presentation">
+             <button class="nav-link active" id="LBreceiver-tab" data-bs-toggle="tab" data-bs-target="#LBreceiver" type="button" role="tab" aria-controls="LBreceiver" aria-selected="true">Receiver</button>
+          </li>
+          <li class="nav-item" role="presentation">
+             <button class="nav-link" id="LBPubSub-tab" data-bs-toggle="tab" data-bs-target="#LBPubSub" type="button" role="tab" aria-controls="LBPubSub" aria-selected="false">PubSub</button>
+          </li>
+       </ul>
+       <div class="tab-content p-0 " id="debugLogContent">
+          <!--LB Receiver Log-->
+          <div class="tab-pane fade show active" id="LBreceiver" role="tabpanel" aria-labelledby="LBreceiver-tab" >
+             <div id="LBreceiverlog" class="col col-10 text-wrap">Logging is disabled.</div>
+          </div>
+          <!--LB Pubsub Log-->
+          <div class="tab-pane fade" id="LBPubSub" role="tabpanel" aria-labelledby="LBPubSub-tab">
+             <div id="LBpubsublog" class="col col-10 text-wrap">Logging is disabled.</div>
+          </div>
+       </div>
+    </div>
+ </div>
+<!--Message Logging external end-->

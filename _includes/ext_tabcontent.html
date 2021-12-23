@@ -1,0 +1,37 @@
+<div class="tab-pane" id="content-status" role="tabpanel" title="Status" data-type="default">
+  <div class='row pt-3'>
+    <h5>Transmitter Connection</h5>
+    <div class="col">
+    <div class="row">
+      <label for="inputPassword" class="col-sm-5 col-form-label">IP Address:</label>
+      <div class="col-sm-4 w-auto">
+        <input type="text" id="nIPbox" name="nIPbox" value='127.0.0.1' class="form-control form-control-sm" >
+      </div>
+    </div>
+    <div class="row">
+      <label for="inputPassword" class="col-sm-5 col-form-label">Port:</label>
+      <div class="col-sm-4 w-auto">
+        <input type="number" min="0" max="65535" id="nPortBox" name="nPortBox" value=9425 class="form-control form-control-sm">
+      </div>
+    </div>
+    <div class="row">
+      <label for="inputPassword" class="col-sm-5 col-form-label">Password (optional):</label>
+      <div class="col-sm-4 w-auto">
+        <input id="nPassBox" type="password" name="nPassBox" size="20" value='' class="form-control form-control-sm">
+      </div>
+    </div>
+    <div class="mt-1 row">
+      <button type="button" id="cnctbutton" class="btn btn-primary btn-sm mb-2 w-auto ms-3" onclick="connectbutton()">Connect</button>
+    </div>
+    </div>
+ </div>
+  <div class='row pt-3'>
+     <h5>Appearance</h5>
+     <div class="col col-md-auto"><button type="button" class="btn btn-primary btn-sm mb-2 w-auto me-2" onclick="TSLNoTabs()">No Tabs</button><button type="button" class="btn btn-primary btn-sm mb-2 w-auto" onclick="TSLTabs()">Show Tabs</button></div>
+  </div>
+{% include ext_tabcontent/message_logging.html %}
+</div>
+<!--Your external script will be inserted here-->
+<!--<script src="example.js"></script>-->
+<!--INSERT PART 1-->
+ 

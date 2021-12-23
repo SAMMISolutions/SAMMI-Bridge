@@ -1,0 +1,156 @@
+body {
+  font-family: 'Lato', sans-serif;
+}
+h1 {
+font-size: calc(1.2em + 1vw);
+}
+a {
+  color: #ffac7c;
+  text-decoration: underline;
+}
+a:hover {
+  color: #ff6810;
+  text-decoration: underline;
+}
+.tslCollapse, .tslCollapse:hover, .tslCollapse a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.tslCollapse.collapsed:before {
+  content:'Show Options \01F847' ;
+  width:15px;
+}
+.tslCollapse:before {
+  content:'Hide Options \01F845' ;
+  width:15px;
+}
+.LBTestTriggers .form-check-input[type=checkbox] {
+  vertical-align: text-bottom;
+}
+#footer .tslCollapse.collapsed:before {
+  content:'Show Installed Extensions \01F847' ;
+  width:15px;
+}
+#footer .tslCollapse:before {
+  content:'Hide Installed Extensions \01F845' ;
+  width:15px;
+}
+
+#LBreceiverlog, #LBpubsublog {
+  background:rgb(10, 11, 26);
+  padding:5px 15px;
+  display:block;
+  position: relative;
+  float: left;
+  text-align: left;
+  max-height: 50%;
+  overflow-y: auto;
+}
+
+#debugLogContent, #debugLog {
+  border:none;
+  background-color:rgba(0,0,0,0);
+  box-shadow:none;
+}
+#debugLog .nav-link {
+  padding: .2rem 1rem;
+}
+#LBPubSub, #LBreceiver {
+  overflow: hidden;
+  padding:5px;
+  margin:2px;
+  padding: 1px 
+}
+samp {
+  width: 200px;
+  word-break: break-all;
+  white-space: normal;
+}
+
+input{
+ padding:0px;
+ margin:1px 1px
+}
+button{
+ padding:2px 5px;
+ margin:3px 0;
+ box-shadow:2 2px #c5c5c5
+}
+button:active{
+ background-color:#797979;
+ color:#fff;
+ box-shadow:0 0 rgb(223, 223, 223);
+ transform:translateY(1px)
+}
+.nav {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.nav-pills .nav-link {
+  font-family: Arial;
+  padding: .4em .6em .1em .6em;
+  margin: 2px 1px 0px 1px!important;
+  background: rgb(175,177,184);
+  background-color: linear-gradient(0deg, rgba(175,177,184,1) 15%, rgba(203,203,213,1) 61%);
+  font-weight: bold;
+  color:rgb(31, 32, 54);
+  border-radius: 5px 5px 0px 0px;
+  text-shadow: 0px 1px 2px rgb(195, 195, 195);
+  transition: 0.01s;
+}
+.nav-pills > li > .nav-link.active {
+   background-image: linear-gradient(to bottom, #E28B3B, #B96C23);
+   color: rgb(255, 255, 255);
+   border: 1px solid #8F8C8C;
+   text-shadow: 1px 1px 3px rgb(0 0 0 / 100%);
+ }
+ 
+ .tab-content {
+   background-color: rgba(39, 55, 110, 0.5);
+   box-shadow: 0.5rem 0.5rem 0.5rem #00000080;
+   min-height:50px;
+   width:100%;
+   border-radius:3px;
+   overflow:hidden;
+   padding:20px;
+ }
+ .draggable-source--is-dragging {
+   opacity: 0;
+ }
+
+@media (max-width: 576px) {
+  .nav-pills .nav-link {
+      border-radius: 5px 5px 0px 0px;
+      font-weight:bold;
+      padding: .2em .4em .1em .4em;
+      font-size: 0.92em 
+ }
+  button{
+     font-size:0.93em;
+      padding:2px 5px;
+     margin:3px 0;
+     box-shadow:2 2px #c5c5c5
+ }
+ button:active{
+     background-color:#797979;
+     color:#fff;
+     box-shadow:0 0 rgb(223, 223, 223);
+     transform:translateY(1px)
+ }
+}
+
+.notabs>.tab-pane {
+  display: block !important;
+  opacity: 1 !important;
+}
+.notabs button, .notabs input{
+ color:#fff;
+ background-color:#4c4c4c;
+ border-color:#464546
+}
+.connected{
+ color:#4ad84a
+}
+.disconnected{
+ color:#fb4848
+}
