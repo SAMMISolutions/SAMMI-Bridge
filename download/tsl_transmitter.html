@@ -198,7 +198,7 @@ button:active{
 </div>  
  <!-- Tab Content -->
  <div class="tab-content" id="extensions-tabContent">
-<!--Twitch Triggers external-->
+<!--Twitch Triggers -->
 <div class="tab-pane" id="content-basic" role="tabpanel" title="Twitch Triggers" data-type="default">
    <form id="LBTestTwitchFollow" class="LBTestTriggers">
       <button type="submit" class="btn btn-primary btn-sm me-1">Test Follower</button>
@@ -286,7 +286,7 @@ button:active{
     </div>
    </form>
   </div>
-  <!--Twitch Triggers external end-->
+  <!--Twitch Triggers end-->
 <div class="tab-pane" id="content-status" role="tabpanel" title="Status" data-type="default">
   <div class='row pt-3'>
     <h5>Transmitter Connection</h5>
@@ -318,7 +318,7 @@ button:active{
      <h5>Appearance</h5>
      <div class="col col-md-auto"><button type="button" class="btn btn-primary btn-sm mb-2 w-auto me-2" onclick="TSLNoTabs()">No Tabs</button><button type="button" class="btn btn-primary btn-sm mb-2 w-auto" onclick="TSLTabs()">Show Tabs</button></div>
   </div>
-<!--Message Logging external-->
+<!--Message Logging -->
 <div class='row pt-3 d-block'>
     <h5>Message Logging</h5>
     <div class='pl-5 ml-5'>
@@ -350,7 +350,7 @@ button:active{
        </div>
     </div>
  </div>
-<!--Message Logging external end-->
+<!--Message Logging end-->
 </div>
 <!--Your external script will be inserted here-->
 <!--<script src="example.js"></script>-->
@@ -913,11 +913,7 @@ Element.prototype.setAttributes = function (obj) {
     this.setAttribute(prop, obj[prop]);
   }
 };
-/* eslint-disable max-len */
 
-/* eslint-disable no-restricted-syntax */
-
-/* eslint-disable no-nested-ternary */
 // fake subscriber testing
 
 function LBTestTriggers() {
@@ -1501,8 +1497,6 @@ function connecttoboard() {
 }
 
 function sendExtensionCommands() {
-  //[Message Logging command]
-  //[Message Logging command end]
   // You LioranBoard extension commands will be inserted here
   /*INSERT PART 2*/
 } // Connect to PubSub
@@ -1612,13 +1606,11 @@ function LBExtensionReceived(hook, LioranBoardJSON) {
     // hook you specified.
     default:
       break;
-    //[Message Logging hook]
-    //[Message Logging hook end]
     //You hooks will be inserted here
 
     /*INSERT PART 3*/
   }
-} // [Message Logging script]
+} // Message Logging
 
 (function initDebugLogging() {
   dbgReceiver.checked = LBVars.LBdebug.receiver;
@@ -1745,7 +1737,7 @@ function LBDebugPost(type, msg) {
         : obj;
     return strRpl;
   }
-} // [Message Logging script end]
+}
 // Your main script will be inserted here
 
 /*INSERT PART 4*/

@@ -1,5 +1,3 @@
-// [Message Logging script]
-
 (function initDebugLogging() {
   dbgReceiver.checked = LBVars.LBdebug.receiver;
   dbgPubsub.checked = LBVars.LBdebug.pubsub;
@@ -93,4 +91,3 @@ function LBDebugPost(type, msg) {
     return strRpl;
   }
 }
-// [Message Logging script end]

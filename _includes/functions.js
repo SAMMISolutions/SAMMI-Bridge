@@ -137,14 +137,14 @@ function LBCommands() {
     },
     /**
     * Releases a button
-    * @param {string} id - button ID to trigger
+    * @param {string} id - button ID to release
     */
     async releaseButton(id) {
       return sendToLB('ReleaseButton', { ButtonId: id });
     },
     /**
     * Modifies a button
-    * @param {string} id - button ID to trigger
+    * @param {string} id - button ID to modify
     * @param {number|undefined} color - decimal button color (BGR)
     * @param {string|undefined} text - button text
     * @param {string|undefined} image - button image file name
@@ -183,7 +183,7 @@ function LBCommands() {
       return sendToLB('DeleteVariable', { Variable: name, ButtonId: buttonId });
     },
     /**
-    * Insert an array value
+    * Inserts an array value
     * @param {string} arrayName - name of the array
     * @param {number} index - index to insert the new item at
     * @param {string|number|object|array} value - item value
@@ -195,7 +195,7 @@ function LBCommands() {
       });
     },
     /**
-    * Delete an array slot
+    * Deletes an array value at specified index
     * @param {string} arrayName - name of the array
     * @param {number} index - index of the item to delete
     * @param {string} buttonId - button id, default is global
@@ -204,7 +204,7 @@ function LBCommands() {
       return sendToLB('DeleteArraySlot', { Array: arrayName, Slot: slot, ButtonId: buttonId });
     },
     /**
-    * Shows a message bubble from the tray icon
+    * Sends a notification (tray icon bubble) message to LBn
     * @param {string} msg - message to show
     */
     async notification(msg) {

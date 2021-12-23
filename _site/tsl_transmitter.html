@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="language" content="English">
 <title>LioranBoard Transmitter</title>
-<link rel="shortcut icon" type="image/x-icon" href="https://christinna9031.github.io/LioranBoard-Transmitter/favicon.ico"/>
+<link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/LioranBoard/LioranBoard-2-Transmitter/main/favicon.ico"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/christinna9031/LioranBoard-Files@main/lib/bootstrap.min.css">
 <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 <style>
@@ -318,7 +318,6 @@ button:active{
      <h5>Appearance</h5>
      <div class="col col-md-auto"><button type="button" class="btn btn-primary btn-sm mb-2 w-auto me-2" onclick="TSLNoTabs()">No Tabs</button><button type="button" class="btn btn-primary btn-sm mb-2 w-auto" onclick="TSLTabs()">Show Tabs</button></div>
   </div>
-<!--Message Logging external-->
 <div class='row pt-3 d-block'>
     <h5>Message Logging</h5>
     <div class='pl-5 ml-5'>
@@ -350,7 +349,6 @@ button:active{
        </div>
     </div>
  </div>
-<!--Message Logging external end-->
 </div>
 <!--Your external script will be inserted here-->
 <!--<script src="example.js"></script>-->
@@ -506,14 +504,14 @@ function LBCommands() {
     },
     /**
     * Releases a button
-    * @param {string} id - button ID to trigger
+    * @param {string} id - button ID to release
     */
     async releaseButton(id) {
       return sendToLB('ReleaseButton', { ButtonId: id });
     },
     /**
     * Modifies a button
-    * @param {string} id - button ID to trigger
+    * @param {string} id - button ID to modify
     * @param {number|undefined} color - decimal button color (BGR)
     * @param {string|undefined} text - button text
     * @param {string|undefined} image - button image file name
@@ -552,7 +550,7 @@ function LBCommands() {
       return sendToLB('DeleteVariable', { Variable: name, ButtonId: buttonId });
     },
     /**
-    * Insert an array value
+    * Inserts an array value
     * @param {string} arrayName - name of the array
     * @param {number} index - index to insert the new item at
     * @param {string|number|object|array} value - item value
@@ -564,7 +562,7 @@ function LBCommands() {
       });
     },
     /**
-    * Delete an array slot
+    * Deletes an array value at specified index
     * @param {string} arrayName - name of the array
     * @param {number} index - index of the item to delete
     * @param {string} buttonId - button id, default is global
@@ -573,7 +571,7 @@ function LBCommands() {
       return sendToLB('DeleteArraySlot', { Array: arrayName, Slot: slot, ButtonId: buttonId });
     },
     /**
-    * Shows a message bubble from the tray icon
+    * Sends a notification (tray icon bubble) message to LBn
     * @param {string} msg - message to show
     */
     async notification(msg) {
@@ -1133,8 +1131,7 @@ function connecttoboard() {
 }
 
 function sendExtensionCommands() {
-//[Message Logging command]
-//[Message Logging command end]
+
 // You LioranBoard extension commands will be inserted here
 /*INSERT PART 2*/
 }
@@ -1220,14 +1217,11 @@ function LBExtensionReceived(hook, LioranBoardJSON) {
     // hook you specified.
     default:
       break;
-//[Message Logging hook]
-//[Message Logging hook end]
+
 //You hooks will be inserted here
 /*INSERT PART 3*/
    }
 }
-
-// [Message Logging script]
 
 (function initDebugLogging() {
   dbgReceiver.checked = LBVars.LBdebug.receiver;
@@ -1322,8 +1316,6 @@ function LBDebugPost(type, msg) {
     return strRpl;
   }
 }
-// [Message Logging script end]
-
 // Your main script will be inserted here
 /*INSERT PART 4*/
 

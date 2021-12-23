@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="language" content="English">
 <title>LioranBoard Transmitter</title>
-<link rel="shortcut icon" type="image/x-icon" href="https://christinna9031.github.io/LioranBoard-Transmitter/favicon.ico"/>
+<link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/LioranBoard/LioranBoard-2-Transmitter/main/favicon.ico"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/christinna9031/LioranBoard-Files@main/lib/bootstrap.min.css">
 <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 <style>
@@ -184,13 +184,220 @@ button:active{
 <h2 id="500-version">5.00 version</h2>
 
 <h3 id="for-users">For users</h3>
-<p>To do.</p>
+<p>Twitch Triggers Tab allows you to test all available Twitch triggers by sending fake payload to LioranBoard 2. 
+It works exactly the same as in LioranBoard 1. Main changes: 
+Can now send Follower trigger. 
+Can select founder badge and first time for chat message. 
+User ID pull values are now dynamically generated. 
+Channel points redeem and reward ID is also dynamically generated.</p>
 
 <h3 id="for-extension-devs">For extension devs</h3>
-<p>To do.</p>
+<p>Transmitter uses LioranBoard websocket library to make sending and receiving data easier: https://github.com/LioranBoard/LioranBoard-2-Websocket. 
+You can use promises for sending data to LioranBoard. Message ids are generated automatically.</p>
 
-<h4 id="global-helper-functions">Global helper functions</h4>
-<p>To do.</p>
+<p><code class="language-plaintext highlighter-rouge">lioranboardclient.send(command, data).then(response=&gt;console.log(response))</code></p>
+
+<h4 id="helper-functions">Helper functions</h4>
+<p>You can call all helper functions with <code class="language-plaintext highlighter-rouge">LB[method](arguments)</code>. 
+To use promises, you can call them with <code class="language-plaintext highlighter-rouge">LB[method](arguments).then(response=&gt;console.log(response))</code>. 
+All methods are documented inside Transmitter using JSDocs.</p>
+
+<p><code class="language-plaintext highlighter-rouge">LB.getVariable(name, buttonId = 'global')</code></p>
+<ul>
+  <li>Get a variable</li>
+  <li>specify its button id or leave empty for global variables</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.getVariable('myVariable', 'ID1')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.setVariable(name, value, buttonId = 'global')</code></p>
+<ul>
+  <li>Set a variable</li>
+  <li>specify its button id or leave empty to create global variables</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.setVariable('myVariable', 'Hello World', 'ID1')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.deleteVariable(name, buttonId = 'global')</code></p>
+<ul>
+  <li>Delete a variable</li>
+  <li>specify its button id or leave empty to create global variables</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.deleteVariable('myVariable', 'ID1')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.popUp(message)</code></p>
+<ul>
+  <li>Send a popup message to LB</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.popUp('Hello World!')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.alert(message)</code></p>
+<ul>
+  <li>Send an alert message to LB</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.alert('Hello World!')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.extCommand(name, color = 3355443, height = 52, boxes)</code></p>
+<ul>
+  <li>Send an extension command (to create extension boxes) to LB</li>
+  <li><code class="language-plaintext highlighter-rouge">name</code> = name of the extension command</li>
+  <li><code class="language-plaintext highlighter-rouge">color</code> box color, accepts dec colors</li>
+  <li><code class="language-plaintext highlighter-rouge">height</code> - height of the box in pixels, you can use 52 for regular box or 80 for resiable box</li>
+  <li><code class="language-plaintext highlighter-rouge">boxes</code> - an object containing box objects (its key is box variable and value is an array of box params)
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">boxVariable: [boxName, boxType, defaultValue, (optional)sizeModifier, (optional)selectOptions]</code></li>
+      <li>boxVariable = variable to save the box value under</li>
+      <li>boxName = name of the box shown in the user interface</li>
+      <li>boxType
+        <ul>
+          <li>0 = Resizable text box that allow for newline,ud_d can be anything</li>
+          <li>2 = Check box, ud_d should be set to true or false or it will crash, will always return true or false when triggered</li>
+          <li>7 = keyboard button, ud_d should be 0, shouldn’t really need this but this will send over a select key code</li>
+          <li>8 = compare box, ud_d should be “==”, returns a string from the compare box such as == or &gt;=</li>
+          <li>9 = math box, ud_d should be “=”, return a string from the compare box such as = or +=</li>
+          <li>10 = sound path box, ud_d should be “”, return a path to said sound effect select</li>
+          <li>11 = slider 0 to 100%, ud_d should be 0-1, will return a float 0 to 1</li>
+          <li>14 = normal white box, ud_d can be anything if you want just normal</li>
+          <li>15 = Variable box(yellow box), ud_d should be a string, will return whatever variable is in the yellow box</li>
+          <li>17 = color box, ud_d should be a number, will return the selected color</li>
+          <li>18 = select box, ud_d should be 0, will show a list when click, of what you defined in ud_oX, will return a number, if user select 3rd option, it will return 2</li>
+          <li>19 = select box string, ud_d should be a string, will return whatever string the user selected.</li>
+          <li>20 = select box string typeable, ud_d should be a string,  will return whatever the user selected or typed in the box</li>
+          <li>22 = file path, ud_d should be a string</li>
+          <li>23 = image path, ud_d should be a string</li>
+        </ul>
+      </li>
+      <li>defaultValue = default value of the variable</li>
+      <li>(optional) sizeModifier = horizontal box size, 1 is normal</li>
+      <li>(optional) [] selectOptions = array of options for the user to select (when using Select box type)</li>
+    </ul>
+  </li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.extCommand('Lucky Wheel', 3355443, 52, { rewardName: ['Reward Name', 14, 'Some Reward name'], rewardName2: ['Reward Name 2', 14, 'And another reward name'] })</code> will create an extension command named Lucky Wheel with 2 text boxes.</li>
+  <li>example2: <code class="language-plaintext highlighter-rouge">LB.extCommand('Lucky Wheel', 3355443, 52, { color: ['Wheel Color', 18, '', null, ['blue','yellow','green']], rewardName: ['Reward Name', 14, 'Your Reward name'], rewardImage: ['Reward Image', 23, 'image.png'] })</code>  will create an extension command named Lucky wheel with one regular text box, one select box with options and one box to select an image file.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.close()</code></p>
+<ul>
+  <li>Closes LB connection to Transmitter</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.stayInformed(enabled)</code></p>
+<ul>
+  <li>Set <code class="language-plaintext highlighter-rouge">enabled</code> to true to start receiving all deck and button updates and false to stop receiving them</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.stayInformed(true)</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.getDeckList()</code></p>
+<ul>
+  <li>Request an array of all decks</li>
+  <li>Replies with an array <code class="language-plaintext highlighter-rouge">["Deck1 Name","Unique ID",crc32,"Deck2 Name","Unique ID",crc32,...]</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.getDeck(id)</code></p>
+<ul>
+  <li>Request a deck params</li>
+  <li>provide <code class="language-plaintext highlighter-rouge">id</code> of the specified deck (retrieved from getDeckList command)</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.getDeck('20211221163402196200595')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.getImage(fileName)</code></p>
+<ul>
+  <li>Retrieve an image in base64</li>
+  <li><code class="language-plaintext highlighter-rouge">fileName</code> = image file without the path</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.getImage('test.png')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.getSum(fileName)</code></p>
+<ul>
+  <li>Retrieves CRC32 of a file</li>
+  <li><code class="language-plaintext highlighter-rouge">fileName</code> - file name without the path</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.getSum('test.png')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.getActiveButtons()</code></p>
+<ul>
+  <li>Retrieves all currently active buttons</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.getTwitchList()</code></p>
+<ul>
+  <li>Retrieves params of all linked Twitch accounts</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.trigger(type, data)</code></p>
+<ul>
+  <li>type - trigger number
+    <ul>
+      <li>0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem, 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey, 8 Timer, 9 OBS Trigger, 10 lioranboard, 11 twitch moderation, 12 extension trigger</li>
+    </ul>
+  </li>
+  <li>data - whatever data is required for the trigger</li>
+  <li>example for chat message trigger: <code class="language-plaintext highlighter-rouge">LB.trigger(0, { message : 'Hello World', broadcaster: 1, moderator: 0, sub: 0, vip: 0, founder: 0, trigger_data: { user_name: 'lioran', display_name: 'Lioran', user_id: 123456789, message : 'Hello World!', emote_list: '304822798:0-9/304682444:11-19', badge_list: 'subscriber/1', channel : 123456789, name_color: '#189A8D', first_time: 0 }})</code></li>
+  <li>this is a very complex command and not recommended to use unless you know the exact payload you need to send</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.triggerButton(id)</code></p>
+<ul>
+  <li>Triggers a button</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code> - button ID to trigger</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.triggerButton('ID1')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.XXX(XXX)</code></p>
+<ul>
+  <li>Releases a button</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code> - button ID to release</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.ReleaseButton('ID1')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.modifyButton(id, color, text, image, border)</code></p>
+<ul>
+  <li>Modifies a button appearance temporarily</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code> - button ID to modify</li>
+  <li><code class="language-plaintext highlighter-rouge">color</code> - decimal button color (BGR)</li>
+  <li><code class="language-plaintext highlighter-rouge">text</code> - button text</li>
+  <li><code class="language-plaintext highlighter-rouge">image</code> - button image file name</li>
+  <li><code class="language-plaintext highlighter-rouge">border</code> - border size, 0-7</li>
+  <li>
+    <p>leave parameters empty to reset button back to default values</p>
+  </li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.modifyButton('ID1', 4934525, 'Hello', 'buttonImage.png', 5)</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.getModifiedButtons()</code></p>
+<ul>
+  <li>Retrieves all currently modified buttons</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.triggerExt(trigger, pullData)</code></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">trigger</code> - name of the trigger</li>
+  <li><code class="language-plaintext highlighter-rouge">data</code> - object containing all trigger pull data (can contain objects, arrays etc.)</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.triggerExt('Test Trigger', {users:['Lioran', 'Melonax'], color: 'blue', number: 5})</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.insertArray(arrayName, index, value, buttonId = 'global')</code></p>
+<ul>
+  <li>Inserts an item to a specified index in an array, shifting the other items</li>
+  <li><code class="language-plaintext highlighter-rouge">arrayName</code> - name of the array</li>
+  <li><code class="language-plaintext highlighter-rouge">index</code> - index to insert the new item at</li>
+  <li><code class="language-plaintext highlighter-rouge">value</code> - item value</li>
+  <li><code class="language-plaintext highlighter-rouge">buttonId</code> - button id, default is global</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.arrayInsert('test',0,'Hello','ID3')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.deleteArray(arrayName, slot, buttonId = 'global')</code></p>
+<ul>
+  <li>Deletes an item in a specified index in an array, shifting the other items</li>
+  <li><code class="language-plaintext highlighter-rouge">arrayName</code> - name of the array</li>
+  <li><code class="language-plaintext highlighter-rouge">index</code> - index to delete the item at</li>
+  <li><code class="language-plaintext highlighter-rouge">buttonId</code> - button id, default is global</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.arrayDelete('test',1,'ID3')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.notification(message)</code></p>
+<ul>
+  <li>Sends a notification (tray icon bubble) message to LB</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.notification('Hello World!')</code></li>
+</ul>
 
 <h2 id="transmitter-collaboration">Transmitter Collaboration</h2>
 
@@ -339,14 +546,14 @@ function LBCommands() {
     },
     /**
     * Releases a button
-    * @param {string} id - button ID to trigger
+    * @param {string} id - button ID to release
     */
     async releaseButton(id) {
       return sendToLB('ReleaseButton', { ButtonId: id });
     },
     /**
     * Modifies a button
-    * @param {string} id - button ID to trigger
+    * @param {string} id - button ID to modify
     * @param {number|undefined} color - decimal button color (BGR)
     * @param {string|undefined} text - button text
     * @param {string|undefined} image - button image file name
@@ -385,7 +592,7 @@ function LBCommands() {
       return sendToLB('DeleteVariable', { Variable: name, ButtonId: buttonId });
     },
     /**
-    * Insert an array value
+    * Inserts an array value
     * @param {string} arrayName - name of the array
     * @param {number} index - index to insert the new item at
     * @param {string|number|object|array} value - item value
@@ -397,7 +604,7 @@ function LBCommands() {
       });
     },
     /**
-    * Delete an array slot
+    * Deletes an array value at specified index
     * @param {string} arrayName - name of the array
     * @param {number} index - index of the item to delete
     * @param {string} buttonId - button id, default is global
@@ -406,7 +613,7 @@ function LBCommands() {
       return sendToLB('DeleteArraySlot', { Array: arrayName, Slot: slot, ButtonId: buttonId });
     },
     /**
-    * Shows a message bubble from the tray icon
+    * Sends a notification (tray icon bubble) message to LBn
     * @param {string} msg - message to show
     */
     async notification(msg) {
@@ -966,8 +1173,7 @@ function connecttoboard() {
 }
 
 function sendExtensionCommands() {
-//[Message Logging command]
-//[Message Logging command end]
+
 // You LioranBoard extension commands will be inserted here
 /*INSERT PART 2*/
 }
@@ -1053,14 +1259,11 @@ function LBExtensionReceived(hook, LioranBoardJSON) {
     // hook you specified.
     default:
       break;
-//[Message Logging hook]
-//[Message Logging hook end]
+
 //You hooks will be inserted here
 /*INSERT PART 3*/
    }
 }
-
-// [Message Logging script]
 
 (function initDebugLogging() {
   dbgReceiver.checked = LBVars.LBdebug.receiver;
@@ -1155,8 +1358,6 @@ function LBDebugPost(type, msg) {
     return strRpl;
   }
 }
-// [Message Logging script end]
-
 // Your main script will be inserted here
 /*INSERT PART 4*/
 
