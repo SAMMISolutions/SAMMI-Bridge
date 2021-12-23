@@ -6,12 +6,13 @@
 ## 5.00 version
 
 ### For users
-Twitch Triggers Tab allows you to test all available Twitch triggers by sending fake payload to LioranBoard 2. 
-It works exactly the same as in LioranBoard 1. Main changes: 
-Can now send Follower trigger. 
-Can select founder badge and first time for chat message. 
-User ID pull values are now dynamically generated. 
-Channel points redeem and reward ID is also dynamically generated. 
+Twitch Triggers allow you to test all available Twitch triggers by sending fake payload to LioranBoard 2.  
+It works exactly the same as in LioranBoard 1.  
+Main changes:  
+- Can now send Follower trigger.  
+- Can select founder badge and first time for chat message. 
+- User ID pull values are now dynamically generated. 
+- Channel points redeem and reward ID is also dynamically generated. 
  
 ### For extension devs
 Transmitter uses LioranBoard websocket library to make sending and receiving data easier: https://github.com/LioranBoard/LioranBoard-2-Websocket. 
@@ -161,9 +162,11 @@ All methods are documented inside Transmitter via JSDoc.
 
 ## Listening to extension data received from LioranBoard
 Instead of using hooks (like in the old LB), you can directly listen to a specified extension payload coming from LioranBoard.  
-This way you can receive all extension data directly in your currently running function. Use `lioranboard.on(extensionName)`.
+This way you can receive all extension data directly in your running functions.   
+Use `lioranboard.on(extensionName)`.  
 For example, let's say your extension is called Lucky Wheel:  
-  ```lioranboardclient.on('Lucky Wheel', (payload) => {
+  ```
+  lioranboardclient.on('Lucky Wheel', (payload) => {
     DO SOMETHING WITH THE EXTENSION PAYLOAD
     console.log(payload)
   });
