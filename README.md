@@ -1,7 +1,7 @@
 # LB-Transmitter
  Current version of Transmitter for LioranBoard 2 . Download the latest release. This version will NOT work with LioranBoard 1.
 
-## Change Log since the initial 5.00 version
+## change log since the initial 5.00 version
 
 ## 5.00 version
 
