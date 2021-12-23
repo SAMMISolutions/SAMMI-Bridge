@@ -20,9 +20,9 @@ You can use promises for sending data to LioranBoard. Message ids are generated 
 `lioranboardclient.send(command, data).then(response=>console.log(response))`
 
 #### Helper functions
-You can call all helper functions with `LB[method](arguments)`. 
-To use promises, you can call them with `LB[method](arguments).then(response=>console.log(response))`. 
-All methods are documented inside Transmitter using JSDocs.
+You can call all helper functions with `LB.method(arguments)`. 
+To use promises, you can call them with `LB.method(arguments).then(response=>console.log(response))`. 
+All methods are documented inside Transmitter via JSDoc.
 
 `LB.getVariable(name, buttonId = 'global')`
 - Get a variable
