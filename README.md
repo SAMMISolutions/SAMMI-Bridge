@@ -6,12 +6,13 @@
 ## 5.00 version
 
 ### For users
-Twitch Triggers Tab allows you to test all available Twitch triggers by sending fake payload to LioranBoard 2. 
-It works exactly the same as in LioranBoard 1. Main changes: 
-Can now send Follower trigger. 
-Can select founder badge and first time for chat message. 
-User ID pull values are now dynamically generated. 
-Channel points redeem and reward ID is also dynamically generated. 
+Twitch Triggers allow you to test all available Twitch triggers by sending fake payload to LioranBoard 2.  
+It works exactly the same as in LioranBoard 1.  
+Main changes:  
+- Can now send Follower trigger.  
+- Can select founder badge and first time for chat message. 
+- User ID pull values are now dynamically generated. 
+- Channel points redeem and reward ID is also dynamically generated. 
  
 ### For extension devs
 Transmitter uses LioranBoard websocket library to make sending and receiving data easier: https://github.com/LioranBoard/LioranBoard-2-Websocket. 
