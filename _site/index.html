@@ -198,9 +198,9 @@ You can use promises for sending data to LioranBoard. Message ids are generated 
 <p><code class="language-plaintext highlighter-rouge">lioranboardclient.send(command, data).then(response=&gt;console.log(response))</code></p>
 
 <h4 id="helper-functions">Helper functions</h4>
-<p>You can call all helper functions with <code class="language-plaintext highlighter-rouge">LB[method](arguments)</code>. 
-To use promises, you can call them with <code class="language-plaintext highlighter-rouge">LB[method](arguments).then(response=&gt;console.log(response))</code>. 
-All methods are documented inside Transmitter using JSDocs.</p>
+<p>You can call all helper functions with <code class="language-plaintext highlighter-rouge">LB.method(arguments)</code>. 
+To use promises, you can call them with <code class="language-plaintext highlighter-rouge">LB.method(arguments).then(response=&gt;console.log(response))</code>. 
+All methods are documented inside Transmitter via JSDoc.</p>
 
 <p><code class="language-plaintext highlighter-rouge">LB.getVariable(name, buttonId = 'global')</code></p>
 <ul>
@@ -223,16 +223,23 @@ All methods are documented inside Transmitter using JSDocs.</p>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.deleteVariable('myVariable', 'ID1')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.popUp(message)</code></p>
+<p><code class="language-plaintext highlighter-rouge">LB.insertArray(arrayName, index, value, buttonId = 'global')</code></p>
 <ul>
-  <li>Send a popup message to LB</li>
-  <li>example: <code class="language-plaintext highlighter-rouge">LB.popUp('Hello World!')</code></li>
+  <li>Inserts an item to a specified index in an array, shifting the other items</li>
+  <li><code class="language-plaintext highlighter-rouge">arrayName</code> - name of the array</li>
+  <li><code class="language-plaintext highlighter-rouge">index</code> - index to insert the new item at</li>
+  <li><code class="language-plaintext highlighter-rouge">value</code> - item value</li>
+  <li><code class="language-plaintext highlighter-rouge">buttonId</code> - button id, default is global</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.insertArray('myArray',0,'Hello','ID1')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.alert(message)</code></p>
+<p><code class="language-plaintext highlighter-rouge">LB.deleteArray(arrayName, slot, buttonId = 'global')</code></p>
 <ul>
-  <li>Send an alert message to LB</li>
-  <li>example: <code class="language-plaintext highlighter-rouge">LB.alert('Hello World!')</code></li>
+  <li>Deletes an item in a specified index in an array, shifting the other items</li>
+  <li><code class="language-plaintext highlighter-rouge">arrayName</code> - name of the array</li>
+  <li><code class="language-plaintext highlighter-rouge">index</code> - index to delete the item at</li>
+  <li><code class="language-plaintext highlighter-rouge">buttonId</code> - button id, default is global</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.deleteArray('myArray',1,'ID1')</code></li>
 </ul>
 
 <p><code class="language-plaintext highlighter-rouge">LB.extCommand(name, color = 3355443, height = 52, boxes)</code></p>
@@ -274,15 +281,48 @@ All methods are documented inside Transmitter using JSDocs.</p>
   <li>example2: <code class="language-plaintext highlighter-rouge">LB.extCommand('Lucky Wheel', 3355443, 52, { color: ['Wheel Color', 18, '', null, ['blue','yellow','green']], rewardName: ['Reward Name', 14, 'Your Reward name'], rewardImage: ['Reward Image', 23, 'image.png'] })</code>  will create an extension command named Lucky wheel with one regular text box, one select box with options and one box to select an image file.</li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.close()</code></p>
+<p><code class="language-plaintext highlighter-rouge">LB.triggerExt(trigger, pullData)</code></p>
 <ul>
-  <li>Closes LB connection to Transmitter</li>
+  <li><code class="language-plaintext highlighter-rouge">trigger</code> - name of the trigger</li>
+  <li><code class="language-plaintext highlighter-rouge">data</code> - object containing all trigger pull data (can contain objects, arrays etc.)</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.triggerExt('Test Trigger', {users:['Lioran', 'Melonax'], color: 'blue', number: 5})</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.stayInformed(enabled)</code></p>
+<p><code class="language-plaintext highlighter-rouge">LB.triggerButton(id)</code></p>
 <ul>
-  <li>Set <code class="language-plaintext highlighter-rouge">enabled</code> to true to start receiving all deck and button updates and false to stop receiving them</li>
-  <li>example: <code class="language-plaintext highlighter-rouge">LB.stayInformed(true)</code></li>
+  <li>Triggers a button</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code> - button ID to trigger</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.triggerButton('ID1')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.modifyButton(id, color, text, image, border)</code></p>
+<ul>
+  <li>Modifies a button appearance temporarily</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code> - button ID to modify</li>
+  <li><code class="language-plaintext highlighter-rouge">color</code> - decimal button color (BGR)</li>
+  <li><code class="language-plaintext highlighter-rouge">text</code> - button text</li>
+  <li><code class="language-plaintext highlighter-rouge">image</code> - button image file name</li>
+  <li><code class="language-plaintext highlighter-rouge">border</code> - border size, 0-7</li>
+  <li>leave parameters empty to reset button back to default values</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.modifyButton('ID1', 4934525, 'Hello', 'buttonImage.png', 5)</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.popUp(message)</code></p>
+<ul>
+  <li>Send a popup message to LB</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.popUp('Hello World!')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.alert(message)</code></p>
+<ul>
+  <li>Send an alert message to LB</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.alert('Hello World!')</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.notification(message)</code></p>
+<ul>
+  <li>Sends a notification (tray icon bubble) message to LB</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.notification('Hello World!')</code></li>
 </ul>
 
 <p><code class="language-plaintext highlighter-rouge">LB.getDeckList()</code></p>
@@ -312,9 +352,20 @@ All methods are documented inside Transmitter using JSDocs.</p>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.getSum('test.png')</code></li>
 </ul>
 
+<p><code class="language-plaintext highlighter-rouge">LB.stayInformed(enabled)</code></p>
+<ul>
+  <li>Set <code class="language-plaintext highlighter-rouge">enabled</code> to true to start receiving all deck and button updates and false to stop receiving them</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">LB.stayInformed(true)</code></li>
+</ul>
+
 <p><code class="language-plaintext highlighter-rouge">LB.getActiveButtons()</code></p>
 <ul>
   <li>Retrieves all currently active buttons</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">LB.getModifiedButtons()</code></p>
+<ul>
+  <li>Retrieves all currently modified buttons</li>
 </ul>
 
 <p><code class="language-plaintext highlighter-rouge">LB.getTwitchList()</code></p>
@@ -334,71 +385,20 @@ All methods are documented inside Transmitter using JSDocs.</p>
   <li>this is a very complex command and not recommended to use unless you know the exact payload you need to send</li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.triggerButton(id)</code></p>
+<p><code class="language-plaintext highlighter-rouge">LB.close()</code></p>
 <ul>
-  <li>Triggers a button</li>
-  <li><code class="language-plaintext highlighter-rouge">id</code> - button ID to trigger</li>
-  <li>example: <code class="language-plaintext highlighter-rouge">LB.triggerButton('ID1')</code></li>
+  <li>Closes LB connection to Transmitter</li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.XXX(XXX)</code></p>
-<ul>
-  <li>Releases a button</li>
-  <li><code class="language-plaintext highlighter-rouge">id</code> - button ID to release</li>
-  <li>example: <code class="language-plaintext highlighter-rouge">LB.ReleaseButton('ID1')</code></li>
-</ul>
-
-<p><code class="language-plaintext highlighter-rouge">LB.modifyButton(id, color, text, image, border)</code></p>
-<ul>
-  <li>Modifies a button appearance temporarily</li>
-  <li><code class="language-plaintext highlighter-rouge">id</code> - button ID to modify</li>
-  <li><code class="language-plaintext highlighter-rouge">color</code> - decimal button color (BGR)</li>
-  <li><code class="language-plaintext highlighter-rouge">text</code> - button text</li>
-  <li><code class="language-plaintext highlighter-rouge">image</code> - button image file name</li>
-  <li><code class="language-plaintext highlighter-rouge">border</code> - border size, 0-7</li>
-  <li>
-    <p>leave parameters empty to reset button back to default values</p>
-  </li>
-  <li>example: <code class="language-plaintext highlighter-rouge">LB.modifyButton('ID1', 4934525, 'Hello', 'buttonImage.png', 5)</code></li>
-</ul>
-
-<p><code class="language-plaintext highlighter-rouge">LB.getModifiedButtons()</code></p>
-<ul>
-  <li>Retrieves all currently modified buttons</li>
-</ul>
-
-<p><code class="language-plaintext highlighter-rouge">LB.triggerExt(trigger, pullData)</code></p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">trigger</code> - name of the trigger</li>
-  <li><code class="language-plaintext highlighter-rouge">data</code> - object containing all trigger pull data (can contain objects, arrays etc.)</li>
-  <li>example: <code class="language-plaintext highlighter-rouge">LB.triggerExt('Test Trigger', {users:['Lioran', 'Melonax'], color: 'blue', number: 5})</code></li>
-</ul>
-
-<p><code class="language-plaintext highlighter-rouge">LB.insertArray(arrayName, index, value, buttonId = 'global')</code></p>
-<ul>
-  <li>Inserts an item to a specified index in an array, shifting the other items</li>
-  <li><code class="language-plaintext highlighter-rouge">arrayName</code> - name of the array</li>
-  <li><code class="language-plaintext highlighter-rouge">index</code> - index to insert the new item at</li>
-  <li><code class="language-plaintext highlighter-rouge">value</code> - item value</li>
-  <li><code class="language-plaintext highlighter-rouge">buttonId</code> - button id, default is global</li>
-  <li>example: <code class="language-plaintext highlighter-rouge">LB.arrayInsert('test',0,'Hello','ID3')</code></li>
-</ul>
-
-<p><code class="language-plaintext highlighter-rouge">LB.deleteArray(arrayName, slot, buttonId = 'global')</code></p>
-<ul>
-  <li>Deletes an item in a specified index in an array, shifting the other items</li>
-  <li><code class="language-plaintext highlighter-rouge">arrayName</code> - name of the array</li>
-  <li><code class="language-plaintext highlighter-rouge">index</code> - index to delete the item at</li>
-  <li><code class="language-plaintext highlighter-rouge">buttonId</code> - button id, default is global</li>
-  <li>example: <code class="language-plaintext highlighter-rouge">LB.arrayDelete('test',1,'ID3')</code></li>
-</ul>
-
-<p><code class="language-plaintext highlighter-rouge">LB.notification(message)</code></p>
-<ul>
-  <li>Sends a notification (tray icon bubble) message to LB</li>
-  <li>example: <code class="language-plaintext highlighter-rouge">LB.notification('Hello World!')</code></li>
-</ul>
-
+<h2 id="listening-to-extension-data-received-from-lioranboard">Listening to extension data received from LioranBoard</h2>
+<p>Instead of using hooks (like in the old LB), you can directly listen to a specified extension payload coming from LioranBoard.<br />
+This way you can receive all extension data directly in your currently running function. Use <code class="language-plaintext highlighter-rouge">lioranboard.on(extensionName)</code>.
+For example, let’s say your extension is called Lucky Wheel:<br />
+  <code class="language-plaintext highlighter-rouge">lioranboardclient.on('Lucky Wheel', (payload) =&gt; {
+    DO SOMETHING WITH THE EXTENSION PAYLOAD
+    console.log(payload)
+  });
+ </code></p>
 <h2 id="transmitter-collaboration">Transmitter Collaboration</h2>
 
 <p>Transmitter is generated by Jekyll. Each section is a separate file generated from <code class="language-plaintext highlighter-rouge">_includes</code> folder. If you wish to propose changes, please do so by editing these files.
@@ -408,231 +408,300 @@ Any changes will immediately reflect at https://christinna9031.github.io/LioranB
 </body>
 <script>
 /** LB2 Helper Functions
-* You can call them with LB.{helperfunction}
-* Use promises if you want to get a reply back from LB
-* No promise example: LB.setVariable(myVariable, 'some value', 'someButtonID')
-* Promise example: LB.getVariable(myVariable, 'someButtonID').then(reply=>console.log(reply))
-*/
-
+ * You can call them with LB.{helperfunction}
+ * Use promises if you want to get a reply back from LB
+ * No promise example: LB.setVariable(myVariable, 'some value', 'someButtonID')
+ * Promise example: LB.getVariable(myVariable, 'someButtonID').then(reply=>console.log(reply))
+ */
 function LBCommands() {
   const LBSendCommand = {
     /**
-    * Get a variable from LB
-    * @param {string} name - name of the variable
-    * @param {string} buttonId - button ID for local variable, default = global variable
-    */
+     * Get a variable from LB
+     * @param {string} name - name of the variable
+     * @param {string} buttonId - button ID for local variable, default = global variable
+     */
     async getVariable(name, buttonId = 'global') {
-      return sendToLB('GetVariable', { Variable: name, ButtonId: buttonId });
+      return sendToLB('GetVariable', {
+        Variable: name,
+        ButtonId: buttonId,
+      });
     },
+
     /**
-    * Set a variable in LB
-    * @param {string} name - name of the variable
-    * @param {(string|number|object|array|null)} value - new value of the variable
-    * @param {string} buttonId - button ID for local variable, default = global variable
-    */
+     * Set a variable in LB
+     * @param {string} name - name of the variable
+     * @param {(string|number|object|array|null)} value - new value of the variable
+     * @param {string} buttonId - button ID for local variable, default = global variable
+     */
     async setVariable(name, value, buttonId = 'global') {
-      return sendToLB('SetVariable', { Variable: name, Value: value, ButtonId: buttonId });
+      return sendToLB('SetVariable', {
+        Variable: name,
+        Value: value,
+        ButtonId: buttonId,
+      });
     },
+
     /**
-    * Send a popup message to LB
-    * @param {string} msg - message to send
-    */
+     * Send a popup message to LB
+     * @param {string} msg - message to send
+     */
     async popUp(msg) {
-      return sendToLB('PopupMessage', { Message: msg });
+      return sendToLB('PopupMessage', {
+        Message: msg,
+      });
     },
+
     /**
-    * Send a yellow notification message to LB
-    * @param {string} msg - message to send
-    */
+     * Send a yellow notification message to LB
+     * @param {string} msg - message to send
+     */
     async alert(msg) {
-      return sendToLB('AlertMessage', { Message: msg });
+      return sendToLB('AlertMessage', {
+        Message: msg,
+      });
     },
+
     /**
-    * send extension command to LB
-    * @param {string} name - name of the extension command
-    * @param {string} color - box color, accepts hex/dec colors (include # for hex), default 3355443
-    * @param {string} height - height of the box in pixels, 52 for regular or 80 for resizable box, default 52
-    * @param {Object} boxes
-    * - one object per box, key = boxVariable, value = array of box params
-    * - boxVariable = variable to save the box value under
-    * - boxName = name of the box shown in the user interface
-    * - boxType = type of the box, 0 = resizable, 2 = checkbox (true/false), 14 = regular box, 15 = variable box, 18 = select box, see extension guide for more
-    * - defaultValue = default value of the variable
-    * - (optional) sizeModifier = horizontal box size, 1 is normal
-    * - (optional) [] selectOptions = array of options for the user to select (when using Select box type)
-    * @param {[boxName: string, boxType: number, defaultValue: (string | number), sizeModifier: (number|undefined), selectOptions: Array|undefined]} boxes.boxVariable
-    * */
+     * send extension command to LB
+     * @param {string} name - name of the extension command
+     * @param {string} color - box color, accepts hex/dec colors (include # for hex), default 3355443
+     * @param {string} height - height of the box in pixels, 52 for regular or 80 for resizable box, default 52
+     * @param {Object} boxes
+     * - one object per box, key = boxVariable, value = array of box params
+     * - boxVariable = variable to save the box value under
+     * - boxName = name of the box shown in the user interface
+     * - boxType = type of the box, 0 = resizable, 2 = checkbox (true/false), 14 = regular box, 15 = variable box, 18 = select box, see extension guide for more
+     * - defaultValue = default value of the variable
+     * - (optional) sizeModifier = horizontal box size, 1 is normal
+     * - (optional) [] selectOptions = array of options for the user to select (when using Select box type)
+     * @param {[boxName: string, boxType: number, defaultValue: (string | number), sizeModifier: (number|undefined), selectOptions: Array|undefined]} boxes.boxVariable
+     * */
     async extCommand(name, color = 3355443, height = 52, boxes) {
       const ext = new LBConstructExtCommand(name, color, height);
+
       for (const [key, value] of Object.entries(boxes)) {
         ext.addBox(key, value);
       }
-      return sendToLB('SendExtensionCommands', { Data: [ext] });
+
+      return sendToLB('SendExtensionCommands', {
+        Data: [ext],
+      });
     },
+
     /**
-    * Close LioranBoard connection to Transmitter.
-    */
+     * Close LioranBoard connection to Transmitter.
+     */
     async close() {
       return sendToLB('Close');
     },
+
     /**
-    * Get deck and button updates
-    * @param {boolean} enabled - enable or disable updates
-    */
+     * Get deck and button updates
+     * @param {boolean} enabled - enable or disable updates
+     */
     async stayInformed(enabled) {
-      return sendToLB('SetStayInformed', { Enabled: enabled });
+      return sendToLB('SetStayInformed', {
+        Enabled: enabled,
+      });
     },
+
     /**
-    * Request an array of all decks
-    * - Replies with an array ["Deck1 Name","Unique ID",crc32,"Deck2 Name","Unique ID",crc32,...]
-    * - Use crc32 value to verify deck you saved localy is the same
-    */
+     * Request an array of all decks
+     * - Replies with an array ["Deck1 Name","Unique ID",crc32,"Deck2 Name","Unique ID",crc32,...]
+     * - Use crc32 value to verify deck you saved localy is the same
+     */
     async getDeckList() {
       return sendToLB('GetDeckList');
     },
+
     /**
-    * Request a deck params
-    * @param {string} id - Unique deck ID retrieved from getDeckList
-    * - Replies with an object containing a full deck
-    */
+     * Request a deck params
+     * @param {string} id - Unique deck ID retrieved from getDeckList
+     * - Replies with an object containing a full deck
+     */
     async getDeck(id) {
-      return sendToLB('GetDeck', { UniqueId: id });
+      return sendToLB('GetDeck', {
+        UniqueId: id,
+      });
     },
+
     /**
-    * Retrieve an image in base64
-    * @param {string} fileName - image file name without the path (image.png)
-    * - Replies with an object containing the Base64 string of the image
-    */
+     * Retrieve an image in base64
+     * @param {string} fileName - image file name without the path (image.png)
+     * - Replies with an object containing the Base64 string of the image
+     */
     async getImage(fileName) {
-      return sendToLB('GetImage', { FileName: fileName });
+      return sendToLB('GetImage', {
+        FileName: fileName,
+      });
     },
+
     /**
-    * Retrieves CRC32 of a file
-    * @param {string} fileName - file name without the path (image.png)
-    */
+     * Retrieves CRC32 of a file
+     * @param {string} fileName - file name without the path (image.png)
+     */
     async getSum(fileName) {
-      return sendToLB('GetSum', { Name: fileName });
+      return sendToLB('GetSum', {
+        Name: fileName,
+      });
     },
+
     /**
-    * Retrieves all currently active buttons
-    * - Replies with an array of button param objects
-    */
+     * Retrieves all currently active buttons
+     * - Replies with an array of button param objects
+     */
     async getActiveButtons() {
       return sendToLB('GetOngoingButtons');
     },
+
     /**
-    * Retrieves params of all linked Twitch accounts
-    */
+     * Retrieves params of all linked Twitch accounts
+     */
     async getTwitchList() {
       return sendToLB('GetTwitchList');
     },
+
     /**
-    * Sends a trigger
-    * @param {number} type - type of trigger
-    * - trigger types: 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem
-    * 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey
-    * 8 Timer, 9 OBS Trigger, 10 lioranboard, 11 twitch moderation, 12 extension trigger
-    * @param {object} data - whatever data is required for the trigger, see manual
-    */
+     * Sends a trigger
+     * @param {number} type - type of trigger
+     * - trigger types: 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem
+     * 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey
+     * 8 Timer, 9 OBS Trigger, 10 lioranboard, 11 twitch moderation, 12 extension trigger
+     * @param {object} data - whatever data is required for the trigger, see manual
+     */
     async trigger(type, data) {
-      return sendToLB('SendTrigger', { Type: type, Data: data });
+      return sendToLB('SendTrigger', {
+        Type: type,
+        Data: data,
+      });
     },
+
     /**
-    * Triggers a button
-    * @param {string} id - button ID to trigger
-    */
+     * Triggers a button
+     * @param {string} id - button ID to trigger
+     */
     async triggerButton(id) {
-      return sendToLB('TriggerButton', { ButtonId: id });
+      return sendToLB('TriggerButton', {
+        ButtonId: id,
+      });
     },
+
     /**
-    * Releases a button
-    * @param {string} id - button ID to release
-    */
+     * Releases a button
+     * @param {string} id - button ID to release
+     */
     async releaseButton(id) {
-      return sendToLB('ReleaseButton', { ButtonId: id });
+      return sendToLB('ReleaseButton', {
+        ButtonId: id,
+      });
     },
+
     /**
-    * Modifies a button
-    * @param {string} id - button ID to modify
-    * @param {number|undefined} color - decimal button color (BGR)
-    * @param {string|undefined} text - button text
-    * @param {string|undefined} image - button image file name
-    * @param {number|undefined} border - border size, 0-7
-    * - leave parameters empty to reset button back to default values
-    */
+     * Modifies a button
+     * @param {string} id - button ID to modify
+     * @param {number|undefined} color - decimal button color (BGR)
+     * @param {string|undefined} text - button text
+     * @param {string|undefined} image - button image file name
+     * @param {number|undefined} border - border size, 0-7
+     * - leave parameters empty to reset button back to default values
+     */
     async modifyButton(id, color, text = '', image, border) {
       return sendToLB('ModifyButton', {
         ButtonId: id,
         Data: {
-          color : color || undefined, text : text || undefined, image: image || undefined, border : border || undefined,
+          color: color || undefined,
+          text: text || undefined,
+          image: image || undefined,
+          border: border || undefined,
         },
       });
     },
+
     /**
-    * Retrieves all currently modified buttons
-    * - object of button objects that are currently modified
-    */
+     * Retrieves all currently modified buttons
+     * - object of button objects that are currently modified
+     */
     async getModifiedButtons() {
       return sendToLB('GetModifications');
     },
+
     /**
-    * Sends an extension trigger
-    * @param {string} trigger - name of the trigger
-    * @param {object} data - object containing all trigger pull data
-    */
+     * Sends an extension trigger
+     * @param {string} trigger - name of the trigger
+     * @param {object} data - object containing all trigger pull data
+     */
     async triggerExt(trigger, data = {}) {
-      return sendToLB('ExtensionTrigger', { Trigger: trigger, Data: data });
-    },
-    /**
-    * Deletes a variable
-    * @param {string} name - name of the variable
-    * @param {string} buttonId - button ID for local variable, default = global variable
-    */
-    async deleteVariable(name, buttonId = 'global') {
-      return sendToLB('DeleteVariable', { Variable: name, ButtonId: buttonId });
-    },
-    /**
-    * Inserts an array value
-    * @param {string} arrayName - name of the array
-    * @param {number} index - index to insert the new item at
-    * @param {string|number|object|array} value - item value
-    * @param {string} buttonId - button id, default is global
-    */
-    async insertArray(arrayName, index, value, buttonId = 'global') {
-      return sendToLB('InsertArrayValue', {
-        Array: arrayName, Slot: slot, Value: value, ButtonId: buttonId,
+      return sendToLB('ExtensionTrigger', {
+        Trigger: trigger,
+        Data: data,
       });
     },
+
     /**
-    * Deletes an array value at specified index
-    * @param {string} arrayName - name of the array
-    * @param {number} index - index of the item to delete
-    * @param {string} buttonId - button id, default is global
-    */
-    async deleteArray(arrayName, slot, buttonId = 'global') {
-      return sendToLB('DeleteArraySlot', { Array: arrayName, Slot: slot, ButtonId: buttonId });
+     * Deletes a variable
+     * @param {string} name - name of the variable
+     * @param {string} buttonId - button ID for local variable, default = global variable
+     */
+    async deleteVariable(name, buttonId = 'global') {
+      return sendToLB('DeleteVariable', {
+        Variable: name,
+        ButtonId: buttonId,
+      });
     },
+
     /**
-    * Sends a notification (tray icon bubble) message to LBn
-    * @param {string} msg - message to show
-    */
+     * Inserts an array value
+     * @param {string} arrayName - name of the array
+     * @param {number} index - index to insert the new item at
+     * @param {string|number|object|array} value - item value
+     * @param {string} buttonId - button id, default is global
+     */
+    async insertArray(arrayName, index, value, buttonId = 'global') {
+      return sendToLB('InsertArrayValue', {
+        Array: arrayName,
+        Slot: index,
+        Value: value,
+        ButtonId: buttonId,
+      });
+    },
+
+    /**
+     * Deletes an array value at specified index
+     * @param {string} arrayName - name of the array
+     * @param {number} index - index of the item to delete
+     * @param {string} buttonId - button id, default is global
+     */
+    async deleteArray(arrayName, slot, buttonId = 'global') {
+      return sendToLB('DeleteArraySlot', {
+        Array: arrayName,
+        Slot: slot,
+        ButtonId: buttonId,
+      });
+    },
+
+    /**
+     * Sends a notification (tray icon bubble) message to LBn
+     * @param {string} msg - message to show
+     */
     async notification(msg) {
-      return sendToLB('NotificationMessage', { Message: msg });
+      return sendToLB('NotificationMessage', {
+        Message: msg,
+      });
     },
   };
 
   async function sendToLB(command, data) {
     const res = await lioranboardclient.send(command, data);
     return res;
-  }
+  } // construct extension command object
 
-  // construct extension command object
   class LBConstructExtCommand {
     constructor(name, color, height) {
       let p = 0;
       this.name = name;
       this.color = color;
       this.height = height;
+
       this.addBox = (boxVar, params) => {
         this[`ud_t${p}`] = boxVar;
         this[`ud_n${p}`] = params[0];
@@ -644,6 +713,7 @@ function LBCommands() {
       };
     }
   }
+
   return LBSendCommand;
 }
 
@@ -860,94 +930,203 @@ Element.prototype.setAttributes = function (obj) {
     this.setAttribute(prop, obj[prop]);
   }
 };
-
-/* eslint-disable max-len */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-nested-ternary */
-// fake subscriber testing
-
+// Fake Triggers testing
 function LBTestTriggers() {
   const processTrigger = {
     LBTestTwitchSubs(form, notUsed, gifted = false, gifterName = '') {
       const type = 1;
-      const subtype = (form.subgift.checked) ? 2 : (form.anongift.checked) ? 4 : gifted ? 2 : 1;
-      const context = (form.subgift.checked) ? 'subgift' : (form.anongift.checked) ? 'anonsubgift' : gifted ? 'subgift' : 'resub';
+      const subtype = form.subgift.checked
+        ? 2
+        : form.anongift.checked
+          ? 4
+          : gifted
+            ? 2
+            : 1;
+      const context = form.subgift.checked
+        ? 'subgift'
+        : form.anongift.checked
+          ? 'anonsubgift'
+          : gifted
+            ? 'subgift'
+            : 'resub';
       const month = parseInt(form.submonths.value) || 1;
-      const name = gifted ? gifterName : form.anongift.checked ? 'Anonymous User' : generateName();
-      const giftedName = (subtype !== 1) ? generateName(name) : '';
+      const name = gifted
+        ? gifterName
+        : form.anongift.checked
+          ? 'Anonymous User'
+          : generateName();
+      const giftedName = subtype !== 1 ? generateName(name) : '';
       const message = form.submessage.value || generateMessage();
       const tiers = form.querySelectorAll('input[name="tier"]');
-      let selectedTier; let selectedTierD;
+      let selectedTier;
+      let selectedTierD;
+
       for (const tier of tiers) {
         if (tier.checked) {
           selectedTier = tier.value;
         }
       }
-      const selecterTierNum = selectedTier === 'Tier 1' ? 1 : selectedTier === 'Tier 2' ? 2 : selectedTier === 'Tier 3' ? 4 : 8;
-      const msg = (subtype !== 1) ? `${name} gifted a sub to ${giftedName}!` : `${name} subscribed for ${month} months!`;
+
+      const selecterTierNum = selectedTier === 'Tier 1'
+        ? 1
+        : selectedTier === 'Tier 2'
+          ? 2
+          : selectedTier === 'Tier 3'
+            ? 4
+            : 8;
+      const msg = subtype !== 1
+        ? `${name} gifted a sub to ${giftedName}!`
+        : `${name} subscribed for ${month} months!`;
       const data = {
-        tier: selecterTierNum, month, subtype, communitygift: gifted ? 1 : 0,
+        tier: selecterTierNum,
+        month,
+        subtype,
+        communitygift: gifted ? 1 : 0,
       };
       const pullData = {
-        user_name: name.toLowerCase(), display_name: name, user_id: 123456789, gifted_user_name: giftedName.toLowerCase(), gifted_display_name: giftedName, gifted_user_id: 123456789, tier: selectedTier, context, message, month, community_gift: gifted ? 1 : 0,
+        user_name: name.toLowerCase(),
+        display_name: name,
+        user_id: 123456789,
+        gifted_user_name: giftedName.toLowerCase(),
+        gifted_display_name: giftedName,
+        gifted_user_id: 123456789,
+        tier: selectedTier,
+        context,
+        message,
+        month,
+        community_gift: gifted ? 1 : 0,
       };
       sendTriggerToLB(type, msg, data, pullData);
     },
+
     LBTestTwitchSubGift(form) {
       const subForm = document.getElementById('LBTestTwitchSubs');
       if (subForm.prime.checked) subForm.tier1.checked = true;
       if (subForm.anongift.checked === false) subForm.subgift.checked = true;
       const tiers = subForm.querySelectorAll('input[name="tier"]');
       let selectedTier;
+
       for (const tier of tiers) {
         if (tier.checked) {
           selectedTier = tier.value;
         }
       }
-      const selecterTierNum = selectedTier === 'Tier 1' ? 1 : selectedTier === 'Tier 2' ? 2 : selectedTier === 'Tier 3' ? 4 : 1;
-      const gifterName = subForm.anongift.checked ? 'Anonymous user' : generateName();
+
+      const selecterTierNum = selectedTier === 'Tier 1'
+        ? 1
+        : selectedTier === 'Tier 2'
+          ? 2
+          : selectedTier === 'Tier 3'
+            ? 4
+            : 1;
+      const gifterName = subForm.anongift.checked
+        ? 'Anonymous user'
+        : generateName();
       const amount = parseInt(form.subGiftAmount.value) || 1;
       const pullData = {
-        user_name: gifterName.toLowerCase(), display_name: gifterName, user_id: 123456789, amount, tier: selectedTier,
+        user_name: gifterName.toLowerCase(),
+        display_name: gifterName,
+        user_id: 123456789,
+        amount,
+        tier: selectedTier,
       };
-      sendTriggerToLB(2, `${gifterName} has gifted ${amount} subs!`, { tier: selecterTierNum, amount }, pullData);
+      sendTriggerToLB(
+        2,
+        `${gifterName} has gifted ${amount} subs!`,
+        {
+          tier: selecterTierNum,
+          amount,
+        },
+        pullData,
+      );
+
       for (let i = 0; i < amount; i++) {
         setTimeout(() => {
           this.LBTestTwitchSubs(subForm, null, true, gifterName);
         }, 1000 + i * 10);
       }
     },
+
     LBTestTwitchBits(form, pullData) {
       const amount = parseInt(form.bitsamount.value) || 50;
       const totalAmount = parseInt(form.bitstotal.value) || amount + 100;
       const message = form.bitsmessage.value || generateMessage();
-      pullData.addvalues({ amount, total_amount: totalAmount, message });
-      sendTriggerToLB(5, `${pullData.user_name} donated ${amount} bits!`, { amount }, pullData);
+      pullData.addvalues({
+        amount,
+        total_amount: totalAmount,
+        message,
+      });
+      sendTriggerToLB(
+        5,
+        `${pullData.user_name} donated ${amount} bits!`,
+        {
+          amount,
+        },
+        pullData,
+      );
     },
+
     LBTestTwitchPoints(form, pullData) {
       const channelID = Math.floor(Math.random() * 1000000000);
       const redeemName = form.channelPointsName.value || 'Test Reward';
       const userInput = form.channelPointsInput.checked;
-      const message = (userInput) ? form.channelPointsMsg.value || generateMessage() : undefined;
+      const message = userInput
+        ? form.channelPointsMsg.value || generateMessage()
+        : undefined;
       const cost = parseInt(form.channelPointsCost.value) || 50;
       const image = 'https://static-cdn.jtvnw.net/custom-reward-images/default-4.png';
       const rewardId = generateUUID();
       const redeemId = generateUUID();
       pullData.addvalues({
-        channel_id: channelID, redeem_name: redeemName, message, cost, image, reward_id: rewardId, redeem_id: redeemId,
+        channel_id: channelID,
+        redeem_name: redeemName,
+        message,
+        cost,
+        image,
+        reward_id: rewardId,
+        redeem_id: redeemId,
       });
-      sendTriggerToLB(5, `${pullData.display_name} has redeemed ${redeemName}!`, { redeemname: redeemName, message }, pullData);
+      sendTriggerToLB(
+        5,
+        `${pullData.display_name} has redeemed ${redeemName}!`,
+        {
+          redeemname: redeemName,
+          message,
+        },
+        pullData,
+      );
     },
+
     LBTestTwitchRaid(form, pullData) {
       const amount = parseInt(form.raidAmount.value) || 5;
-      pullData.addvalues({ amount });
-      sendTriggerToLB(4, `${pullData.display_name} is raiding you with ${amount} viewers!`, { amount }, pullData);
+      pullData.addvalues({
+        amount,
+      });
+      sendTriggerToLB(
+        4,
+        `${pullData.display_name} is raiding you with ${amount} viewers!`,
+        {
+          amount,
+        },
+        pullData,
+      );
     },
+
     LBTestTwitchHost(form, pullData) {
       const amount = parseInt(form.hostamount.value) || 5;
-      pullData.addvalues({ amount });
-      sendTriggerToLB(14, `${pullData.display_name} is hosting you with ${amount} viewers!`, { amount }, pullData);
+      pullData.addvalues({
+        amount,
+      });
+      sendTriggerToLB(
+        14,
+        `${pullData.display_name} is hosting you with ${amount} viewers!`,
+        {
+          amount,
+        },
+        pullData,
+      );
     },
+
     LBTestTwitchChat(form) {
       const name = form.chatName.value || generateName();
       const userId = Math.floor(Math.random() * 1000000000);
@@ -961,30 +1140,68 @@ function LBTestTriggers() {
       if (form.chatMod.checked) badge.push('moderator/1');
       if (form.chatVip.checked) badge.push('vip/1');
       if (form.chatFounder.checked) badge.push('founder/1');
+
       if (form.chatSub.checked) {
         const tier = parseInt(form.chatMsgSubTier.value);
-        let month = (form.chatMsgSubMonth.value != 1) ? parseInt(form.chatMsgSubMonth.value) : 0;
-        month = (month > 3 && month < 6) ? month = 3 : (month > 6 && month < 9) ? month = 6 : (month > 9 && month < 12) ? month = 9 : month;
-        const subBadge = (tier === 1) ? `subscriber/${month}` : (tier === 2) ? `subscriber/${2000 + month}` : `subscriber/${3000 + month}`;
+        let month = form.chatMsgSubMonth.value != 1
+          ? parseInt(form.chatMsgSubMonth.value)
+          : 0;
+        month = month > 3 && month < 6
+          ? (month = 3)
+          : month > 6 && month < 9
+            ? (month = 6)
+            : month > 9 && month < 12
+              ? (month = 9)
+              : month;
+        const subBadge = tier === 1
+          ? `subscriber/${month}`
+          : tier === 2
+            ? `subscriber/${2000 + month}`
+            : `subscriber/${3000 + month}`;
         badge.push(subBadge);
       }
+
       const pullData = {
-        user_name: name.toLowerCase(), display_name: name, user_id: userId, message, emote_list: emoteList, badge_list: badge, channel, name_color: color, first_time: firstTime,
+        user_name: name.toLowerCase(),
+        display_name: name,
+        user_id: userId,
+        message,
+        emote_list: emoteList,
+        badge_list: badge,
+        channel,
+        name_color: color,
+        first_time: firstTime,
       };
-      LB.trigger(0, { message, broadcaster: form.chatBroadcaster.checked, moderator: form.chatMod.checked, sub: form.chatSub.checked, vip: form.chatVip.checked, founder: form.chatFounder.checked, trigger_data: pullData,
+      LB.trigger(0, {
+        message,
+        broadcaster: form.chatBroadcaster.checked,
+        moderator: form.chatMod.checked,
+        sub: form.chatSub.checked,
+        vip: form.chatVip.checked,
+        founder: form.chatFounder.checked,
+        trigger_data: pullData,
       });
     },
+
     LBTestTwitchFollow(form, pullData) {
-      sendTriggerToLB(6, `${pullData.display_name} followed you!`, {}, pullData);
+      sendTriggerToLB(
+        6,
+        `${pullData.display_name} followed you!`,
+        {},
+        pullData,
+      );
     },
   };
 
   class ConstructPullData {
     constructor(type) {
       const name = generateName();
-      this.user_name = (type !== 'LBTestTwitchHost') ? name.toLowerCase() : undefined;
-      this.display_name = (type !== 'LBTestTwitchBits') ? name : undefined;
-      this.user_id = (type !== 'LBTestTwitchHost') ? Math.floor(Math.random() * 1000000000) : undefined;
+      this.user_name = type !== 'LBTestTwitchHost' ? name.toLowerCase() : undefined;
+      this.display_name = type !== 'LBTestTwitchBits' ? name : undefined;
+      this.user_id = type !== 'LBTestTwitchHost'
+        ? Math.floor(Math.random() * 1000000000)
+        : undefined;
+
       this.addvalues = (params) => {
         Object.assign(this, params);
       };
@@ -992,78 +1209,88 @@ function LBTestTriggers() {
   }
 
   const forms = document.querySelectorAll('.LBTestTriggers');
-  Array.prototype.slice.call(forms)
-    .forEach((form) => {
-      form.addEventListener('submit', (e) => {
+  Array.prototype.slice.call(forms).forEach((form) => {
+    form.addEventListener(
+      'submit',
+      (e) => {
         e.preventDefault();
         const pullData = new ConstructPullData(form.id);
         processTrigger[form.id](form, pullData);
-      }, false);
-    });
+      },
+      false,
+    );
+  });
 
   function generateName(name = '') {
-    const names = ['Lioran', 'nutella4eva', 'Kottpower', 'Neverwho', 'Deomew', 'Doodybeard', 'Exeldro', 'AuralMoral', 'SuperMetroid', 'Melonax', 'Ptoil', 'LinksDarkHalf', 'Derpiii_', 'CoD360_420', 'Bill', 'Kurocha', 'Lisa', 'DeathByButtonMash', 'Daryl', 'Sebas', 'Ramsreef', 'Kelvin214', 'wellzish', 'Andilippi', 'MrWaldo', 'MrRubberDucky', 'Cyanidesugar', 'MisterK', 'Silverlink'];
+    const names = [
+      'Lioran',
+      'nutella4eva',
+      'Kottpower',
+      'Neverwho',
+      'Deomew',
+      'Doodybeard',
+      'Exeldro',
+      'AuralMoral',
+      'SuperMetroid',
+      'Melonax',
+      'Ptoil',
+      'LinksDarkHalf',
+      'Derpiii_',
+      'CoD360_420',
+      'Bill',
+      'Kurocha',
+      'Lisa',
+      'DeathByButtonMash',
+      'Daryl',
+      'Sebas',
+      'Ramsreef',
+      'Kelvin214',
+      'wellzish',
+      'Andilippi',
+      'MrWaldo',
+      'MrRubberDucky',
+      'Cyanidesugar',
+      'MisterK',
+      'Silverlink',
+    ];
     const randomName = names[Math.floor(Math.random() * names.length)];
     if (name !== randomName) return randomName;
     return generateName(name);
   }
 
   function generateMessage() {
-    const messages = ['Hello World!', "Love your stream, you are a very genuine guy and you're not affraid to say it how it is. But, I would just prefer if you didn't give your opinion, just saying.", "Alright, I'll be honest with ya, Bob. My name's not Kirk. It's Skywalker. Luke Skywalker.", 'Well, that never happened in any of the simulations.', 'You know, you blow up one sun and suddenly everyone expects you to walk on water.', "How's a needle in my butt gonna get water out of my ears?", 'If you immediately know the candle light is fire, then the meal was cooked a long time ago.', 'All that glitters is not gold. Fair is foul, and foul is fair Hover through the fog and filthy air. These violent delights have violent ends. Hell is empty and all the devils are here. By the pricking of my thumbs, Something wicked this way comes. Open, locks, Whoever knocks!'];
+    const messages = [
+      'Hello World!',
+      "Love your stream, you are a very genuine guy and you're not affraid to say it how it is. But, I would just prefer if you didn't give your opinion, just saying.",
+      "Alright, I'll be honest with ya, Bob. My name's not Kirk. It's Skywalker. Luke Skywalker.",
+      'Well, that never happened in any of the simulations.',
+      'You know, you blow up one sun and suddenly everyone expects you to walk on water.',
+      "How's a needle in my butt gonna get water out of my ears?",
+      'If you immediately know the candle light is fire, then the meal was cooked a long time ago.',
+      'All that glitters is not gold. Fair is foul, and foul is fair Hover through the fog and filthy air. These violent delights have violent ends. Hell is empty and all the devils are here. By the pricking of my thumbs, Something wicked this way comes. Open, locks, Whoever knocks!',
+    ];
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
     return randomMessage;
   }
 
   function generateUUID() {
-    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) => (
+      c
+        ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16));
   }
 
-  function sendTriggerToLB(type, message = 'Test trigger fired.', data = {}, triggerData) {
+  function sendTriggerToLB(
+    type,
+    message = 'Test trigger fired.',
+    data = {},
+    triggerData,
+  ) {
     data.trigger_data = triggerData;
     LB.trigger(type, data);
     LB.alert(message);
   }
-}
-
-// fake chat message testing
-function fakechatmsg() {
-  const name = ichatname.value || fakename();
-  const msg = ichatmsg.value.replace(/"/g, "'") || 'This is a test message.';
-  const badge = [];
-  const user_id = '123456789';
-  if (ichatbroadcaster.checked) { badge.push('broadcaster/1'); }
-  if (ichatmod.checked) { badge.push('moderator/1'); }
-  if (ichatvip.checked) { badge.push('vip/1'); }
-  if (ichatsub.checked) {
-    const tier = parseInt(chatmsgsubtier.value);
-    let month = (chatmsgsubmonth.value != 1) ? parseInt(chatmsgsubmonth.value) : 0;
-    month = (month > 3 && month < 6) ? month = 3 : (month > 6 && month < 9) ? month = 6 : (month > 9 && month < 12) ? month = 9 : month;
-    const subBadge = (tier === 1) ? `subscriber/${month}` : (tier === 2) ? `subscriber/${2000 + month}` : `subscriber/${3000 + month}`;
-    badge.push(subBadge);
-  }
-  const chat_obj = {
-    emotes: '304822798:0-9/304682444:11-19',
-    login: name.toLowerCase(),
-    display_name: name,
-    user_id,
-    color: '#189A8D',
-    badge: badge.join(),
-    message: msg,
-    channel: name,
-    topic: 'chatmessage',
-    type: 'MESSAGE',
-  };
-  lioranboardclient.send(JSON.stringify(chat_obj));
-}
-
-// fake names for testing
-function fakename(name = 'none') {
-  const names = ['Lioran', 'nutella4eva', 'Kottpower', 'Neverwho', 'Deomew', 'Doodybeard', 'Exeldro', 'AuralMoral', 'SuperMetroid', 'Melonax', 'Ptoil', 'LinksDarkHalf', 'Derpiii_', 'CoD360_420', 'Bill', 'Kurocha', 'Lisa', 'DeathByButtonMash', 'Daryl', 'Sebas', 'Ramsreef', 'Kelvin214'];
-  const randomName = names[Math.floor(Math.random() * names.length)];
-  if (name !== randomName) return randomName;
-  return fakename(name);
-}
-  
+}  
 // load LB connection params from storage
 function load_connection() {
   const ls = JSON.parse(localStorage.getItem('lsParams')) || {};
@@ -1074,8 +1301,15 @@ function load_connection() {
 
 // manually connect/disconnect from LB via button
 function connectbutton() {
+  let _lioranboardclient;
+
   const p = LBVars;
-  if (lioranboardclient?._connected) {
+
+  if (
+    (_lioranboardclient = lioranboardclient) !== null
+    && _lioranboardclient !== void 0
+    && _lioranboardclient._connected
+  ) {
     p.force_close = true;
     lioranboardclient.send('Close');
     lioranboardclient.disconnect();
@@ -1083,7 +1317,11 @@ function connectbutton() {
     document.querySelector('#cnctbutton').innerText = 'Disconnecting';
   } else {
     console.log('LioranBoard Manual Connection.');
-    try { clearTimeout(p.waiting_to_connect); } catch (e) {}
+
+    try {
+      clearTimeout(p.waiting_to_connect);
+    } catch (e) {}
+
     connecttoboard();
   }
 }
@@ -1091,19 +1329,25 @@ function connectbutton() {
 // Connect to LB and listen for events
 function connecttoboard() {
   LBDebugLog(dbgReceiver);
-  try { clearTimeout(p.waiting_to_connect); } catch (e) {}
+
+  try {
+    clearTimeout(p.waiting_to_connect);
+  } catch (e) {}
+
   const p = LBVars;
 
   // CONNECT TO LIORANBOARD
-  lioranboardclient.connect({ address: `${nIPbox.value || '127.0.0.1'}:${nPortBox.value || 9425}`, password: `${nPassBox.value || ''}`, name: 'Transmitter2' });
+  lioranboardclient.connect({
+    address: `${nIPbox.value || '127.0.0.1'}:${nPortBox.value || 9425}`,
+    password: `${nPassBox.value || ''}`,
+    name: 'Transmitter',
+  });
 
   // CONNECTION OPENED
   lioranboardclient.on('ConnectionOpened', () => {
     document.querySelector('#cnctbutton').innerText = 'Disconnect';
-
     console.log('LioranBoard Connection opened!');
   });
-
   lioranboardclient.on('error', (err) => {
     lioranboardclient.disconnect();
   });
@@ -1111,15 +1355,19 @@ function connecttoboard() {
   // AUTH SUCCESSFUL
   lioranboardclient.on('AuthenticationSuccess', async () => {
     // Send all extension commands to LB
-    sendExtensionCommands();
-    // Get Twitch list and connect to Pubsub
-    await LB.getTwitchList()
-      .then((data) => {
-        p.twitchList = data.twitch_list;
-        connectPubSubserver();
-      });
+    sendExtensionCommands(); // Get Twitch list and connect to Pubsub
+
+    await LB.getTwitchList().then((data) => {
+      p.twitchList = data.twitch_list;
+      connectPubSubserver();
+    });
+
     // Save connection params to storage
-    const ls = { ip: nIPbox.value, port: nPortBox.value, pass: nPassBox.value };
+    const ls = {
+      ip: nIPbox.value,
+      port: nPortBox.value,
+      pass: nPassBox.value,
+    };
     localStorage.setItem('lsParams', JSON.stringify(ls));
     ConnectionStatus('toclient', 'connected', 'Connected', 'green');
     console.log('LioranBoard Authentication successsful!');
@@ -1127,12 +1375,17 @@ function connecttoboard() {
 
   // CONNECTION CLOSED
   lioranboardclient.on('ConnectionClosed', () => {
-    try { clearTimeout(p.waiting_to_connect); } catch (e) {}
+    try {
+      clearTimeout(p.waiting_to_connect);
+    } catch (e) {}
+
     lioranboardclient.removeAllListeners();
+
     // Attempt to force disconnect from PubSub
     try {
       pubsubserver.close();
     } catch (e) {}
+
     // Attempt to reconnect if not manual disconnect
     if (!p.force_close) {
       ConnectionStatus(
@@ -1145,11 +1398,11 @@ function connecttoboard() {
       p.waiting_to_connect = setTimeout(() => {
         connecttoboard();
       }, 2000);
-    }
-    else {
+    } else {
       console.log('LioranBoard disconnected by user.');
       ConnectionStatus('toclient', 'disconnected', 'Connection Closed', 'red');
     }
+
     p.force_close = false;
     document.querySelector('#cnctbutton').innerText = 'Connect';
   });
@@ -1157,7 +1410,10 @@ function connecttoboard() {
   // CONNECTION ERROR
   lioranboardclient.on('ConnectionError', (e) => {
     // Try to force close the connection
-    try { lioranboard.disconnect(); } catch (e) {}
+    try {
+      lioranboard.disconnect();
+    } catch (e) {}
+
     console.log('LioranBoard Connection error');
   });
 
@@ -1173,84 +1429,114 @@ function connecttoboard() {
 }
 
 function sendExtensionCommands() {
-
 // You LioranBoard extension commands will be inserted here
 /*INSERT PART 2*/
 }
 
 // Connect to PubSub
 function connectPubSubserver() {
-  const p = LBVars;
+  const p = LBVars; 
+  
   // Do not connect if user's Twitch account isn't linked
   if (Object.keys(p.twitchList).length === 0) {
     ConnectionStatus(
-      'topubsub',
-      'disconnected',
-      'No linked account found.',
-      'grey',
+      "topubsub",
+      "disconnected",
+      "No linked account found.",
+      "grey"
     );
     return;
   }
-  pubsubserver = new WebSocket('wss://pubsub-edge.twitch.tv');
+
+  pubsubserver = new WebSocket("wss://pubsub-edge.twitch.tv");
 
   function PubSubPing() {
-    pubsubserver.send(JSON.stringify({ type: 'PING' }));
-  }
-
-  // attempt to reconnect on disconnect, unless LioranBoard is disconnected
+    pubsubserver.send(
+      JSON.stringify({
+        type: "PING"
+      })
+    );
+  } 
+  
+  // Attempt to reconnect on disconnect, unless LioranBoard is disconnected
   pubsubserver.onclose = () => {
-    try { clearInterval(p.pubsubinterval); } catch (e) {}
+    var _lioranboardclient;
+
+    try {
+      clearInterval(p.pubsubinterval);
+    } catch (e) {}
+
     const i_obj = {
-      topic: 'pubsubdisconnected',
-      type: 'MESSAGE',
+      topic: "pubsubdisconnected",
+      type: "MESSAGE"
     };
     ConnectionStatus(
-      'topubsub',
-      'disconnected',
-      'Connection closed. Attempting to reconnect.',
-      'red',
+      "topubsub",
+      "disconnected",
+      "Connection closed. Attempting to reconnect.",
+      "red"
     );
-    if (lioranboardclient?._connected) connectPubSubserver();
-  };
-
-  // once connected, listen for stuff
+    if (
+      (_lioranboardclient = lioranboardclient) !== null &&
+      _lioranboardclient !== void 0 &&
+      _lioranboardclient._connected
+    )
+      connectPubSubserver();
+  }; 
+  
+  // Once connected, listen for stuff
   pubsubserver.onopen = () => {
     p.pubsubinterval = setInterval(PubSubPing, 120000);
-    console.log('Twitch PubSub connected successfully.');
-    ConnectionStatus('topubsub', 'connected', 'Connected', 'green');
+    console.log("Twitch PubSub connected successfully.");
+    ConnectionStatus("topubsub", "connected", "Connected", "green"); // List of available Pubsub topic versions
 
-    // List of available Pubsub topic versions
     const listenTopics = {
-      listen_bits: ['bits', 'channel-bits-events-v2'], listen_follow: ['follows', 'following'], listen_moderation: ['mod', 'chat_moderator_actions'], listen_redeem: ['redeem', 'channel-points-channel-v1'], listen_subs: ['subs', 'channel-subscribe-events-v1'], listen_whispers: ['whispers', 'whispers'], listen_hypetrain: ['hypetrain', 'hype-train-events-v1'], listen_predictions: ['predictions', 'predictions-channel-v1'], listen_polls: ['polls', 'polls'],
+      listen_bits: ["bits", "channel-bits-events-v2"],
+      listen_follow: ["follows", "following"],
+      listen_moderation: ["mod", "chat_moderator_actions"],
+      listen_redeem: ["redeem", "channel-points-channel-v1"],
+      listen_subs: ["subs", "channel-subscribe-events-v1"],
+      listen_whispers: ["whispers", "whispers"],
+      listen_hypetrain: ["hypetrain", "hype-train-events-v1"],
+      listen_predictions: ["predictions", "predictions-channel-v1"],
+      listen_polls: ["polls", "polls"]
     };
 
     // Construct a listen object to send to Pubsub
     function PubsubConstructListen(id, token) {
-      this.type = 'LISTEN';
-      this.data = { auth_token: token };
+      this.type = "LISTEN";
+      this.data = {
+        auth_token: token
+      };
+
       this.changeTopic = (type, topic) => {
         this.nonce = `${type}-${id}`;
         this.data.topics = [`${topic}.${id}`];
       };
-    }
-
+    } 
+    
     // Go through the Twitch list and listen to everything the user selected
     Object.values(p.twitchList).forEach((params) => {
-      const pubsubListen = new PubsubConstructListen(params.user_id, params.token);
+      const pubsubListen = new PubsubConstructListen(
+        params.user_id,
+        params.token
+      );
       Object.keys(params).forEach((key) => {
-        if (key.includes('listen_') && params[key]) {
+        if (key.includes("listen_") && params[key]) {
           pubsubListen.changeTopic(listenTopics[key][0], listenTopics[key][1]);
           pubsubserver.send(JSON.stringify(pubsubListen));
         }
       });
     });
-  };
-
+  }; 
+  
   // Send data from Pubsub to LioranBoard
   pubsubserver.onmessage = (event) => {
     // send pubsub message to lioranboard, let it deal with it
-    lioranboardclient.send('PubSubMessage', { Data: JSON.parse(event.data) });
-    if (LBDebugPost && p.LBdebug.pubsub) LBDebugPost('pubsub', event.data);
+    lioranboardclient.send("PubSubMessage", {
+      Data: JSON.parse(event.data)
+    });
+    if (LBDebugPost && p.LBdebug.pubsub) LBDebugPost("pubsub", event.data);
   };
 }
 
@@ -1259,7 +1545,6 @@ function LBExtensionReceived(hook, LioranBoardJSON) {
     // hook you specified.
     default:
       break;
-
 //You hooks will be inserted here
 /*INSERT PART 3*/
    }

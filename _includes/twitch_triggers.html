@@ -1,5 +1,5 @@
-<!--Twitch Triggers external-->
-<div class="tab-pane" id="content-basic" role="tabpanel" title="Twitch Triggers" data-type="default">
+<!--Twitch Triggers-->
+<div class="tab-pane" id="content-triggers" role="tabpanel" title="Twitch Triggers" data-type="default">
    <form id="LBTestTwitchFollow" class="LBTestTriggers">
       <button type="submit" class="btn btn-primary btn-sm me-1">Test Follower</button>
    </form>
@@ -26,7 +26,6 @@
     <div>
    </form>
    <form id="LBTestTwitchSubGift" class="LBTestTriggers">
-
        <button type="submit" class="btn btn-primary btn-sm me-1">Test Subs Gift Amount</button>
        Amount:
        <input type="number" min="1" max="99" id="subGiftAmount" value=1> 
@@ -37,7 +36,7 @@
     <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidebits" role="button" aria-expanded="false" aria-controls="hidebits"></a>
     <div class='collapse' id="hidebits"> 
        Amount of bits:
-       <input type="number" min="0" max="999" id="bitsamount" value=1>
+       <input type="number" min="0" max="999" id="bitsamount" value=10>
        Total bits: 	
        <input type="number" min="0" max="999" id="bitstotal" value=100><br/>
        Message:	
@@ -86,4 +85,3 @@
     </div>
    </form>
   </div>
-  <!--Twitch Triggers external end-->

@@ -20,9 +20,9 @@ You can use promises for sending data to LioranBoard. Message ids are generated 
 `lioranboardclient.send(command, data).then(response=>console.log(response))`
 
 #### Helper functions
-You can call all helper functions with `LB[method](arguments)`. 
-To use promises, you can call them with `LB[method](arguments).then(response=>console.log(response))`. 
-All methods are documented inside Transmitter using JSDocs.
+You can call all helper functions with `LB.method(arguments)`. 
+To use promises, you can call them with `LB.method(arguments).then(response=>console.log(response))`. 
+All methods are documented inside Transmitter via JSDoc.
 
 `LB.getVariable(name, buttonId = 'global')`
 - Get a variable
@@ -39,13 +39,20 @@ All methods are documented inside Transmitter using JSDocs.
 - specify its button id or leave empty to create global variables
 - example: `LB.deleteVariable('myVariable', 'ID1')`
 
-`LB.popUp(message)`
-- Send a popup message to LB
-- example: `LB.popUp('Hello World!')`
+`LB.insertArray(arrayName, index, value, buttonId = 'global')`
+- Inserts an item to a specified index in an array, shifting the other items
+- `arrayName` - name of the array
+- `index` - index to insert the new item at
+- `value` - item value
+- `buttonId` - button id, default is global
+- example: `LB.insertArray('myArray',0,'Hello','ID1')`
 
-`LB.alert(message)`
-- Send an alert message to LB
-- example: `LB.alert('Hello World!')`
+`LB.deleteArray(arrayName, slot, buttonId = 'global')`
+- Deletes an item in a specified index in an array, shifting the other items
+- `arrayName` - name of the array
+- `index` - index to delete the item at
+- `buttonId` - button id, default is global
+- example: `LB.deleteArray('myArray',1,'ID1')`
 
 `LB.extCommand(name, color = 3355443, height = 52, boxes)`
 - Send an extension command (to create extension boxes) to LB 
@@ -78,12 +85,37 @@ All methods are documented inside Transmitter using JSDocs.
 - example: `LB.extCommand('Lucky Wheel', 3355443, 52, { rewardName: ['Reward Name', 14, 'Some Reward name'], rewardName2: ['Reward Name 2', 14, 'And another reward name'] })` will create an extension command named Lucky Wheel with 2 text boxes. 
 - example2: `LB.extCommand('Lucky Wheel', 3355443, 52, { color: ['Wheel Color', 18, '', null, ['blue','yellow','green']], rewardName: ['Reward Name', 14, 'Your Reward name'], rewardImage: ['Reward Image', 23, 'image.png'] })`  will create an extension command named Lucky wheel with one regular text box, one select box with options and one box to select an image file. 
 
-`LB.close()`
-- Closes LB connection to Transmitter
+`LB.triggerExt(trigger, pullData)`
+- `trigger` - name of the trigger
+- `data` - object containing all trigger pull data (can contain objects, arrays etc.)
+- example: `LB.triggerExt('Test Trigger', {users:['Lioran', 'Melonax'], color: 'blue', number: 5})`
 
-`LB.stayInformed(enabled)`
-- Set `enabled` to true to start receiving all deck and button updates and false to stop receiving them
-- example: `LB.stayInformed(true)`
+`LB.triggerButton(id)`
+- Triggers a button
+- `id` - button ID to trigger
+- example: `LB.triggerButton('ID1')`
+
+`LB.modifyButton(id, color, text, image, border)`
+- Modifies a button appearance temporarily
+- `id` - button ID to modify
+- `color` - decimal button color (BGR)
+- `text` - button text
+-  `image` - button image file name
+- `border` - border size, 0-7
+- leave parameters empty to reset button back to default values
+- example: `LB.modifyButton('ID1', 4934525, 'Hello', 'buttonImage.png', 5)`
+
+`LB.popUp(message)`
+- Send a popup message to LB
+- example: `LB.popUp('Hello World!')`
+
+`LB.alert(message)`
+- Send an alert message to LB
+- example: `LB.alert('Hello World!')`
+
+`LB.notification(message)`
+- Sends a notification (tray icon bubble) message to LB
+- example: `LB.notification('Hello World!')`
 
 `LB.getDeckList()`
 - Request an array of all decks
@@ -104,8 +136,15 @@ All methods are documented inside Transmitter using JSDocs.
 - `fileName` - file name without the path
 - example: `LB.getSum('test.png')`
 
+`LB.stayInformed(enabled)`
+- Set `enabled` to true to start receiving all deck and button updates and false to stop receiving them
+- example: `LB.stayInformed(true)`
+
 `LB.getActiveButtons()`
 - Retrieves all currently active buttons
+
+`LB.getModifiedButtons()`
+- Retrieves all currently modified buttons
 
 `LB.getTwitchList()`
 - Retrieves params of all linked Twitch accounts
@@ -117,60 +156,18 @@ All methods are documented inside Transmitter using JSDocs.
 - example for chat message trigger: `LB.trigger(0, { message : 'Hello World', broadcaster: 1, moderator: 0, sub: 0, vip: 0, founder: 0, trigger_data: { user_name: 'lioran', display_name: 'Lioran', user_id: 123456789, message : 'Hello World!', emote_list: '304822798:0-9/304682444:11-19', badge_list: 'subscriber/1', channel : 123456789, name_color: '#189A8D', first_time: 0 }})`
 - this is a very complex command and not recommended to use unless you know the exact payload you need to send
 
-`LB.triggerButton(id)`
-- Triggers a button
-- `id` - button ID to trigger
-- example: `LB.triggerButton('ID1')`
+`LB.close()`
+- Closes LB connection to Transmitter
 
-`LB.XXX(XXX)`
-- Releases a button
-- `id` - button ID to release
-- example: `LB.ReleaseButton('ID1')`
-
-
-`LB.modifyButton(id, color, text, image, border)`
-- Modifies a button appearance temporarily
-- `id` - button ID to modify
-- `color` - decimal button color (BGR)
-- `text` - button text
--  `image` - button image file name
-- `border` - border size, 0-7
-- leave parameters empty to reset button back to default values
-
-- example: `LB.modifyButton('ID1', 4934525, 'Hello', 'buttonImage.png', 5)`
-
-
-`LB.getModifiedButtons()`
-- Retrieves all currently modified buttons
-
-
-`LB.triggerExt(trigger, pullData)`
-- `trigger` - name of the trigger
-- `data` - object containing all trigger pull data (can contain objects, arrays etc.)
-- example: `LB.triggerExt('Test Trigger', {users:['Lioran', 'Melonax'], color: 'blue', number: 5})`
-
-
-`LB.insertArray(arrayName, index, value, buttonId = 'global')`
-- Inserts an item to a specified index in an array, shifting the other items
-- `arrayName` - name of the array
-- `index` - index to insert the new item at
-- `value` - item value
-- `buttonId` - button id, default is global
-- example: `LB.arrayInsert('test',0,'Hello','ID3')`
-
-`LB.deleteArray(arrayName, slot, buttonId = 'global')`
-- Deletes an item in a specified index in an array, shifting the other items
-- `arrayName` - name of the array
-- `index` - index to delete the item at
-- `buttonId` - button id, default is global
-- example: `LB.arrayDelete('test',1,'ID3')`
-
-
-`LB.notification(message)`
-- Sends a notification (tray icon bubble) message to LB
-- example: `LB.notification('Hello World!')`
-
-
+## Listening to extension data received from LioranBoard
+Instead of using hooks (like in the old LB), you can directly listen to a specified extension payload coming from LioranBoard.  
+This way you can receive all extension data directly in your currently running function. Use `lioranboard.on(extensionName)`.
+For example, let's say your extension is called Lucky Wheel:  
+  ```lioranboardclient.on('Lucky Wheel', (payload) => {
+    DO SOMETHING WITH THE EXTENSION PAYLOAD
+    console.log(payload)
+  });
+  ```
 ## Transmitter Collaboration
 
 Transmitter is generated by Jekyll. Each section is a separate file generated from `_includes` folder. If you wish to propose changes, please do so by editing these files.

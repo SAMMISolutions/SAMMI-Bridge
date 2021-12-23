@@ -8,8 +8,15 @@ function load_connection() {
 
 // manually connect/disconnect from LB via button
 function connectbutton() {
+  let _lioranboardclient;
+
   const p = LBVars;
-  if (lioranboardclient?._connected) {
+
+  if (
+    (_lioranboardclient = lioranboardclient) !== null
+    && _lioranboardclient !== void 0
+    && _lioranboardclient._connected
+  ) {
     p.force_close = true;
     lioranboardclient.send('Close');
     lioranboardclient.disconnect();
@@ -17,7 +24,11 @@ function connectbutton() {
     document.querySelector('#cnctbutton').innerText = 'Disconnecting';
   } else {
     console.log('LioranBoard Manual Connection.');
-    try { clearTimeout(p.waiting_to_connect); } catch (e) {}
+
+    try {
+      clearTimeout(p.waiting_to_connect);
+    } catch (e) {}
+
     connecttoboard();
   }
 }
@@ -25,19 +36,25 @@ function connectbutton() {
 // Connect to LB and listen for events
 function connecttoboard() {
   LBDebugLog(dbgReceiver);
-  try { clearTimeout(p.waiting_to_connect); } catch (e) {}
+
+  try {
+    clearTimeout(p.waiting_to_connect);
+  } catch (e) {}
+
   const p = LBVars;
 
   // CONNECT TO LIORANBOARD
-  lioranboardclient.connect({ address: `${nIPbox.value || '127.0.0.1'}:${nPortBox.value || 9425}`, password: `${nPassBox.value || ''}`, name: 'Transmitter2' });
+  lioranboardclient.connect({
+    address: `${nIPbox.value || '127.0.0.1'}:${nPortBox.value || 9425}`,
+    password: `${nPassBox.value || ''}`,
+    name: 'Transmitter',
+  });
 
   // CONNECTION OPENED
   lioranboardclient.on('ConnectionOpened', () => {
     document.querySelector('#cnctbutton').innerText = 'Disconnect';
-
     console.log('LioranBoard Connection opened!');
   });
-
   lioranboardclient.on('error', (err) => {
     lioranboardclient.disconnect();
   });
@@ -45,15 +62,19 @@ function connecttoboard() {
   // AUTH SUCCESSFUL
   lioranboardclient.on('AuthenticationSuccess', async () => {
     // Send all extension commands to LB
-    sendExtensionCommands();
-    // Get Twitch list and connect to Pubsub
-    await LB.getTwitchList()
-      .then((data) => {
-        p.twitchList = data.twitch_list;
-        connectPubSubserver();
-      });
+    sendExtensionCommands(); // Get Twitch list and connect to Pubsub
+
+    await LB.getTwitchList().then((data) => {
+      p.twitchList = data.twitch_list;
+      connectPubSubserver();
+    });
+
     // Save connection params to storage
-    const ls = { ip: nIPbox.value, port: nPortBox.value, pass: nPassBox.value };
+    const ls = {
+      ip: nIPbox.value,
+      port: nPortBox.value,
+      pass: nPassBox.value,
+    };
     localStorage.setItem('lsParams', JSON.stringify(ls));
     ConnectionStatus('toclient', 'connected', 'Connected', 'green');
     console.log('LioranBoard Authentication successsful!');
@@ -61,12 +82,17 @@ function connecttoboard() {
 
   // CONNECTION CLOSED
   lioranboardclient.on('ConnectionClosed', () => {
-    try { clearTimeout(p.waiting_to_connect); } catch (e) {}
+    try {
+      clearTimeout(p.waiting_to_connect);
+    } catch (e) {}
+
     lioranboardclient.removeAllListeners();
+
     // Attempt to force disconnect from PubSub
     try {
       pubsubserver.close();
     } catch (e) {}
+
     // Attempt to reconnect if not manual disconnect
     if (!p.force_close) {
       ConnectionStatus(
@@ -79,11 +105,11 @@ function connecttoboard() {
       p.waiting_to_connect = setTimeout(() => {
         connecttoboard();
       }, 2000);
-    }
-    else {
+    } else {
       console.log('LioranBoard disconnected by user.');
       ConnectionStatus('toclient', 'disconnected', 'Connection Closed', 'red');
     }
+
     p.force_close = false;
     document.querySelector('#cnctbutton').innerText = 'Connect';
   });
@@ -91,7 +117,10 @@ function connecttoboard() {
   // CONNECTION ERROR
   lioranboardclient.on('ConnectionError', (e) => {
     // Try to force close the connection
-    try { lioranboard.disconnect(); } catch (e) {}
+    try {
+      lioranboard.disconnect();
+    } catch (e) {}
+
     console.log('LioranBoard Connection error');
   });
 
