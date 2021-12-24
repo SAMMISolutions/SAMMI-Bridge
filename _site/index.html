@@ -179,7 +179,7 @@ button:active{
 <h1 id="lb-transmitter">LB-Transmitter</h1>
 <p>Current version of Transmitter for LioranBoard 2 . Download the latest release. This version will NOT work with LioranBoard 1.</p>
 
-<h2 id="change-log-since-the-initial-500-version">Change Log since the initial 5.00 version</h2>
+<h2 id="change-log-since-the-initial-500-version">change log since the initial 5.00 version</h2>
 
 <h2 id="500-version">5.00 version</h2>
 
@@ -198,35 +198,40 @@ Main changes:</p>
 <p>Transmitter uses LioranBoard websocket library to make sending and receiving data easier: https://github.com/LioranBoard/LioranBoard-2-Websocket. 
 You can use promises for sending data to LioranBoard. Message ids are generated automatically.</p>
 
-<p><code class="language-plaintext highlighter-rouge">lioranboardclient.send(command, data).then(response=&gt;console.log(response))</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">lioranboardclient</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span> <span class="nx">data</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h4 id="helper-functions">Helper functions</h4>
 <p>You can call all helper functions with <code class="language-plaintext highlighter-rouge">LB.method(arguments)</code>. 
 To use promises, you can call them with <code class="language-plaintext highlighter-rouge">LB.method(arguments).then(response=&gt;console.log(response))</code>. 
 All methods are documented inside Transmitter via JSDoc.</p>
 
-<p><code class="language-plaintext highlighter-rouge">LB.getVariable(name, buttonId = 'global')</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">getVariable</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">buttonId</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">global</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Get a variable</li>
   <li>specify its button id or leave empty for global variables</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.getVariable('myVariable', 'ID1')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.setVariable(name, value, buttonId = 'global')</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">setVariable</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">buttonId</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">global</span><span class="dl">'</span><span class="p">)</span><span class="s2">`
+</span></code></pre></div></div>
 <ul>
   <li>Set a variable</li>
   <li>specify its button id or leave empty to create global variables</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.setVariable('myVariable', 'Hello World', 'ID1')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.deleteVariable(name, buttonId = 'global')</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">deleteVariable</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">buttonId</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">global</span><span class="dl">'</span><span class="p">)</span><span class="s2">`
+</span></code></pre></div></div>
 <ul>
   <li>Delete a variable</li>
   <li>specify its button id or leave empty to create global variables</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.deleteVariable('myVariable', 'ID1')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.insertArray(arrayName, index, value, buttonId = 'global')</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">insertArray</span><span class="p">(</span><span class="nx">arrayName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">buttonId</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">global</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Inserts an item to a specified index in an array, shifting the other items</li>
   <li><code class="language-plaintext highlighter-rouge">arrayName</code> - name of the array</li>
@@ -236,7 +241,8 @@ All methods are documented inside Transmitter via JSDoc.</p>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.insertArray('myArray',0,'Hello','ID1')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.deleteArray(arrayName, slot, buttonId = 'global')</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">deleteArray</span><span class="p">(</span><span class="nx">arrayName</span><span class="p">,</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">buttonId</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">global</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Deletes an item in a specified index in an array, shifting the other items</li>
   <li><code class="language-plaintext highlighter-rouge">arrayName</code> - name of the array</li>
@@ -245,60 +251,81 @@ All methods are documented inside Transmitter via JSDoc.</p>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.deleteArray('myArray',1,'ID1')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.extCommand(name, color = 3355443, height = 52, boxes)</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">extCommand</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">color</span> <span class="o">=</span> <span class="mi">3355443</span><span class="p">,</span> <span class="nx">height</span> <span class="o">=</span> <span class="mi">52</span><span class="p">,</span> <span class="nx">boxes</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Send an extension command (to create extension boxes) to LB</li>
-  <li><code class="language-plaintext highlighter-rouge">name</code> = name of the extension command</li>
-  <li><code class="language-plaintext highlighter-rouge">color</code> box color, accepts dec colors</li>
+  <li><code class="language-plaintext highlighter-rouge">name</code> - name of the extension command</li>
+  <li><code class="language-plaintext highlighter-rouge">color</code> - box color, accepts dec colors</li>
   <li><code class="language-plaintext highlighter-rouge">height</code> - height of the box in pixels, you can use 52 for regular box or 80 for resiable box</li>
   <li><code class="language-plaintext highlighter-rouge">boxes</code> - an object containing box objects (its key is box variable and value is an array of box params)
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">boxVariable: [boxName, boxType, defaultValue, (optional)sizeModifier, (optional)selectOptions]</code></li>
-      <li>boxVariable = variable to save the box value under</li>
-      <li>boxName = name of the box shown in the user interface</li>
-      <li>boxType
-        <ul>
-          <li>0 = Resizable text box that allow for newline,ud_d can be anything</li>
-          <li>2 = Check box, ud_d should be set to true or false or it will crash, will always return true or false when triggered</li>
-          <li>7 = keyboard button, ud_d should be 0, shouldn’t really need this but this will send over a select key code</li>
-          <li>8 = compare box, ud_d should be “==”, returns a string from the compare box such as == or &gt;=</li>
-          <li>9 = math box, ud_d should be “=”, return a string from the compare box such as = or +=</li>
-          <li>10 = sound path box, ud_d should be “”, return a path to said sound effect select</li>
-          <li>11 = slider 0 to 100%, ud_d should be 0-1, will return a float 0 to 1</li>
-          <li>14 = normal white box, ud_d can be anything if you want just normal</li>
-          <li>15 = Variable box(yellow box), ud_d should be a string, will return whatever variable is in the yellow box</li>
-          <li>17 = color box, ud_d should be a number, will return the selected color</li>
-          <li>18 = select box, ud_d should be 0, will show a list when click, of what you defined in ud_oX, will return a number, if user select 3rd option, it will return 2</li>
-          <li>19 = select box string, ud_d should be a string, will return whatever string the user selected.</li>
-          <li>20 = select box string typeable, ud_d should be a string,  will return whatever the user selected or typed in the box</li>
-          <li>22 = file path, ud_d should be a string</li>
-          <li>23 = image path, ud_d should be a string</li>
-        </ul>
+      <li>
+        <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">boxVariable</span><span class="p">:</span> <span class="p">[</span><span class="nx">boxName</span><span class="p">,</span> <span class="nx">boxType</span><span class="p">,</span> <span class="nx">defaultValue</span><span class="p">,</span> <span class="p">(</span><span class="nx">optional</span><span class="p">)</span><span class="nx">sizeModifier</span><span class="p">,</span> <span class="p">(</span><span class="nx">optional</span><span class="p">)</span><span class="nx">selectOptions</span><span class="p">]</span>
+</code></pre></div>        </div>
       </li>
-      <li>defaultValue = default value of the variable</li>
-      <li>(optional) sizeModifier = horizontal box size, 1 is normal</li>
-      <li>(optional) [] selectOptions = array of options for the user to select (when using Select box type)</li>
+      <li><code class="language-plaintext highlighter-rouge">boxVariable</code> - variable to save the box value under</li>
+      <li><code class="language-plaintext highlighter-rouge">boxName</code> - name of the box shown in the user interface</li>
+      <li><code class="language-plaintext highlighter-rouge">boxType</code>
+ boxType | Description
+ —|—
+  0 | Resizable text box that allow for newline,ud_d can be anything
+  2 | Check box, ud_d should be set to true or false or it will crash, will always return true or false when triggered
+  7 | keyboard button, ud_d should be 0, shouldn’t really need this but this will send over a select key code
+  8 | compare box, ud_d should be “==”, returns a string from the compare box such as =| or &gt;=
+  9 | math box, ud_d should be “=”, return a string from the compare box such as | or +=
+  10 | sound path box, ud_d should be “”, return a path to said sound effect select
+  11 | slider 0 to 100%, ud_d should be 0-1, will return a float 0 to 1
+  14 | normal white box, ud_d can be anything if you want just normal 
+  15 | Variable box(yellow box), ud_d should be a string, will return whatever variable is in the yellow box
+  17 | color box, ud_d should be a number, will return the selected color
+  18 | select box, ud_d should be 0, will show a list when click, of what you defined in ud_oX, will return a number, if user select 3rd option, it will return 2
+  19 | select box string, ud_d should be a string, will return whatever string the user selected.
+  20 | select box string typeable, ud_d should be a string,  will return whatever the user selected or typed in the box
+  22 | file path, ud_d should be a string
+  23 | image path, ud_d should be a string</li>
+      <li><code class="language-plaintext highlighter-rouge">defaultValue</code> - default value of the variable</li>
+      <li>(optional) <code class="language-plaintext highlighter-rouge">sizeModifier</code> - horizontal box size, 1 is normal</li>
+      <li>(optional) [] <code class="language-plaintext highlighter-rouge">selectOptions</code> - array of options for the user to select (when using Select box type)</li>
     </ul>
   </li>
-  <li>example: <code class="language-plaintext highlighter-rouge">LB.extCommand('Lucky Wheel', 3355443, 52, { rewardName: ['Reward Name', 14, 'Some Reward name'], rewardName2: ['Reward Name 2', 14, 'And another reward name'] })</code> will create an extension command named Lucky Wheel with 2 text boxes.</li>
-  <li>example2: <code class="language-plaintext highlighter-rouge">LB.extCommand('Lucky Wheel', 3355443, 52, { color: ['Wheel Color', 18, '', null, ['blue','yellow','green']], rewardName: ['Reward Name', 14, 'Your Reward name'], rewardImage: ['Reward Image', 23, 'image.png'] })</code>  will create an extension command named Lucky wheel with one regular text box, one select box with options and one box to select an image file.</li>
+  <li>example:
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">extCommand</span><span class="p">(</span><span class="dl">'</span><span class="s1">Lucky Wheel</span><span class="dl">'</span><span class="p">,</span> <span class="mi">3355443</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">rewardName</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Reward Name</span><span class="dl">'</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Some Reward name</span><span class="dl">'</span><span class="p">],</span>
+  <span class="na">rewardName2</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Reward Name 2</span><span class="dl">'</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="dl">'</span><span class="s1">And another reward name</span><span class="dl">'</span><span class="p">]</span>
+<span class="p">})</span>
+</code></pre></div>    </div>
+    <p>will create an extension command named Lucky Wheel with 2 text boxes.</p>
+  </li>
+  <li>example2:
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">extCommand</span><span class="p">(</span><span class="dl">'</span><span class="s1">Lucky Wheel</span><span class="dl">'</span><span class="p">,</span> <span class="mi">3355443</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">color</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Wheel Color</span><span class="dl">'</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="p">[</span><span class="dl">'</span><span class="s1">blue</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">yellow</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">]],</span>
+  <span class="na">rewardName</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Reward Name</span><span class="dl">'</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Your Reward name</span><span class="dl">'</span><span class="p">],</span>
+  <span class="na">rewardImage</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Reward Image</span><span class="dl">'</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="dl">'</span><span class="s1">image.png</span><span class="dl">'</span><span class="p">]</span>
+<span class="p">})</span>
+</code></pre></div>    </div>
+    <p>will create an extension command named Lucky wheel with one regular text box, one select box with options and one box to select an image file.</p>
+  </li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.triggerExt(trigger, pullData)</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">triggerExt</span><span class="p">(</span><span class="nx">trigger</span><span class="p">,</span> <span class="nx">pullData</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">trigger</code> - name of the trigger</li>
   <li><code class="language-plaintext highlighter-rouge">data</code> - object containing all trigger pull data (can contain objects, arrays etc.)</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.triggerExt('Test Trigger', {users:['Lioran', 'Melonax'], color: 'blue', number: 5})</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.triggerButton(id)</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">triggerButton</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Triggers a button</li>
   <li><code class="language-plaintext highlighter-rouge">id</code> - button ID to trigger</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.triggerButton('ID1')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.modifyButton(id, color, text, image, border)</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">modifyButton</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">image</span><span class="p">,</span> <span class="nx">border</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Modifies a button appearance temporarily</li>
   <li><code class="language-plaintext highlighter-rouge">id</code> - button ID to modify</li>
@@ -310,73 +337,85 @@ All methods are documented inside Transmitter via JSDoc.</p>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.modifyButton('ID1', 4934525, 'Hello', 'buttonImage.png', 5)</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.popUp(message)</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Send a popup message to LB</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.popUp('Hello World!')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.alert(message)</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Send an alert message to LB</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.alert('Hello World!')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.notification(message)</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">notification</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Sends a notification (tray icon bubble) message to LB</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.notification('Hello World!')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.getDeckList()</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">getDeckList</span><span class="p">()</span>
+</code></pre></div></div>
 <ul>
   <li>Request an array of all decks</li>
   <li>Replies with an array <code class="language-plaintext highlighter-rouge">["Deck1 Name","Unique ID",crc32,"Deck2 Name","Unique ID",crc32,...]</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.getDeck(id)</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">getDeck</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Request a deck params</li>
   <li>provide <code class="language-plaintext highlighter-rouge">id</code> of the specified deck (retrieved from getDeckList command)</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.getDeck('20211221163402196200595')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.getImage(fileName)</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">getImage</span><span class="p">(</span><span class="nx">fileName</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Retrieve an image in base64</li>
   <li><code class="language-plaintext highlighter-rouge">fileName</code> = image file without the path</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.getImage('test.png')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.getSum(fileName)</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">getSum</span><span class="p">(</span><span class="nx">fileName</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Retrieves CRC32 of a file</li>
   <li><code class="language-plaintext highlighter-rouge">fileName</code> - file name without the path</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.getSum('test.png')</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.stayInformed(enabled)</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">stayInformed</span><span class="p">(</span><span class="nx">enabled</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>Set <code class="language-plaintext highlighter-rouge">enabled</code> to true to start receiving all deck and button updates and false to stop receiving them</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.stayInformed(true)</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.getActiveButtons()</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">getActiveButtons</span><span class="p">()</span>
+</code></pre></div></div>
 <ul>
   <li>Retrieves all currently active buttons</li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.getModifiedButtons()</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">getModifiedButtons</span><span class="p">()</span>
+</code></pre></div></div>
 <ul>
   <li>Retrieves all currently modified buttons</li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.getTwitchList()</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">getTwitchList</span><span class="p">()</span>
+</code></pre></div></div>
 <ul>
   <li>Retrieves params of all linked Twitch accounts</li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.trigger(type, data)</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+</code></pre></div></div>
 <ul>
   <li>type - trigger number
     <ul>
@@ -388,7 +427,8 @@ All methods are documented inside Transmitter via JSDoc.</p>
   <li>this is a very complex command and not recommended to use unless you know the exact payload you need to send</li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">LB.close()</code></p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">LB</span><span class="p">.</span><span class="nx">close</span><span class="p">()</span>
+</code></pre></div></div>
 <ul>
   <li>Closes LB connection to Transmitter</li>
 </ul>
@@ -398,10 +438,10 @@ All methods are documented inside Transmitter via JSDoc.</p>
 This way you can receive all extension data directly in your running functions. <br />
 Use <code class="language-plaintext highlighter-rouge">lioranboard.on(extensionName)</code>.<br />
 For example, let’s say your extension is called Lucky Wheel:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  lioranboardclient.on('Lucky Wheel', (payload) =&gt; {
-    DO SOMETHING WITH THE EXTENSION PAYLOAD
-    console.log(payload)
-  });
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">lioranboardclient</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">Lucky Wheel</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">payload</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">DO</span> <span class="nx">SOMETHING</span> <span class="nx">WITH</span> <span class="nx">THE</span> <span class="nx">EXTENSION</span> <span class="nx">PAYLOAD</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payload</span><span class="p">)</span>
+  <span class="p">});</span>
 </code></pre></div></div>
 <h2 id="transmitter-collaboration">Transmitter Collaboration</h2>
 
@@ -759,7 +799,6 @@ lioranboardclient = new LBWebSocket()
 load_connection();
 connecttoboard();
 LBTestTriggers();
-
 }, false);
 
 // modify UI on load
@@ -1091,7 +1130,7 @@ function LBTestTriggers() {
         redeem_id: redeemId,
       });
       sendTriggerToLB(
-        5,
+        3,
         `${pullData.display_name} has redeemed ${redeemName}!`,
         {
           redeemname: redeemName,
