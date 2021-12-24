@@ -76,9 +76,7 @@ LB.extCommand(name, color = 3355443, height = 52, boxes)
 - `color` - box color, accepts dec colors
 - `height` - height of the box in pixels, you can use 52 for regular box or 80 for resiable box
 - `boxes` - an object containing box objects (its key is box variable and value is an array of box params)
-    - ```js
-      boxVariable: [boxName, boxType, defaultValue, (optional)sizeModifier, (optional)selectOptions]
-      ```
+    - `boxVariable: [boxName, boxType, defaultValue, (optional)sizeModifier, (optional)selectOptions]`
     - `boxVariable` - variable to save the box value under 
     - `boxName` - name of the box shown in the user interface
     - `boxType`
