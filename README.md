@@ -239,11 +239,11 @@ Any changes will immediately reflect at http://lioranboard.ca/LioranBoard-2-Tran
 
 # Change log
 
-## 5.04
+## 5.03
 Fixed incorrect trigger type for Channel Points test trigger.
 
-## 5.03
+## 5.02
 Cleaned up the code and fixed an array helper function. 
 
-## 5.02
+## 5.01
 A lot has changed since the initial 5.00 version. Websocket protocol is now completely different and supports helper functions and promises. Testing buttons now work again too. 
