@@ -213,7 +213,27 @@ LB.trigger(type, data)
 - type - trigger number
     - 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem, 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey, 8 Timer, 9 OBS Trigger, 10 lioranboard, 11 twitch moderation, 12 extension trigger
 - data - whatever data is required for the trigger
-- example for chat message trigger: `LB.trigger(0, { message : 'Hello World', broadcaster: 1, moderator: 0, sub: 0, vip: 0, founder: 0, trigger_data: { user_name: 'lioran', display_name: 'Lioran', user_id: 123456789, message : 'Hello World!', emote_list: '304822798:0-9/304682444:11-19', badge_list: 'subscriber/1', channel : 123456789, name_color: '#189A8D', first_time: 0 }})`
+- example for chat message trigger: 
+    ```js
+    LB.trigger(0, {
+    message : 'Hello World',
+    broadcaster: 1,
+    moderator: 0, 
+    sub: 0, vip: 0,
+    founder: 0,
+    trigger_data: { 
+      user_name: 'lioran', 
+      display_name: 'Lioran', 
+      user_id: 123456789, 
+      message : 'Hello World!', 
+      emote_list: '304822798:0-9/304682444:11-19', 
+      badge_list: 'subscriber/1', 
+      channel : 123456789, 
+      name_color: '#189A8D', 
+      first_time: 0 
+      }
+    })
+    ```
 - this is a very complex command and not recommended to use unless you know the exact payload you need to send
 
 ```js
