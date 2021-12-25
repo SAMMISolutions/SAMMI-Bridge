@@ -248,7 +248,7 @@ Use `lioranboard.on(extensionName)`.
 For example, let's say your extension is called Lucky Wheel:  
   ```js
   lioranboardclient.on('Lucky Wheel', (payload) => {
-    DO SOMETHING WITH THE EXTENSION PAYLOAD
+    // DO SOMETHING WITH THE EXTENSION PAYLOAD
     console.log(payload)
   });
   ```
