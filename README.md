@@ -227,7 +227,7 @@ LB.trigger(type, data)
       user_id: 123456789, 
       message : 'Hello World!', 
       emote_list: '304822798:0-9/304682444:11-19', 
-      badge_list: 'subscriber/1', 
+      badge_list: 'broadcaster/1', 
       channel : 123456789, 
       name_color: '#189A8D', 
       first_time: 0 
