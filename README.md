@@ -1,5 +1,5 @@
 # LB-Transmitter
- Current version of Transmitter for LioranBoard 2 . Download the latest release. This version will NOT work with LioranBoard 1.
+ Current version of Transmitter for LioranBoard 2 . Download the latest [release](https://github.com/LioranBoard/LioranBoard-2-Transmitter/releases). This version will NOT work with LioranBoard 1.
 
 ### For users
 Twitch Triggers allow you to test all available Twitch triggers by sending fake payload to LioranBoard 2.  
