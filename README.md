@@ -245,7 +245,7 @@ LB.close()
 Instead of using hooks (like in the old LB), you can directly listen to a specified extension command coming from LioranBoard.  
 This way you can receive all extension data directly in your running functions.   
 Use `lioranboard.on(extensionCommandName)`.  
-For example, let's say your extension command name is called Lucky Wheel:  
+For example, let's say your extension command is called Lucky Wheel:  
   ```js
   lioranboardclient.on('Lucky Wheel', (payload) => {
     // DO SOMETHING WITH THE EXTENSION PAYLOAD
