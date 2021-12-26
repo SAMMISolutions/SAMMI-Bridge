@@ -112,7 +112,7 @@ LB.extCommand(name, color = 3355443, height = 52, boxes)
     rewardImage: ['Reward Image', 23, 'image.png']
   })
   ``` 
-  will create an extension command named Lucky wheel with one regular text box, one select box with options and one box to select an image file.  
+  will create an extension command named Lucky wheel with one select box with options, one regular text box and one box to select an image file.  
 
 
 ```js
