@@ -242,8 +242,8 @@ LB.close()
 - Closes LB connection to Transmitter
 
 ## Listening to extension data received from LioranBoard
-Instead of using hooks (like in the old LB), you can directly listen to a specified extension command coming from LioranBoard.  
-This way you can receive all extension data directly in your running functions.   
+In addition to hooks (which work the same as in LB1), you can also directly listen to a specified extension command coming from LioranBoard.  
+This way you can receive all extension data directly in your functions.   
 Use `lioranboard.on(extensionCommandName)`.  
 For example, let's say your extension command is called Lucky Wheel:  
   ```js
