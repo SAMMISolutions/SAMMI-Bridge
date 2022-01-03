@@ -259,6 +259,11 @@ Any changes will immediately reflect at http://lioranboard.ca/LioranBoard-2-Tran
 
 # Change log
 
+## 5.04
+Debug Logging 
+ - fixed undefined request names and ids shown in the log
+ - Twitch tokens will show as *** for GetTwitchList replies to prevent accidentally exposing them
+ 
 ## 5.03
 Fixed incorrect trigger type for Channel Points test trigger.
 
