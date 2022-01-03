@@ -1,5 +1,5 @@
 <!--For Extension info, read How to make extensions.txt in Extension folder-->
-<!--Transmitter V5.03-->
+<!--Transmitter V5.04-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,11 +177,7 @@ button:active{
 <body>
 <div class="container">
 <h1 id="lb-transmitter">LB-Transmitter</h1>
-<p>Current version of Transmitter for LioranBoard 2 . Download the latest release. This version will NOT work with LioranBoard 1.</p>
-
-<h2 id="change-log-since-the-initial-500-version">change log since the initial 5.00 version</h2>
-
-<h2 id="500-version">5.00 version</h2>
+<p>Current version of Transmitter for LioranBoard 2 . Download the latest <a href="https://github.com/LioranBoard/LioranBoard-2-Transmitter/releases">release</a>. This version will NOT work with LioranBoard 1.</p>
 
 <h3 id="for-users">For users</h3>
 <p>Twitch Triggers allow you to test all available Twitch triggers by sending fake payload to LioranBoard 2.<br />
@@ -301,7 +297,7 @@ All methods are documented inside Transmitter via JSDoc.</p>
   <span class="na">rewardImage</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Reward Image</span><span class="dl">'</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="dl">'</span><span class="s1">image.png</span><span class="dl">'</span><span class="p">]</span>
 <span class="p">})</span>
 </code></pre></div>    </div>
-    <p>will create an extension command named Lucky wheel with one regular text box, one select box with options and one box to select an image file.</p>
+    <p>will create an extension command named Lucky wheel with one select box with options, one regular text box and one box to select an image file.</p>
   </li>
 </ul>
 
@@ -420,7 +416,27 @@ All methods are documented inside Transmitter via JSDoc.</p>
     </ul>
   </li>
   <li>data - whatever data is required for the trigger</li>
-  <li>example for chat message trigger: <code class="language-plaintext highlighter-rouge">LB.trigger(0, { message : 'Hello World', broadcaster: 1, moderator: 0, sub: 0, vip: 0, founder: 0, trigger_data: { user_name: 'lioran', display_name: 'Lioran', user_id: 123456789, message : 'Hello World!', emote_list: '304822798:0-9/304682444:11-19', badge_list: 'subscriber/1', channel : 123456789, name_color: '#189A8D', first_time: 0 }})</code></li>
+  <li>example for chat message trigger:
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">LB</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">message</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Hello World</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">broadcaster</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">moderator</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+  <span class="na">sub</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">vip</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">founder</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">trigger_data</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">user_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">lioran</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">display_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Lioran</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">user_id</span><span class="p">:</span> <span class="mi">123456789</span><span class="p">,</span> 
+    <span class="na">message</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Hello World!</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">emote_list</span><span class="p">:</span> <span class="dl">'</span><span class="s1">304822798:0-9/304682444:11-19</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">badge_list</span><span class="p">:</span> <span class="dl">'</span><span class="s1">broadcaster/1</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">channel</span> <span class="p">:</span> <span class="mi">123456789</span><span class="p">,</span> 
+    <span class="na">name_color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#189A8D</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">first_time</span><span class="p">:</span> <span class="mi">0</span> 
+    <span class="p">}</span>
+  <span class="p">})</span>
+</code></pre></div>    </div>
+  </li>
   <li>this is a very complex command and not recommended to use unless you know the exact payload you need to send</li>
 </ul>
 
@@ -431,12 +447,12 @@ All methods are documented inside Transmitter via JSDoc.</p>
 </ul>
 
 <h2 id="listening-to-extension-data-received-from-lioranboard">Listening to extension data received from LioranBoard</h2>
-<p>Instead of using hooks (like in the old LB), you can directly listen to a specified extension payload coming from LioranBoard.<br />
-This way you can receive all extension data directly in your running functions. <br />
-Use <code class="language-plaintext highlighter-rouge">lioranboard.on(extensionName)</code>.<br />
-For example, let’s say your extension is called Lucky Wheel:</p>
+<p>In addition to hooks (which work the same as in LB1), you can also directly listen to a specified extension command coming from LioranBoard.<br />
+This way you can receive all extension data directly in your functions. <br />
+Use <code class="language-plaintext highlighter-rouge">lioranboard.on(extensionCommandName)</code>.<br />
+For example, let’s say your extension command is called Lucky Wheel:</p>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">lioranboardclient</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">Lucky Wheel</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">payload</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">DO</span> <span class="nx">SOMETHING</span> <span class="nx">WITH</span> <span class="nx">THE</span> <span class="nx">EXTENSION</span> <span class="nx">PAYLOAD</span>
+    <span class="c1">// DO SOMETHING WITH THE EXTENSION PAYLOAD</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payload</span><span class="p">)</span>
   <span class="p">});</span>
 </code></pre></div></div>
@@ -444,6 +460,17 @@ For example, let’s say your extension is called Lucky Wheel:</p>
 
 <p>Transmitter is generated by Jekyll. Each section is a separate file generated from <code class="language-plaintext highlighter-rouge">_includes</code> folder. If you wish to propose changes, please do so by editing these files.
 Any changes will immediately reflect at http://lioranboard.ca/LioranBoard-2-Transmitter/tsl_transmitter.html. I also manually generate the Transmitter file for each release, which can be found in <code class="language-plaintext highlighter-rouge">download</code> folder.</p>
+
+<h1 id="change-log">Change log</h1>
+
+<h2 id="503">5.03</h2>
+<p>Fixed incorrect trigger type for Channel Points test trigger.</p>
+
+<h2 id="502">5.02</h2>
+<p>Cleaned up the code and fixed an array helper function.</p>
+
+<h2 id="501">5.01</h2>
+<p>A lot has changed since the initial 5.00 version. Websocket protocol is now completely different and supports helper functions and promises. Testing buttons now work again too.</p>
 
 </div>
 </body>
