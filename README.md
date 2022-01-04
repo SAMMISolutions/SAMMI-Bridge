@@ -34,14 +34,14 @@ LB.getVariable(name, buttonId = 'global')
 LB.setVariable(name, value, buttonId = 'global')`
 ```
 - Set a variable
-- specify its button id or leave empty to create global variables
+- specify its button id or leave empty to create a global variable
 - example: `LB.setVariable('myVariable', 'Hello World', 'ID1')`
 
 ```js
 LB.deleteVariable(name, buttonId = 'global')`
 ```
 - Delete a variable
-- specify its button id or leave empty to create global variables
+- specify its button id or leave empty to delete a global variable
 - example: `LB.deleteVariable('myVariable', 'ID1')`
 
 ```js
