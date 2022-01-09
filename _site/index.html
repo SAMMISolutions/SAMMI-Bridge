@@ -1,5 +1,5 @@
 <!--For Extension info, read How to make extensions.txt in Extension folder-->
-<!--Transmitter V5.04-->
+<!--Transmitter V5.05-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -214,7 +214,7 @@ All methods are documented inside Transmitter via JSDoc.</p>
 </span></code></pre></div></div>
 <ul>
   <li>Set a variable</li>
-  <li>specify its button id or leave empty to create global variables</li>
+  <li>specify its button id or leave empty to create a global variable</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.setVariable('myVariable', 'Hello World', 'ID1')</code></li>
 </ul>
 
@@ -222,7 +222,7 @@ All methods are documented inside Transmitter via JSDoc.</p>
 </span></code></pre></div></div>
 <ul>
   <li>Delete a variable</li>
-  <li>specify its button id or leave empty to create global variables</li>
+  <li>specify its button id or leave empty to delete a global variable</li>
   <li>example: <code class="language-plaintext highlighter-rouge">LB.deleteVariable('myVariable', 'ID1')</code></li>
 </ul>
 
@@ -462,6 +462,13 @@ For example, let’s say your extension command is called Lucky Wheel:</p>
 Any changes will immediately reflect at http://lioranboard.ca/LioranBoard-2-Transmitter/tsl_transmitter.html. I also manually generate the Transmitter file for each release, which can be found in <code class="language-plaintext highlighter-rouge">download</code> folder.</p>
 
 <h1 id="change-log">Change log</h1>
+
+<h2 id="504">5.04</h2>
+<p>Debug Logging</p>
+<ul>
+  <li>fixed undefined request names and ids shown in the log</li>
+  <li>Twitch tokens will show as *** for GetTwitchList replies to prevent accidentally exposing them</li>
+</ul>
 
 <h2 id="503">5.03</h2>
 <p>Fixed incorrect trigger type for Channel Points test trigger.</p>
