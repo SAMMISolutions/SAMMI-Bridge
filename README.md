@@ -259,6 +259,9 @@ Any changes will immediately reflect at http://lioranboard.ca/LioranBoard-2-Tran
 
 # Change log
 
+## 5.05
+Fixed bad auth token error for PubSub which happened when debug logging was enabled.
+
 ## 5.04
 Debug Logging 
  - fixed undefined request names and ids shown in the log
