@@ -88,7 +88,7 @@ LB.extCommand(name, color = 3355443, height = 52, boxes)
         14 | Normal white box, defaultValue can be anything
         15 | Variable box(yellow box), defaultValue should be a string, returns whatever variable is in the yellow box
         17 | Color box, defaultValue should be a number, returns the selected color
-        18 | Select box, defaultValue should be `0`, will show a list when click, of what you defined in ud_oX, returns a number, if user select 3rd option, it returns 2
+        18 | Select box, defaultValue should be `0`, will show a list when click, of what you defined in selectOptions, returns a number, if user select 3rd option, it returns 2
         19 | select box string, defaultValue should be a string, returns whatever string the user selected.
         20 | select box string typeable, defaultValue should be a string,  returns whatever the user selected or typed in the box
         22 | file path, defaultValue should be a string
