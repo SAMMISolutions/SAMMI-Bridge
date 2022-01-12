@@ -78,21 +78,21 @@ LB.extCommand(name, color = 3355443, height = 52, boxes)
     - `boxType`
        boxType | Description
        ---|---
-        0 | Resizable text box that allow for newline,ud_d can be anything
-        2 | Check box, ud_d should be set to true or false or it will crash, will always return true or false when triggered
-        7 | keyboard button, ud_d should be 0, shouldn't really need this but this will send over a select key code
-        8 | compare box, ud_d should be "==", returns a string from the compare box such as =| or >=
-        9 | math box, ud_d should be "=", return a string from the compare box such as | or +=
-        10 | sound path box, ud_d should be "", return a path to said sound effect select
-        11 | slider 0 to 100%, ud_d should be 0-1, will return a float 0 to 1
-        14 | normal white box, ud_d can be anything if you want just normal 
-        15 | Variable box(yellow box), ud_d should be a string, will return whatever variable is in the yellow box
-        17 | color box, ud_d should be a number, will return the selected color
-        18 | select box, ud_d should be 0, will show a list when click, of what you defined in ud_oX, will return a number, if user select 3rd option, it will return 2
-        19 | select box string, ud_d should be a string, will return whatever string the user selected.
-        20 | select box string typeable, ud_d should be a string,  will return whatever the user selected or typed in the box
-        22 | file path, ud_d should be a string
-        23 | image path, ud_d should be a string
+        0 | Resizable text box that allows for newline, defaultValue can be anything
+        2 | Check box, defaultValue should be set to true or false or it will crash, will always return true or false when triggered
+        7 | Keyboard button, defaultValue should be 0, shouldn't really need this but this will send over a select key code
+        8 | Compare box, defaultValue should be `==`, returns a string from the compare box such as `=|` or `>=`
+        9 | Math box, defaultValue should be `=`, returns a string from the compare box such as `|` or `+=`
+        10 | Sound path box, defaultValue should be `""`, returns a path to said sound effect select
+        11 | Slider 0 to 100%, defaultValue should be 0-1, returns a float 0 to 1
+        14 | Normal white box, defaultValue can be anything
+        15 | Variable box(yellow box), defaultValue should be a string, returns whatever variable is in the yellow box
+        17 | Color box, defaultValue should be a number, returns the selected color
+        18 | Select box, defaultValue should be `0`, will show a list when click, of what you defined in selectOptions, returns a number, if user select 3rd option, it returns 2
+        19 | select box string, defaultValue should be a string, returns whatever string the user selected.
+        20 | select box string typeable, defaultValue should be a string,  returns whatever the user selected or typed in the box
+        22 | file path, defaultValue should be a string
+        23 | image path, defaultValue should be a string
     - `defaultValue` - default value of the variable
     - (optional) `sizeModifier` - horizontal box size, 1 is normal
     - (optional) [] `selectOptions` - array of options for the user to select (when using Select box type)
