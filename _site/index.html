@@ -1,5 +1,5 @@
 <!--For Extension info, read How to make extensions.txt in Extension folder-->
-<!--Transmitter V5.05-->
+<!--Transmitter V5.06-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -262,21 +262,21 @@ All methods are documented inside Transmitter via JSDoc.</p>
       <li><code class="language-plaintext highlighter-rouge">boxType</code>
  boxType | Description
  —|—
-  0 | Resizable text box that allow for newline,ud_d can be anything
-  2 | Check box, ud_d should be set to true or false or it will crash, will always return true or false when triggered
-  7 | keyboard button, ud_d should be 0, shouldn’t really need this but this will send over a select key code
-  8 | compare box, ud_d should be “==”, returns a string from the compare box such as =| or &gt;=
-  9 | math box, ud_d should be “=”, return a string from the compare box such as | or +=
-  10 | sound path box, ud_d should be “”, return a path to said sound effect select
-  11 | slider 0 to 100%, ud_d should be 0-1, will return a float 0 to 1
-  14 | normal white box, ud_d can be anything if you want just normal 
-  15 | Variable box(yellow box), ud_d should be a string, will return whatever variable is in the yellow box
-  17 | color box, ud_d should be a number, will return the selected color
-  18 | select box, ud_d should be 0, will show a list when click, of what you defined in ud_oX, will return a number, if user select 3rd option, it will return 2
-  19 | select box string, ud_d should be a string, will return whatever string the user selected.
-  20 | select box string typeable, ud_d should be a string,  will return whatever the user selected or typed in the box
-  22 | file path, ud_d should be a string
-  23 | image path, ud_d should be a string</li>
+  0 | Resizable text box that allows for newline, defaultValue can be anything
+  2 | Check box, defaultValue should be set to true or false or it will crash, will always return true or false when triggered
+  7 | Keyboard button, defaultValue should be 0, shouldn’t really need this but this will send over a select key code
+  8 | Compare box, defaultValue should be <code class="language-plaintext highlighter-rouge">==</code>, returns a string from the compare box such as <code class="language-plaintext highlighter-rouge">=|</code> or <code class="language-plaintext highlighter-rouge">&gt;=</code>
+  9 | Math box, defaultValue should be <code class="language-plaintext highlighter-rouge">=</code>, returns a string from the compare box such as <code class="language-plaintext highlighter-rouge">|</code> or <code class="language-plaintext highlighter-rouge">+=</code>
+  10 | Sound path box, defaultValue should be <code class="language-plaintext highlighter-rouge">""</code>, returns a path to said sound effect select
+  11 | Slider 0 to 100%, defaultValue should be 0-1, returns a float 0 to 1
+  14 | Normal white box, defaultValue can be anything
+  15 | Variable box(yellow box), defaultValue should be a string, returns whatever variable is in the yellow box
+  17 | Color box, defaultValue should be a number, returns the selected color
+  18 | Select box, defaultValue should be <code class="language-plaintext highlighter-rouge">0</code>, will show a list when click, of what you defined in selectOptions, returns a number, if user select 3rd option, it returns 2
+  19 | select box string, defaultValue should be a string, returns whatever string the user selected.
+  20 | select box string typeable, defaultValue should be a string,  returns whatever the user selected or typed in the box
+  22 | file path, defaultValue should be a string
+  23 | image path, defaultValue should be a string</li>
       <li><code class="language-plaintext highlighter-rouge">defaultValue</code> - default value of the variable</li>
       <li>(optional) <code class="language-plaintext highlighter-rouge">sizeModifier</code> - horizontal box size, 1 is normal</li>
       <li>(optional) [] <code class="language-plaintext highlighter-rouge">selectOptions</code> - array of options for the user to select (when using Select box type)</li>
@@ -449,13 +449,17 @@ All methods are documented inside Transmitter via JSDoc.</p>
 <h2 id="listening-to-extension-data-received-from-lioranboard">Listening to extension data received from LioranBoard</h2>
 <p>In addition to hooks (which work the same as in LB1), you can also directly listen to a specified extension command coming from LioranBoard.<br />
 This way you can receive all extension data directly in your functions. <br />
-Use <code class="language-plaintext highlighter-rouge">lioranboard.on(extensionCommandName)</code>.<br />
+Use <code class="language-plaintext highlighter-rouge">lioranboard.on()</code> or <code class="language-plaintext highlighter-rouge">lioranboardclient.addListener()</code> and <code class="language-plaintext highlighter-rouge">lioranboardclient.removeListener()</code>.<br />
 For example, let’s say your extension command is called Lucky Wheel:</p>
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">lioranboardclient</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">Lucky Wheel</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">payload</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="c1">// DO SOMETHING WITH THE EXTENSION PAYLOAD</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payload</span><span class="p">)</span>
   <span class="p">});</span>
 </code></pre></div></div>
+<p>You can also do:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">lioranboardclient</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">Lucky Wheel</span><span class="dl">'</span><span class="p">,</span> <span class="nx">functionToExecute</span><span class="p">)</span>
+</code></pre></div></div>
+
 <h2 id="transmitter-collaboration">Transmitter Collaboration</h2>
 
 <p>Transmitter is generated by Jekyll. Each section is a separate file generated from <code class="language-plaintext highlighter-rouge">_includes</code> folder. If you wish to propose changes, please do so by editing these files.
@@ -1446,6 +1450,10 @@ function connecttoboard() {
       pass: nPassBox.value,
     };
     localStorage.setItem('lsParams', JSON.stringify(ls));
+
+    // set current browser as global variable
+    LB.setVariable('browser_name', browser);
+
     ConnectionStatus('toclient', 'connected', 'Connected', 'green');
     console.log('LioranBoard Authentication successsful!');
   });
@@ -1504,6 +1512,24 @@ function connecttoboard() {
     LBExtensionReceived(json.CommandName, json.Data);
   });
 }
+
+// Get Browser Name
+
+const browser = (function () {
+  const test = function (regexp) { return regexp.test(window.navigator.userAgent); };
+  switch (true) {
+    case test(/OBS/i): return 'OBS';
+    case test(/edg/i): return 'Microsoft Edge';
+    case test(/trident/i): return 'Microsoft Internet Explorer';
+    case test(/firefox|fxios/i): return 'Mozilla Firefox';
+    case test(/opr\//i): return 'Opera';
+    case test(/ucbrowser/i): return 'UC Browser';
+    case test(/samsungbrowser/i): return 'Samsung Browser';
+    case test(/chrome|chromium|crios/i): return 'Google Chrome';
+    case test(/safari/i): return 'Apple Safari';
+    default: return 'Other';
+  }
+}());
 
 function sendExtensionCommands() {
 // You LioranBoard extension commands will be inserted here
