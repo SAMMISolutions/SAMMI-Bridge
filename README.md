@@ -80,6 +80,9 @@ LB.extCommand(name, color = 3355443, height = 52, boxes)
        ---|---
         0 | Resizable text box that allows for newline, defaultValue can be anything
         2 | Check box, defaultValue should be set to true or false or it will crash, will always return true or false when triggered
+        4 | OBS Scenes box
+        5 | OBS Sources box
+        6 | OBS Filters box
         7 | Keyboard button, defaultValue should be 0, shouldn't really need this but this will send over a select key code
         8 | Compare box, defaultValue should be `==`, returns a string from the compare box such as `=|` or `>=`
         9 | Math box, defaultValue should be `=`, returns a string from the compare box such as `|` or `+=`
