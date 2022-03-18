@@ -264,6 +264,9 @@ All methods are documented inside Transmitter via JSDoc.</p>
  —|—
   0 | Resizable text box that allows for newline, defaultValue can be anything
   2 | Check box, defaultValue should be set to true or false or it will crash, will always return true or false when triggered
+  4 | OBS Scenes box
+  5 | OBS Sources box
+  6 | OBS Filters box
   7 | Keyboard button, defaultValue should be 0, shouldn’t really need this but this will send over a select key code
   8 | Compare box, defaultValue should be <code class="language-plaintext highlighter-rouge">==</code>, returns a string from the compare box such as <code class="language-plaintext highlighter-rouge">=|</code> or <code class="language-plaintext highlighter-rouge">&gt;=</code>
   9 | Math box, defaultValue should be <code class="language-plaintext highlighter-rouge">=</code>, returns a string from the compare box such as <code class="language-plaintext highlighter-rouge">|</code> or <code class="language-plaintext highlighter-rouge">+=</code>
@@ -1614,9 +1617,9 @@ function connectPubSubserver() {
 
       this.changeTopic = (type, topic) => {
         this.nonce = `${type}-${id}`;
-        this.data.topics = [`${topic}.${id}`];
+        this.data.topics = (type !== 'mod') ? [`${topic}.${id}`] : [`${topic}.${id}.${id}`];
       };
-    } 
+    }
     
     // Go through the Twitch list and listen to everything the user selected
     Object.values(p.twitchList).forEach((params) => {

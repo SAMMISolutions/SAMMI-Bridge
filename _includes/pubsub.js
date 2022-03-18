@@ -76,9 +76,9 @@ function connectPubSubserver() {
 
       this.changeTopic = (type, topic) => {
         this.nonce = `${type}-${id}`;
-        this.data.topics = [`${topic}.${id}`];
+        this.data.topics = (type !== 'mod') ? [`${topic}.${id}`] : [`${topic}.${id}.${id}`];
       };
-    } 
+    }
     
     // Go through the Twitch list and listen to everything the user selected
     Object.values(p.twitchList).forEach((params) => {
