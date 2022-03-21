@@ -1156,7 +1156,7 @@ function LBTestTriggers() {
       const userInput = form.channelPointsInput.checked;
       const message = userInput
         ? form.channelPointsMsg.value || generateMessage()
-        : undefined;
+        : '';
       const cost = parseInt(form.channelPointsCost.value) || 50;
       const image = 'https://static-cdn.jtvnw.net/custom-reward-images/default-4.png';
       const rewardId = generateUUID();
