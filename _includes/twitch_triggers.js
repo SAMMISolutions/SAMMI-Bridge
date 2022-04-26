@@ -88,7 +88,7 @@ function LBTestTriggers() {
             ? 4
             : 1;
       const gifterName = subForm.anongift.checked
-        ? 'Anonymous user'
+        ? 'Anonymous User'
         : generateName();
       const amount = parseInt(form.subGiftAmount.value) || 1;
       const pullData = {
