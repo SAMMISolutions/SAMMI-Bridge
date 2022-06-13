@@ -1,5 +1,5 @@
 <!--For Extension info, read How to make extensions.txt in Extension folder-->
-<!--Transmitter V5.08-->
+<!--Transmitter V6.00-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -674,7 +674,7 @@ function LBCommands() {
 }
 
 // Twitch client ID to use for Twitch API requests
-const TWITCH_CLIENT_ID = "tpqy40pm79e00s63cqusqepvhwqz1n";
+let TWITCH_CLIENT_ID = "tpqy40pm79e00s63cqusqepvhwqz1n";
 // init object with all available LB command methods
 const LB = new LBCommands ()
 // Expose websocket client, pubsub client and logIt function for global access
@@ -1245,7 +1245,8 @@ function LBTestTriggers() {
     LB.trigger(type, data);
     LB.alert(message);
   }
-}  
+}
+  
 // load LB connection params from storage
 function load_connection() {
   const ls = JSON.parse(localStorage.getItem('lsParams')) || {};
@@ -1313,6 +1314,7 @@ function connecttoboard() {
     sendExtensionCommands(); // Get Twitch list and connect to Pubsub
 
     await LB.getTwitchList().then((data) => {
+      TWITCH_CLIENT_ID = data.twitch_list.clientId ? data.twitch_list.clientId : TWITCH_CLIENT_ID
       p.twitchList = data.twitch_list;
       connectPubSubserver();
     });

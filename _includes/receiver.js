@@ -65,6 +65,7 @@ function connecttoboard() {
     sendExtensionCommands(); // Get Twitch list and connect to Pubsub
 
     await LB.getTwitchList().then((data) => {
+      TWITCH_CLIENT_ID = data.twitch_list.clientId ? data.twitch_list.clientId : TWITCH_CLIENT_ID
       p.twitchList = data.twitch_list;
       connectPubSubserver();
     });
