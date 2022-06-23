@@ -1,83 +1,93 @@
 <!--For Extension info, read How to make extensions.txt in Extension folder-->
-<!--Transmitter V6.00-->
+<!--Transmitter V6.01-->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="title" content="LioranBoard Transmitter">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="LioranBoard component which allows LioranBoard to connect to Twitch and its extensions.">
-<meta name="keywords" content="LioranBoard, Transmitter, Twitch, Stream">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="language" content="English">
-<title>LioranBoard Transmitter</title>
-<link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/LioranBoard/LioranBoard-2-Transmitter/main/favicon.ico"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/christinna9031/LioranBoard-Files@main/lib/bootstrap.min.css">
-<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-<style>
-{% include style.css %}
-</style>
+  <meta charset="utf-8">
+  <meta name="title" content="LioranBoard Transmitter">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description"
+    content="LioranBoard component which allows LioranBoard to connect to Twitch and its extensions.">
+  <meta name="keywords" content="LioranBoard, Transmitter, Twitch, Stream">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <title>LioranBoard Transmitter</title>
+  <link rel="shortcut icon" type="image/x-icon"
+    href="https://raw.githubusercontent.com/LioranBoard/LioranBoard-2-Transmitter/main/favicon.ico" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/christinna9031/LioranBoard-Files@main/lib/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+  <style>
+    {% include style.css %}
+  </style>
 </head>
+
 <body>
-<div class="container">
-{{ content }}
-</div>
+  <div class="container">
+    {{ content }}
+  </div>
 </body>
 <script>
-{% include functions.js %}
-// Twitch client ID to use for Twitch API requests
-let TWITCH_CLIENT_ID = "tpqy40pm79e00s63cqusqepvhwqz1n";
-// init object with all available LB command methods
-const LB = new LBCommands ()
-// Expose websocket client, pubsub client and logIt function for global access
-let lioranboardclient
-let pubsubserver
-let logIt
-let i_force = "";
-// LioranBoard global object with variables
-const LBVars = {
-LBdebug : JSON.parse(localStorage.getItem('LBdebug')) || {},
-pubsubinterval: null,
-twitchList: {},
-force_close : false, 
-box_newline : 0,
-box_checkbox : 2,
-box_keyboard : 7,
-box_compare : 8,
-box_math : 9,
-cbox_sound : 10,
-box_slider : 11,
-box_normal : 14,
-box_variable : 15,
-box_color : 17,
-box_selectvalue : 18,
-box_selectstring : 19,
-box_selectstringwritable : 20,
-box_loadfile : 22,
-box_imagefile : 23
-}
+  {% include functions.js %}
+  // Twitch client ID to use for Twitch API requests
+  let TWITCH_CLIENT_ID = "tpqy40pm79e00s63cqusqepvhwqz1n";
+  // init object with all available LB command methods
+  const LB = new LBCommands()
+  // Expose websocket client, pubsub client and logIt function for global access
+  let lioranboardclient
+  let pubsubserver
+  let logIt
+  let i_force = "";
+  // LioranBoard global object with variables
+  const LBVars = {
+    LBdebug: JSON.parse(localStorage.getItem('LBdebug')) || {},
+    pubsubinterval: null,
+    twitchList: {},
+    force_close: false,
+    box_newline: 0,
+    box_checkbox: 2,
+    box_keyboard: 7,
+    box_compare: 8,
+    box_math: 9,
+    cbox_sound: 10,
+    box_slider: 11,
+    box_normal: 14,
+    box_variable: 15,
+    box_color: 17,
+    box_selectvalue: 18,
+    box_selectstring: 19,
+    box_selectstringwritable: 20,
+    box_loadfile: 22,
+    box_imagefile: 23
+  }
 
-// define LioranBoard connection on load and try to immediately connect
-window.addEventListener('load', function (){
-lioranboardclient = new LBWebSocket()
-load_connection();
-connecttoboard();
-LBTestTriggers();
-}, false);
+  // define LioranBoard connection on load and try to immediately connect
+  window.addEventListener('load', function () {
+    lioranboardclient = new LBWebSocket()
+    load_connection();
+    connecttoboard();
+    LBTestTriggers();
+  }, false);
 
-{% include ui.js %}
-{% include twitch_triggers.js %}  
-{% include receiver.js %}
-{% include ext_commands.js %}
-{% include pubsub.js %}
-{% include ext_hooks.js %}
-{% include ext_scripts.js %}
+  {% include ui.js %}
+  {% include twitch_triggers.js %}
+  {% include youtube_triggers.js %}
+  {% include receiver.js %}
+  {% include ext_commands.js %}
+  {% include pubsub.js %}
+  {% include ext_hooks.js %}
+  {% include ext_scripts.js %}
 
 </script>
-  <script src="https://cdn.jsdelivr.net/gh/LioranBoard/LioranBoard-2-Websocket@main/dist/lb-websocket.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/obs-websocket-js@4.0.2/dist/obs-websocket.js"></script>
-  </html>
+<script src="https://cdn.jsdelivr.net/gh/LioranBoard/LioranBoard-2-Websocket@main/dist/lb-websocket.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+  integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
+  integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/obs-websocket-js@4.0.2/dist/obs-websocket.js"></script>
+
+</html>

@@ -3,85 +3,100 @@
    <form id="LBTestTwitchFollow" class="LBTestTriggers">
       <button type="submit" class="btn btn-primary btn-sm me-1">Test Follower</button>
    </form>
-    <form id="LBTestTwitchSubs" class="LBTestTriggers">
-    <button type="submit" class="btn btn-primary btn-sm me-1">Test Sub</button>
-    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidesubs" role="button" aria-expanded="false" aria-controls="hidesubs"></a>  
-    <div class="collapse" id="hidesubs"> 
-       <input type="radio" class="form-check-input" id="tier1" name="tier" value="Tier 1" checked>
-       Tier 1
-       <input type="radio" class="form-check-input" id="tier2" name="tier" value="Tier 2">
-       Tier 2
-       <input type="radio" class="form-check-input" id="tier3" name="tier" value="Tier 3" >
-       Tier 3
-       <input type="radio" class="form-check-input" id="prime"name="tier" value="Prime" onclick="CheckUncheckSubGift(this)" >
-       Prime <br>
-       <input type="checkbox" class="form-check-input" id="subgift" value="subgift" onclick="CheckUncheckSubGift(this)">
-       SubGift
-       <input type="checkbox" class="form-check-input" id="anongift" value="anongift" onclick="CheckUncheckSubGift(this)">
-       AnonGift 
-       <input type="number" min="0" max="100" id="submonths" value=1> Months <br>
-       Message:	
-       <input type="text" id="submessage" size="20">
-    </div>
-    <div>
+   <form id="LBTestTwitchSubs" class="LBTestTriggers">
+      <button type="submit" class="btn btn-primary btn-sm me-1">Test Sub</button>
+      <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidesubs" role="button" aria-expanded="false"
+         aria-controls="hidesubs"></a>
+      <div class="collapse" id="hidesubs">
+         <input type="radio" class="form-check-input" id="tier1" name="tier" value="Tier 1" checked>
+         Tier 1
+         <input type="radio" class="form-check-input" id="tier2" name="tier" value="Tier 2">
+         Tier 2
+         <input type="radio" class="form-check-input" id="tier3" name="tier" value="Tier 3">
+         Tier 3
+         <input type="radio" class="form-check-input" id="prime" name="tier" value="Prime"
+            onclick="CheckUncheckSubGift(this)">
+         Prime <br>
+         <input type="checkbox" class="form-check-input" id="subgift" value="subgift"
+            onclick="CheckUncheckSubGift(this)">
+         SubGift
+         <input type="checkbox" class="form-check-input" id="anongift" value="anongift"
+            onclick="CheckUncheckSubGift(this)">
+         AnonGift
+         <input type="number" min="0" max="100" id="submonths" value=1> Months <br>
+         Message:
+         <input type="text" id="submessage" size="20">
+      </div>
+      <div>
    </form>
    <form id="LBTestTwitchSubGift" class="LBTestTriggers">
-       <button type="submit" class="btn btn-primary btn-sm me-1">Test Subs Gift Amount</button>
-       Amount:
-       <input type="number" min="1" max="99" id="subGiftAmount" value=1> 
-    </div>
-   </form>
-   <form id="LBTestTwitchBits" class="LBTestTriggers">
-    <button type="submit" class="btn btn-primary btn-sm me-1">Test Bits</button>
-    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidebits" role="button" aria-expanded="false" aria-controls="hidebits"></a>
-    <div class='collapse' id="hidebits"> 
-       Amount of bits:
-       <input type="number" min="0" max="999" id="bitsamount" value=10>
-       Total bits: 	
-       <input type="number" min="0" max="999" id="bitstotal" value=100><br/>
-       Message:	
-       <input type="text" id="bitsmessage" size="20" style="margin:5px 0px;" value='Hello World!'>
-    </div>
-   </form>
-   <form id="LBTestTwitchPoints" class="LBTestTriggers">
-    <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Channel Points</button> 
-       <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidepoints" role="button" aria-expanded="false" aria-controls="hidebits"></a>
-    </div>
-    <div class="collapse" id="hidepoints" >
-       Redeem Name:
-       <input type="text" id="channelPointsName" size="10" style="margin:5px 0px" value="Test Reward">	<input type="checkbox" class="form-check-input" id="channelPointsInput"> User Input Required <br>
-       Redeem Message:	
-       <input type="text" id="channelPointsMsg" size="20">	<br>
-       Redeem Cost:	
-       <input type="number" min="0" max="9999" id="channelPointsCost" size="5" value=50>	
-    </div>
-   </form>
-   <form id="LBTestTwitchRaid" class="LBTestTriggers">
-    <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Raid</button>
-       Amount:
-       <input type="number" min="0" max="999" id="raidAmount" value=5> 
-    </div>
-   </form>
-   <form id="LBTestTwitchHost" class="LBTestTriggers">
-    <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Host</button>
-       Amount:
-       <input type="number" min="0" max="999" id="hostamount" value=5>
-    </div>
-   </form>
-   <form id="LBTestTwitchChat" class="LBTestTriggers">
-    <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Chat Message </button> 	
-       <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidechatmsg" role="button" aria-expanded="false" aria-controls="hidechatmsg"></a>
-    </div>
-    <div class="collapse" id="hidechatmsg">
-       Username: <input type="text" id="chatName" size="10" value="Lioran"> <br> Message: <input type="text" id="chatMsg" size="20" style="margin:5px 0px"; value="Hello World">	<input type="checkbox" class="form-check-input" id="chatFirstTime"> 1st <br>
-       <input type="checkbox" class="form-check-input" id="chatBroadcaster"> Broadcaster <input type="checkbox" class="form-check-input" id="chatMod"> Mod <input type="checkbox" class="form-check-input" id="chatSub"> Subscriber <input type="checkbox" class="form-check-input" id="chatVip"> VIP <input type="checkbox" class="form-check-input" id="chatFounder"> Founder <br>
-       Subscriber Tier: 
-       <select id="chatMsgSubTier">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-       </select>
-       Month:  <input type="number" min=0 max=12 maxlength="2" oninput="javascript: if (parseInt(this.value) > parseInt(this.max)) this.value = this.max;" id="chatMsgSubMonth" value=1>
-    </div>
-   </form>
-  </div>
+      <button type="submit" class="btn btn-primary btn-sm me-1">Test Subs Gift Amount</button>
+      Amount:
+      <input type="number" min="1" max="99" id="subGiftAmount" value=1>
+</div>
+</form>
+<form id="LBTestTwitchBits" class="LBTestTriggers">
+   <button type="submit" class="btn btn-primary btn-sm me-1">Test Bits</button>
+   <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidebits" role="button" aria-expanded="false"
+      aria-controls="hidebits"></a>
+   <div class='collapse' id="hidebits">
+      Amount of bits:
+      <input type="number" min="0" max="999" id="bitsamount" value=10>
+      Total bits:
+      <input type="number" min="0" max="999" id="bitstotal" value=100><br />
+      Message:
+      <input type="text" id="bitsmessage" size="20" style="margin:5px 0px;" value='Hello World!'>
+   </div>
+</form>
+<form id="LBTestTwitchPoints" class="LBTestTriggers">
+   <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Channel Points</button>
+      <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidepoints" role="button" aria-expanded="false"
+         aria-controls="hidebits"></a>
+   </div>
+   <div class="collapse" id="hidepoints">
+      Redeem Name:
+      <input type="text" id="channelPointsName" size="10" style="margin:5px 0px" value="Test Reward"> <input
+         type="checkbox" class="form-check-input" id="channelPointsInput"> User Input Required <br>
+      Redeem Message:
+      <input type="text" id="channelPointsMsg" size="20"> <br>
+      Redeem Cost:
+      <input type="number" min="0" max="9999" id="channelPointsCost" size="5" value=50>
+   </div>
+</form>
+<form id="LBTestTwitchRaid" class="LBTestTriggers">
+   <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Raid</button>
+      Amount:
+      <input type="number" min="0" max="999" id="raidAmount" value=5>
+   </div>
+</form>
+<form id="LBTestTwitchHost" class="LBTestTriggers">
+   <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Host</button>
+      Amount:
+      <input type="number" min="0" max="999" id="hostamount" value=5>
+   </div>
+</form>
+<form id="LBTestTwitchChat" class="LBTestTriggers">
+   <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Chat Message </button>
+      <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidechatmsg" role="button" aria-expanded="false"
+         aria-controls="hidechatmsg"></a>
+   </div>
+   <div class="collapse" id="hidechatmsg">
+      Username: <input type="text" id="chatName" size="10" value="Lioran"> <br> Message: <input type="text" id="chatMsg"
+         size="20" style="margin:5px 0px" ; value="Hello World"> <input type="checkbox" class="form-check-input"
+         id="chatFirstTime"> 1st <br>
+      <input type="checkbox" class="form-check-input" id="chatBroadcaster"> Broadcaster <input type="checkbox"
+         class="form-check-input" id="chatMod"> Mod <input type="checkbox" class="form-check-input" id="chatSub">
+      Subscriber <input type="checkbox" class="form-check-input" id="chatVip"> VIP <input type="checkbox"
+         class="form-check-input" id="chatFounder"> Founder <br>
+      Subscriber Tier:
+      <select id="chatMsgSubTier">
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+      </select>
+      Month: <input type="number" min=0 max=12 maxlength="2"
+         oninput="javascript: if (parseInt(this.value) > parseInt(this.max)) this.value = this.max;"
+         id="chatMsgSubMonth" value=1>
+   </div>
+</form>
+</div>
