@@ -14,14 +14,11 @@
          Tier 2
          <input type="radio" class="form-check-input" id="tier3" name="tier" value="Tier 3">
          Tier 3
-         <input type="radio" class="form-check-input" id="prime" name="tier" value="Prime"
-            onclick="CheckUncheckSubGift(this)">
+         <input type="radio" class="form-check-input" id="prime" name="tier" value="Prime">
          Prime <br>
-         <input type="checkbox" class="form-check-input" id="subgift" value="subgift"
-            onclick="CheckUncheckSubGift(this)">
+         <input type="checkbox" class="form-check-input" id="subgift" value="subgift">
          SubGift
-         <input type="checkbox" class="form-check-input" id="anongift" value="anongift"
-            onclick="CheckUncheckSubGift(this)">
+         <input type="checkbox" class="form-check-input" id="anongift" value="anongift">
          AnonGift
          <input type="number" min="0" max="100" id="submonths" value=1> Months <br>
          Message:
@@ -72,16 +69,95 @@
 <form id="LBTestTwitchHost" class="LBTestTriggers">
    <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Host</button>
       Amount:
-      <input type="number" min="0" max="999" id="hostamount" value=5>
+      <input type="number" min="0" max="999" id="hostamount" value=5> <br>
    </div>
 </form>
+
+<form id="LBTestTwitchPoll" class="LBTestTriggers form-inline">
+      <div class="form-group d-flex align-items-center">
+      <button type="submit" class="btn btn-primary btn-sm me-2">Test Poll</button>
+      <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Poll Type" id="pollType">
+         <option value="begin" selected>Created</option>
+         <option value="progress">Voted</option>
+         <option value="end">Ended</option>
+         <option value="archive">Archived</option>
+       </select>
+       <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidepoll" role="button" aria-expanded="false"
+       aria-controls="hidebits"></a>
+   </div>
+   <div class="collapse mb-1" id="hidepoll">
+      Choice amount:
+      <input type="number" min="2" max="5" id="pollChoiceAmount" value=3> <br>
+      Duration:
+      <input type="number" min="1" max="3600" id="pollDuration" value=60> <br>
+      <input type="checkbox" class="form-check-input" id="pollAllowBits"> Allow Bits <input type="checkbox"
+         class="form-check-input" id="pollAllowPoints"> Allow Channel Points
+   </div>
+</form>
+
+<form id="LBTestTwitchPrediction" class="LBTestTriggers form-inline">
+   <div class="form-group d-flex align-items-center">
+   <button type="submit" class="btn btn-primary btn-sm me-2">Test Prediction</button>
+   <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Poll Type" id="predictType">
+      <option value="begin" selected>Created</option>
+      <option value="progress">Voted</option>
+      <option value="end">Locked</option>
+      <option value="archive">Resolved</option>
+    </select>
+    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hideprediction" role="button" aria-expanded="false"
+    aria-controls="hidebits"></a>
+</div>
+<div class="collapse mb-1" id="hideprediction">
+   Outcome amount:
+   <input type="number" min="2" max="10" id="predictChoiceAmount" value=3> <br>
+   Duration:
+   <input type="number" min="1" max="3600" id="predictionDuration" value=60> <br>
+</div>
+</form>
+
+<form id="LBTestTwitchHypeTrain" class="LBTestTriggers form-inline">
+   <div class="form-group d-flex align-items-center">
+   <button type="submit" class="btn btn-primary btn-sm me-2">Test Hype Train</button>
+   <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Hype Train Type" id="hypeTrainType">
+      <option value="approaching" selected>Approaching</option>
+      <option value="started">Started</option>
+      <option value="updated">Updated</option>
+      <option value="updated">Progressed</option>
+      <option value="levelup">Leveled Up</option>
+      <option value="ended">Ended</option>
+      <option value="cdexpired">Cooldown Expired</option>
+    </select>
+    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidehypetrain" role="button" aria-expanded="false"
+    aria-controls="hidebits"></a>
+</div>
+<div class="collapse mb-1" id="hidehypetrain">
+   Current level:
+   <input type="number" min="2" max="50" id="hypeTrainLevel" value=3> <br>
+   (Updated/Progressed) Display Name:
+   <input type="text" size="20" id="hypeTrainName"> <br>
+   (Updated/Progressed) Source:
+   <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Hype Train Source" id="hypeTrainSource">
+      <option value="BITS" selected>BITS</option>
+      <option value="SUBS">SUBS</option>
+    </select>
+   Amount:
+   <input type="number" min="1" max="10000" id="hypeTrainAmount" value=100> <br>
+   (Ended) Ending reason:
+   <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Hype Train Ended Reason" id="hypeTrainEndReason">
+      <option value="COMPLETED" selected>COMPLETED</option>
+      <option value="EXPIRED">EXPIRED</option>
+    </select> <br>
+</div>
+</form>
+
+
 <form id="LBTestTwitchChat" class="LBTestTriggers">
    <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Chat Message </button>
       <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidechatmsg" role="button" aria-expanded="false"
          aria-controls="hidechatmsg"></a>
    </div>
    <div class="collapse" id="hidechatmsg">
-      Username: <input type="text" id="chatName" size="10" value="Lioran"> <br> Message: <input type="text" id="chatMsg"
+      Username: <input type="text" id="chatName" size="10" value=""> <br> Message: <input type="text" id="chatMsg"
          size="20" style="margin:5px 0px" ; value="Hello World"> <input type="checkbox" class="form-check-input"
          id="chatFirstTime"> 1st <br>
       <input type="checkbox" class="form-check-input" id="chatBroadcaster"> Broadcaster <input type="checkbox"

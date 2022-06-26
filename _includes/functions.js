@@ -168,6 +168,21 @@ function LBCommands() {
     },
 
     /**
+     * Sends a test trigger that will automatically include channel ID for from_channel_id pull value
+     * @param {number} type - type of trigger
+     * - trigger types: 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem
+     * 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey
+     * 8 Timer, 9 OBS Trigger, 10 lioranboard, 11 twitch moderation, 12 extension trigger
+     * @param {object} data - whatever data is required for the trigger, see manual
+     */
+    async testTrigger(type, data) {
+      return sendToLB('SendTestTrigger', {
+        Type: type,
+        Data: data,
+      });
+    },
+
+    /**
      * Triggers a button
      * @param {string} id - button ID to trigger
      */
