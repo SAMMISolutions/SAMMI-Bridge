@@ -1,20 +1,20 @@
 <!--For Extension info, read How to make extensions.txt in Extension folder-->
-<!--Transmitter V6.10-->
+<!--SAMMI 7.00-->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <meta name="title" content="LioranBoard Transmitter">
+  <meta name="title" content="SAMMI Bridge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description"
-    content="LioranBoard component which allows LioranBoard to connect to Twitch and its extensions.">
-  <meta name="keywords" content="LioranBoard, Transmitter, Twitch, Stream">
+    content="SAMMI component which allows SAMMI to connect to its extensions.">
+  <meta name="keywords" content="SAMMI, Bridge, Twitch, Stream">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="language" content="English">
-  <title>LioranBoard Transmitter</title>
+  <title>SAMMI Bridge</title>
   <link rel="shortcut icon" type="image/x-icon"
-    href="https://raw.githubusercontent.com/LioranBoard/LioranBoard-2-Transmitter/main/favicon_ce.ico" />
+    href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon_ce.ico" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/christinna9031/LioranBoard-Files@main/lib/bootstrap.min.css">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
   <style>
@@ -31,17 +31,16 @@
   {% include functions.js %}
   // Twitch client ID to use for Twitch API requests
   let TWITCH_CLIENT_ID = "tpqy40pm79e00s63cqusqepvhwqz1n";
-  // init object with all available LB command methods
-  const LB = new LBCommands()
-  // Expose websocket client, pubsub client and logIt function for global access
+  // init object with all available SAMMI command methods
+  const SAMMI = LB = new SAMMICommands()
+  // Expose websocket client and logIt function for global access
+  let sammiclient
   let lioranboardclient
-  let pubsubserver
   let logIt
   let i_force = "";
-  // LioranBoard global object with variables
-  const LBVars = {
-    LBdebug: JSON.parse(localStorage.getItem('LBdebug')) || {},
-    pubsubinterval: null,
+  // SAMMI global object with variables
+  const SAMMIVars = LBVars = {
+    SAMMIdebug: JSON.parse(localStorage.getItem('SAMMIdebug')) || {},
     twitchList: {},
     force_close: false,
     box_newline: 0,
@@ -61,20 +60,19 @@
     box_imagefile: 23
   }
 
-  // define LioranBoard connection on load and try to immediately connect
+  // define SAMMI connection on load and try to immediately connect
   window.addEventListener('load', function () {
-    lioranboardclient = new LBWebSocket()
+    sammiclient = lioranboardclient = new LBWebSocket()
     load_connection();
-    connecttoboard();
-    LBTestTriggers();
+    connecttosammi();
+    SAMMITestTriggers();
   }, false);
 
   {% include ui.js %}
   {% include twitch_triggers.js %}
   {% include youtube_triggers.js %}
-  {% include receiver.js %}
+  {% include core.js %}
   {% include ext_commands.js %}
-  {% include pubsub.js %}
   {% include ext_hooks.js %}
   {% include ext_scripts.js %}
 

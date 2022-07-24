@@ -1,73 +1,69 @@
-# LB-Transmitter
- Current version of Transmitter for LioranBoard 2 . Download the latest [release](https://github.com/LioranBoard/LioranBoard-2-Transmitter/releases). This version will NOT work with LioranBoard 1.
+# SAMMI Bridge
+ Current version of SAMMI Bridge . Download the latest [release](https://github.com/SAMMISolutions/SAMMISolutions/SAMMI-Bridge/releases). This version will NOT work with any previous non SAMMI versions.
 
 ### For users
-Twitch Triggers allow you to test all available Twitch triggers by sending fake payload to LioranBoard 2.  
-It works exactly the same as in LioranBoard 1.  
-Main changes:  
-- Can now send Follower trigger.  
-- Can select founder badge and first time for chat message. 
-- User ID pull values are now dynamically generated. 
-- Channel points redeem and reward ID is also dynamically generated. 
+**Twitch Triggers** allow you to test all available Twitch triggers by sending fake payload that mimics real triggers to SAMMI.\ 
+**YouTube Triggers** allow you to test all available YouTube triggers by sending fake payload that mimics real triggers to SAMMI.
+
  
 ### For extension devs
-Transmitter uses LioranBoard websocket library to make sending and receiving data easier: https://github.com/LioranBoard/LioranBoard-2-Websocket. 
-You can use promises for sending data to LioranBoard. Message ids are generated automatically. 
+SAMMI Bridge uses SAMMI websocket library to make sending and receiving data easier: https://github.com/LioranBoard/LioranBoard-2-Websocket. 
+You can use promises for sending data to SAMMI. Message ids are generated automatically. 
 
 ```js
-lioranboardclient.send(command, data).then(response=>console.log(response))
+sammiclient.send(command, data).then(response=>console.log(response))
 ```
 
 #### Helper functions
-You can call all helper functions with `LB.method(arguments)`. 
-To use promises, you can call them with `LB.method(arguments).then(response=>console.log(response))`. 
-All methods are documented inside Transmitter via JSDoc.
+You can call all helper functions with `SAMMI.method(arguments)`. 
+To use promises, you can call them with `SAMMI.method(arguments).then(response=>console.log(response))`. 
+All methods are documented inside SAMMI Bridge via JSDoc.
 
 ```js
-LB.getVariable(name, buttonId = 'global')
+SAMMI.getVariable(name, buttonId = 'global')
 ```
 - Get a variable
 - specify its button id or leave empty for global variables
-- example: `LB.getVariable('myVariable', 'ID1')`
+- example: `SAMMI.getVariable('myVariable', 'ID1')`
 
 ```js
-LB.setVariable(name, value, buttonId = 'global')`
+SAMMI.setVariable(name, value, buttonId = 'global')`
 ```
 - Set a variable
 - specify its button id or leave empty to create a global variable
-- example: `LB.setVariable('myVariable', 'Hello World', 'ID1')`
+- example: `SAMMI.setVariable('myVariable', 'Hello World', 'ID1')`
 
 ```js
-LB.deleteVariable(name, buttonId = 'global')`
+SAMMI.deleteVariable(name, buttonId = 'global')`
 ```
 - Delete a variable
 - specify its button id or leave empty to delete a global variable
-- example: `LB.deleteVariable('myVariable', 'ID1')`
+- example: `SAMMI.deleteVariable('myVariable', 'ID1')`
 
 ```js
-LB.insertArray(arrayName, index, value, buttonId = 'global')
+SAMMI.insertArray(arrayName, index, value, buttonId = 'global')
 ```
 - Inserts an item to a specified index in an array, shifting the other items
 - `arrayName` - name of the array
 - `index` - index to insert the new item at
 - `value` - item value
 - `buttonId` - button id, default is global
-- example: `LB.insertArray('myArray',0,'Hello','ID1')`
+- example: `SAMMI.insertArray('myArray',0,'Hello','ID1')`
 
 
 ```js
-LB.deleteArray(arrayName, slot, buttonId = 'global')
+SAMMI.deleteArray(arrayName, slot, buttonId = 'global')
 ```
 - Deletes an item in a specified index in an array, shifting the other items
 - `arrayName` - name of the array
 - `index` - index to delete the item at
 - `buttonId` - button id, default is global
-- example: `LB.deleteArray('myArray',1,'ID1')`
+- example: `SAMMI.deleteArray('myArray',1,'ID1')`
 
 ```js
-LB.extCommand(name, color = 3355443, height = 52, boxes)
+SAMMI.extCommand(name, color = 3355443, height = 52, boxes)
 ```
-- Send an extension command (to create extension boxes) to LB 
+- Send an extension command (to create extension boxes) to SAMMI 
 - `name` - name of the extension command 
 - `color` - box color, accepts dec colors
 - `height` - height of the box in pixels, you can use 52 for regular box or 80 for resiable box
@@ -101,7 +97,7 @@ LB.extCommand(name, color = 3355443, height = 52, boxes)
     - (optional) [] `selectOptions` - array of options for the user to select (when using Select box type)
 - example: 
   ```js 
-  LB.extCommand('Lucky Wheel', 3355443, 52, {
+  SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
     rewardName: ['Reward Name', 14, 'Some Reward name'],
     rewardName2: ['Reward Name 2', 14, 'And another reward name']
   })
@@ -109,7 +105,7 @@ LB.extCommand(name, color = 3355443, height = 52, boxes)
   will create an extension command named Lucky Wheel with 2 text boxes. 
 - example2: 
   ```js 
-  LB.extCommand('Lucky Wheel', 3355443, 52, {
+  SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
     color: ['Wheel Color', 18, '', null, ['blue', 'yellow', 'green']],
     rewardName: ['Reward Name', 14, 'Your Reward name'],
     rewardImage: ['Reward Image', 23, 'image.png']
@@ -119,21 +115,21 @@ LB.extCommand(name, color = 3355443, height = 52, boxes)
 
 
 ```js
-LB.triggerExt(trigger, pullData)
+SAMMI.triggerExt(trigger, pullData)
 ```
 - `trigger` - name of the trigger
 - `data` - object containing all trigger pull data (can contain objects, arrays etc.)
-- example: `LB.triggerExt('Test Trigger', {users:['Lioran', 'Melonax'], color: 'blue', number: 5})`
+- example: `SAMMI.triggerExt('Test Trigger', {users:['Lioran', 'Melonax'], color: 'blue', number: 5})`
 
 ```js
-LB.triggerButton(id)
+SAMMI.triggerButton(id)
 ```
 - Triggers a button
 - `id` - button ID to trigger
-- example: `LB.triggerButton('ID1')`
+- example: `SAMMI.triggerButton('ID1')`
 
 ```js
-LB.modifyButton(id, color, text, image, border)
+SAMMI.modifyButton(id, color, text, image, border)
 ```
 - Modifies a button appearance temporarily
 - `id` - button ID to modify
@@ -142,83 +138,83 @@ LB.modifyButton(id, color, text, image, border)
 -  `image` - button image file name
 - `border` - border size, 0-7
 - leave parameters empty to reset button back to default values
-- example: `LB.modifyButton('ID1', 4934525, 'Hello', 'buttonImage.png', 5)`
+- example: `SAMMI.modifyButton('ID1', 4934525, 'Hello', 'buttonImage.png', 5)`
 
 ```js
-LB.popUp(message)
+SAMMI.popUp(message)
 ```
-- Send a popup message to LB
-- example: `LB.popUp('Hello World!')`
+- Send a popup message to SAMMI
+- example: `SAMMI.popUp('Hello World!')`
 
 ```js
-LB.alert(message)
+SAMMI.alert(message)
 ```
-- Send an alert message to LB
-- example: `LB.alert('Hello World!')`
+- Send an alert message to SAMMI
+- example: `SAMMI.alert('Hello World!')`
 
 ```js
-LB.notification(message)
+SAMMI.notification(message)
 ```
-- Sends a notification (tray icon bubble) message to LB
-- example: `LB.notification('Hello World!')`
+- Sends a notification (tray icon bubble) message to SAMMI
+- example: `SAMMI.notification('Hello World!')`
 
 ```js
-LB.getDeckList()
+SAMMI.getDeckList()
 ```
 - Request an array of all decks
 - Replies with an array `["Deck1 Name","Unique ID",crc32,"Deck2 Name","Unique ID",crc32,...]`
 
 ```js
-LB.getDeck(id)
+SAMMI.getDeck(id)
 ```
 - Request a deck params
 - provide `id` of the specified deck (retrieved from getDeckList command)
-- example: `LB.getDeck('20211221163402196200595')`
+- example: `SAMMI.getDeck('20211221163402196200595')`
 
 ```js
-LB.getImage(fileName)
+SAMMI.getImage(fileName)
 ```
 - Retrieve an image in base64
 - `fileName` = image file without the path
-- example: `LB.getImage('test.png')`
+- example: `SAMMI.getImage('test.png')`
 
 ```js
-LB.getSum(fileName)
+SAMMI.getSum(fileName)
 ```
 - Retrieves CRC32 of a file
 - `fileName` - file name without the path
-- example: `LB.getSum('test.png')`
+- example: `SAMMI.getSum('test.png')`
 
 ```js
-LB.stayInformed(enabled)
+SAMMI.stayInformed(enabled)
 ```
 - Set `enabled` to true to start receiving all deck and button updates and false to stop receiving them
-- example: `LB.stayInformed(true)`
+- example: `SAMMI.stayInformed(true)`
 
 ```js
-LB.getActiveButtons()
+SAMMI.getActiveButtons()
 ```
 - Retrieves all currently active buttons
 
 ```js
-LB.getModifiedButtons()
+SAMMI.getModifiedButtons()
 ```
 - Retrieves all currently modified buttons
 
 ```js
-LB.getTwitchList()
+SAMMI.getTwitchList()
 ```
-- Retrieves params of all linked Twitch accounts
+- Retrieves information for all linked Twitch accounts, including username, id, token etc.
 
 ```js
-LB.trigger(type, data)
+SAMMI.trigger(type, data)
 ```
 - type - trigger number
-    - 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem, 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey, 8 Timer, 9 OBS Trigger, 10 lioranboard, 11 twitch moderation, 12 extension trigger
+    - 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem, 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey, 8 Timer, 9 OBS Trigger, 10 SAMMI, 11 twitch moderation, 12 extension trigger
 - data - whatever data is required for the trigger
 - example for chat message trigger: 
     ```js
-    LB.trigger(0, {
+    SAMMI.trigger(0, {
     message : 'Hello World',
     broadcaster: 1,
     moderator: 0, 
@@ -240,30 +236,37 @@ LB.trigger(type, data)
 - this is a very complex command and not recommended to use unless you know the exact payload you need to send
 
 ```js
-LB.close()
+SAMMI.close()
 ```
-- Closes LB connection to Transmitter
+- Closes SAMMI connection to Bridge
 
-## Listening to extension data received from LioranBoard
-In addition to hooks (which work the same as in LB1), you can also directly listen to a specified extension command coming from LioranBoard.  
+```js
+SAMMI.generateMessage()
+```
+- Generates a random message (used for test triggers)
+
+## Listening to extension data received from SAMMI
+In addition to hooks, you can also directly listen to a specified extension command coming from SAMMI.  
 This way you can receive all extension data directly in your functions.   
-Use `lioranboard.on()` or `lioranboardclient.addListener()` and `lioranboardclient.removeListener()`.  
+Use `sammiclient.on()` or `sammiclient.addListener()` and `sammiclient.removeListener()`.  
 For example, let's say your extension command is called Lucky Wheel:  
   ```js
-  lioranboardclient.on('Lucky Wheel', (payload) => {
+  sammiclient.on('Lucky Wheel', (payload) => {
     // DO SOMETHING WITH THE EXTENSION PAYLOAD
     console.log(payload)
   });
   ```
 You can also do: 
   ```js
- lioranboardclient.addListener('Lucky Wheel', functionToExecute)
+ sammiclient.addListener('Lucky Wheel', functionToExecute)
   ```
 
-## Transmitter Collaboration
+*Note: These methods will not be available until after your Bridge connects to SAMMI. Make sure to wrap them in a function which you call in your Extension Commands section (which is initalized as soon as Bridge connects to SAMMI).*
 
-Transmitter is generated by Jekyll. Each section is a separate file generated from `_includes` folder. If you wish to propose changes, please do so by editing these files.
-Any changes will immediately reflect at http://lioranboard.ca/LioranBoard-2-Transmitter/tsl_transmitter.html. I also manually generate the Transmitter file for each release, which can be found in `download` folder.
+## SAMMI Bridge Collaboration
+
+SAMMI Bridge is generated by Jekyll. Each section is a separate file generated from `_includes` folder. If you wish to propose changes, please do so by editing these files.
+Any changes will immediately reflect at https://sammi.solutions/SAMMI-Bridge/bridge.html. We also manually generate the Bridge file for each release, which can be found in `download` folder.
 
 # Change log
 

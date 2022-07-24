@@ -1,4 +1,4 @@
-// load LB connection params from storage
+// load SAMMI connection params from storage
 function load_connection() {
   const ls = JSON.parse(localStorage.getItem('lsParams')) || {};
   nIPbox.value = ls.ip || '127.0.0.1';
@@ -6,68 +6,66 @@ function load_connection() {
   nPassBox.value = ls.pass || '';
 }
 
-// manually connect/disconnect from LB via button
+// manually connect/disconnect from SAMMI via button
 function connectbutton() {
-  let _lioranboardclient;
-
-  const p = LBVars;
+  let _sammiclient;
+  const p = SAMMIVars;
 
   if (
-    (_lioranboardclient = lioranboardclient) !== null
-    && _lioranboardclient !== void 0
-    && _lioranboardclient._connected
+    (_sammiclient = sammiclient) !== null
+    && _sammiclient !== void 0
+    && _sammiclient._connected
   ) {
     p.force_close = true;
-    lioranboardclient.send('Close');
-    lioranboardclient.disconnect();
+    sammiclient.send('Close');
+    sammiclient.disconnect();
     ConnectionStatus('toclient', 'disconnected', 'Connection Closed', 'red');
     document.querySelector('#cnctbutton').innerText = 'Disconnecting';
   } else {
-    console.log('LioranBoard Manual Connection.');
+    console.log('SAMMI manually connected.');
 
     try {
       clearTimeout(p.waiting_to_connect);
     } catch (e) {}
 
-    connecttoboard();
+    connecttosammi();
   }
 }
 
-// Connect to LB and listen for events
-function connecttoboard() {
-  LBDebugLog(dbgReceiver);
+// Connect to SAMMI and listen for events
+function connecttosammi() {
+  SAMMIDebugLog(dbgBridge);
 
   try {
     clearTimeout(p.waiting_to_connect);
   } catch (e) {}
 
-  const p = LBVars;
+  const p = SAMMIVars;
 
-  // CONNECT TO LIORANBOARD
-  lioranboardclient.connect({
+  // CONNECT TO SAMMI
+  sammiclient.connect({
     address: `${nIPbox.value || '127.0.0.1'}:${nPortBox.value || 9425}`,
     password: `${nPassBox.value || ''}`,
-    name: 'Transmitter',
+    name: 'SAMMI Bridge',
   });
 
   // CONNECTION OPENED
-  lioranboardclient.on('ConnectionOpened', () => {
+  sammiclient.on('ConnectionOpened', () => {
     document.querySelector('#cnctbutton').innerText = 'Disconnect';
-    console.log('LioranBoard Connection opened!');
+    console.log('SAMMI Connection opened!');
   });
-  lioranboardclient.on('error', (err) => {
-    lioranboardclient.disconnect();
+  sammiclient.on('error', (err) => {
+    sammiclient.disconnect();
   });
 
   // AUTH SUCCESSFUL
-  lioranboardclient.on('AuthenticationSuccess', async () => {
-    // Send all extension commands to LB
-    sendExtensionCommands(); // Get Twitch list and connect to Pubsub
+  sammiclient.on('AuthenticationSuccess', async () => {
+    // Send all extension commands to SAMMI
+    sendExtensionCommands(); // Get Twitch list for extension makers
 
-    await LB.getTwitchList().then((data) => {
+    await SAMMI.getTwitchList().then((data) => {
       TWITCH_CLIENT_ID = data.twitch_list.clientId ? data.twitch_list.clientId : TWITCH_CLIENT_ID
-      p.twitchList = data.twitch_list;
-      connectPubSubserver();
+      //p.twitchList = data.twitch_list;
     });
 
     // Save connection params to storage
@@ -79,24 +77,19 @@ function connecttoboard() {
     localStorage.setItem('lsParams', JSON.stringify(ls));
 
     // set current browser as global variable
-    LB.setVariable('browser_name', browser);
+    SAMMI.setVariable('browser_name', browser);
 
     ConnectionStatus('toclient', 'connected', 'Connected', 'green');
-    console.log('LioranBoard Authentication successsful!');
+    console.log('SAMMI Authentication successsful!');
   });
 
   // CONNECTION CLOSED
-  lioranboardclient.on('ConnectionClosed', () => {
+  sammiclient.on('ConnectionClosed', () => {
     try {
       clearTimeout(p.waiting_to_connect);
     } catch (e) {}
 
-    lioranboardclient.removeAllListeners();
-
-    // Attempt to force disconnect from PubSub
-    try {
-      pubsubserver.close();
-    } catch (e) {}
+    sammiclient.removeAllListeners();
 
     // Attempt to reconnect if not manual disconnect
     if (!p.force_close) {
@@ -106,12 +99,12 @@ function connecttoboard() {
         'Disconnected, attempting to reconnect.',
         'red',
       );
-      console.log('LioranBoard disconnected. Attempting to reconnect in 2s.');
+      console.log('SAMMI disconnected. Attempting to reconnect in 2s.');
       p.waiting_to_connect = setTimeout(() => {
-        connecttoboard();
+        connecttosammi();
       }, 2000);
     } else {
-      console.log('LioranBoard disconnected by user.');
+      console.log('SAMMI disconnected by user.');
       ConnectionStatus('toclient', 'disconnected', 'Connection Closed', 'red');
     }
 
@@ -120,29 +113,29 @@ function connecttoboard() {
   });
 
   // CONNECTION ERROR
-  lioranboardclient.on('ConnectionError', (e) => {
+  sammiclient.on('ConnectionError', (e) => {
     // Try to force close the connection
     try {
-      lioranboard.disconnect();
+      sammiclient.disconnect();
     } catch (e) {}
 
-    console.log('LioranBoard Connection error');
+    console.log('SAMMI connection error.');
   });
 
-  // RELOAD TRANSMITTER
-  lioranboardclient.on('ResetPlease', () => {
+  // RELOAD SAMMI Bridge
+  sammiclient.on('ResetPlease', () => {
     location.reload();
   });
 
   // EXECUTE COMMAND
-  lioranboardclient.on('ExecuteCommand', (json) => {
-    LBExtensionReceived(json.CommandName, json.Data);
+  sammiclient.on('ExecuteCommand', (json) => {
+    SammiExtensionReceived(json.CommandName, json.Data);
   });
 }
 
 // Get Browser Name
 
-const browser = (function () {
+const browser = (() => {
   const test = function (regexp) { return regexp.test(window.navigator.userAgent); };
   switch (true) {
     case test(/OBS/i): return 'OBS';
@@ -156,4 +149,4 @@ const browser = (function () {
     case test(/safari/i): return 'Apple Safari';
     default: return 'Other';
   }
-}());
+})();

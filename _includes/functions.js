@@ -1,31 +1,31 @@
-/** LB2 Helper Functions
- * You can call them with LB.{helperfunction}
- * Use promises if you want to get a reply back from LB
- * No promise example: LB.setVariable(myVariable, 'some value', 'someButtonID')
- * Promise example: LB.getVariable(myVariable, 'someButtonID').then(reply=>console.log(reply))
+/** SAMMI Core Helper Functions
+ * You can call them with SAMMI.{helperfunction}
+ * Use promises if you want to get a reply back from SAMMI
+ * No promise example: SAMMI.setVariable(myVariable, 'some value', 'someButtonID')
+ * Promise example: SAMMI.getVariable(myVariable, 'someButtonID').then(reply=>console.log(reply))
  */
-function LBCommands() {
-  const LBSendCommand = {
+function SAMMICommands() {
+  const SendCommand = {
     /**
-     * Get a variable from LB
+     * Get a variable from SAMMI
      * @param {string} name - name of the variable
      * @param {string} buttonId - button ID for local variable, default = global variable
      */
     async getVariable(name, buttonId = 'global') {
-      return sendToLB('GetVariable', {
+      return sendToSAMMI('GetVariable', {
         Variable: name,
         ButtonId: buttonId,
       });
     },
 
     /**
-     * Set a variable in LB
+     * Set a variable in SAMMI
      * @param {string} name - name of the variable
      * @param {(string|number|object|array|null)} value - new value of the variable
      * @param {string} buttonId - button ID for local variable, default = global variable
      */
     async setVariable(name, value, buttonId = 'global') {
-      return sendToLB('SetVariable', {
+      return sendToSAMMI('SetVariable', {
         Variable: name,
         Value: value,
         ButtonId: buttonId,
@@ -33,27 +33,27 @@ function LBCommands() {
     },
 
     /**
-     * Send a popup message to LB
+     * Send a popup message to SAMMI
      * @param {string} msg - message to send
      */
     async popUp(msg) {
-      return sendToLB('PopupMessage', {
+      return sendToSAMMI('PopupMessage', {
         Message: msg,
       });
     },
 
     /**
-     * Send a yellow notification message to LB
+     * Send a yellow notification message to SAMMI
      * @param {string} msg - message to send
      */
     async alert(msg) {
-      return sendToLB('AlertMessage', {
+      return sendToSAMMI('AlertMessage', {
         Message: msg,
       });
     },
 
     /**
-     * send extension command to LB
+     * send extension command to SAMMI
      * @param {string} name - name of the extension command
      * @param {string} color - box color, accepts hex/dec colors (include # for hex), default 3355443
      * @param {string} height - height of the box in pixels, 52 for regular or 80 for resizable box, default 52
@@ -68,22 +68,22 @@ function LBCommands() {
      * @param {[boxName: string, boxType: number, defaultValue: (string | number), sizeModifier: (number|undefined), selectOptions: Array|undefined]} boxes.boxVariable
      * */
     async extCommand(name, color = 3355443, height = 52, boxes) {
-      const ext = new LBConstructExtCommand(name, color, height);
+      const ext = new SammiConstructExtCommand(name, color, height);
 
       for (const [key, value] of Object.entries(boxes)) {
         ext.addBox(key, value);
       }
 
-      return sendToLB('SendExtensionCommands', {
+      return sendToSAMMI('SendExtensionCommands', {
         Data: [ext],
       });
     },
 
     /**
-     * Close LioranBoard connection to Transmitter.
+     * Close SAMMI Bridge connection to SAMMI Core.
      */
     async close() {
-      return sendToLB('Close');
+      return sendToSAMMI('Close');
     },
 
     /**
@@ -91,7 +91,7 @@ function LBCommands() {
      * @param {boolean} enabled - enable or disable updates
      */
     async stayInformed(enabled) {
-      return sendToLB('SetStayInformed', {
+      return sendToSAMMI('SetStayInformed', {
         Enabled: enabled,
       });
     },
@@ -102,7 +102,7 @@ function LBCommands() {
      * - Use crc32 value to verify deck you saved localy is the same
      */
     async getDeckList() {
-      return sendToLB('GetDeckList');
+      return sendToSAMMI('GetDeckList');
     },
 
     /**
@@ -111,7 +111,7 @@ function LBCommands() {
      * - Replies with an object containing a full deck
      */
     async getDeck(id) {
-      return sendToLB('GetDeck', {
+      return sendToSAMMI('GetDeck', {
         UniqueId: id,
       });
     },
@@ -122,7 +122,7 @@ function LBCommands() {
      * - Replies with an object containing the Base64 string of the image
      */
     async getImage(fileName) {
-      return sendToLB('GetImage', {
+      return sendToSAMMI('GetImage', {
         FileName: fileName,
       });
     },
@@ -132,7 +132,7 @@ function LBCommands() {
      * @param {string} fileName - file name without the path (image.png)
      */
     async getSum(fileName) {
-      return sendToLB('GetSum', {
+      return sendToSAMMI('GetSum', {
         Name: fileName,
       });
     },
@@ -142,14 +142,14 @@ function LBCommands() {
      * - Replies with an array of button param objects
      */
     async getActiveButtons() {
-      return sendToLB('GetOngoingButtons');
+      return sendToSAMMI('GetOngoingButtons');
     },
 
     /**
      * Retrieves params of all linked Twitch accounts
      */
     async getTwitchList() {
-      return sendToLB('GetTwitchList');
+      return sendToSAMMI('GetTwitchList');
     },
 
     /**
@@ -157,11 +157,11 @@ function LBCommands() {
      * @param {number} type - type of trigger
      * - trigger types: 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem
      * 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey
-     * 8 Timer, 9 OBS Trigger, 10 lioranboard, 11 twitch moderation, 12 extension trigger
+     * 8 Timer, 9 OBS Trigger, 10 SAMMI Bridge, 11 twitch moderation, 12 extension trigger
      * @param {object} data - whatever data is required for the trigger, see manual
      */
     async trigger(type, data) {
-      return sendToLB('SendTrigger', {
+      return sendToSAMMI('SendTrigger', {
         Type: type,
         Data: data,
       });
@@ -172,11 +172,11 @@ function LBCommands() {
      * @param {number} type - type of trigger
      * - trigger types: 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem
      * 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey
-     * 8 Timer, 9 OBS Trigger, 10 lioranboard, 11 twitch moderation, 12 extension trigger
+     * 8 Timer, 9 OBS Trigger, 10 SAMMI Bridge, 11 twitch moderation, 12 extension trigger
      * @param {object} data - whatever data is required for the trigger, see manual
      */
     async testTrigger(type, data) {
-      return sendToLB('SendTestTrigger', {
+      return sendToSAMMI('SendTestTrigger', {
         Type: type,
         Data: data,
       });
@@ -187,7 +187,7 @@ function LBCommands() {
      * @param {string} id - button ID to trigger
      */
     async triggerButton(id) {
-      return sendToLB('TriggerButton', {
+      return sendToSAMMI('TriggerButton', {
         ButtonId: id,
       });
     },
@@ -197,7 +197,7 @@ function LBCommands() {
      * @param {string} id - button ID to release
      */
     async releaseButton(id) {
-      return sendToLB('ReleaseButton', {
+      return sendToSAMMI('ReleaseButton', {
         ButtonId: id,
       });
     },
@@ -212,7 +212,7 @@ function LBCommands() {
      * - leave parameters empty to reset button back to default values
      */
     async modifyButton(id, color, text = '', image, border) {
-      return sendToLB('ModifyButton', {
+      return sendToSAMMI('ModifyButton', {
         ButtonId: id,
         Data: {
           color: color || undefined,
@@ -228,7 +228,7 @@ function LBCommands() {
      * - object of button objects that are currently modified
      */
     async getModifiedButtons() {
-      return sendToLB('GetModifications');
+      return sendToSAMMI('GetModifications');
     },
 
     /**
@@ -237,7 +237,7 @@ function LBCommands() {
      * @param {object} data - object containing all trigger pull data
      */
     async triggerExt(trigger, data = {}) {
-      return sendToLB('ExtensionTrigger', {
+      return sendToSAMMI('ExtensionTrigger', {
         Trigger: trigger,
         Data: data,
       });
@@ -249,7 +249,7 @@ function LBCommands() {
      * @param {string} buttonId - button ID for local variable, default = global variable
      */
     async deleteVariable(name, buttonId = 'global') {
-      return sendToLB('DeleteVariable', {
+      return sendToSAMMI('DeleteVariable', {
         Variable: name,
         ButtonId: buttonId,
       });
@@ -263,7 +263,7 @@ function LBCommands() {
      * @param {string} buttonId - button id, default is global
      */
     async insertArray(arrayName, index, value, buttonId = 'global') {
-      return sendToLB('InsertArrayValue', {
+      return sendToSAMMI('InsertArrayValue', {
         Array: arrayName,
         Slot: index,
         Value: value,
@@ -278,7 +278,7 @@ function LBCommands() {
      * @param {string} buttonId - button id, default is global
      */
     async deleteArray(arrayName, slot, buttonId = 'global') {
-      return sendToLB('DeleteArraySlot', {
+      return sendToSAMMI('DeleteArraySlot', {
         Array: arrayName,
         Slot: slot,
         ButtonId: buttonId,
@@ -286,22 +286,42 @@ function LBCommands() {
     },
 
     /**
-     * Sends a notification (tray icon bubble) message to LBn
+     * Sends a notification (tray icon bubble) message to SAMMI
      * @param {string} msg - message to show
      */
     async notification(msg) {
-      return sendToLB('NotificationMessage', {
+      return sendToSAMMI('NotificationMessage', {
         Message: msg,
       });
     },
+    generateMessage() {
+      const messages = [
+        'All that glitters is not gold. Fair is foul, and foul is fair Hover through the fog and filthy air. These violent delights have violent ends. Hell is empty and all the devils are here. By the pricking of my thumbs, Something wicked this way comes. Open, locks, Whoever knocks!',
+        'Hello World!',
+        "Alright, I'll be honest with ya, Bob. My name's not Kirk. It's Skywalker. Luke Skywalker.",
+        'Well, that never happened in any of the simulations.',
+        'You know, you blow up one sun and suddenly everyone expects you to walk on water.',
+        "How's a needle in my butt gonna get water out of my ears?",
+        'If you immediately know the candle light is fire, then the meal was cooked a long time ago.',
+        'In the middle of my backswing!?',
+        'If I am to remain in this body, I must shave my head.',
+        "I remembered something. There's a man. He is bald and wears a short sleeve shirt. And somehow, he is important to me… I think his name is… Homer.",
+        'Alright, we came here in peace, we expect to go in one... piece.',
+        'It costs nearly a billion dollars just to turn the lights on around here',
+        "You wouldn't believe the things you can make from the common, simple items lying around your planet... which reminds me, you're going to need a new microwave.",
+        'Welcome, ye knights of the round table, men of honor, followers of the path of righteousness. Only those with wealth of knowledge and truth of spirit shall be given access to the underworld, the storehouse of riches of Ambrosius Aurelianus. Prove ye worthy, and all shall be revealed.'
+      ];
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      return randomMessage;
+    },
   };
 
-  async function sendToLB(command, data) {
-    const res = await lioranboardclient.send(command, data);
+  async function sendToSAMMI(command, data) {
+    const res = await sammiclient.send(command, data);
     return res;
   } // construct extension command object
 
-  class LBConstructExtCommand {
+  class SammiConstructExtCommand {
     constructor(name, color, height) {
       let p = 0;
       this.name = name;
@@ -320,5 +340,5 @@ function LBCommands() {
     }
   }
 
-  return LBSendCommand;
+  return SendCommand;
 }

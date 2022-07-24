@@ -24,7 +24,7 @@ a:hover {
   content:'Hide Options \01F845' ;
   width:15px;
 }
-.LBTestTriggers .form-check-input[type=checkbox] {
+.SAMMITestTriggers .form-check-input[type=checkbox] {
   vertical-align: text-bottom;
 }
 #footer .tslCollapse.collapsed:before {
@@ -36,7 +36,7 @@ a:hover {
   width:15px;
 }
 
-#LBreceiverlog, #LBpubsublog {
+#SAMMIcorelog {
   background:rgb(10, 11, 26);
   padding:5px 15px;
   display:block;
@@ -55,7 +55,7 @@ a:hover {
 #debugLog .nav-link {
   padding: .2rem 1rem;
 }
-#LBPubSub, #LBreceiver {
+#SAMMIBridge {
   overflow: hidden;
   padding:5px;
   margin:2px;

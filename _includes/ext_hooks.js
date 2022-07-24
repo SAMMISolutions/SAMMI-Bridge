@@ -1,4 +1,5 @@
-function LBExtensionReceived(hook, LioranBoardJSON) {
+function SammiExtensionReceived(hook, SAMMIJSON) {
+  LioranBoardJSON = SAMMIJSON;
   switch (hook) {
     // hook you specified.
     default:

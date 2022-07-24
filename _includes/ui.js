@@ -1,6 +1,6 @@
 // modify UI on load
-window.addEventListener('load', LBLoadTabsUI, false);
-function LBLoadTabsUI() {
+window.addEventListener('load', SAMMILoadTabsUI, false);
+function SAMMILoadTabsUI() {
   const tabList = {};
   let tabSortList = JSON.parse(localStorage.getItem('tabsSortList')) || [];
   const newtabSortList = [];

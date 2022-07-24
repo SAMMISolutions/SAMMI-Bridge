@@ -1,9 +1,9 @@
 <!--Twitch Triggers-->
 <div class="tab-pane" id="content-triggers" role="tabpanel" title="Twitch Triggers" data-type="default">
-   <form id="LBTestTwitchFollow" class="LBTestTriggers">
+   <form id="SAMMITestTwitchFollow" class="SAMMITestTriggers">
       <button type="submit" class="btn btn-primary btn-sm me-1">Test Follower</button>
    </form>
-   <form id="LBTestTwitchSubs" class="LBTestTriggers">
+   <form id="SAMMITestTwitchSubs" class="SAMMITestTriggers">
       <button type="submit" class="btn btn-primary btn-sm me-1">Test Sub</button>
       <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidesubs" role="button" aria-expanded="false"
          aria-controls="hidesubs"></a>
@@ -20,32 +20,32 @@
          SubGift
          <input type="checkbox" class="form-check-input" id="anongift" value="anongift">
          AnonGift
-         <input type="number" min="0" max="100" id="submonths" value=1> Months <br>
+         <input type="number" min="1" max="999" id="submonths" value=1> Months <br>
          Message:
          <input type="text" id="submessage" size="20">
       </div>
       <div>
    </form>
-   <form id="LBTestTwitchSubGift" class="LBTestTriggers">
+   <form id="SAMMITestTwitchSubGift" class="SAMMITestTriggers">
       <button type="submit" class="btn btn-primary btn-sm me-1">Test Subs Gift Amount</button>
       Amount:
-      <input type="number" min="1" max="99" id="subGiftAmount" value=1>
+      <input type="number" min="1" max="999" id="subGiftAmount" value=1>
 </div>
 </form>
-<form id="LBTestTwitchBits" class="LBTestTriggers">
+<form id="SAMMITestTwitchBits" class="SAMMITestTriggers">
    <button type="submit" class="btn btn-primary btn-sm me-1">Test Bits</button>
    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidebits" role="button" aria-expanded="false"
       aria-controls="hidebits"></a>
    <div class='collapse' id="hidebits">
       Amount of bits:
-      <input type="number" min="0" max="999" id="bitsamount" value=10>
+      <input type="number" min="1" max="99999" id="bitsamount" value=10>
       Total bits:
-      <input type="number" min="0" max="999" id="bitstotal" value=100><br />
+      <input type="number" min="1" max="99999" id="bitstotal" value=100><br />
       Message:
       <input type="text" id="bitsmessage" size="20" style="margin:5px 0px;" value='Hello World!'>
    </div>
 </form>
-<form id="LBTestTwitchPoints" class="LBTestTriggers">
+<form id="SAMMITestTwitchPoints" class="SAMMITestTriggers">
    <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Channel Points</button>
       <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidepoints" role="button" aria-expanded="false"
          aria-controls="hidebits"></a>
@@ -57,23 +57,23 @@
       Redeem Message:
       <input type="text" id="channelPointsMsg" size="20"> <br>
       Redeem Cost:
-      <input type="number" min="0" max="9999" id="channelPointsCost" size="5" value=50>
+      <input type="number" min="1" max="9999" id="channelPointsCost" size="5" value=50>
    </div>
 </form>
-<form id="LBTestTwitchRaid" class="LBTestTriggers">
+<form id="SAMMITestTwitchRaid" class="SAMMITestTriggers">
    <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Raid</button>
       Amount:
-      <input type="number" min="0" max="999" id="raidAmount" value=5>
+      <input type="number" min="1" max="999" id="raidAmount" value=5>
    </div>
 </form>
-<form id="LBTestTwitchHost" class="LBTestTriggers">
+<form id="SAMMITestTwitchHost" class="SAMMITestTriggers">
    <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Host</button>
       Amount:
-      <input type="number" min="0" max="999" id="hostamount" value=5> <br>
+      <input type="number" min="1" max="999" id="hostamount" value=5> <br>
    </div>
 </form>
 
-<form id="LBTestTwitchPoll" class="LBTestTriggers form-inline">
+<form id="SAMMITestTwitchPoll" class="SAMMITestTriggers form-inline">
       <div class="form-group d-flex align-items-center">
       <button type="submit" class="btn btn-primary btn-sm me-2">Test Poll</button>
       <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Poll Type" id="pollType">
@@ -95,7 +95,7 @@
    </div>
 </form>
 
-<form id="LBTestTwitchPrediction" class="LBTestTriggers form-inline">
+<form id="SAMMITestTwitchPrediction" class="SAMMITestTriggers form-inline">
    <div class="form-group d-flex align-items-center">
    <button type="submit" class="btn btn-primary btn-sm me-2">Test Prediction</button>
    <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Poll Type" id="predictType">
@@ -115,7 +115,7 @@
 </div>
 </form>
 
-<form id="LBTestTwitchHypeTrain" class="LBTestTriggers form-inline">
+<form id="SAMMITestTwitchHypeTrain" class="SAMMITestTriggers form-inline">
    <div class="form-group d-flex align-items-center">
    <button type="submit" class="btn btn-primary btn-sm me-2">Test Hype Train</button>
    <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Hype Train Type" id="hypeTrainType">
@@ -151,7 +151,7 @@
 </form>
 
 
-<form id="LBTestTwitchChat" class="LBTestTriggers">
+<form id="SAMMITestTwitchChat" class="SAMMITestTriggers">
    <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Chat Message </button>
       <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidechatmsg" role="button" aria-expanded="false"
          aria-controls="hidechatmsg"></a>

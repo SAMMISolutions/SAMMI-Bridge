@@ -15,7 +15,7 @@ function YTLiveTestEvent(e) {
       break;
     case 'ytLiveTestSub':
 
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         19,
         `YouTube Subscription Test triggered by ${pullData.display_name}`,
         {},
@@ -30,7 +30,7 @@ function YTLiveTestEvent(e) {
         level_name: 'Some level name',
       });
 
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         22,
         `YouTube Member Test triggered by ${pullData.display_name}`,
         {},
@@ -41,7 +41,7 @@ function YTLiveTestEvent(e) {
     case 'ytLiveTestMilestone': {
       const months = document.getElementById('YTLiveMilestoneMonth').value || Math.ceil(Math.random() * 10);
       const level_name = document.getElementById('YTLiveMilestoneLevel').value || 'Some level name';
-      const message = document.getElementById('YTLiveMilestoneMsg').value || generateMessage();
+      const message = document.getElementById('YTLiveMilestoneMsg').value || SAMMI.generateMessage();
 
       pullData.addvalues({
         channel_url: `https://www.youtube.com/channel/${pullData.user_id}`,
@@ -51,7 +51,7 @@ function YTLiveTestEvent(e) {
         months,
       });
 
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         22,
         `YouTube Member Renewal Test triggered by ${pullData.display_name}`,
         {},
@@ -62,7 +62,7 @@ function YTLiveTestEvent(e) {
     case 'ytLiveTestSuperChat': {
       const amount = parseInt(document.getElementById('YTLiveSuperChatAmount').value) || Math.ceil(Math.random() * 1000000);
       const tier = document.getElementById('YTLiveSuperChatTier').value || Math.ceil(Math.random() * 5);
-      const message = document.getElementById('YTLiveSuperChatMsg').value || generateMessage();
+      const message = document.getElementById('YTLiveSuperChatMsg').value || SAMMI.generateMessage();
 
       pullData.addvalues({
         channel_url: `https://www.youtube.com/channel/${pullData.user_id}`,
@@ -74,7 +74,7 @@ function YTLiveTestEvent(e) {
         tier,
       });
 
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         20,
         `YouTube Super Chat Test triggered by ${pullData.display_name}`,
         { amount },
@@ -95,7 +95,7 @@ function YTLiveTestEvent(e) {
         sticker_text: 'Pear character turning around waving his hand, saying Hey you while lowering his glasses',
       });
 
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         21,
         `YouTube Super Sticker Test triggered by ${pullData.display_name}`,
         { amount },
@@ -104,7 +104,7 @@ function YTLiveTestEvent(e) {
     }
       break;
     case 'ytLiveTestChatMessage': {
-      const message = document.getElementById('YTLiveChatMessageMsg').value || generateMessage();
+      const message = document.getElementById('YTLiveChatMessageMsg').value || SAMMI.generateMessage();
       pullData.addvalues({
         display_name: document.getElementById('YTLiveChatMessageName').value || pullData.display_name,
         channel_url: `https://www.youtube.com/channel/${pullData.user_id}`,
@@ -116,7 +116,7 @@ function YTLiveTestEvent(e) {
         is_verified: YTLiveChatMessageMember.checked,
       });
 
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         18,
         `YouTube Chat Message Test triggered by ${pullData.display_name}`,
         {
@@ -132,11 +132,6 @@ function YTLiveTestEvent(e) {
       break;
   }
 
-  function generateMessage() {
-    const message = ['Hello World!', "Alright, I'll be honest with ya, Bob. My name's not Kirk. It's Skywalker. Luke Skywalker.", 'Well, that never happened in any of the simulations.', 'You know, you blow up one sun and suddenly everyone expects you to walk on water.', "How's a needle in my butt gonna get water out of my ears?", 'If you immediately know the candle light is fire, then the meal was cooked a long time ago.', "So it's possible there's an alternate version of myself out there that actually understands what the hell you're talkin' about?", 'It costs nearly a billion dollars just to turn the lights on around here'];
-    const randomMsg = message[Math.floor(Math.random() * message.length)];
-    return randomMsg;
-  }
 
   function generateName() {
     const names = [
@@ -161,34 +156,14 @@ function YTLiveTestEvent(e) {
     return randomName;
   }
 
-  function generateMessage() {
-    const messages = [
-      'Hello World!',
-      "Alright, I'll be honest with ya, Bob. My name's not Kirk. It's Skywalker. Luke Skywalker.",
-      'Well, that never happened in any of the simulations.',
-      'You know, you blow up one sun and suddenly everyone expects you to walk on water.',
-      "How's a needle in my butt gonna get water out of my ears?",
-      'If you immediately know the candle light is fire, then the meal was cooked a long time ago.',
-      'In the middle of my backswing!?',
-      'If I am to remain in this body, I must shave my head.',
-      "I remembered something. There's a man. He is bald and wears a short sleeve shirt. And somehow, he is important to me… I think his name is… Homer.",
-      'Alright, we came here in peace, we expect to go in one... piece.',
-      'It costs nearly a billion dollars just to turn the lights on around here',
-      "You wouldn't believe the things you can make from the common, simple items lying around your planet... which reminds me, you're going to need a new microwave.",
-      'Welcome, ye knights of the round table, men of honor, followers of the path of righteousness. Only those with wealth of knowledge and truth of spirit shall be given access to the underworld, the storehouse of riches of Ambrosius Aurelianus. Prove ye worthy, and all shall be revealed.',
-    ];
-    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-    return randomMessage;
-  }
-
-  function sendTriggerToLB(
+  function sendTriggerToSAMMI(
     type,
     message = 'Test trigger fired.',
     data = {},
     triggerData,
   ) {
     data.trigger_data = triggerData;
-    LB.trigger(type, data);
-    LB.alert(message);
+    SAMMI.trigger(type, data);
+    SAMMI.alert(message);
   }
 }

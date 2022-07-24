@@ -1,7 +1,7 @@
 // Fake Triggers testing
-async function LBTestTriggers() {
+async function SAMMITestTriggers() {
   const processTrigger = {
-    LBTestTwitchSubs(form, notUsed, gifted = false, gifterName = '') {
+    SAMMITestTwitchSubs(form, notUsed, gifted = false, gifterName = '') {
       const type = 1;
       const subtype = form.subgift.checked
         ? 2
@@ -24,7 +24,7 @@ async function LBTestTriggers() {
           ? ['Anonymous User']
           : generateName();
       const giftedName = subtype !== 1 ? generateName(name[0]) : [''];
-      const message = form.submessage.value || generateMessage();
+      const message = form.submessage.value || SAMMI.generateMessage();
       const tiers = form.querySelectorAll('input[name="tier"]');
       let selectedTier;
       let selectedTierD;
@@ -64,11 +64,11 @@ async function LBTestTriggers() {
         month,
         community_gift: gifted ? 1 : 0,
       };
-      sendTriggerToLB(type, msg, data, pullData);
+      sendTriggerToSAMMI(type, msg, data, pullData);
     },
 
-    LBTestTwitchSubGift(form) {
-      const subForm = document.getElementById('LBTestTwitchSubs');
+    SAMMITestTwitchSubGift(form) {
+      const subForm = document.getElementById('SAMMITestTwitchSubs');
       if (subForm.prime.checked) subForm.tier1.checked = true;
       if (subForm.anongift.checked === false) subForm.subgift.checked = true;
       const tiers = subForm.querySelectorAll('input[name="tier"]');
@@ -98,7 +98,7 @@ async function LBTestTriggers() {
         amount,
         tier: selectedTier,
       };
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         2,
         `${gifterName[0]} has gifted ${amount} subs!`,
         {
@@ -110,21 +110,21 @@ async function LBTestTriggers() {
 
       for (let i = 0; i < amount; i++) {
         setTimeout(() => {
-          this.LBTestTwitchSubs(subForm, null, true, gifterName);
+          this.SAMMITestTwitchSubs(subForm, null, true, gifterName);
         }, 1000 + i * 10);
       }
     },
 
-    LBTestTwitchBits(form, pullData) {
+    SAMMITestTwitchBits(form, pullData) {
       const amount = parseInt(form.bitsamount.value) || 50;
       const totalAmount = parseInt(form.bitstotal.value) || amount + 100;
-      const message = form.bitsmessage.value || generateMessage();
+      const message = form.bitsmessage.value || SAMMI.generateMessage();
       pullData.addvalues({
         amount,
         total_amount: totalAmount,
         message,
       });
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         5,
         `${pullData.user_name} donated ${amount} bits (test trigger)!`,
         {
@@ -134,12 +134,12 @@ async function LBTestTriggers() {
       );
     },
 
-    LBTestTwitchPoints(form, pullData) {
+    SAMMITestTwitchPoints(form, pullData) {
       const channelID = generateName[1];
       const redeemName = form.channelPointsName.value || 'Test Reward';
       const userInput = form.channelPointsInput.checked;
       const message = userInput
-        ? form.channelPointsMsg.value || generateMessage()
+        ? form.channelPointsMsg.value || SAMMI.generateMessage()
         : '';
       const cost = parseInt(form.channelPointsCost.value) || 50;
       const image = 'https://static-cdn.jtvnw.net/custom-reward-images/default-4.png';
@@ -154,7 +154,7 @@ async function LBTestTriggers() {
         reward_id: rewardId,
         redeem_id: redeemId,
       });
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         3,
         `${pullData.display_name} has redeemed ${redeemName}!`,
         {
@@ -165,12 +165,12 @@ async function LBTestTriggers() {
       );
     },
 
-    LBTestTwitchRaid(form, pullData) {
+    SAMMITestTwitchRaid(form, pullData) {
       const amount = parseInt(form.raidAmount.value) || 5;
       pullData.addvalues({
         amount,
       });
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         4,
         `${pullData.display_name} is raiding you with ${amount} viewers (test trigger)!`,
         {
@@ -180,12 +180,12 @@ async function LBTestTriggers() {
       );
     },
 
-    LBTestTwitchHost(form, pullData) {
+    SAMMITestTwitchHost(form, pullData) {
       const amount = parseInt(form.hostamount.value) || 5;
       pullData.addvalues({
         amount,
       });
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         14,
         `${pullData.display_name} is hosting you with ${amount} viewers (test trigger)!`,
         {
@@ -195,7 +195,7 @@ async function LBTestTriggers() {
       );
     },
 
-    LBTestTwitchPrediction(form) {
+    SAMMITestTwitchPrediction(form) {
       const predictSelect = form.predictType;
       const amount = form.predictChoiceAmount.value || getRandomInt(2, 10);
       const duration = form.predictionDuration.value || getRandomInt(60, 600);
@@ -212,7 +212,7 @@ async function LBTestTriggers() {
       };
       const pullData = populateWithOutcomeInfo(baseData, amount, type);
 
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         15,
         `Prediction ${type} Test trigger sent!`,
         {
@@ -222,7 +222,7 @@ async function LBTestTriggers() {
       );
     },
 
-    LBTestTwitchPoll(form) {
+    SAMMITestTwitchPoll(form) {
       const pollSelect = form.pollType;
       const amount = form.pollChoiceAmount.value || getRandomInt(2, 5);
       const duration = form.pollDuration.value || getRandomInt(60, 600);
@@ -246,7 +246,7 @@ async function LBTestTriggers() {
       };
       const pullData = populateWithChoiceInfo(baseData, amount, type, allowBits, allowPoints, voteTotal);
 
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         16,
         `Poll ${type} Test trigger sent!`,
         {
@@ -255,7 +255,7 @@ async function LBTestTriggers() {
         pullData,
       );
     },
-    async LBTestTwitchHypeTrain(form) {
+    async SAMMITestTwitchHypeTrain(form) {
       const hypeSelect = form.hypeTrainType;
       const type = hypeSelect[hypeSelect.selectedIndex].text;
       const currentLevel = form.hypeTrainLevel.value || 1;
@@ -266,7 +266,7 @@ async function LBTestTriggers() {
       };
       const typeNum = typeNums[type];
       let baseObj = {};
-      // base LB trigger values are the same for the following types
+      // base SAMMI trigger values are the same for the following types
       if (typeNum == 1 || typeNum == 3 || typeNum == 6) {
         baseObj = {
           current_level: parseInt(currentLevel),
@@ -403,10 +403,10 @@ async function LBTestTriggers() {
           const particType = source === 'BITS' ? particTypes[getRandomInt(0, 2)] : particTypes[getRandomInt(3, 8)];
           const particTypeValue = parseInt(form.hypeTrainAmount.value) || 10;
           baseObj = {
-              display_name: name,
-              user_name: name.toLowerCase(),
-              user_id: userID,
-            };
+            display_name: name,
+            user_name: name.toLowerCase(),
+            user_id: userID,
+          };
           data = {
             participations: {
               [particType]: particTypeValue,
@@ -450,7 +450,7 @@ async function LBTestTriggers() {
       baseObj.type = typeNum;
       baseObj.data = data;
 
-      sendTriggerToLB(
+      sendTriggerToSAMMI(
         17,
         `Hype Train ${type} Test trigger sent!`,
         { type: typeNum },
@@ -458,9 +458,9 @@ async function LBTestTriggers() {
       );
     },
 
-    async LBTestTwitchChat(form) {
+    async SAMMITestTwitchChat(form) {
       const [name, userID] = await getNameFromInput(form.chatName);
-      const message = form.chatMsg.value || generateMessage();
+      const message = form.chatMsg.value || SAMMI.generateMessage();
       const channel = Math.floor(Math.random() * 1000000000);
       const color = '#189A8D';
       const emoteList = '304822798:0-9/304682444:11-19';
@@ -496,12 +496,12 @@ async function LBTestTriggers() {
         user_id: parseInt(userID),
         message,
         emote_list: emoteList,
-        badge_list: badge,
+        badge_list: badge.join(','),
         channel,
         name_color: color,
         first_time: firstTime,
       };
-      LB.trigger(0, {
+      SAMMI.trigger(0, {
         message,
         broadcaster: form.chatBroadcaster.checked,
         moderator: form.chatMod.checked,
@@ -512,8 +512,8 @@ async function LBTestTriggers() {
       });
     },
 
-    LBTestTwitchFollow(form, pullData) {
-      sendTriggerToLB(
+    SAMMITestTwitchFollow(form, pullData) {
+      sendTriggerToSAMMI(
         6,
         `${pullData.display_name} followed you!`,
         {},
@@ -525,9 +525,9 @@ async function LBTestTriggers() {
   class ConstructPullData {
     constructor(type) {
       const name = generateName();
-      this.user_name = type !== 'LBTestTwitchHost' ? name[0].toLowerCase() : undefined;
-      this.display_name = type !== 'LBTestTwitchBits' ? name[0] : undefined;
-      this.user_id = type !== 'LBTestTwitchHost'
+      this.user_name = type !== 'SAMMITestTwitchHost' ? name[0].toLowerCase() : undefined;
+      this.display_name = type !== 'SAMMITestTwitchBits' ? name[0] : undefined;
+      this.user_id = type !== 'SAMMITestTwitchHost'
         ? name[1]
         : undefined;
 
@@ -537,7 +537,7 @@ async function LBTestTriggers() {
     }
   }
 
-  const forms = document.querySelectorAll('.LBTestTriggers');
+  const forms = document.querySelectorAll('.SAMMITestTriggers');
   Array.prototype.slice.call(forms).forEach((form) => {
     form.addEventListener(
       'submit',
@@ -676,21 +676,6 @@ async function LBTestTriggers() {
     return obj;
   }
 
-  function generateMessage() {
-    const messages = [
-      'Hello World!',
-      "Love your stream, you are a very genuine guy and you're not affraid to say it how it is. But, I would just prefer if you didn't give your opinion, just saying.",
-      "Alright, I'll be honest with ya, Bob. My name's not Kirk. It's Skywalker. Luke Skywalker.",
-      'Well, that never happened in any of the simulations.',
-      'You know, you blow up one sun and suddenly everyone expects you to walk on water.',
-      "How's a needle in my butt gonna get water out of my ears?",
-      'If you immediately know the candle light is fire, then the meal was cooked a long time ago.',
-      'All that glitters is not gold. Fair is foul, and foul is fair Hover through the fog and filthy air. These violent delights have violent ends. Hell is empty and all the devils are here. By the pricking of my thumbs, Something wicked this way comes. Open, locks, Whoever knocks!',
-    ];
-    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-    return randomMessage;
-  }
-
   function generateUUID() {
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) => (
       c
@@ -698,14 +683,14 @@ async function LBTestTriggers() {
     ).toString(16));
   }
 
-  function sendTriggerToLB(
+  function sendTriggerToSAMMI(
     type,
     message = 'Test trigger fired.',
     data = {},
     triggerData,
   ) {
     data.trigger_data = triggerData;
-    LB.testTrigger(type, data);
-    LB.alert(message);
+    SAMMI.testTrigger(type, data);
+    SAMMI.alert(message);
   }
 }
