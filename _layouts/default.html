@@ -62,7 +62,7 @@
 
   // define SAMMI connection on load and try to immediately connect
   window.addEventListener('load', function () {
-    sammiclient = lioranboardclient = new LBWebSocket()
+    sammiclient = lioranboardclient = new SAMMIWebSocket()
     load_connection();
     connecttosammi();
     SAMMITestTriggers();
@@ -77,7 +77,7 @@
   {% include ext_scripts.js %}
 
 </script>
-<script src="https://cdn.jsdelivr.net/gh/LioranBoard/LioranBoard-2-Websocket@main/dist/lb-websocket.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/SAMMISolutions/SAMMI-Websocket@main/dist/sammi-websocket.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

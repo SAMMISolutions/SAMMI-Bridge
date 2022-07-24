@@ -10,7 +10,7 @@ function SAMMIDebugLog(e) {
   // disable or enable debug logging and display it
 
   if (e.checked) {
-    if (localStorage.debug === 'lb-websocket-js:*') {
+    if (localStorage.debug === 'sammi-websocket-js:*') {
       const _debug = console.debug.bind(console);
       logIt = (...args) => {
         const msg = {};
@@ -26,7 +26,7 @@ function SAMMIDebugLog(e) {
     } else {
       core.innerHTML = '<samp>Logging will be enabled once SAMMI Bridge is reloaded.</samp>';
     }
-    localStorage.debug = 'lb-websocket-js:*';
+    localStorage.debug = 'sammi-websocket-js:*';
   } else {
     if (localStorage.debug == 0) core.innerHTML = disabled;
     else {
