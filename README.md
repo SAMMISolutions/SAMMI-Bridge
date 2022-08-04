@@ -106,7 +106,7 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes)
 - example2: 
   ```js 
   SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
-    color: ['Wheel Color', 18, '', 0, ['blue', 'yellow', 'green']],
+    color: ['Wheel Color', 18, 0, null, ['blue', 'yellow', 'green']],
     rewardName: ['Reward Name', 14, 'Your Reward name'],
     rewardImage: ['Reward Image', 23, 'image.png']
   })
