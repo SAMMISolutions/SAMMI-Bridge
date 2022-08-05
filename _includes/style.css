@@ -1,5 +1,6 @@
 body {
   font-family: 'Lato', sans-serif;
+  background-color: #040b15;
 }
 h1 {
 font-size: calc(1.2em + 1vw);
@@ -37,7 +38,7 @@ a:hover {
 }
 
 #SAMMIcorelog {
-  background:rgb(10, 11, 26);
+  background:#040b15;
   padding:5px 15px;
   display:block;
   position: relative;
@@ -99,14 +100,24 @@ button:active{
   transition: 0.01s;
 }
 .nav-pills > li > .nav-link.active {
-   background-image: linear-gradient(to bottom, #E28B3B, #B96C23);
+   /*background-image: linear-gradient(to bottom, #E28B3B, #B96C23);*/
+   background-image: linear-gradient(to bottom, #761a2c , #761a2c );
+   border: 1px solid #761a2c;
    color: rgb(255, 255, 255);
-   border: 1px solid #8F8C8C;
+   border: 1px solid #761a2c;
    text-shadow: 1px 1px 3px rgb(0 0 0 / 100%);
+   /*
+    /*
+ background-image: linear-gradient(to bottom, #76511A, #76511A);
+    color: rgb(255, 255, 255);
+    border: 1px solid #76511A;
+ */
+   */
  }
  
  .tab-content {
-   background-color: rgba(39, 55, 110, 0.5);
+   /*background-color: rgba(39, 55, 110, 0.5);*/
+   background-color: rgba(22, 53, 100, 0.769);
    box-shadow: 0.5rem 0.5rem 0.5rem #00000080;
    min-height:50px;
    width:100%;
@@ -137,6 +148,18 @@ button:active{
      box-shadow:0 0 rgb(223, 223, 223);
      transform:translateY(1px)
  }
+}
+
+.btn-primary {
+  background-color: #535861b5;
+  border-color: rgb(72 78 89);
+
+}
+
+.btn-primary:hover {
+  background-color: #60646ad9;
+  border-color: #60646ad9
+
 }
 
 .notabs>.tab-pane {

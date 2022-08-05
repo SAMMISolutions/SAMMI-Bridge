@@ -143,20 +143,6 @@ function SAMMILoadTabsUI() {
   }
 }
 
-// switch to no tabs UI
-function TSLNoTabs() {
-  document.getElementById('extensions-tab').className = 'd-none d-flex';
-  document.getElementById('extensions-tabContent').className = 'notabs';
-  document.getElementById('extensions-tab-buttons').className = 'd-none mt-2';
-}
-
-// switch to tabs UI
-function TSLTabs() {
-  document.getElementById('extensions-tab').className = 'nav nav-pills mb-3';
-  document.getElementById('extensions-tabContent').className = 'tab-content';
-  document.getElementById('extensions-tab-buttons').className = 'mt-2';
-}
-
 // change connection status UI
 function ConnectionStatus(id, status, text, fill) {
   document.getElementById(id).className = `${status} d-none d-md-inline-flex`;

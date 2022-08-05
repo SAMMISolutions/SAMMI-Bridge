@@ -1,5 +1,5 @@
 <!--For Extension info, read How to make extensions.txt in Extension folder-->
-<!--SAMMI 7.00-->
+<!--Bridge V7.00-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +20,7 @@
   <style>
     body {
   font-family: 'Lato', sans-serif;
+  background-color: #040b15;
 }
 h1 {
 font-size: calc(1.2em + 1vw);
@@ -57,7 +58,7 @@ a:hover {
 }
 
 #SAMMIcorelog {
-  background:rgb(10, 11, 26);
+  background:#040b15;
   padding:5px 15px;
   display:block;
   position: relative;
@@ -119,14 +120,24 @@ button:active{
   transition: 0.01s;
 }
 .nav-pills > li > .nav-link.active {
-   background-image: linear-gradient(to bottom, #E28B3B, #B96C23);
+   /*background-image: linear-gradient(to bottom, #E28B3B, #B96C23);*/
+   background-image: linear-gradient(to bottom, #761a2c , #761a2c );
+   border: 1px solid #761a2c;
    color: rgb(255, 255, 255);
-   border: 1px solid #8F8C8C;
+   border: 1px solid #761a2c;
    text-shadow: 1px 1px 3px rgb(0 0 0 / 100%);
+   /*
+    /*
+ background-image: linear-gradient(to bottom, #76511A, #76511A);
+    color: rgb(255, 255, 255);
+    border: 1px solid #76511A;
+ */
+   */
  }
  
  .tab-content {
-   background-color: rgba(39, 55, 110, 0.5);
+   /*background-color: rgba(39, 55, 110, 0.5);*/
+   background-color: rgba(22, 53, 100, 0.769);
    box-shadow: 0.5rem 0.5rem 0.5rem #00000080;
    min-height:50px;
    width:100%;
@@ -157,6 +168,18 @@ button:active{
      box-shadow:0 0 rgb(223, 223, 223);
      transform:translateY(1px)
  }
+}
+
+.btn-primary {
+  background-color: #535861b5;
+  border-color: rgb(72 78 89);
+
+}
+
+.btn-primary:hover {
+  background-color: #60646ad9;
+  border-color: #60646ad9
+
 }
 
 .notabs>.tab-pane {
@@ -225,12 +248,6 @@ button:active{
       </div>
     </div>
   </div>
-  <div class='row pt-3'>
-    <h5>Appearance</h5>
-    <div class="col col-md-auto"><button type="button" class="btn btn-primary btn-sm mb-2 w-auto me-2"
-        onclick="TSLNoTabs()">No Tabs</button><button type="button" class="btn btn-primary btn-sm mb-2 w-auto"
-        onclick="TSLTabs()">Show Tabs</button></div>
-  </div>
   <div class='row pt-3 d-block'>
     <h5>Message Logging</h5>
     <div class='pl-5 ml-5'>
@@ -238,12 +255,7 @@ button:active{
           <input class="form-check-input" type="checkbox" id="dbgBridge" onclick="SAMMIDebugLog(this)" >
           <label class="form-check-label"for="flexSwitchCheckDefault">SAMMI</label>
        </div>
-       <ul class="nav nav-tabs mt-3" id="debugLog" role="tablist">
-          <li class="nav-item" role="presentation">
-             <button class="nav-link active" id="SAMMIBridge-tab" data-bs-toggle="tab" data-bs-target="#SAMMIBridge" type="button" role="tab" aria-controls="SAMMIBridge" aria-selected="true">SAMMI</button>
-          </li>
-       </ul>
-       <div class="tab-content p-0 " id="debugLogContent">
+       <div class="tab-content p-0 mt-2" id="debugLogContent">
           <!--SAMMI Core Log-->
           <div class="tab-pane fade show active" id="SAMMIBridge" role="tabpanel" aria-labelledby="SAMMIBridge-tab" >
              <div id="SAMMIcorelog" class="col col-10 text-wrap">Logging is disabled.</div>
@@ -877,7 +889,7 @@ function SAMMICommands() {
 }
 
   // Twitch client ID to use for Twitch API requests
-  let TWITCH_CLIENT_ID = "tpqy40pm79e00s63cqusqepvhwqz1n";
+  let TWITCH_CLIENT_ID = "xolexwv18o8i5uqsga0bw3z39cpg0c";
   // init object with all available SAMMI command methods
   const SAMMI = LB = new SAMMICommands()
   // Expose websocket client and logIt function for global access
@@ -1058,20 +1070,6 @@ function SAMMILoadTabsUI() {
     });
     localStorage.setItem('tabsVisibility', JSON.stringify(tabsVisiblity));
   }
-}
-
-// switch to no tabs UI
-function TSLNoTabs() {
-  document.getElementById('extensions-tab').className = 'd-none d-flex';
-  document.getElementById('extensions-tabContent').className = 'notabs';
-  document.getElementById('extensions-tab-buttons').className = 'd-none mt-2';
-}
-
-// switch to tabs UI
-function TSLTabs() {
-  document.getElementById('extensions-tab').className = 'nav nav-pills mb-3';
-  document.getElementById('extensions-tabContent').className = 'tab-content';
-  document.getElementById('extensions-tab-buttons').className = 'mt-2';
 }
 
 // change connection status UI
@@ -2055,10 +2053,10 @@ function connecttosammi() {
         'Disconnected, attempting to reconnect.',
         'red',
       );
-      console.log('SAMMI disconnected. Attempting to reconnect in 2s.');
+      console.log('SAMMI disconnected. Attempting to reconnect in 5s.');
       p.waiting_to_connect = setTimeout(() => {
         connecttosammi();
-      }, 2000);
+      }, 5000);
     } else {
       console.log('SAMMI disconnected by user.');
       ConnectionStatus('toclient', 'disconnected', 'Connection Closed', 'red');
@@ -2107,22 +2105,6 @@ const browser = (() => {
   }
 })();
 
-  function sendExtensionCommands() {
-// You SAMMI Core extension commands will be inserted here
-/*INSERT PART 2*/
-}
-
-  function SammiExtensionReceived(hook, SAMMIJSON) {
-  LioranBoardJSON = SAMMIJSON;
-  switch (hook) {
-    // hook you specified.
-    default:
-      break;
-//You hooks will be inserted here
-/*INSERT PART 3*/
-   }
-}
-
   (function initDebugLogging() {
   dbgBridge.checked = SAMMIVars.SAMMIdebug.core;
   SAMMIDebugLog(dbgBridge);
@@ -2137,7 +2119,7 @@ function SAMMIDebugLog(e) {
   if (e.checked) {
     if (localStorage.debug === 'sammi-websocket-js:*') {
       const _debug = console.debug.bind(console);
-      logIt = (...args) => {
+      logIt = function (...args) {
         const msg = {};
         _debug.apply(console, arguments);
         if (!SAMMIdebugPost) return;
@@ -2200,7 +2182,23 @@ function SAMMIdebugPost(type, msg) {
   }
 }
 
-// Your main script will be inserted here
+  function sendExtensionCommands() {
+// You SAMMI Core extension commands will be inserted here
+/*INSERT PART 2*/
+}
+
+  function SammiExtensionReceived(hook, SAMMIJSON) {
+  LioranBoardJSON = SAMMIJSON;
+  switch (hook) {
+    // hook you specified.
+    default:
+      break;
+//You hooks will be inserted here
+/*INSERT PART 3*/
+   }
+}
+
+  // Your main script will be inserted here
 /*INSERT PART 4*/
 
 </script>

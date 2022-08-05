@@ -1,5 +1,5 @@
 <!--For Extension info, read How to make extensions.txt in Extension folder-->
-<!--SAMMI 7.00-->
+<!--Bridge V7.00-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +30,7 @@
 <script>
   {% include functions.js %}
   // Twitch client ID to use for Twitch API requests
-  let TWITCH_CLIENT_ID = "tpqy40pm79e00s63cqusqepvhwqz1n";
+  let TWITCH_CLIENT_ID = "xolexwv18o8i5uqsga0bw3z39cpg0c";
   // init object with all available SAMMI command methods
   const SAMMI = LB = new SAMMICommands()
   // Expose websocket client and logIt function for global access
@@ -72,6 +72,7 @@
   {% include twitch_triggers.js %}
   {% include youtube_triggers.js %}
   {% include core.js %}
+  {% include message_logging.js %}
   {% include ext_commands.js %}
   {% include ext_hooks.js %}
   {% include ext_scripts.js %}

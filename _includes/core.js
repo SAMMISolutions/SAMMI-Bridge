@@ -99,10 +99,10 @@ function connecttosammi() {
         'Disconnected, attempting to reconnect.',
         'red',
       );
-      console.log('SAMMI disconnected. Attempting to reconnect in 2s.');
+      console.log('SAMMI disconnected. Attempting to reconnect in 5s.');
       p.waiting_to_connect = setTimeout(() => {
         connecttosammi();
-      }, 2000);
+      }, 5000);
     } else {
       console.log('SAMMI disconnected by user.');
       ConnectionStatus('toclient', 'disconnected', 'Connection Closed', 'red');
