@@ -14,8 +14,8 @@
   <meta name="language" content="English">
   <title>SAMMI Bridge</title>
   <link rel="shortcut icon" type="image/x-icon"
-    href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon_ce.ico" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/christinna9031/LioranBoard-Files@main/lib/bootstrap.min.css">
+    href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon.ico"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SAMMISolutions/SAMMI-Bridge@main/lib/bootstrap.min.css">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
   <style>
     body {
@@ -207,11 +207,11 @@ button:active{
 <p>Current version of SAMMI Bridge . Download the latest <a href="https://github.com/SAMMISolutions/SAMMISolutions/SAMMI-Bridge/releases">release</a>. This version will NOT work with any previous non SAMMI versions.</p>
 
 <h3 id="for-users">For users</h3>
-<p><strong>Twitch Triggers</strong> allow you to test all available Twitch triggers by sending fake payload that mimics real triggers to SAMMI.\ 
+<p><strong>Twitch Triggers</strong> allow you to test all available Twitch triggers by sending fake payload that mimics real triggers to SAMMI.<br />
 <strong>YouTube Triggers</strong> allow you to test all available YouTube triggers by sending fake payload that mimics real triggers to SAMMI.</p>
 
 <h3 id="for-extension-devs">For extension devs</h3>
-<p>SAMMI Bridge uses SAMMI websocket library to make sending and receiving data easier: https://github.com/LioranBoard/LioranBoard-2-Websocket. 
+<p>SAMMI Bridge uses SAMMI websocket library to make sending and receiving data easier: https://github.com/SAMMISolutions/SAMMI-Websocket. 
 You can use promises for sending data to SAMMI. Message ids are generated automatically.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">sammiclient</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span> <span class="nx">data</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
@@ -315,7 +315,7 @@ All methods are documented inside SAMMI Bridge via JSDoc.</p>
   </li>
   <li>example2:
     <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">extCommand</span><span class="p">(</span><span class="dl">'</span><span class="s1">Lucky Wheel</span><span class="dl">'</span><span class="p">,</span> <span class="mi">3355443</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="p">{</span>
-  <span class="na">color</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Wheel Color</span><span class="dl">'</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="p">[</span><span class="dl">'</span><span class="s1">blue</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">yellow</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">]],</span>
+  <span class="na">color</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Wheel Color</span><span class="dl">'</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="p">[</span><span class="dl">'</span><span class="s1">blue</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">yellow</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">]],</span>
   <span class="na">rewardName</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Reward Name</span><span class="dl">'</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Your Reward name</span><span class="dl">'</span><span class="p">],</span>
   <span class="na">rewardImage</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Reward Image</span><span class="dl">'</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="dl">'</span><span class="s1">image.png</span><span class="dl">'</span><span class="p">]</span>
 <span class="p">})</span>
@@ -329,7 +329,7 @@ All methods are documented inside SAMMI Bridge via JSDoc.</p>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">trigger</code> - name of the trigger</li>
   <li><code class="language-plaintext highlighter-rouge">data</code> - object containing all trigger pull data (can contain objects, arrays etc.)</li>
-  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.triggerExt('Test Trigger', {users:['Lioran', 'Melonax'], color: 'blue', number: 5})</code></li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.triggerExt('Test Trigger', {users:['cyanidesugar', 'Silverlink'], color: 'blue', number: 5})</code></li>
 </ul>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">triggerButton</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
@@ -447,8 +447,8 @@ All methods are documented inside SAMMI Bridge via JSDoc.</p>
   <span class="na">sub</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">vip</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">founder</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">trigger_data</span><span class="p">:</span> <span class="p">{</span> 
-    <span class="na">user_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">lioran</span><span class="dl">'</span><span class="p">,</span> 
-    <span class="na">display_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Lioran</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">user_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">silverlink</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">display_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Silverlink</span><span class="dl">'</span><span class="p">,</span> 
     <span class="na">user_id</span><span class="p">:</span> <span class="mi">123456789</span><span class="p">,</span> 
     <span class="na">message</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Hello World!</span><span class="dl">'</span><span class="p">,</span> 
     <span class="na">emote_list</span><span class="p">:</span> <span class="dl">'</span><span class="s1">304822798:0-9/304682444:11-19</span><span class="dl">'</span><span class="p">,</span> 
@@ -926,6 +926,7 @@ function SAMMILoadTabsUI() {
 
   // create tabs and checkboxes
   content.forEach((e) => {
+    e.id = e.id.replace(/^[^a-z]+|[^\w:.-]+/g, '');
     createExtensionTab(e);
     createExtensionBox(e);
   });

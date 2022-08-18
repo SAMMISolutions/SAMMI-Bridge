@@ -2,12 +2,12 @@
  Current version of SAMMI Bridge . Download the latest [release](https://github.com/SAMMISolutions/SAMMISolutions/SAMMI-Bridge/releases). This version will NOT work with any previous non SAMMI versions.
 
 ### For users
-**Twitch Triggers** allow you to test all available Twitch triggers by sending fake payload that mimics real triggers to SAMMI.\ 
+**Twitch Triggers** allow you to test all available Twitch triggers by sending fake payload that mimics real triggers to SAMMI.\
 **YouTube Triggers** allow you to test all available YouTube triggers by sending fake payload that mimics real triggers to SAMMI.
 
  
 ### For extension devs
-SAMMI Bridge uses SAMMI websocket library to make sending and receiving data easier: https://github.com/LioranBoard/LioranBoard-2-Websocket. 
+SAMMI Bridge uses SAMMI websocket library to make sending and receiving data easier: https://github.com/SAMMISolutions/SAMMI-Websocket. 
 You can use promises for sending data to SAMMI. Message ids are generated automatically. 
 
 ```js
@@ -106,7 +106,7 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes)
 - example2: 
   ```js 
   SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
-    color: ['Wheel Color', 18, '', null, ['blue', 'yellow', 'green']],
+    color: ['Wheel Color', 18, 0, null, ['blue', 'yellow', 'green']],
     rewardName: ['Reward Name', 14, 'Your Reward name'],
     rewardImage: ['Reward Image', 23, 'image.png']
   })
@@ -119,7 +119,7 @@ SAMMI.triggerExt(trigger, pullData)
 ```
 - `trigger` - name of the trigger
 - `data` - object containing all trigger pull data (can contain objects, arrays etc.)
-- example: `SAMMI.triggerExt('Test Trigger', {users:['Lioran', 'Melonax'], color: 'blue', number: 5})`
+- example: `SAMMI.triggerExt('Test Trigger', {users:['cyanidesugar', 'Silverlink'], color: 'blue', number: 5})`
 
 ```js
 SAMMI.triggerButton(id)
@@ -221,8 +221,8 @@ SAMMI.trigger(type, data)
     sub: 0, vip: 0,
     founder: 0,
     trigger_data: { 
-      user_name: 'lioran', 
-      display_name: 'Lioran', 
+      user_name: 'silverlink', 
+      display_name: 'Silverlink', 
       user_id: 123456789, 
       message : 'Hello World!', 
       emote_list: '304822798:0-9/304682444:11-19', 
