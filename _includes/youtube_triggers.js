@@ -112,8 +112,8 @@ function YTLiveTestEvent(e) {
         message: message.replace(/"/g, "'"),
         is_broadcaster: YTLiveChatMessageBroadcaster.checked,
         is_moderator: YTLiveChatMessageMod.checked,
-        is_member: YTLiveChatMessageVerified.checked,
-        is_verified: YTLiveChatMessageMember.checked,
+        is_member: YTLiveChatMessageMember.checked, 
+        is_verified: YTLiveChatMessageVerified.checked,
       });
 
       sendTriggerToSAMMI(
