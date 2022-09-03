@@ -1,5 +1,5 @@
 <!--For Extension info, read How to make extensions.txt in Extension folder-->
-<!--Bridge V7.00-->
+<!--Bridge V7.01-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -203,342 +203,319 @@ button:active{
 
 <body>
   <div class="container">
-    <h1 class="text-center">SAMMI Bridge </h1>
-<!-- Connection Info -->
-<div class="row justify-content-center">
-  <div class="col col-auto">
-    <svg id="toclient_circle" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-circle-fill d-md-none me-1" viewBox="0 0 16 16">
-        <circle cx="8" cy="8" r="8"/>
-      </svg>
-    <span>SAMMI Core</span><span class="d-none d-md-inline-flex me-1">: </span><span id="toclient" class="disconnected d-none d-md-inline-flex">Not connected.</span>
-  </div>
-</div> <br>
-<!--Tabs -->
-<div class="row justify-content-center g-0">
-    <ul class="nav nav-pills mb-0" id="extensions-tab" role="tablist">
-</div>  
- <!-- Tab Content -->
- <div class="tab-content" id="extensions-tabContent">
-<div class="tab-pane" id="content-basic" role="tabpanel" title="Status" data-type="default">
-  <div class='row pt-3'>
-    <h5>Bridge Connection</h5>
-    <div class="col">
-      <div class="row">
-        <label for="inputPassword" class="col-sm-5 col-form-label">IP Address:</label>
-        <div class="col-sm-4 w-auto">
-          <input type="text" id="nIPbox" name="nIPbox" value='127.0.0.1' class="form-control form-control-sm">
-        </div>
-      </div>
-      <div class="row">
-        <label for="inputPassword" class="col-sm-5 col-form-label">Port:</label>
-        <div class="col-sm-4 w-auto">
-          <input type="number" min="0" max="65535" id="nPortBox" name="nPortBox" value=9425
-            class="form-control form-control-sm">
-        </div>
-      </div>
-      <div class="row">
-        <label for="inputPassword" class="col-sm-5 col-form-label">Password (optional):</label>
-        <div class="col-sm-4 w-auto">
-          <input id="nPassBox" type="password" name="nPassBox" size="20" value='' class="form-control form-control-sm">
-        </div>
-      </div>
-      <div class="mt-1 row">
-        <button type="button" id="cnctbutton" class="btn btn-primary btn-sm mb-2 w-auto ms-3"
-          onclick="connectbutton()">Connect</button>
-      </div>
-    </div>
-  </div>
-  <div class='row pt-3 d-block'>
-    <h5>Message Logging</h5>
-    <div class='pl-5 ml-5'>
-       <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="dbgBridge" onclick="SAMMIDebugLog(this)" >
-          <label class="form-check-label"for="flexSwitchCheckDefault">SAMMI</label>
-       </div>
-       <div class="tab-content p-0 mt-2" id="debugLogContent">
-          <!--SAMMI Core Log-->
-          <div class="tab-pane fade show active" id="SAMMIBridge" role="tabpanel" aria-labelledby="SAMMIBridge-tab" >
-             <div id="SAMMIcorelog" class="col col-10 text-wrap">Logging is disabled.</div>
-          </div>
-       </div>
-    </div>
- </div>
-</div>
-<!--Your external script will be inserted here-->
-<!--<script src="example.js"></script>-->
-<!--INSERT PART 1-->
-<!--Twitch Triggers-->
-<div class="tab-pane" id="content-triggers" role="tabpanel" title="Twitch Triggers" data-type="default">
-   <form id="SAMMITestTwitchFollow" class="SAMMITestTriggers">
-      <button type="submit" class="btn btn-primary btn-sm me-1">Test Follower</button>
-   </form>
-   <form id="SAMMITestTwitchSubs" class="SAMMITestTriggers">
-      <button type="submit" class="btn btn-primary btn-sm me-1">Test Sub</button>
-      <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidesubs" role="button" aria-expanded="false"
-         aria-controls="hidesubs"></a>
-      <div class="collapse" id="hidesubs">
-         <input type="radio" class="form-check-input" id="tier1" name="tier" value="Tier 1" checked>
-         Tier 1
-         <input type="radio" class="form-check-input" id="tier2" name="tier" value="Tier 2">
-         Tier 2
-         <input type="radio" class="form-check-input" id="tier3" name="tier" value="Tier 3">
-         Tier 3
-         <input type="radio" class="form-check-input" id="prime" name="tier" value="Prime">
-         Prime <br>
-         <input type="checkbox" class="form-check-input" id="subgift" value="subgift">
-         SubGift
-         <input type="checkbox" class="form-check-input" id="anongift" value="anongift">
-         AnonGift
-         <input type="number" min="1" max="999" id="submonths" value=1> Months <br>
-         Message:
-         <input type="text" id="submessage" size="20">
-      </div>
-      <div>
-   </form>
-   <form id="SAMMITestTwitchSubGift" class="SAMMITestTriggers">
-      <button type="submit" class="btn btn-primary btn-sm me-1">Test Subs Gift Amount</button>
-      Amount:
-      <input type="number" min="1" max="999" id="subGiftAmount" value=1>
-</div>
-</form>
-<form id="SAMMITestTwitchBits" class="SAMMITestTriggers">
-   <button type="submit" class="btn btn-primary btn-sm me-1">Test Bits</button>
-   <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidebits" role="button" aria-expanded="false"
-      aria-controls="hidebits"></a>
-   <div class='collapse' id="hidebits">
-      Amount of bits:
-      <input type="number" min="1" max="99999" id="bitsamount" value=10>
-      Total bits:
-      <input type="number" min="1" max="99999" id="bitstotal" value=100><br />
-      Message:
-      <input type="text" id="bitsmessage" size="20" style="margin:5px 0px;" value='Hello World!'>
-   </div>
-</form>
-<form id="SAMMITestTwitchPoints" class="SAMMITestTriggers">
-   <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Channel Points</button>
-      <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidepoints" role="button" aria-expanded="false"
-         aria-controls="hidebits"></a>
-   </div>
-   <div class="collapse" id="hidepoints">
-      Redeem Name:
-      <input type="text" id="channelPointsName" size="10" style="margin:5px 0px" value="Test Reward"> <input
-         type="checkbox" class="form-check-input" id="channelPointsInput"> User Input Required <br>
-      Redeem Message:
-      <input type="text" id="channelPointsMsg" size="20"> <br>
-      Redeem Cost:
-      <input type="number" min="1" max="9999" id="channelPointsCost" size="5" value=50>
-   </div>
-</form>
-<form id="SAMMITestTwitchRaid" class="SAMMITestTriggers">
-   <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Raid</button>
-      Amount:
-      <input type="number" min="1" max="999" id="raidAmount" value=5>
-   </div>
-</form>
-<form id="SAMMITestTwitchHost" class="SAMMITestTriggers">
-   <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Host</button>
-      Amount:
-      <input type="number" min="1" max="999" id="hostamount" value=5> <br>
-   </div>
-</form>
+    <h1 id="sammi-bridge">SAMMI Bridge</h1>
+<p>Current version of SAMMI Bridge . Download the latest <a href="https://github.com/SAMMISolutions/SAMMISolutions/SAMMI-Bridge/releases">release</a>. This version will NOT work with any previous non SAMMI versions.</p>
 
-<form id="SAMMITestTwitchPoll" class="SAMMITestTriggers form-inline">
-      <div class="form-group d-flex align-items-center">
-      <button type="submit" class="btn btn-primary btn-sm me-2">Test Poll</button>
-      <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Poll Type" id="pollType">
-         <option value="begin" selected>Created</option>
-         <option value="progress">Voted</option>
-         <option value="end">Ended</option>
-         <option value="archive">Archived</option>
-       </select>
-       <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidepoll" role="button" aria-expanded="false"
-       aria-controls="hidebits"></a>
-   </div>
-   <div class="collapse mb-1" id="hidepoll">
-      Choice amount:
-      <input type="number" min="2" max="5" id="pollChoiceAmount" value=3> <br>
-      Duration:
-      <input type="number" min="1" max="3600" id="pollDuration" value=60> <br>
-      <input type="checkbox" class="form-check-input" id="pollAllowBits"> Allow Bits <input type="checkbox"
-         class="form-check-input" id="pollAllowPoints"> Allow Channel Points
-   </div>
-</form>
+<h3 id="for-users">For users</h3>
+<p><strong>Twitch Triggers</strong> allow you to test all available Twitch triggers by sending fake payload that mimics real triggers to SAMMI.<br />
+<strong>YouTube Triggers</strong> allow you to test all available YouTube triggers by sending fake payload that mimics real triggers to SAMMI.</p>
 
-<form id="SAMMITestTwitchPrediction" class="SAMMITestTriggers form-inline">
-   <div class="form-group d-flex align-items-center">
-   <button type="submit" class="btn btn-primary btn-sm me-2">Test Prediction</button>
-   <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Poll Type" id="predictType">
-      <option value="begin" selected>Created</option>
-      <option value="progress">Voted</option>
-      <option value="end">Locked</option>
-      <option value="archive">Resolved</option>
-    </select>
-    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hideprediction" role="button" aria-expanded="false"
-    aria-controls="hidebits"></a>
-</div>
-<div class="collapse mb-1" id="hideprediction">
-   Outcome amount:
-   <input type="number" min="2" max="10" id="predictChoiceAmount" value=3> <br>
-   Duration:
-   <input type="number" min="1" max="3600" id="predictionDuration" value=60> <br>
-</div>
-</form>
+<h3 id="for-extension-devs">For extension devs</h3>
+<p>SAMMI Bridge uses SAMMI websocket library to make sending and receiving data easier: https://github.com/SAMMISolutions/SAMMI-Websocket. 
+You can use promises for sending data to SAMMI. Message ids are generated automatically.</p>
 
-<form id="SAMMITestTwitchHypeTrain" class="SAMMITestTriggers form-inline">
-   <div class="form-group d-flex align-items-center">
-   <button type="submit" class="btn btn-primary btn-sm me-2">Test Hype Train</button>
-   <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Hype Train Type" id="hypeTrainType">
-      <option value="approaching" selected>Approaching</option>
-      <option value="started">Started</option>
-      <option value="updated">Updated</option>
-      <option value="updated">Progressed</option>
-      <option value="levelup">Leveled Up</option>
-      <option value="ended">Ended</option>
-      <option value="cdexpired">Cooldown Expired</option>
-    </select>
-    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidehypetrain" role="button" aria-expanded="false"
-    aria-controls="hidebits"></a>
-</div>
-<div class="collapse mb-1" id="hidehypetrain">
-   Current level:
-   <input type="number" min="2" max="50" id="hypeTrainLevel" value=3> <br>
-   (Updated/Progressed) Display Name:
-   <input type="text" size="20" id="hypeTrainName"> <br>
-   (Updated/Progressed) Source:
-   <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Hype Train Source" id="hypeTrainSource">
-      <option value="BITS" selected>BITS</option>
-      <option value="SUBS">SUBS</option>
-    </select>
-   Amount:
-   <input type="number" min="1" max="10000" id="hypeTrainAmount" value=100> <br>
-   (Ended) Ending reason:
-   <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Hype Train Ended Reason" id="hypeTrainEndReason">
-      <option value="COMPLETED" selected>COMPLETED</option>
-      <option value="EXPIRED">EXPIRED</option>
-    </select> <br>
-</div>
-</form>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">sammiclient</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span> <span class="nx">data</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+</code></pre></div></div>
 
+<h4 id="helper-functions">Helper functions</h4>
+<p>You can call all helper functions with <code class="language-plaintext highlighter-rouge">SAMMI.method(arguments)</code>. 
+To use promises, you can call them with <code class="language-plaintext highlighter-rouge">SAMMI.method(arguments).then(response=&gt;console.log(response))</code>. 
+All methods are documented inside SAMMI Bridge via JSDoc.</p>
 
-<form id="SAMMITestTwitchChat" class="SAMMITestTriggers">
-   <div><button type="submit" class="btn btn-primary btn-sm me-1">Test Chat Message </button>
-      <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidechatmsg" role="button" aria-expanded="false"
-         aria-controls="hidechatmsg"></a>
-   </div>
-   <div class="collapse" id="hidechatmsg">
-      Username: <input type="text" id="chatName" size="10" value=""> <br> Message: <input type="text" id="chatMsg"
-         size="20" style="margin:5px 0px" ; value="Hello World"> <input type="checkbox" class="form-check-input"
-         id="chatFirstTime"> 1st <br>
-      <input type="checkbox" class="form-check-input" id="chatBroadcaster"> Broadcaster <input type="checkbox"
-         class="form-check-input" id="chatMod"> Mod <input type="checkbox" class="form-check-input" id="chatSub">
-      Subscriber <input type="checkbox" class="form-check-input" id="chatVip"> VIP <input type="checkbox"
-         class="form-check-input" id="chatFounder"> Founder <br>
-      Subscriber Tier:
-      <select id="chatMsgSubTier">
-         <option value="1">1</option>
-         <option value="2">2</option>
-         <option value="3">3</option>
-      </select>
-      Month: <input type="number" min=0 max=12 maxlength="2"
-         oninput="javascript: if (parseInt(this.value) > parseInt(this.max)) this.value = this.max;"
-         id="chatMsgSubMonth" value=1>
-   </div>
-</form>
-</div>
-<!--YouTube Triggers-->
-<div class="tab-pane" id="content-yttriggers" role="tabpanel" title="YouTube Triggers" data-type="default">
-    <div>
-        <h5>YouTube Live Test Triggers</h5>
-    </div>
-    <div class="align-middle align-items-center">
-        <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestSub"
-            onclick="YTLiveTestEvent(this)">Test Subscriber</button><button style="margin-right:10px;" type="button"
-            class="btn btn-primary btn-sm" id="ytLiveTestMember" onclick="YTLiveTestEvent(this)">Test
-            Member</button><br>
-        <div class="btn-group align-items-center">
-            <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestMilestone"
-                onclick="YTLiveTestEvent(this)">Test Member Renewal</button>
-            <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#YTLiveHideMilestone" role="button"
-                aria-expanded="false" aria-controls="HideMilestone"></a>
-        </div> <br>
-        <div class="collapse" id="YTLiveHideMilestone">
-            <div class="form-check ps-0 d-flex align-items-center">
-                <label class="form-check-label me-1">Level name:</label>
-                <input type="text" class="form-control form-control-sm w-auto  me-2" id="YTLiveMilestoneLevel">
-                <label class="form-check-label me-1">Months:</label>
-                <input type="number" class="form-control form-control-sm w-auto" min="1" max="99"
-                    id="YTLiveMilestoneMonth">
-            </div>
-            <div class="form-check ps-0 d-flex align-items-center">
-                <label class="form-check-label me-1">Message:</label>
-                <textarea type="text" rows="1" class="form-control form-control-sm w-75"
-                    id="YTLiveMilestoneMsg"></textarea>
-            </div>
-        </div>
-        <div class="btn-group align-items-center">
-            <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestSuperChat"
-                onclick="YTLiveTestEvent(this)">Test Super Chat</button>
-            <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#YTLiveHideSuperChat" role="button"
-                aria-expanded="false" aria-controls="HideSuperChat"></a>
-        </div> <br>
-        <div class="collapse" id="YTLiveHideSuperChat">
-            <div class="form-check ps-0 d-flex align-items-center">
-                <label class="form-check-label me-1">Amount:</label>
-                <input type="number" min="1" max="100000" class="form-control form-control-sm w-auto  me-2"
-                    id="YTLiveSuperChatAmount">
-                <label class="form-check-label me-1">Tier:</label>
-                <input type="number" class="form-control form-control-sm w-auto" min="1" max="9"
-                    id="YTLiveSuperChatTier">
-            </div>
-            <div class="form-check ps-0 d-flex align-items-center">
-                <label class="form-check-label me-1">Message:</label>
-                <textarea type="text" rows="1" class="form-control form-control-sm w-75"
-                    id="YTLiveSuperChatMsg"></textarea>
-            </div>
-        </div>
-        <div class="btn-group align-items-center">
-            <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestSuperSticker"
-                onclick="YTLiveTestEvent(this)">Test Super Sticker</button>
-            <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#YTLiveHideSuperSticker" role="button"
-                aria-expanded="false" aria-controls="HideSuperSticker"></a>
-        </div> <br>
-        <div class="collapse" id="YTLiveHideSuperSticker">
-            <div class="form-check ps-0 d-flex align-items-center">
-                <label class="form-check-label me-1">Amount:</label>
-                <input type="number" min="1" max="100000" class="form-control form-control-sm w-auto  me-2"
-                    id="YTLiveSuperStickerAmount">
-            </div>
-        </div>
-        <div class="btn-group align-items-center">
-            <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestChatMessage"
-                onclick="YTLiveTestEvent(this)">Test Chat Message</button>
-            <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#YTLiveHideChatMessage" role="button"
-                aria-expanded="false" aria-controls="HideChatMessage"></a>
-        </div> <br>
-        <div class="collapse" id="YTLiveHideChatMessage">
-            <div class="form-check ps-0 d-flex align-items-center">
-                <label class="form-check-label me-1">Display Name:</label>
-                <input type="text" class="form-control form-control-sm w-auto me-2" id="YTLiveChatMessageName">
-            </div>
-            <div class="form-check ps-0 d-flex align-items-center">
-                <label class="form-check-label me-1">Message:</label>
-                <textarea type="text" rows="1" class="form-control form-control-sm w-75"
-                    id="YTLiveChatMessageMsg"></textarea>
-            </div>
-            <input type="checkbox" id="YTLiveChatMessageBroadcaster"> Broadcaster
-            <input type="checkbox" id="YTLiveChatMessageMod"> Mod
-            <input type="checkbox" id="YTLiveChatMessageMember"> Member
-            <input type="checkbox" id="YTLiveChatMessageVerified"> Verified
-        </div>
-    </div>
-</div>
-</div>
-<div class="row justify-content-center mt-3 px-2 mb-5" id="footer"> <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#installedextensions" role="button" aria-expanded="false" aria-controls="installedextensions"></a>
-  <span class='collapse' id="installedextensions"></span>
-  <span id ='extensions-tab-buttons' class="mt-2">
-  <button id="extensionsshow" class="btn btn-primary btn-sm me-1">Show All Tabs</button> <button id="extensionshide" class="btn btn-primary btn-sm me-1">Hide All Tabs</button> <button id="extensionsresetorder" class="btn btn-primary btn-sm me-1">Reset Tab Order</button> <button onclick="location.reload()" class="btn btn-primary btn-sm me-1">Refresh</button></span>
-</div>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">getVariable</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">buttonId</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">global</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Get a variable</li>
+  <li>specify its button id or leave empty for global variables</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.getVariable('myVariable', 'ID1')</code></li>
+</ul>
 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">setVariable</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">buttonId</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">global</span><span class="dl">'</span><span class="p">)</span><span class="s2">`
+</span></code></pre></div></div>
+<ul>
+  <li>Set a variable</li>
+  <li>specify its button id or leave empty to create a global variable</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.setVariable('myVariable', 'Hello World', 'ID1')</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">deleteVariable</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">buttonId</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">global</span><span class="dl">'</span><span class="p">)</span><span class="s2">`
+</span></code></pre></div></div>
+<ul>
+  <li>Delete a variable</li>
+  <li>specify its button id or leave empty to delete a global variable</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.deleteVariable('myVariable', 'ID1')</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">insertArray</span><span class="p">(</span><span class="nx">arrayName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">buttonId</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">global</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Inserts an item to a specified index in an array, shifting the other items</li>
+  <li><code class="language-plaintext highlighter-rouge">arrayName</code> - name of the array</li>
+  <li><code class="language-plaintext highlighter-rouge">index</code> - index to insert the new item at</li>
+  <li><code class="language-plaintext highlighter-rouge">value</code> - item value</li>
+  <li><code class="language-plaintext highlighter-rouge">buttonId</code> - button id, default is global</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.insertArray('myArray',0,'Hello','ID1')</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">deleteArray</span><span class="p">(</span><span class="nx">arrayName</span><span class="p">,</span> <span class="nx">slot</span><span class="p">,</span> <span class="nx">buttonId</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">global</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Deletes an item in a specified index in an array, shifting the other items</li>
+  <li><code class="language-plaintext highlighter-rouge">arrayName</code> - name of the array</li>
+  <li><code class="language-plaintext highlighter-rouge">index</code> - index to delete the item at</li>
+  <li><code class="language-plaintext highlighter-rouge">buttonId</code> - button id, default is global</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.deleteArray('myArray',1,'ID1')</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">extCommand</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">color</span> <span class="o">=</span> <span class="mi">3355443</span><span class="p">,</span> <span class="nx">height</span> <span class="o">=</span> <span class="mi">52</span><span class="p">,</span> <span class="nx">boxes</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Send an extension command (to create extension boxes) to SAMMI</li>
+  <li><code class="language-plaintext highlighter-rouge">name</code> - name of the extension command</li>
+  <li><code class="language-plaintext highlighter-rouge">color</code> - box color, accepts dec colors</li>
+  <li><code class="language-plaintext highlighter-rouge">height</code> - height of the box in pixels, you can use 52 for regular box or 80 for resiable box</li>
+  <li><code class="language-plaintext highlighter-rouge">boxes</code> - an object containing box objects (its key is box variable and value is an array of box params)
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">boxVariable: [boxName, boxType, defaultValue, (optional)sizeModifier, (optional)selectOptions]</code></li>
+      <li><code class="language-plaintext highlighter-rouge">boxVariable</code> - variable to save the box value under</li>
+      <li><code class="language-plaintext highlighter-rouge">boxName</code> - name of the box shown in the user interface</li>
+      <li><code class="language-plaintext highlighter-rouge">boxType</code>
+ boxType | Description
+ —|—
+  0 | Resizable text box that allows for newline, defaultValue can be anything
+  2 | Check box, defaultValue should be set to true or false or it will crash, will always return true or false when triggered
+  4 | OBS Scenes box
+  5 | OBS Sources box
+  6 | OBS Filters box
+  7 | Keyboard button, defaultValue should be 0, shouldn’t really need this but this will send over a select key code
+  8 | Compare box, defaultValue should be <code class="language-plaintext highlighter-rouge">==</code>, returns a string from the compare box such as <code class="language-plaintext highlighter-rouge">=|</code> or <code class="language-plaintext highlighter-rouge">&gt;=</code>
+  9 | Math box, defaultValue should be <code class="language-plaintext highlighter-rouge">=</code>, returns a string from the compare box such as <code class="language-plaintext highlighter-rouge">|</code> or <code class="language-plaintext highlighter-rouge">+=</code>
+  10 | Sound path box, defaultValue should be <code class="language-plaintext highlighter-rouge">""</code>, returns a path to said sound effect select
+  11 | Slider 0 to 100%, defaultValue should be 0-1, returns a float 0 to 1
+  14 | Normal white box, defaultValue can be anything
+  15 | Variable box(yellow box), defaultValue should be a string, returns whatever variable is in the yellow box
+  17 | Color box, defaultValue should be a number, returns the selected color
+  18 | Select box, defaultValue should be <code class="language-plaintext highlighter-rouge">0</code>, will show a list when click, of what you defined in selectOptions, returns a number, if user select 3rd option, it returns 2
+  19 | select box string, defaultValue should be a string, returns whatever string the user selected.
+  20 | select box string typeable, defaultValue should be a string,  returns whatever the user selected or typed in the box
+  22 | file path, defaultValue should be a string
+  23 | image path, defaultValue should be a string</li>
+      <li><code class="language-plaintext highlighter-rouge">defaultValue</code> - default value of the variable</li>
+      <li>(optional) <code class="language-plaintext highlighter-rouge">sizeModifier</code> - horizontal box size, 1 is normal</li>
+      <li>(optional) [] <code class="language-plaintext highlighter-rouge">selectOptions</code> - array of options for the user to select (when using Select box type)</li>
+    </ul>
+  </li>
+  <li>example:
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">extCommand</span><span class="p">(</span><span class="dl">'</span><span class="s1">Lucky Wheel</span><span class="dl">'</span><span class="p">,</span> <span class="mi">3355443</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">rewardName</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Reward Name</span><span class="dl">'</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Some Reward name</span><span class="dl">'</span><span class="p">],</span>
+  <span class="na">rewardName2</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Reward Name 2</span><span class="dl">'</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="dl">'</span><span class="s1">And another reward name</span><span class="dl">'</span><span class="p">]</span>
+<span class="p">})</span>
+</code></pre></div>    </div>
+    <p>will create an extension command named Lucky Wheel with 2 text boxes.</p>
+  </li>
+  <li>example2:
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">extCommand</span><span class="p">(</span><span class="dl">'</span><span class="s1">Lucky Wheel</span><span class="dl">'</span><span class="p">,</span> <span class="mi">3355443</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">color</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Wheel Color</span><span class="dl">'</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="p">[</span><span class="dl">'</span><span class="s1">blue</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">yellow</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">]],</span>
+  <span class="na">rewardName</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Reward Name</span><span class="dl">'</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Your Reward name</span><span class="dl">'</span><span class="p">],</span>
+  <span class="na">rewardImage</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Reward Image</span><span class="dl">'</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="dl">'</span><span class="s1">image.png</span><span class="dl">'</span><span class="p">]</span>
+<span class="p">})</span>
+</code></pre></div>    </div>
+    <p>will create an extension command named Lucky wheel with one select box with options, one regular text box and one box to select an image file.</p>
+  </li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">triggerExt</span><span class="p">(</span><span class="nx">trigger</span><span class="p">,</span> <span class="nx">pullData</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">trigger</code> - name of the trigger</li>
+  <li><code class="language-plaintext highlighter-rouge">data</code> - object containing all trigger pull data (can contain objects, arrays etc.)</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.triggerExt('Test Trigger', {users:['cyanidesugar', 'Silverlink'], color: 'blue', number: 5})</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">triggerButton</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Triggers a button</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code> - button ID to trigger</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.triggerButton('ID1')</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">modifyButton</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">image</span><span class="p">,</span> <span class="nx">border</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Modifies a button appearance temporarily</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code> - button ID to modify</li>
+  <li><code class="language-plaintext highlighter-rouge">color</code> - decimal button color (BGR)</li>
+  <li><code class="language-plaintext highlighter-rouge">text</code> - button text</li>
+  <li><code class="language-plaintext highlighter-rouge">image</code> - button image file name</li>
+  <li><code class="language-plaintext highlighter-rouge">border</code> - border size, 0-7</li>
+  <li>leave parameters empty to reset button back to default values</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.modifyButton('ID1', 4934525, 'Hello', 'buttonImage.png', 5)</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Send a popup message to SAMMI</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.popUp('Hello World!')</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Send an alert message to SAMMI</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.alert('Hello World!')</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">notification</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Sends a notification (tray icon bubble) message to SAMMI</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.notification('Hello World!')</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">getDeckList</span><span class="p">()</span>
+</code></pre></div></div>
+<ul>
+  <li>Request an array of all decks</li>
+  <li>Replies with an array <code class="language-plaintext highlighter-rouge">["Deck1 Name","Unique ID",crc32,"Deck2 Name","Unique ID",crc32,...]</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">getDeck</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Request a deck params</li>
+  <li>provide <code class="language-plaintext highlighter-rouge">id</code> of the specified deck (retrieved from getDeckList command)</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.getDeck('20211221163402196200595')</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">getImage</span><span class="p">(</span><span class="nx">fileName</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Retrieve an image in base64</li>
+  <li><code class="language-plaintext highlighter-rouge">fileName</code> = image file without the path</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.getImage('test.png')</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">getSum</span><span class="p">(</span><span class="nx">fileName</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Retrieves CRC32 of a file</li>
+  <li><code class="language-plaintext highlighter-rouge">fileName</code> - file name without the path</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.getSum('test.png')</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">stayInformed</span><span class="p">(</span><span class="nx">enabled</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>Set <code class="language-plaintext highlighter-rouge">enabled</code> to true to start receiving all deck and button updates and false to stop receiving them</li>
+  <li>example: <code class="language-plaintext highlighter-rouge">SAMMI.stayInformed(true)</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">getActiveButtons</span><span class="p">()</span>
+</code></pre></div></div>
+<ul>
+  <li>Retrieves all currently active buttons</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">getModifiedButtons</span><span class="p">()</span>
+</code></pre></div></div>
+<ul>
+  <li>Retrieves all currently modified buttons</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">getTwitchList</span><span class="p">()</span>
+</code></pre></div></div>
+<ul>
+  <li>Retrieves information for all linked Twitch accounts, including username, id, token etc.</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li>type - trigger number
+    <ul>
+      <li>0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem, 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey, 8 Timer, 9 OBS Trigger, 10 SAMMI, 11 twitch moderation, 12 extension trigger</li>
+    </ul>
+  </li>
+  <li>data - whatever data is required for the trigger</li>
+  <li>example for chat message trigger:
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">SAMMI</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">message</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Hello World</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">broadcaster</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">moderator</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+  <span class="na">sub</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">vip</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">founder</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">trigger_data</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">user_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">silverlink</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">display_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Silverlink</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">user_id</span><span class="p">:</span> <span class="mi">123456789</span><span class="p">,</span> 
+    <span class="na">message</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Hello World!</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">emote_list</span><span class="p">:</span> <span class="dl">'</span><span class="s1">304822798:0-9/304682444:11-19</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">badge_list</span><span class="p">:</span> <span class="dl">'</span><span class="s1">broadcaster/1</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">channel</span> <span class="p">:</span> <span class="mi">123456789</span><span class="p">,</span> 
+    <span class="na">name_color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#189A8D</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">first_time</span><span class="p">:</span> <span class="mi">0</span> 
+    <span class="p">}</span>
+  <span class="p">})</span>
+</code></pre></div>    </div>
+  </li>
+  <li>this is a very complex command and not recommended to use unless you know the exact payload you need to send</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">close</span><span class="p">()</span>
+</code></pre></div></div>
+<ul>
+  <li>Closes SAMMI connection to Bridge</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SAMMI</span><span class="p">.</span><span class="nx">generateMessage</span><span class="p">()</span>
+</code></pre></div></div>
+<ul>
+  <li>Generates a random message (used for test triggers)</li>
+</ul>
+
+<h2 id="listening-to-extension-data-received-from-sammi">Listening to extension data received from SAMMI</h2>
+<p>In addition to hooks, you can also directly listen to a specified extension command coming from SAMMI.<br />
+This way you can receive all extension data directly in your functions. <br />
+Use <code class="language-plaintext highlighter-rouge">sammiclient.on()</code> or <code class="language-plaintext highlighter-rouge">sammiclient.addListener()</code> and <code class="language-plaintext highlighter-rouge">sammiclient.removeListener()</code>.<br />
+For example, let’s say your extension command is called Lucky Wheel:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">sammiclient</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">Lucky Wheel</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">payload</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// DO SOMETHING WITH THE EXTENSION PAYLOAD</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payload</span><span class="p">)</span>
+  <span class="p">});</span>
+</code></pre></div></div>
+<p>You can also do:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">sammiclient</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">Lucky Wheel</span><span class="dl">'</span><span class="p">,</span> <span class="nx">functionToExecute</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><em>Note: These methods will not be available until after your Bridge connects to SAMMI. Make sure to wrap them in a function which you call in your Extension Commands section (which is initalized as soon as Bridge connects to SAMMI).</em></p>
+
+<h2 id="sammi-bridge-collaboration">SAMMI Bridge Collaboration</h2>
+
+<p>SAMMI Bridge is generated by Jekyll. Each section is a separate file generated from <code class="language-plaintext highlighter-rouge">_includes</code> folder. If you wish to propose changes, please do so by editing these files.
+Any changes will immediately reflect at https://sammi.solutions/SAMMI-Bridge/bridge.html. We also manually generate the Bridge file for each release, which can be found in <code class="language-plaintext highlighter-rouge">download</code> folder.</p>
+
+<h1 id="change-log">Change log</h1>
+
+<h2 id="505">5.05</h2>
+<p>Fixed bad auth token error for PubSub which happened when debug logging was enabled.</p>
+
+<h2 id="504">5.04</h2>
+<p>Debug Logging</p>
+<ul>
+  <li>fixed undefined request names and ids shown in the log</li>
+  <li>Twitch tokens will show as *** for GetTwitchList replies to prevent accidentally exposing them</li>
+</ul>
+
+<h2 id="503">5.03</h2>
+<p>Fixed incorrect trigger type for Channel Points test trigger.</p>
+
+<h2 id="502">5.02</h2>
+<p>Cleaned up the code and fixed an array helper function.</p>
+
+<h2 id="501">5.01</h2>
+<p>A lot has changed since the initial 5.00 version. Websocket protocol is now completely different and supports helper functions and promises. Testing buttons now work again too.</p>
 
   </div>
 </body>
@@ -1897,8 +1874,8 @@ async function SAMMITestTriggers() {
         message: message.replace(/"/g, "'"),
         is_broadcaster: YTLiveChatMessageBroadcaster.checked,
         is_moderator: YTLiveChatMessageMod.checked,
-        is_member: YTLiveChatMessageVerified.checked,
-        is_verified: YTLiveChatMessageMember.checked,
+        is_member: YTLiveChatMessageMember.checked, 
+        is_verified: YTLiveChatMessageVerified.checked,
       });
 
       sendTriggerToSAMMI(
