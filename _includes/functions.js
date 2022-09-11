@@ -11,7 +11,7 @@ function SAMMICommands() {
      * @param {string} name - name of the variable
      * @param {string} buttonId - button ID for local variable, default = global variable
      */
-    async getVariable(name, buttonId = 'global') {
+    async getVariable(name = '', buttonId = 'global') {
       return sendToSAMMI('GetVariable', {
         Variable: name,
         ButtonId: buttonId,
@@ -24,7 +24,7 @@ function SAMMICommands() {
      * @param {(string|number|object|array|null)} value - new value of the variable
      * @param {string} buttonId - button ID for local variable, default = global variable
      */
-    async setVariable(name, value, buttonId = 'global') {
+    async setVariable(name = '', value = '', buttonId = 'global') {
       return sendToSAMMI('SetVariable', {
         Variable: name,
         Value: value,
@@ -36,7 +36,7 @@ function SAMMICommands() {
      * Send a popup message to SAMMI
      * @param {string} msg - message to send
      */
-    async popUp(msg) {
+    async popUp(msg = '') {
       return sendToSAMMI('PopupMessage', {
         Message: msg,
       });
@@ -46,7 +46,7 @@ function SAMMICommands() {
      * Send a yellow notification message to SAMMI
      * @param {string} msg - message to send
      */
-    async alert(msg) {
+    async alert(msg = '') {
       return sendToSAMMI('AlertMessage', {
         Message: msg,
       });
@@ -67,7 +67,7 @@ function SAMMICommands() {
      * - (optional) [] selectOptions = array of options for the user to select (when using Select box type)
      * @param {[boxName: string, boxType: number, defaultValue: (string | number), sizeModifier: (number|undefined), selectOptions: Array|undefined]} boxes.boxVariable
      * */
-    async extCommand(name, color = 3355443, height = 52, boxes) {
+    async extCommand(name = '', color = 3355443, height = 52, boxes = {}) {
       const ext = new SammiConstructExtCommand(name, color, height);
 
       for (const [key, value] of Object.entries(boxes)) {
@@ -110,7 +110,7 @@ function SAMMICommands() {
      * @param {string} id - Unique deck ID retrieved from getDeckList
      * - Replies with an object containing a full deck
      */
-    async getDeck(id) {
+    async getDeck(id = 0) {
       return sendToSAMMI('GetDeck', {
         UniqueId: id,
       });
@@ -121,7 +121,7 @@ function SAMMICommands() {
      * @param {string} fileName - image file name without the path (image.png)
      * - Replies with an object containing the Base64 string of the image
      */
-    async getImage(fileName) {
+    async getImage(fileName = '') {
       return sendToSAMMI('GetImage', {
         FileName: fileName,
       });
@@ -131,7 +131,7 @@ function SAMMICommands() {
      * Retrieves CRC32 of a file
      * @param {string} fileName - file name without the path (image.png)
      */
-    async getSum(fileName) {
+    async getSum(fileName = '') {
       return sendToSAMMI('GetSum', {
         Name: fileName,
       });
@@ -160,7 +160,7 @@ function SAMMICommands() {
      * 8 Timer, 9 OBS Trigger, 10 SAMMI Bridge, 11 twitch moderation, 12 extension trigger
      * @param {object} data - whatever data is required for the trigger, see manual
      */
-    async trigger(type, data) {
+    async trigger(type = -1, data = { trigger_data: {} }) {
       return sendToSAMMI('SendTrigger', {
         Type: type,
         Data: data,
@@ -186,7 +186,7 @@ function SAMMICommands() {
      * Triggers a button
      * @param {string} id - button ID to trigger
      */
-    async triggerButton(id) {
+    async triggerButton(id = '') {
       return sendToSAMMI('TriggerButton', {
         ButtonId: id,
       });
@@ -196,7 +196,7 @@ function SAMMICommands() {
      * Releases a button
      * @param {string} id - button ID to release
      */
-    async releaseButton(id) {
+    async releaseButton(id = '') {
       return sendToSAMMI('ReleaseButton', {
         ButtonId: id,
       });
@@ -234,9 +234,9 @@ function SAMMICommands() {
     /**
      * Sends an extension trigger
      * @param {string} trigger - name of the trigger
-     * @param {object} data - object containing all trigger pull data
+     * @param {object} dats - object containing all trigger pull data
      */
-    async triggerExt(trigger, data = {}) {
+    async triggerExt(trigger = '', data = {}) {
       return sendToSAMMI('ExtensionTrigger', {
         Trigger: trigger,
         Data: data,
@@ -248,7 +248,7 @@ function SAMMICommands() {
      * @param {string} name - name of the variable
      * @param {string} buttonId - button ID for local variable, default = global variable
      */
-    async deleteVariable(name, buttonId = 'global') {
+    async deleteVariable(name = '', buttonId = 'global') {
       return sendToSAMMI('DeleteVariable', {
         Variable: name,
         ButtonId: buttonId,
@@ -262,7 +262,7 @@ function SAMMICommands() {
      * @param {string|number|object|array} value - item value
      * @param {string} buttonId - button id, default is global
      */
-    async insertArray(arrayName, index, value, buttonId = 'global') {
+    async insertArray(arrayName = '', index = 0, value = '', buttonId = 'global') {
       return sendToSAMMI('InsertArrayValue', {
         Array: arrayName,
         Slot: index,
@@ -277,7 +277,7 @@ function SAMMICommands() {
      * @param {number} index - index of the item to delete
      * @param {string} buttonId - button id, default is global
      */
-    async deleteArray(arrayName, slot, buttonId = 'global') {
+    async deleteArray(arrayName = '', slot = 0, buttonId = 'global') {
       return sendToSAMMI('DeleteArraySlot', {
         Array: arrayName,
         Slot: slot,
@@ -289,7 +289,7 @@ function SAMMICommands() {
      * Sends a notification (tray icon bubble) message to SAMMI
      * @param {string} msg - message to show
      */
-    async notification(msg) {
+    async notification(msg = '') {
       return sendToSAMMI('NotificationMessage', {
         Message: msg,
       });
@@ -309,7 +309,7 @@ function SAMMICommands() {
         'Alright, we came here in peace, we expect to go in one... piece.',
         'It costs nearly a billion dollars just to turn the lights on around here',
         "You wouldn't believe the things you can make from the common, simple items lying around your planet... which reminds me, you're going to need a new microwave.",
-        'Welcome, ye knights of the round table, men of honor, followers of the path of righteousness. Only those with wealth of knowledge and truth of spirit shall be given access to the underworld, the storehouse of riches of Ambrosius Aurelianus. Prove ye worthy, and all shall be revealed.'
+        'Welcome, ye knights of the round table, men of honor, followers of the path of righteousness. Only those with wealth of knowledge and truth of spirit shall be given access to the underworld, the storehouse of riches of Ambrosius Aurelianus. Prove ye worthy, and all shall be revealed.',
       ];
       const randomMessage = messages[Math.floor(Math.random() * messages.length)];
       return randomMessage;
