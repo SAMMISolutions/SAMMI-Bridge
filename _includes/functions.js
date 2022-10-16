@@ -117,6 +117,29 @@ function SAMMICommands() {
     },
 
     /**
+     * Get deck status
+     * - Replies with either 0 (deck is disabled) or 1 (deck is enabled)
+     * @param {string} id - Unique deck ID retrieved from getDeckList
+     */
+    async getDeckStatus(deckID = 0) {
+      return sendToSAMMI('getDeckStatus', {
+        deckID,
+      });
+    },
+
+    /**
+     * Change deck status
+     * @param {string} id - Unique deck ID retrieved from getDeckList
+     * @param {int} status - New deck status, 0 = disable, 1 = enable, 2 = toggle
+     */
+    async changeDeckStatus(deckID = 0, status = 1) {
+      return sendToSAMMI('changeDeckStatus', {
+        deckID,
+        status,
+      });
+    },
+
+    /**
      * Retrieve an image in base64
      * @param {string} fileName - image file name without the path (image.png)
      * - Replies with an object containing the Base64 string of the image

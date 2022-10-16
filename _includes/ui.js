@@ -1,6 +1,7 @@
 // modify UI on load
 window.addEventListener('load', SAMMILoadTabsUI, false);
 function SAMMILoadTabsUI() {
+  sammiModal = new bootstrap.Modal(document.getElementById('sammiModalElem'), {});
   const tabList = {};
   let tabSortList = JSON.parse(localStorage.getItem('tabsSortList')) || [];
   const newtabSortList = [];
@@ -157,3 +158,4 @@ Element.prototype.setAttributes = function (obj) {
     this.setAttribute(prop, obj[prop]);
   }
 };
+

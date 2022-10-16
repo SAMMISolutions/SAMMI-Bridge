@@ -23,7 +23,6 @@ function connectbutton() {
     document.querySelector('#cnctbutton').innerText = 'Disconnecting';
   } else {
     console.log('SAMMI manually connected.');
-
     try {
       clearTimeout(p.waiting_to_connect);
     } catch (e) {}
@@ -124,7 +123,18 @@ function connecttosammi() {
 
   // RELOAD SAMMI Bridge
   sammiclient.on('ResetPlease', () => {
-    location.reload();
+  location.reload();
+  });
+
+  // PING SAMMI Bridge
+  sammiclient.on('UserPing', () => {
+    sammiModalElemTitle.innerHTML = 'SAMMI Core';
+    sammiModalElemContent.innerHTML = 'Ping received!';
+    sammiModal.show();
+    setTimeout(() => {
+      sammiModal.hide();
+    }, 10000);
+    SAMMI.alert(`Ping Received. Your Bridge is running in the following browser: ${browser}.`)
   });
 
   // EXECUTE COMMAND
