@@ -107,7 +107,7 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigg
   SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
     rewardName: ['Reward Name', 14, 'Some Reward name'],
     rewardName2: ['Reward Name 2', 14, 'And another reward name']
-  })
+  }, true)
   ```
   will create an extension command named Lucky Wheel with 2 text boxes. Will send its data as an Extension Trigger within SAMMI instead of sending it to Bridge. 
 - example2: 
@@ -116,7 +116,7 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigg
     color: ['Wheel Color', 18, 0, null, ['blue', 'yellow', 'green']],
     rewardName: ['Reward Name', 14, 'Your Reward name'],
     rewardImage: ['Reward Image', 23, 'image.png']
-  }, true)
+  })
   ``` 
   will create an extension command named Lucky wheel with one select box with options, one regular text box and one box to select an image file. Will send its data to Bridge. 
 
