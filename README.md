@@ -69,9 +69,9 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigg
 - `height` - height of the box in pixels, you can use 52 for regular box or 80 for resiable box
 - `boxes` - an object containing box objects (its key is box variable and value is an array of box params)
     - `boxVariable: [boxName, boxType, defaultValue, (optional)sizeModifier, (optional)selectOptions]`
-    - `boxVariable` - variable to save the box value under 
-    - `boxName` - name of the box shown in the user interface
-    - `boxType`
+    - `boxVariable` string - variable to save the box value under 
+    - `boxName` string - name of the box shown in the user interface
+    - `boxType` int
        boxType | Description
        ---|---
         0 | Resizable text box that allows for newline, defaultValue can be anything
@@ -99,9 +99,9 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigg
         34 | Password Box, same as 14 except the string is displayed as *****
         
     - `defaultValue` - default value of the variable
-    - (optional) `sizeModifier` - horizontal box size, 1 is normal
+    - (optional) int `sizeModifier` - horizontal box size, 1 is normal
     - (optional) [] `selectOptions` - array of options for the user to select (when using Select box type)
-    - (optional) `sendAsExtensionTrigger` - will fire an extension trigger within SAMMI instead of sending the data to Bridge, useful for relaying information between buttons while providing your users with a friendly interface. Works the same as Trigger Extension Trigger command, except you can have custom boxes. 
+    - (optional) boolean `sendAsExtensionTrigger` - will fire an extension trigger within SAMMI instead of sending the data to Bridge, useful for relaying information between buttons while providing your users with a friendly interface. Works the same as Trigger Extension Trigger command, except you can have custom boxes. 
 - example: 
   ```js 
   SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
@@ -109,16 +109,16 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigg
     rewardName2: ['Reward Name 2', 14, 'And another reward name']
   })
   ```
-  will create an extension command named Lucky Wheel with 2 text boxes. 
+  will create an extension command named Lucky Wheel with 2 text boxes. Will send its data as an Extension Trigger within SAMMI instead of sending it to Bridge. 
 - example2: 
   ```js 
   SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
     color: ['Wheel Color', 18, 0, null, ['blue', 'yellow', 'green']],
     rewardName: ['Reward Name', 14, 'Your Reward name'],
     rewardImage: ['Reward Image', 23, 'image.png']
-  })
+  }, true)
   ``` 
-  will create an extension command named Lucky wheel with one select box with options, one regular text box and one box to select an image file.  
+  will create an extension command named Lucky wheel with one select box with options, one regular text box and one box to select an image file. Will send its data to Bridge. 
 
 
 ```js
