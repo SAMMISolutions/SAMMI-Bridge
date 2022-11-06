@@ -101,7 +101,7 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigg
     - `defaultValue` - default value of the variable
     - (optional) int `sizeModifier` - horizontal box size, 1 is normal
     - (optional) [] `selectOptions` - array of options for the user to select (when using Select box type)
-    - (optional) boolean `sendAsExtensionTrigger` - will fire an extension trigger within SAMMI instead of sending the data to Bridge, useful for relaying information between buttons while providing your users with a friendly interface. Works the same as Trigger Extension Trigger command, except you can have custom boxes. 
+    - (optional) boolean `sendAsExtensionTrigger` - will fire an extension trigger within SAMMI instead of sending the data to Bridge, useful for relaying information between buttons while providing your users with a friendly interface. Works the same as Trigger Extension Trigger command, except you can have custom boxes. (THIS FEATURE ONLY WORKS IN SAMMI 2022.5.1 AND BRIDGE 7.11 or newer)
 - example: 
   ```js 
   SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
