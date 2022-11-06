@@ -61,7 +61,7 @@ SAMMI.deleteArray(arrayName, slot, buttonId = 'global')
 - example: `SAMMI.deleteArray('myArray',1,'ID1')`
 
 ```js
-SAMMI.extCommand(name, color = 3355443, height = 52, boxes)
+SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigger = false)
 ```
 - Send an extension command (to create extension boxes) to SAMMI 
 - `name` - name of the extension command 
@@ -75,26 +75,33 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes)
        boxType | Description
        ---|---
         0 | Resizable text box that allows for newline, defaultValue can be anything
-        2 | Check box, defaultValue should be set to true or false or it will crash, will always return true or false when triggered
+        2 | Check box, defaultValue should be set to true or false, will always return true or false when triggered
         4 | OBS Scenes box
         5 | OBS Sources box
         6 | OBS Filters box
-        7 | Keyboard button, defaultValue should be 0, shouldn't really need this but this will send over a select key code
-        8 | Compare box, defaultValue should be `==`, returns a string from the compare box such as `=|` or `>=`
-        9 | Math box, defaultValue should be `=`, returns a string from the compare box such as `|` or `+=`
-        10 | Sound path box, defaultValue should be `""`, returns a path to said sound effect select
+        7 | Keyboard button, defaultValue should be 0, returns the select key code
+        8 | Compare box, defaultValue should be `==`, returns a string from the compare box, such as `=|` or `>=`
+        9 | Math box, defaultValue should be `=`, returns a string from the compare box, such as `|` or `+=`
+        10 | Sound path box, defaultValue should be `""`, returns its path
         11 | Slider 0 to 100%, defaultValue should be 0-1, returns a float 0 to 1
         14 | Normal white box, defaultValue can be anything
-        15 | Variable box(yellow box), defaultValue should be a string, returns whatever variable is in the yellow box
+        15 | Variable box (yellow box), defaultValue should be a string, returns whatever variable is in the yellow box
         17 | Color box, defaultValue should be a number, returns the selected color
-        18 | Select box, defaultValue should be `0`, will show a list when click, of what you defined in selectOptions, returns a number, if user select 3rd option, it returns 2
-        19 | select box string, defaultValue should be a string, returns whatever string the user selected.
-        20 | select box string typeable, defaultValue should be a string,  returns whatever the user selected or typed in the box
-        22 | file path, defaultValue should be a string
-        23 | image path, defaultValue should be a string
+        18 | Select box value, defaultValue should be `0`, shows a list of all the options you provided when clicked and returns a numeric value of the selected option
+        19 | Select box string, defaultValue should be a string, returns a string the user selected
+        20 | Select box string typeable, defaultValue should be a string, returns a string the user selected or typed in the box
+        22 | File path, defaultValue should be a string
+        23 | Image path, defaultValue should be a string
+        24 | Twitch reward redeem ID, defaultValue should be a number
+        30 | No box at all, only label is present
+        32 | OBS Pull Box 
+        33 | Select Deck Box, defaultValue should be a number
+        34 | Password Box, same as 14 except the string is displayed as *****
+        
     - `defaultValue` - default value of the variable
     - (optional) `sizeModifier` - horizontal box size, 1 is normal
     - (optional) [] `selectOptions` - array of options for the user to select (when using Select box type)
+    - (optional) `sendAsExtensionTrigger` - will fire an extension trigger within SAMMI instead of sending the data to Bridge, useful for relaying information between buttons while providing your users with a friendly interface. Works the same as Trigger Extension Trigger command, except you can have custom boxes. 
 - example: 
   ```js 
   SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
@@ -170,6 +177,22 @@ SAMMI.getDeck(id)
 - Request a deck params
 - provide `id` of the specified deck (retrieved from getDeckList command)
 - example: `SAMMI.getDeck('20211221163402196200595')`
+
+```js
+SAMMI.getDeckStatus(id)
+```
+- Request current deck status (enabled/disabled)
+- provide `id` of the specified deck (retrieved from getDeckList command)
+- replies with either 0 (deck is disabled) or 1 (deck is enabled)
+- example: `SAMMI.getDeckStatus('20211221163402196200595')`
+
+```js
+SAMMI.changeDeckStatus(id, status)
+```
+- Change deck status
+- provide `id` of the specified deck (retrieved from getDeckList command)
+- provide new `status` of the deck - 1 = enable, 0 = disable, 2 = toggle
+- example: `SAMMI.changeDeckStatus('20211221163402196200595', 2)`
 
 ```js
 SAMMI.getImage(fileName)
