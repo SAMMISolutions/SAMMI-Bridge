@@ -503,6 +503,7 @@ async function SAMMITestTriggers() {
       };
       SAMMI.trigger(0, {
         message,
+        user_name: name.toLowerCase(),
         broadcaster: form.chatBroadcaster.checked,
         moderator: form.chatMod.checked,
         sub: form.chatSub.checked,
