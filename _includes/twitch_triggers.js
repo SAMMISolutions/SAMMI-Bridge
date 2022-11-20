@@ -160,6 +160,7 @@ async function SAMMITestTriggers() {
         {
           redeemname: redeemName,
           message,
+          user_name: pullData.user_name,
         },
         pullData,
       );
