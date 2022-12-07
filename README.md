@@ -27,14 +27,14 @@ SAMMI.getVariable(name, buttonId = 'global')
 - example: `SAMMI.getVariable('myVariable', 'ID1')`
 
 ```js
-SAMMI.setVariable(name, value, buttonId = 'global')`
+SAMMI.setVariable(name, value, buttonId = 'global')
 ```
 - Set a variable
 - specify its button id or leave empty to create a global variable
 - example: `SAMMI.setVariable('myVariable', 'Hello World', 'ID1')`
 
 ```js
-SAMMI.deleteVariable(name, buttonId = 'global')`
+SAMMI.deleteVariable(name, buttonId = 'global')
 ```
 - Delete a variable
 - specify its button id or leave empty to delete a global variable
