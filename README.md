@@ -96,7 +96,8 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigg
         30 | No box at all, only label is present
         32 | OBS Pull Box 
         33 | Select Deck Box, defaultValue should be a number
-        34 | Password Box, same as 14 except the string is displayed as *****
+        34 | Password Box, same as 14 except the string is displayed as 
+        35 | Twitch Account Box, select box with all linked Twitch accounts, returns the entered / selected text *****
         
     - `defaultValue` - default value of the variable
     - (optional) int `sizeModifier` - horizontal box size, 1 is normal
