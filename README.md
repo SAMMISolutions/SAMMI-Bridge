@@ -1,6 +1,8 @@
 # SAMMI Bridge
  Current version of SAMMI Bridge . Download the latest [release](https://github.com/SAMMISolutions/SAMMISolutions/SAMMI-Bridge/releases). This version will NOT work with any previous non SAMMI versions.
 
+Find more about SAMMI at [sammi.solutions](https://sammi.solutions)
+
 ### For users
 **Twitch Triggers** allow you to test all available Twitch triggers by sending fake payload that mimics real triggers to SAMMI.\
 **YouTube Triggers** allow you to test all available YouTube triggers by sending fake payload that mimics real triggers to SAMMI.
@@ -27,14 +29,14 @@ SAMMI.getVariable(name, buttonId = 'global')
 - example: `SAMMI.getVariable('myVariable', 'ID1')`
 
 ```js
-SAMMI.setVariable(name, value, buttonId = 'global')`
+SAMMI.setVariable(name, value, buttonId = 'global')
 ```
 - Set a variable
 - specify its button id or leave empty to create a global variable
 - example: `SAMMI.setVariable('myVariable', 'Hello World', 'ID1')`
 
 ```js
-SAMMI.deleteVariable(name, buttonId = 'global')`
+SAMMI.deleteVariable(name, buttonId = 'global')
 ```
 - Delete a variable
 - specify its button id or leave empty to delete a global variable
@@ -70,6 +72,7 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigg
 - `boxes` - an object containing box objects (its key is box variable and value is an array of box params)
     - `boxVariable: [boxName, boxType, defaultValue, (optional)sizeModifier, (optional)selectOptions]`
     - `boxVariable` string - variable to save the box value under 
+      - ! the following values are reserved variables and cannot be used as `boxVariable`: cmd, dis, ext, extcmd, ms, obsid, pos, sef, vis, xpan 
     - `boxName` string - name of the box shown in the user interface
     - `boxType` int
        boxType | Description
@@ -96,7 +99,8 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigg
         30 | No box at all, only label is present
         32 | OBS Pull Box 
         33 | Select Deck Box, defaultValue should be a number
-        34 | Password Box, same as 14 except the string is displayed as *****
+        34 | Password Box, same as 14, except the string is displayed as *****
+        35 | Twitch Account Box, select box with all linked Twitch accounts, returns the entered / selected text *****
         
     - `defaultValue` - default value of the variable
     - (optional) int `sizeModifier` - horizontal box size, 1 is normal
