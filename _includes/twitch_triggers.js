@@ -95,7 +95,7 @@ async function SAMMITestTriggers() {
         user_name: gifterName[0].toLowerCase(),
         display_name: gifterName[0],
         user_id: gifterName[1],
-        amount,
+        amount: `${amount}`,
         tier: selectedTier,
       };
       sendTriggerToSAMMI(
@@ -120,7 +120,7 @@ async function SAMMITestTriggers() {
       const totalAmount = parseInt(form.bitstotal.value) || amount + 100;
       const message = form.bitsmessage.value || SAMMI.generateMessage();
       pullData.addvalues({
-        amount,
+        amount: `${amount}`,
         total_amount: totalAmount,
         message,
       });
