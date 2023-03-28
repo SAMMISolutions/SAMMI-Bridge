@@ -24,11 +24,13 @@ function SAMMICommands() {
      * @param {(string|number|object|array|null)} value - new value of the variable
      * @param {string} buttonId - button ID for local variable, default = global variable
      */
-    async setVariable(name = '', value = '', buttonId = 'global') {
+    async setVariable(name = '', value = '', buttonId = 'global', instanceId = 0) {
+      instanceId = !isNaN(instanceId) ? parseInt(instanceId) : 0;
       return sendToSAMMI('SetVariable', {
         Variable: name,
         Value: value,
         ButtonId: buttonId,
+        instanceId,
       });
     },
 
