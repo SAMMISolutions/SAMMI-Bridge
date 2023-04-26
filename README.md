@@ -34,9 +34,9 @@ SAMMI.setVariable(name, value, buttonId = 'global', instanceID [optional])
 - Set a variable
 - specify `button id` or leave empty to create a global variable
 - specify `instanceID` if the button is not persistent
- - retrieved from Extension Command payload as `instanceID` key 
- - the button must be still active (for example with Wait Until Variable exists command) when setting non persistent button variable
- - only available in SAMMI Core 2023.2.0^
+  - retrieved from Extension Command payload as `instanceID` key 
+  - the button must be still active (for example with Wait Until Variable exists command) when setting non persistent button variable
+  - only available in SAMMI Core 2023.2.0^
 - example: `SAMMI.setVariable('myVariable', 'Hello World', 'ID1')`
 
 ```js
