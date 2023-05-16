@@ -46,7 +46,10 @@ function connecttosammi() {
     address: `${nIPbox.value || '127.0.0.1'}:${nPortBox.value || 9425}`,
     password: `${nPassBox.value || ''}`,
     name: 'SAMMI Bridge',
-  });
+  })
+    .catch(() => {
+      console.log('SAMMI Connection Error');
+    });
 
   // CONNECTION OPENED
   sammiclient.on('ConnectionOpened', () => {
@@ -63,8 +66,8 @@ function connecttosammi() {
     sendExtensionCommands(); // Get Twitch list for extension makers
 
     await SAMMI.getTwitchList().then((data) => {
-      TWITCH_CLIENT_ID = data.twitch_list.clientId ? data.twitch_list.clientId : TWITCH_CLIENT_ID
-      //p.twitchList = data.twitch_list;
+      TWITCH_CLIENT_ID = data.twitch_list.clientId ? data.twitch_list.clientId : TWITCH_CLIENT_ID;
+      // p.twitchList = data.twitch_list;
     });
 
     // Save connection params to storage
@@ -123,7 +126,7 @@ function connecttosammi() {
 
   // RELOAD SAMMI Bridge
   sammiclient.on('ResetPlease', () => {
-  location.reload();
+    location.reload();
   });
 
   // PING SAMMI Bridge
@@ -134,7 +137,7 @@ function connecttosammi() {
     setTimeout(() => {
       sammiModal.hide();
     }, 10000);
-    SAMMI.alert(`Ping Received. Your Bridge is running in the following browser: ${browser}.`)
+    SAMMI.alert(`Ping Received. Your Bridge is running in the following browser: ${browser}.`);
   });
 
   // EXECUTE COMMAND
