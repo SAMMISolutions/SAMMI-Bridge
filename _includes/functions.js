@@ -69,8 +69,8 @@ function SAMMICommands() {
      * - (optional) [] selectOptions = array of options for the user to select (when using Select box type)
      * @param {[boxName: string, boxType: number, defaultValue: (string | number), sizeModifier: (number|undefined), selectOptions: Array|undefined]} boxes.boxVariable
      * */
-    async extCommand(name = '', color = 3355443, height = 52, boxes = {}, triggerButton = false) {
-      const ext = new SammiConstructExtCommand(name, color, height, triggerButton);
+    async extCommand(name = '', color = 3355443, height = 52, boxes = {}, triggerButton = false, hidden = false) {
+      const ext = new SammiConstructExtCommand(name, color, height, triggerButton, hidden);
 
       for (const [key, value] of Object.entries(boxes)) {
         ext.addBox(key, value);
@@ -347,12 +347,13 @@ function SAMMICommands() {
   } // construct extension command object
 
   class SammiConstructExtCommand {
-    constructor(name, color, height, triggerButton = false) {
+    constructor(name, color, height, triggerButton = false, hidden = false) {
       let p = 0;
       this.name = name;
       this.color = color;
       this.height = height;
       this.triggerButton = triggerButton;
+      this.hidden = hidden;
 
       this.addBox = (boxVar, params) => {
         this[`ud_t${p}`] = boxVar;
@@ -361,6 +362,7 @@ function SAMMICommands() {
         this[`ud_d${p}`] = params[2];
         this[`ud_m${p}`] = params[3] || undefined;
         this[`ud_o${p}`] = params[4] || undefined;
+
         p += 1;
       };
     }
