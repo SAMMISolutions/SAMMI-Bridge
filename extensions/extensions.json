@@ -4,6 +4,7 @@
             "extension_name": "Discord Controls",
             "details": {
                 "author": "Christina K",
+                "description": "Control your stream with Discord!",
                 "latest_version": "1.1",
                 "download_link": "https://christinak.itch.io/discord-controls"
             }
@@ -12,6 +13,7 @@
             "extension_name": "Twitch Chat Logs",
             "details": {
                 "author": "Christina K",
+                "description": "Log your Twitch chat!",
                 "latest_version": "1.0",
                 "download_link": "https://christinak.itch.io/twitch-chat-logs"
             }
@@ -20,6 +22,7 @@
             "extension_name": "Puzzle Game",
             "details": {
                 "author": "Christina K",
+                "description": "A puzzle game!",
                 "latest_version": "2.0",
                 "download_link": "https://christinak.itch.io/sammi-puzzle-game"
             }
