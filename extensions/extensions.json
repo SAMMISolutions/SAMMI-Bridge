@@ -1,0 +1,28 @@
+{
+    "extensions": [
+        {
+            "extension_name": "Discord Controls",
+            "details": {
+                "author": "Christina K",
+                "latest_version": "1.1",
+                "download_link": "https://christinak.itch.io/discord-controls"
+            }
+        },
+        {
+            "extension_name": "Twitch Chat Logs",
+            "details": {
+                "author": "Christina K",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/twitch-chat-logs"
+            }
+        },
+        {
+            "extension_name": "Puzzle Game",
+            "details": {
+                "author": "Christina K",
+                "latest_version": "2.0",
+                "download_link": "https://christinak.itch.io/sammi-puzzle-game"
+            }
+        }
+    ]
+}
