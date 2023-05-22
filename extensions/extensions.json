@@ -10,7 +10,7 @@
             }
         },
         {
-            "extension_name": "Twitch Chat Logs",
+            "extension_name": "Chat Logs",
             "details": {
                 "author": "Christina K",
                 "description": "Log your Twitch chat!",
@@ -25,6 +25,24 @@
                 "description": "A puzzle game!",
                 "latest_version": "2.0",
                 "download_link": "https://christinak.itch.io/sammi-puzzle-game"
+            }
+        },
+        {
+            "extension_name": "Get Folder Files",
+            "details": {
+                "author": "Christina K",
+                "description": "Get all files in a folder!",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/get-folder-files"
+            }
+        },
+        {
+            "extension_name": "Color Converter",
+            "details": {
+                "author": "Christina K",
+                "description": "Convert colors!",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/sammi-color-converter"
             }
         }
     ]
