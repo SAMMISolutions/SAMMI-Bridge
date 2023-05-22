@@ -1,0 +1,21 @@
+<form id="SAMMITestTwitchPrediction" class="form-inline SAMMITestTriggers">
+   <div class="form-group d-flex align-items-center">
+      <button type="submit" class="btn btn-primary btn-sm me-2">Test Prediction</button>
+      <select class="form-select form-select-sm w-auto me-2" aria-label="Poll Type" name="predictType">
+         <option value="begin" selected>Created</option>
+         <option value="progress">Voted</option>
+         <option value="end">Locked</option>
+         <option value="archive">Resolved</option>
+      </select>
+   </div>
+   <div class="collapse" id="hideprediction">
+      <div class="form-group mb-2">
+         <label>Outcome amount:</label>
+         <input type="number" class="form-control form-control-sm" min="2" max="10" name="predictChoiceAmount" value=3>
+      </div>
+      <div class="form-group mb-2">
+         <label>Duration:</label>
+         <input type="number" class="form-control form-control-sm" min="1" max="3600" name="predictionDuration" value=60>
+      </div>
+   </div>
+</form>

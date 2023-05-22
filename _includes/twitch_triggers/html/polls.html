@@ -1,0 +1,21 @@
+<form id="SAMMITestTwitchPoll" class="SAMMITestTriggers form-inline">
+   <div class="form-group d-flex align-items-center">
+   <button type="submit" class="btn btn-primary btn-sm me-2">Test Poll</button>
+   <select class="form-select-sm w-auto me-2" style="height:30px" aria-label="Poll Type" name="pollType">
+      <option value="begin" selected>Created</option>
+      <option value="progress">Voted</option>
+      <option value="end">Ended</option>
+      <option value="archive">Archived</option>
+    </select>
+    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidepoll" role="button" aria-expanded="false"
+    aria-controls="hidepoll"></a>
+</div>
+<div class="collapse mt-2 mb-1" id="hidepoll">
+   Choice amount:
+   <input class="mb-2" type="number" min="2" max="5" name="pollChoiceAmount" value=3> <br>
+   Duration:
+   <input class="mb-2" type="number" min="1" max="3600" name="pollDuration" value=60> <br>
+   <input type="checkbox"
+      class="form-check-input" name="pollAllowPoints"> Allow Channel Points
+</div>
+</form>

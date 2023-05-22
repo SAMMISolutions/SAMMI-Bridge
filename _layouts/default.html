@@ -1,5 +1,5 @@
 <!--For Extension info, read How to make extensions.txt in Extension folder-->
-<!--Bridge V7.14-->
+<!--Bridge V7.20-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +17,7 @@
     href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon.ico"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SAMMISolutions/SAMMI-Bridge@main/lib/bootstrap.min.css">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     {% include style.css %}
   </style>
@@ -69,9 +70,11 @@
   }, false);
 
   {% include ui.js %}
+  {% include core.js %}
+  {% include extension_updates.js %}
   {% include twitch_triggers.js %}
   {% include youtube_triggers.js %}
-  {% include core.js %}
+  {% include bridge_version.js %}
   {% include message_logging.js %}
   {% include ext_commands.js %}
   {% include ext_hooks.js %}

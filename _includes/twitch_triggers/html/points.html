@@ -1,0 +1,29 @@
+<form id="SAMMITestTwitchPoints" class="SAMMITestTriggers">
+   <div>
+      <button type="submit" class="btn btn-primary btn-sm me-1">Test Channel Points</button>
+      <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidepoints" role="button" aria-expanded="false"
+         aria-controls="hidebits"></a>
+   </div>
+   <div class="collapse" id="hidepoints">
+      <div class="form-group mb-2">
+         <label>Username:</label>
+         <input type="text" class="form-control form-control-sm w-auto" name="name">
+      </div>
+      <div class="form-group mb-2">
+         <label>Redeem Name:</label>
+         <input type="text" class="form-control form-control-sm w-auto mb-1" name="channelPointsName">
+      </div>
+      <div class="form-group mb-2">
+         <label>Redeem Cost:</label>
+         <input type="number" class="form-control form-control-sm w-auto" min="1" max="9999" name="channelPointsCost" value=50>
+      </div>
+      <div class="form-group mb-2">
+         <label>Redeem Message:</label>
+         <textarea class="form-control form-control-sm w-75" name="channelPointsMsg"></textarea>
+         <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="channelPointsInput">
+            <label class="form-check-label">User Input Required</label>
+         </div>
+      </div>
+   </div>
+</form>

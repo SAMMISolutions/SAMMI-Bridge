@@ -29,11 +29,11 @@ a:hover {
   vertical-align: text-bottom;
 }
 #footer .tslCollapse.collapsed:before {
-  content:'Show Installed Extensions \01F847' ;
+  content:'Show Tabs \01F847' ;
   width:15px;
 }
 #footer .tslCollapse:before {
-  content:'Hide Installed Extensions \01F845' ;
+  content:'Hide Tabs \01F845' ;
   width:15px;
 }
 

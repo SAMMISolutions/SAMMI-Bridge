@@ -1,0 +1,49 @@
+<form id="SAMMITestTwitchSubs" class="SAMMITestTriggers">
+   <button type="submit" class="btn btn-primary btn-sm me-1">Test Sub</button>
+   <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidesubs" role="button" aria-expanded="false"
+      aria-controls="hidesubs"></a>
+   <div class="collapse" id="hidesubs">
+      <div class="form-group">
+         <label>Username:</label>
+         <input type="text" class="form-control form-control-sm w-auto" name="name">
+      </div>
+      <div class="form-group mb-2">
+         <label>Tier:</label>
+         <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" name="tier" value="Tier 1" checked>
+            <label class="form-check-label">Tier 1</label>
+         </div>
+         <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" name="tier" value="Tier 2">
+            <label class="form-check-label">Tier 2</label>
+         </div>
+         <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" name="tier" value="Tier 3">
+            <label class="form-check-label">Tier 3</label>
+         </div>
+         <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" name="tier" value="Prime">
+            <label class="form-check-label">Prime</label>
+         </div>
+      </div>
+      <div class="form-group mb-2">
+         <label>Gift Options:</label>
+         <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" name="subgift" value="subgift">
+            <label class="form-check-label">SubGift</label>
+         </div>
+         <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" name="anongift" value="anongift">
+            <label class="form-check-label">AnonGift</label>
+         </div>
+      </div>
+      <div class="form-group mb-2">
+         <label>Months:</label>
+         <input type="number" class="form-control form-control-sm w-auto" min="1" max="999" name="submonths" value=1>
+      </div>
+      <div class="form-group mb-2">
+         <label>Message:</label>
+         <input type="text" class="form-control form-control-sm w-75" name="submessage">
+      </div>
+   </div>
+</form>

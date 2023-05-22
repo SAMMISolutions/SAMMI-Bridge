@@ -80,7 +80,9 @@ function connecttosammi() {
 
     // set current browser as global variable
     SAMMI.setVariable('browser_name', browser);
-
+    waitForExtensions().then(() => {
+      SAMMI.setVariable('extensions', window.extensionVersions);
+    });
     ConnectionStatus('toclient', 'connected', 'Connected', 'green');
     console.log('SAMMI Authentication successsful!');
   });

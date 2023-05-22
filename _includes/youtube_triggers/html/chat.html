@@ -1,0 +1,23 @@
+<div>
+    <div class="btn-group align-items-center">
+        <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestChatMessage"
+            onclick="YTLiveTestEvent(this)">Test Chat Message</button>
+        <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#YTLiveHideChatMessage" role="button"
+            aria-expanded="false" aria-controls="HideChatMessage"></a>
+    </div> <br>
+    <div class="collapse" id="YTLiveHideChatMessage">
+        <div class="form-check ps-0 d-flex align-items-center">
+            <label class="form-check-label me-1">Display Name:</label>
+            <input type="text" class="form-control form-control-sm w-auto me-2" id="YTLiveChatMessageName">
+        </div>
+        <div class="form-check ps-0 d-flex align-items-center">
+            <label class="form-check-label me-1">Message:</label>
+            <textarea type="text" rows="1" class="form-control form-control-sm w-75"
+                id="YTLiveChatMessageMsg"></textarea>
+        </div>
+        <input type="checkbox" id="YTLiveChatMessageBroadcaster"> Broadcaster
+        <input type="checkbox" id="YTLiveChatMessageMod"> Mod
+        <input type="checkbox" id="YTLiveChatMessageMember"> Member
+        <input type="checkbox" id="YTLiveChatMessageVerified"> Verified
+    </div>
+</div>

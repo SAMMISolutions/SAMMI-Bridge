@@ -1,0 +1,32 @@
+<form id="SAMMITestTwitchChat" class="SAMMITestTriggers">
+    <div>
+        <button type="submit" class="btn btn-primary btn-sm me-1">Test Chat Message </button>
+        <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidechatmsg" role="button" aria-expanded="false"
+            aria-controls="hidechatmsg"></a>
+    </div>
+    <div class="collapse" id="hidechatmsg">
+        <div class="form-check ps-0 d-flex align-items-center mb-2">
+             <label class="form-check-label me-1">Username:</label>
+             <input type="text" class="form-control form-control-sm w-auto me-2" name="name">
+        </div>
+        <div class="form-check ps-0 d-flex align-items-center mb-2">
+             <label class="form-check-label me-1">Message:</label>
+             <textarea class="form-control form-control-sm w-75" name="chatMsg">Hello World</textarea>
+        </div> 
+       <input type="checkbox" class="form-check-input" name="chatFirstTime"> 1st Message<br>
+       <input type="checkbox" class="form-check-input" name="chatBroadcaster"> Broadcaster 
+       <input type="checkbox" class="form-check-input" name="chatMod"> Mod 
+       <input type="checkbox" class="form-check-input" name="chatSub"> Subscriber 
+       <input type="checkbox" class="form-check-input" name="chatVip"> VIP 
+       <input type="checkbox" class="form-check-input" name="chatFounder"> Founder <br>
+       Subscriber Tier:
+       <select name="chatMsgSubTier">
+           <option value="1">1</option>
+           <option value="2">2</option>
+           <option value="3">3</option>
+       </select>
+       Month: <input type="number" min=0 max=12 maxlength="2"
+           oninput="javascript: if (parseInt(this.value) > parseInt(this.max)) this.value = this.max;"
+           name="chatMsgSubMonth" value=1>
+   </div>
+</form>

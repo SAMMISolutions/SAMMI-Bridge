@@ -1,6 +1,7 @@
 // modify UI on load
-window.addEventListener('load', SAMMILoadTabsUI, false);
-function SAMMILoadTabsUI() {
+window.addEventListener('load', SAMMIInitUI, false);
+
+function SAMMIInitUI() {
   sammiModal = new bootstrap.Modal(document.getElementById('sammiModalElem'), {});
   const tabList = {};
   let tabSortList = JSON.parse(localStorage.getItem('tabsSortList')) || [];
@@ -40,6 +41,9 @@ function SAMMILoadTabsUI() {
     },
     plugins: [Draggable.Plugins.SortAnimation],
   });
+
+  // populated extension versions 
+  populateExtensionTable();
 
   // save a new sort order
   draggable.on('sortable:sorted', (e) => {
