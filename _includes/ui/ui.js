@@ -1,8 +1,5 @@
-// modify UI on load
-window.addEventListener('load', SAMMIInitUI, false);
-
-function SAMMIInitUI() {
-  sammiModal = new bootstrap.Modal(document.getElementById('sammiModalElem'), {});
+function SAMMIUITabs() {
+  window.sammiModal = new bootstrap.Modal(document.getElementById('sammiModalElem'), {});
   const tabList = {};
   let tabSortList = JSON.parse(localStorage.getItem('tabsSortList')) || [];
   const newtabSortList = [];

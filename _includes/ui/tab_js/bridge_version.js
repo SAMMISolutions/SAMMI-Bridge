@@ -13,6 +13,3 @@ async function getVersionFromHTML() {
   // Use the bridge version
   document.querySelector('span[name="version"]').innerText = bridgeVersion;
 }
-
-// Call the function
-getVersionFromHTML();
