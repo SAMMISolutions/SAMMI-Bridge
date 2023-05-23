@@ -5,43 +5,63 @@
 
 <head>
   <title>SAMMI Bridge</title>
-    {%- include header/meta.html -%}
-    {%- include header/favicon.html -%}
-    {%- include header/stylesheet.html -%}
+{% include header/meta.html %}
+{% include header/favicon.html %}
+{% include header/stylesheet.html %}
   <style>
-    {%- include style.css -%}
+{% include style.css %}
   </style>
 </head>
 
 <body>
   <div class="container">
-    {{- content -}}
+    {{ content }}
   </div>
-</body>
 
 <script>
-  {%- include functions/functions.js-%}
-  {%- include init_defs/init.js-%}
+(function() {
+  "use strict";
+{% include core/initDefs.js %}
+{% include functions/functions.js %}
 
-  // define SAMMI connection on load and try to immediately connect
-  window.addEventListener('load', function () {
-    sammiclient = lioranboardclient = new SAMMIWebSocket()
-    load_connection();
-    connecttosammi();
-    SAMMITestTriggers();
-  }, false);
+window.addEventListener('load', function () {
+// Instantiate SAMMICore and SAMMIUI, and setup socket connection...
+const sammiclient = new SAMMIWebSocket();
+window.sammiclient = sammiclient
+window.lioranboardclient = sammiclient
+const sammiCore = new SAMMICore();
+const sammiUI = new SAMMIUI();
 
-  {%- include ui/ui.js -%}
-  {%- include core/core.js -%}
-  {%- include ui/tab_js/extension_updates.js -%}
-  {%- include twitch_triggers/twitch_triggers.js -%}
-  {%- include youtube_triggers/youtube_triggers.js -%}
-  {%- include ui/tab_js/bridge_version.js -%}
-  {%- include ui/tab_js/message_logging.js -%}
-  {%- include ext_commands.js -%}
-  {%- include ext_hooks.js -%}
-  {%- include ext_scripts.js -%}
+// Add event listener for the connection button
+document.querySelector('#cnctbutton').addEventListener('click', () => {
+  sammiCore.connectButton();
+});
 
+// Initialize SAMMIUI
+sammiUI.initModal();
+sammiUI.initTabs();
+populateExtensionTable();
+
+// Get Bridge Version
+getVersionFromHTML();
+
+// Test triggers
+SAMMITestTriggers();
+}, false);
+
+{% include ui/ui.js %}
+{% include core/core.js %}
+{% include tabs/js/extension_updates.js %}
+{% include twitch_triggers/twitch_triggers.js %}
+{% include youtube_triggers/youtube_triggers.js %}
+{% include tabs/js/bridge_version.js %}
+{% include tabs/js/message_logging.js %}
+})();
+
+{% include ext_commands.js %}
+{% include ext_hooks.js %}
+{% include ext_scripts.js %}
 </script>
-{%- include external_scripts.html-%}
+{% include external_scripts.html %}
+</body>
 </html>

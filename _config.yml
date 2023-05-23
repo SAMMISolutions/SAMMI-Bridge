@@ -1,1 +1,3 @@
 title: "SAMMI Bridge"
+exclude:
+  - minifier

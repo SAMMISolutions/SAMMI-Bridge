@@ -3,9 +3,9 @@ layout: default
 ---
 
 <h1 class="text-center">SAMMI Bridge </h1>
-{%- include connection/connection_info.html -%}
+{% include connection/connection_info.html %}
 <br>
-{%- include helpers/modal.html -%}
+{% include helpers/modal.html %}
 <!--Tabs -->
 <span id="close-tab-button">
     &times;
@@ -15,13 +15,12 @@ layout: default
 </div>
 <!-- Tab Content -->
 <div class="tab-content" id="extensions-tabContent">
-    {%- include ui/tab_html/bridge_status.html -%}
+    {% include tabs/html/bridge_status.html %}
+    {% include tabs/html/extension_updates.html %}
+    {% include twitch_triggers/twitch_triggers.html %}
+    {% include youtube_triggers/youtube_triggers.html %}
     <!--Your external script will be inserted here-->
     <!--<script src="example.js"></script>-->
     <!--INSERT PART 1-->
-    {%- include test.html -%}
-    {%- include ui/tab_html/extension_updates.html -%}
-    {%- include twitch_triggers/twitch_triggers.html -%}
-    {%- include youtube_triggers/youtube_triggers.html -%}
 </div>
-{%- include ui/tab_footer.html -%}
+{% include tabs/html/tab_footer.html %}

@@ -22,6 +22,7 @@ function SAMMIDebugLog(e) {
           SAMMIdebugPost('core', msg);
         }
       };
+      window.logIt = logIt;
       core.innerHTML = listening;
     } else {
       core.innerHTML = '<samp>Logging will be enabled once SAMMI Bridge is reloaded.</samp>';

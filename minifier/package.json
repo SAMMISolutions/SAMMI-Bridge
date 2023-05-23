@@ -1,0 +1,21 @@
+{
+  "name": "minifier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "minify.js",
+  "scripts": {
+    "minify": "node minify.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
+    "clean-css": "^5.3.2",
+    "html-minifier": "^4.0.0",
+    "jsdom": "^22.0.0",
+    "uglify-js": "^3.17.4",
+    "xmlserializer": "^0.6.1"
+  }
+}

@@ -1,10 +1,10 @@
 function SammiExtensionReceived(hook, SAMMIJSON) {
-  LioranBoardJSON = SAMMIJSON;
+  let LioranBoardJSON = SAMMIJSON;
   switch (hook) {
     // hook you specified.
     default:
       break;
-//You hooks will be inserted here
-/*INSERT PART 3*/
-   }
+    //You hooks will be inserted here
+    /*INSERT PART 3*/
+  }
 }
