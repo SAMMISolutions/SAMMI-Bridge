@@ -20,7 +20,7 @@
 </body>
 
 <script>
-  {%- include functions.js-%}
+  {%- include functions/functions.js-%}
   {%- include init_defs/init.js-%}
 
   // define SAMMI connection on load and try to immediately connect
@@ -31,13 +31,13 @@
     SAMMITestTriggers();
   }, false);
 
-  {%- include ui.js -%}
-  {%- include core.js -%}
-  {%- include extension_updates.js -%}
-  {%- include twitch_triggers.js -%}
-  {%- include youtube_triggers.js -%}
-  {%- include bridge_version.js -%}
-  {%- include message_logging.js -%}
+  {%- include ui/ui.js -%}
+  {%- include core/core.js -%}
+  {%- include ui/tab_js/extension_updates.js -%}
+  {%- include twitch_triggers/twitch_triggers.js -%}
+  {%- include youtube_triggers/youtube_triggers.js -%}
+  {%- include ui/tab_js/bridge_version.js -%}
+  {%- include ui/tab_js/message_logging.js -%}
   {%- include ext_commands.js -%}
   {%- include ext_hooks.js -%}
   {%- include ext_scripts.js -%}

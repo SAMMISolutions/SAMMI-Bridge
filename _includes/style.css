@@ -106,14 +106,11 @@ button:active{
    color: rgb(255, 255, 255);
    border: 1px solid #761a2c;
    text-shadow: 1px 1px 3px rgb(0 0 0 / 100%);
-   /*
-    /*
- background-image: linear-gradient(to bottom, #76511A, #76511A);
-    color: rgb(255, 255, 255);
-    border: 1px solid #76511A;
- */
-   */
  }
+ .nav-item
+  {
+    z-index: 998;
+  }
  
  .tab-content {
    /*background-color: rgba(39, 55, 110, 0.5);*/
@@ -171,9 +168,54 @@ button:active{
  background-color:#4c4c4c;
  border-color:#464546
 }
+
+#close-tab-button {
+  display: none;
+  position: absolute;
+  top: 0%;  /* adjust this to position the button lower or higher */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(5, 11, 20, 0.9);
+  padding: 10px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  line-height: 40px;
+  text-align: center;
+  z-index: 9998; /* Ensure it overlays other elements */
+  pointer-events: auto
+}
+
+#close-tab-button.hovered {
+  color: rgba(255, 0, 0, 0.9);
+}
+
+
 .connected{
  color:#4ad84a
 }
 .disconnected{
  color:#fb4848
 }
+
+.opacity-90{
+ opacity:0.9
+}
+
+@keyframes shake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(0, 0) rotate(-3deg); }
+  40% { transform: translate(0, 0) rotate(3deg); }
+  60% { transform: translate(0, 0) rotate(-3deg); }
+  80% { transform: translate(0, 0) rotate(3deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.shaking {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) infinite both;
+  transform-origin: center center;
+}
+
+
