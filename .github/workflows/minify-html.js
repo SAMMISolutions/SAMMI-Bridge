@@ -7,9 +7,10 @@ const path = require('path');
 const htmlMinifier = require('html-minifier');
 
 // copy bridge.html to bridge_unminified.html
-const sourcePath = path.resolve(__dirname, '../_site/bridge.html');
-const destPath = path.resolve(__dirname, '../download/bridge_unminified.html');
-const destPathMin = path.resolve(__dirname, '../download/bridge.html');
+const sourcePath = path.resolve(__dirname, '../../_site/bridge.html');
+const destPath = path.resolve(__dirname, '../../download/bridge_unminified.html');
+const destPathMin = path.resolve(__dirname, '../../download/bridge.html');
+
 fs.copyFileSync(sourcePath, destPath);
 
 // read bridge_unminified.html

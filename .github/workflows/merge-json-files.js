@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const directoryPath = path.join(__dirname, 'Extensions');
+const directoryPath = path.join(__dirname, '../../extensions');
 let mergedData = { extensions: [] };
 
 fs.readdir(directoryPath, (err, files) => {
