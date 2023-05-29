@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'extensions/**'
+  workflow_dispatch:      
 
 jobs:
   build:
