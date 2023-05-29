@@ -242,7 +242,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
 
 <body>
   <div class="container">
-    <h1 class="text-center">SAMMI Bridge </h1>
+    <h1 class="text-center mt-1">SAMMI Bridge </h1>
 <!-- Connection Info -->
 <div class="row justify-content-center">
     <div class="col col-auto">
@@ -286,7 +286,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
 </div>
 <!-- Tab Content -->
 <div class="tab-content" id="extensions-tabContent">
-    <div class="tab-pane" id="content-basic" role="tabpanel" title="Status" data-type="default">
+    <div class="tab-pane" id="content-basic" role="tabpanel" title="(g) Settings" data-type="default">
   <div class='row pt-3'>
     <h5>Bridge Connection</h5>
     <div class="fs-7 mb-3"><span class="me-2">Version:</span><span name="version"></span></div>
@@ -331,7 +331,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
     </div>
  </div>
 </div>
-    <div class="tab-pane non-draggable" id="content-extensions" role="tabpanel" title="Extensions" data-type="default">
+    <div class="tab-pane non-draggable" id="content-extensions" role="tabpanel" title="* Extensions" data-type="default">
     <div class='row pt-3'>
         <h5>Extensions</h5>
     </div>
@@ -361,7 +361,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
     </div>
   </div>
     <!--Twitch Triggers-->
-<div class="tab-pane" id="content-triggers" role="tabpanel" title="Twitch Triggers" data-type="default">
+<div class="tab-pane" id="content-triggers" role="tabpanel" title="* Twitch Triggers" data-type="default">
    <form id="SAMMITestTwitchFollow" class="SAMMITestTriggers">
     <div class="form-check ps-0 d-flex align-items-center">
         <button type="submit" class="btn btn-primary btn-sm me-1">Test Follower</button>
@@ -625,7 +625,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
 
 </div>
     <!--YouTube Triggers-->
-<div class="tab-pane" id="content-yttriggers" role="tabpanel" title="YouTube Triggers" data-type="default">
+<div class="tab-pane" id="content-yttriggers" role="tabpanel" title="* YouTube Triggers" data-type="default">
     <div>
         <h5>YouTube Live Test Triggers</h5>
     </div>
@@ -1440,7 +1440,8 @@ class SAMMIUI {
     button.setAttribute('aria-selected', 'false');
     button.setAttribute('draggable', 'true');
 
-    button.innerHTML = e.title;
+    const title = e.title.startsWith('* ') ? `<i class="fa-solid fa-star me-1"></i>${e.title.replace('* ', '')}` : e.title.startsWith('(g) ') ? `<i class="fa-solid fa-gear me-1"></i>${e.title.replace('(g) ', '')}` : e.title;
+    button.innerHTML = title;
     li.appendChild(button);
 
     // Store the created tab in the tabList object
