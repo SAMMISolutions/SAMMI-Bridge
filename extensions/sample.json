@@ -1,0 +1,13 @@
+{
+    "extensions": [
+        {
+            "extension_name": "Sample",
+            "details": {
+                "author": "Author Name",
+                "description": "Extension Description (optional)",
+                "latest_version": "1.0",
+                "download_link": "https://download_link.com"
+            }
+        }
+    ]
+}
