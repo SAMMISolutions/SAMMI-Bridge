@@ -1,0 +1,39 @@
+name: Minify HTML
+
+on:
+  push:
+    paths:
+      - '_site/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: |
+        npm install jsdom
+        npm install uglify-js
+        npm install clean-css
+        npm install @babel/core @babel/preset-env
+        npm install path
+        npm install html-minifier
+
+    - name: Minify HTML
+      run: node minify-html.js
+
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add download/bridge.html
+        git commit -m "Minify HTML" -a
+        git push

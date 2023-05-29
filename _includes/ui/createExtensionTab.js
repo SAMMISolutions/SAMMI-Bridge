@@ -33,7 +33,8 @@ createExtensionTab(e) {
     button.setAttribute('aria-selected', 'false');
     button.setAttribute('draggable', 'true');
 
-    button.innerHTML = e.title;
+    const title = e.title.startsWith('* ') ? `<i class="fa-solid fa-star me-1"></i>${e.title.replace('* ', '')}` : e.title.startsWith('(g) ') ? `<i class="fa-solid fa-gear me-1"></i>${e.title.replace('(g) ', '')}` : e.title;
+    button.innerHTML = title;
     li.appendChild(button);
 
     // Store the created tab in the tabList object
