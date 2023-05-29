@@ -29,6 +29,6 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add Extensions/extensions.json
+        git add extensions/extensions.json
         git commit -m "Merge JSON files" -a
         git push
