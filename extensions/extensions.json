@@ -1,6 +1,51 @@
 {
     "extensions": [
         {
+            "extension_name": "Discord Controls",
+            "details": {
+                "author": "Christina K",
+                "description": "Control your stream with Discord!",
+                "latest_version": "1.1",
+                "download_link": "https://christinak.itch.io/discord-controls"
+            }
+        },
+        {
+            "extension_name": "Chat Logs",
+            "details": {
+                "author": "Christina K",
+                "description": "Log your Twitch chat!",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/twitch-chat-logs"
+            }
+        },
+        {
+            "extension_name": "Puzzle Game",
+            "details": {
+                "author": "Christina K",
+                "description": "A puzzle game!",
+                "latest_version": "2.0",
+                "download_link": "https://christinak.itch.io/sammi-puzzle-game"
+            }
+        },
+        {
+            "extension_name": "Get Folder Files",
+            "details": {
+                "author": "Christina K",
+                "description": "Get all files in a folder!",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/get-folder-files"
+            }
+        },
+        {
+            "extension_name": "Color Converter",
+            "details": {
+                "author": "Christina K",
+                "description": "Convert colors!",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/sammi-color-converter"
+            }
+        },
+        {
             "extension_name": "Sample",
             "details": {
                 "author": "Author Name",
