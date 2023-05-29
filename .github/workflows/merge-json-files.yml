@@ -1,4 +1,4 @@
-name: Merge JSON files
+name: Merge JSON files  
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
       run: npm install
 
     - name: Merge JSON files
-      run: node merge-json-files.js
+      run: node .github/workflows/merge-json-files.js
 
     - name: Commit files
       run: |
