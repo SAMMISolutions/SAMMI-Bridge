@@ -1,12 +1,12 @@
 # SAMMI Bridge
- Current version of SAMMI Bridge . Download the latest [release](https://github.com/SAMMISolutions/SAMMISolutions/SAMMI-Bridge/releases). This version will NOT work with any previous non SAMMI versions.
-
-Find more about SAMMI at [sammi.solutions](https://sammi.solutions)
+ Current version of SAMMI Bridge. Find more about SAMMI at [sammi.solutions](https://sammi.solutions)
+ 
+### Download
+[Latest Release](https://github.com/SAMMISolutions/SAMMISolutions/SAMMI-Bridge/releases).
 
 ### For users
-**Twitch Triggers** allow you to test all available Twitch triggers by sending fake payload that mimics real triggers to SAMMI.\
+**Twitch Triggers** allow you to test all available Twitch triggers by sending fake payload that mimics real triggers to SAMMI.\ 
 **YouTube Triggers** allow you to test all available YouTube triggers by sending fake payload that mimics real triggers to SAMMI.
-
  
 ### For extension devs
 SAMMI Bridge uses SAMMI websocket library to make sending and receiving data easier: https://github.com/SAMMISolutions/SAMMI-Websocket. 
