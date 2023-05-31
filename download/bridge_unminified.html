@@ -242,7 +242,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
 
 <body>
   <div class="container">
-    <h1 class="text-center">SAMMI Bridge </h1>
+    <h1 class="text-center mt-1">SAMMI Bridge </h1>
 <!-- Connection Info -->
 <div class="row justify-content-center">
     <div class="col col-auto">
@@ -286,7 +286,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
 </div>
 <!-- Tab Content -->
 <div class="tab-content" id="extensions-tabContent">
-    <div class="tab-pane" id="content-basic" role="tabpanel" title="Status" data-type="default">
+    <div class="tab-pane" id="content-basic" role="tabpanel" title="Settings" data-type="settings">
   <div class='row pt-3'>
     <h5>Bridge Connection</h5>
     <div class="fs-7 mb-3"><span class="me-2">Version:</span><span name="version"></span></div>
@@ -741,7 +741,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
   "use strict";
 /* eslint-disable */
 // Twitch client ID to use for Twitch API requests
-let TWITCH_CLIENT_ID = 'xolexwv18o8i5uqsga0bw3z39cpg0c';
+window.TWITCH_CLIENT_ID = 'xolexwv18o8i5uqsga0bw3z39cpg0c';
 // init object with all available SAMMI command methods
 const SAMMI = new SAMMICommands();
 window.SAMMI = SAMMI;
@@ -1440,12 +1440,33 @@ class SAMMIUI {
     button.setAttribute('aria-selected', 'false');
     button.setAttribute('draggable', 'true');
 
-    button.innerHTML = e.title;
+    // verify data type and add icon to title
+    let dataType = e.getAttribute('data-type');
+    let title = e.title;
+    
+    // for default tabs included with bridge
+    if (dataType === 'default') {
+        title = `<i class="fa-solid fa-star me-1"></i>${title}`;
+    // for settings/status tab included with bridge
+    } else if (dataType === 'settings') {
+        title = `<i class="fa-solid fa-gear me-1"></i>${title}`;
+    // for official SAMMI extensions
+    } else if (dataType === 'official') {
+        // title = `<i class="fa-solid fa-shield me-1"></i>${title}`;
+        title = `<i class="fa-solid fa-badge-check me-1"></i>${title}`;
+    // for user created extensions
+    } else if (!dataType || dataType === 'external') {
+        // No icon to be added
+    }
+
+    button.innerHTML = title;
     li.appendChild(button);
 
     // Store the created tab in the tabList object
     this.tabList[e.id] = li;
   }
+
+  // data-type
 
   // This method creates the extension boxes
     createExtensionBox(e) {
@@ -1587,7 +1608,7 @@ class SAMMICore {
       sendExtensionCommands(); // Get Twitch list for extension makers
 
       await SAMMI.getTwitchList().then((data) => {
-        TWITCH_CLIENT_ID = data.twitch_list.clientId ? data.twitch_list.clientId : TWITCH_CLIENT_ID;
+        window.TWITCH_CLIENT_ID = data.twitch_list.clientId ? data.twitch_list.clientId : window.TWITCH_CLIENT_ID;
       });
 
       // Save connection params to storage

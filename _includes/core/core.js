@@ -97,7 +97,7 @@ class SAMMICore {
       sendExtensionCommands(); // Get Twitch list for extension makers
 
       await SAMMI.getTwitchList().then((data) => {
-        TWITCH_CLIENT_ID = data.twitch_list.clientId ? data.twitch_list.clientId : TWITCH_CLIENT_ID;
+        window.TWITCH_CLIENT_ID = data.twitch_list.clientId ? data.twitch_list.clientId : window.TWITCH_CLIENT_ID;
       });
 
       // Save connection params to storage

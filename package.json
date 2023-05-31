@@ -4,7 +4,8 @@
   "description": "",
   "main": "minify.js",
   "scripts": {
-    "minify": "node minify.js"
+    "minify": "node minify.js",
+    "build": "bundle exec jekyll build && node .github/workflows/minify-html.js"
   },
   "keywords": [],
   "author": "",

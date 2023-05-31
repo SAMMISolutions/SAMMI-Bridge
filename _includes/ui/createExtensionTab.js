@@ -33,10 +33,30 @@ createExtensionTab(e) {
     button.setAttribute('aria-selected', 'false');
     button.setAttribute('draggable', 'true');
 
-    const title = e.title.startsWith('* ') ? `<i class="fa-solid fa-star me-1"></i>${e.title.replace('* ', '')}` : e.title.startsWith('(g) ') ? `<i class="fa-solid fa-gear me-1"></i>${e.title.replace('(g) ', '')}` : e.title;
+    // verify data type and add icon to title
+    let dataType = e.getAttribute('data-type');
+    let title = e.title;
+    
+    // for default tabs included with bridge
+    if (dataType === 'default') {
+        title = `<i class="fa-solid fa-star me-1"></i>${title}`;
+    // for settings/status tab included with bridge
+    } else if (dataType === 'settings') {
+        title = `<i class="fa-solid fa-gear me-1"></i>${title}`;
+    // for official SAMMI extensions
+    } else if (dataType === 'official') {
+        // title = `<i class="fa-solid fa-shield me-1"></i>${title}`;
+        title = `<i class="fa-solid fa-badge-check me-1"></i>${title}`;
+    // for user created extensions
+    } else if (!dataType || dataType === 'external') {
+        // No icon to be added
+    }
+
     button.innerHTML = title;
     li.appendChild(button);
 
     // Store the created tab in the tabList object
     this.tabList[e.id] = li;
   }
+
+  // data-type

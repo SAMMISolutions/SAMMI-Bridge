@@ -1,6 +1,6 @@
 /* eslint-disable */
 // Twitch client ID to use for Twitch API requests
-let TWITCH_CLIENT_ID = 'xolexwv18o8i5uqsga0bw3z39cpg0c';
+window.TWITCH_CLIENT_ID = 'xolexwv18o8i5uqsga0bw3z39cpg0c';
 // init object with all available SAMMI command methods
 const SAMMI = new SAMMICommands();
 window.SAMMI = SAMMI;

@@ -1,3 +1,4 @@
 title: "SAMMI Bridge"
 exclude:
   - minifier
+  - node_modules
