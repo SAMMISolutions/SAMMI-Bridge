@@ -45,8 +45,7 @@ createExtensionTab(e) {
         title = `<i class="fa-solid fa-gear me-1"></i>${title}`;
     // for official SAMMI extensions
     } else if (dataType === 'official') {
-        // title = `<i class="fa-solid fa-shield me-1"></i>${title}`;
-        title = `<i class="fa-solid fa-badge-check me-1"></i>${title}`;
+        title = `<i class="fa-solid fa-circle-check me-1"></i>${title}`; // fa-solid fa-badge-check
     // for user created extensions
     } else if (!dataType || dataType === 'external') {
         // No icon to be added
