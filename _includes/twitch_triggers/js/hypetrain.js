@@ -125,7 +125,7 @@ async SAMMITestTwitchHypeTrain(form) {
       case 'Progressed': {
         const sourceSelect = form.elements['hypeTrainSource'];
         const source = sourceSelect.options[sourceSelect.selectedIndex].text;
-        const [name, userID] = await getNameFromInput(form.elements['hypeTrainName'].value);
+        const [name, userID] = await getNameFromInput(form.elements.hypeTrainName);
         const amount = parseInt(form.elements['hypeTrainAmount'].value) || 10;
         data = {
           sequence_id: 2174,
@@ -141,7 +141,7 @@ async SAMMITestTwitchHypeTrain(form) {
       }
         break;
       case 'Updated': {
-        const [name, userID] = await getNameFromInput(form.elements['hypeTrainName'].value);
+        const [name, userID] = await getNameFromInput(form.elements.hypeTrainName);
         const sourceSelect = form.elements['hypeTrainSource'];
         const source = sourceSelect.options[sourceSelect.selectedIndex].text;
         const particType = source === 'BITS' ? particTypes[getRandomInt(0, 2)] : particTypes[getRandomInt(3, 8)];

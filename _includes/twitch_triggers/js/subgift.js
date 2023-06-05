@@ -1,7 +1,7 @@
 SAMMITestTwitchSubGift(form) {
   const subForm = document.getElementById('SAMMITestTwitchSubs');
-  if (subForm.elements['prime'].checked) subForm.elements['tier1'].checked = true;
-  if (subForm.elements['anongift'].checked === false) subForm.elements['subgift'].checked = true;
+  if (subForm.querySelector('[value="Prime"]').checked) subForm.querySelector('[value="tier1"]').checked = true;
+  if (subForm.querySelector('[value="anongift"]').checked === false) subForm.querySelector('[value="subgift"]').checked = true;
   const tiers = subForm.querySelectorAll('input[name="tier"]');
   let selectedTier;
 
@@ -18,7 +18,7 @@ SAMMITestTwitchSubGift(form) {
       : selectedTier === 'Tier 3'
         ? 4
         : 1;
-  const gifterName = subForm.elements['anongift'].checked
+  const gifterName = subForm.querySelector('[value="anongift"]').checked
     ? ['Anonymous User']
     : generateName();
   const amount = parseInt(form.elements['subGiftAmount'].value) || 1;
