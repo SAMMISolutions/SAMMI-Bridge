@@ -39,13 +39,13 @@ createExtensionTab(e) {
     
     // for default tabs included with bridge
     if (dataType === 'default') {
-        title = `<i class="fa-solid fa-star me-1"></i>${title}`;
+        title = `<i class="fa-solid fa-star me-1" title="Official SAMMI Tab"></i>${title}`;
     // for settings/status tab included with bridge
     } else if (dataType === 'settings') {
-        title = `<i class="fa-solid fa-gear me-1"></i>${title}`;
+        title = `<i class="fa-solid fa-gear me-1" title="Official SAMMI Tab"></i>${title}`;
     // for official SAMMI extensions
     } else if (dataType === 'official') {
-        title = `<i class="fa-solid fa-circle-check me-1"></i>${title}`; // fa-solid fa-badge-check
+        title = `<i class="fa-solid fa-circle-check me-1" title="Official SAMMI Extension"></i>${title}`; // fa-solid fa-badge-check
     // for user created extensions
     } else if (!dataType || dataType === 'external') {
         // No icon to be added

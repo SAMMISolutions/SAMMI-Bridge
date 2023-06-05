@@ -24,6 +24,39 @@
 <!--Your external script will be inserted here-->
     <!--<script src="example.js"></script>-->
     <!--INSERT PART 1-->
+<!--Crowd Control external-->
+<div id="content-Crowd_Control" class="tab-pane" data-version="1.0" data-type="official" title="Crowd Control"><a href="https://crowdcontrol.live/" style="display: block;" target="_blank">
+  <img src="https://crowdcontrol.live/img/cclogo-white.300b2be3.png" alt="CrowdControl Logo" style="width: 100%; max-width: 400px;">
+</a>
+<br>
+<form style="width: 100%;">
+  <span style="font-weight: bold; font-size: 20px;">Status: </span>
+  <span id="statusText" style="color: red;font-weight: bold; font-size: 20px;">Disconnected</span>
+  <label for="platform" style="padding-top: 5px; display: block; margin-bottom: 5px;">Platform:</label>
+  <select id="platform" name="platform" style="width: 100%; padding: 5px; font-size: 14px; border-radius: 5px;" onchange="ccHandlePlatformChange()">
+    <option value="Twitch">Twitch</option>
+    <option value="Youtube">Youtube</option>
+    <option value="Discord">Discord</option>
+  </select>
+  <label for="username" style="padding-top: 5px; display: none; margin-bottom: 5px;" id="usernameLabel">Username:</label>
+  <select id="username" name="username" style="width: 100%; padding: 5px; font-size: 14px; border-radius: 5px;"></select>
+  <label for="userid" style="padding-top: 5px; display: block; margin-bottom: 5px;" id="userIdLabel">User ID:</label>
+  <input type="text" id="userid" name="userid" style="width: 100%; padding: 5px; font-size: 14px;" disabled>
+  <label for="game" style="padding-top: 5px; display: block; margin-bottom: 5px;">Game (optional):</label>
+  <select id="game" name="game" style="width: 100%; padding: 5px; font-size: 14px; border-radius: 5px;"></select>
+  <label for="pack" style="padding-top: 5px; display: block; margin-bottom: 5px;">Pack (optional):</label>
+  <select id="pack" name="pack" style="width: 100%; padding: 5px; font-size: 14px; border-radius: 5px;"></select>
+  <br>
+  <br>
+  <button type="button" onclick="ccPopulateAndShowTable()" style="padding: 8px 16px; font-size: 14px; width: 100%; border-radius: 12px; font-weight: bold;" id="showHideButton">Show Effects</button>
+  <button type="button" onclick="ccConnect()" style="padding: 8px 16px; font-size: 14px; width: 100%; border-radius: 12px; font-weight: bold;" id="ccIDConnect">Connect</button>
+  <div id="tableContainer" style="margin-top: 20px; display: none;">
+    <table style="border-collapse: collapse; width: 100%;">
+      <tbody id="ccEffectTable"></tbody>
+    </table>
+  </div>
+</form></div>
+<!--Crowd Control external end-->
 </div>
 <div class="row justify-content-center mt-3 px-2 mb-5" id="footer"> <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#installedextensions" role="button" aria-expanded="false" aria-controls="installedextensions"></a>
   <span class="collapse" id="installedextensions"></span>
@@ -41,6 +74,15 @@ function _extends(){return(_extends=Object.assign?Object.assign.bind():function(
 function sendExtensionCommands() {
 // You SAMMI Core extension commands will be inserted here
 /*INSERT PART 2*/
+//[Crowd Control command]
+SAMMI.extCommand('Crowd Control', "442a44", 52, {
+	option: ['Option', 19, 'Get Effects For Current Game', '', ['Get Effects For Current Game','Get Game List', 'Get Connection Status', 'Toggle Connection Status']],
+	variable_name : ['Save Variable As', 14, '']
+}, false);
+ccPopulateUsernames();
+ccPopulateGames();
+ccHandlePlatformChange();
+//[Crowd Control command end]
 }
 function SammiExtensionReceived(hook, SAMMIJSON) {
   let LioranBoardJSON = SAMMIJSON;
@@ -50,10 +92,470 @@ function SammiExtensionReceived(hook, SAMMIJSON) {
       break;
     //You hooks will be inserted here
     /*INSERT PART 3*/
+//[Crowd Control hook]
+case "Crowd Control": {
+	switch (SAMMIJSON.option) {
+		case "Get Effects For Current Game":
+			ccSetSAMMIEffects(SAMMIJSON.variable_name, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
+			break;
+		case "Get Game List":
+			ccGetGameList(SAMMIJSON.variable_name, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
+			break;
+		case "Get Connection Status":
+			ccCheckConnectionStatus(SAMMIJSON.variable_name, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
+			break;
+		case "Toggle Connection Status":
+			ccToggleConnection(SAMMIJSON.variable_name, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
+			break;
+	}
+	break;
+}
+//[Crowd Control hook end]
   }
 }
 // Your main script will be inserted here
 /*INSERT PART 4*/
+//[Crowd Control script]
+//Initialize Variables
+var ccWebSocket;
+var ccWebSocketStatus = false;
+var ccTableVisible = false;
+
+async function ccPopulateUsernames() {
+    var select = document.getElementById("username");
+    try {
+        // Call SAMMI.getTwitchList() to retrieve the JSON response
+        var response = await SAMMI.getTwitchList();
+        var twitchList = response.twitch_list;
+
+        // Get an array of usernames
+        var usernames = Object.keys(twitchList)
+            .map(userId => twitchList[userId].display_name)
+            .filter(displayName => typeof displayName === "string");
+
+        // Sort the usernames alphabetically
+        usernames.sort((a, b) => a.localeCompare(b));
+
+        // Populate the select box with sorted usernames
+        usernames.forEach(username => {
+            var option = document.createElement("option");
+            var userId = Object.keys(twitchList).find(
+                userId => twitchList[userId].display_name === username
+            );
+            option.value = userId;
+            option.textContent = username;
+            select.appendChild(option);
+        });
+
+        // Add event listener to automatically fill out the user ID based on selected username
+        select.addEventListener("change", function() {
+            var selectedUserId = this.value;
+            var userIdInput = document.getElementById("userid");
+            userIdInput.value = selectedUserId;
+        });
+
+    } catch (error) {
+        console.error("Error fetching Twitch list:", error);
+    }
+
+    ccSetTwitchUserID();
+}
+
+function ccFetchGames() {
+    return fetch('https://openapi.crowdcontrol.live/games')
+        .then(response => response.json())
+        .then(data => {
+            // Filter out game objects with invalid or undefined names
+            const validGames = data.filter(game => typeof game.name === 'string');
+
+            // Sort the valid game objects alphabetically by name
+            validGames.sort((a, b) => a.name.localeCompare(b.name));
+
+            return validGames;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+function ccPopulateGames() {
+    const gameSelectBox = document.getElementById('game');
+    const packSelectBox = document.getElementById('pack');
+
+    function ccPopulateGameSelectBox(games) {
+        games.forEach(game => {
+            const option = document.createElement('option');
+            option.value = game.gameID;
+            option.textContent = game.name;
+            gameSelectBox.appendChild(option);
+        });
+    }
+
+    function ccPopulatePackSelectBox(gameObj) {
+        packSelectBox.innerHTML = '';
+
+        if (gameObj) {
+            gameObj.packs.forEach(pack => {
+                const packOption = document.createElement('option');
+                packOption.value = pack;
+                packOption.textContent = pack;
+                packSelectBox.appendChild(packOption);
+            });
+
+            // Automatically select the first pack
+            packSelectBox.selectedIndex = 0;
+        }
+    }
+
+    function ccHandleGameSelectBoxChange(games) {
+        gameSelectBox.addEventListener('change', () => {
+            const selectedGame = gameSelectBox.value;
+            const selectedGameObj = games.find(game => game.gameID === selectedGame);
+            ccPopulatePackSelectBox(selectedGameObj);
+            ccHideEffects();
+        });
+        packSelectBox.addEventListener('change', () => {
+            ccHideEffects();
+        });
+    }
+
+    ccFetchGames()
+        .then(games => {
+            ccPopulateGameSelectBox(games);
+            ccHandleGameSelectBoxChange(games);
+
+            // Trigger the change event on game select box to populate packs initially
+            gameSelectBox.dispatchEvent(new Event('change'));
+        });
+}
+
+function ccHandlePlatformChange() {
+    var platform = document.getElementById("platform").value;
+    var usernameLabel = document.getElementById("usernameLabel");
+    var usernameInput = document.getElementById("username");
+    var userIdInput = document.getElementById("userid");
+
+    if (platform === "Twitch") {
+        usernameLabel.style.display = "block";
+        usernameInput.style.display = "block";
+        userIdInput.disabled = true;
+        ccSetTwitchUserID();
+    } else if (platform === "Youtube") {
+        usernameLabel.style.display = "none";
+        usernameInput.style.display = "none";
+        userIdInput.disabled = false;
+        userIdInput.value = "";
+    } else if (platform === "Discord") {
+        usernameLabel.style.display = "none";
+        usernameInput.style.display = "none";
+        userIdInput.disabled = false;
+        userIdInput.value = "";
+    }
+}
+
+function ccSetTwitchUserID() {
+    var select = document.getElementById("username");
+    var event = new Event("change");
+    select.dispatchEvent(event);
+}
+
+async function ccConnect() {
+    const btnConnect = document.getElementById("ccIDConnect");
+    btnConnect.disabled = true;
+
+    if (!ccWebSocketStatus) {
+
+        var platform = document.getElementById("platform").value;
+        var userId = document.getElementById("userid").value;
+
+        if (userId === "") {
+            alert("Please fill out all fields.");
+            return;
+        }
+
+        var url;
+        if (platform === "Twitch") {
+            url = `https://staging-openapi.crowdcontrol.live/user/twitch/${userId}/id`;
+        } else if (platform === "Discord") {
+            url = `https://staging-openapi.crowdcontrol.live/user/discord/${userId}/id`;
+        } else if (platform === "Youtube") {
+            url = `https://staging-openapi.crowdcontrol.live/user/youtube/${userId}/id`;
+        } else {
+            alert("Invalid platform selected.");
+            return;
+        }
+
+        try {
+            var response = await fetch(url);
+            if (response.ok) {
+                var data = await response.json();
+                var ccUID = data.ccUID;
+                console.log("Connecting with ccUID:", ccUID);
+                ccWebSocket = ccCreateWebSocket(ccUID);
+            } else {
+                console.error("Failed to retrieve ccUID:", response.status);
+            }
+        } catch (error) {
+            console.error("Error fetching ccUID:", error);
+        }
+    } else {
+        ccWebSocket.closeWebSocket();
+    }
+}
+
+function ccUpdateUI(status) {
+    const statusText = document.getElementById("statusText");
+    const platform = document.getElementById("platform");
+    const username = document.getElementById("username");
+    const userId = document.getElementById("userid");
+    const btnConnect = document.getElementById("ccIDConnect");
+
+    statusText.style.color = status ? "green" : "red";
+    statusText.innerText = status ? "Connected" : "Disconnected";
+
+    platform.disabled = status;
+    username.disabled = status;
+    userId.disabled = status;
+    btnConnect.innerHTML = status ? "Disconnect" : "Connect";
+    ccWebSocketStatus = status;
+    btnConnect.disabled = false;
+}
+
+function ccPopulateAndShowTable() {
+    var gameSelect = document.getElementById("game");
+    var packSelect = document.getElementById("pack");
+    var table = document.getElementById("ccEffectTable");
+
+    var selectedGame = gameSelect.value;
+    var selectedPack = packSelect.value;
+
+    if (!ccTableVisible) {
+        ccGetEffects(selectedGame, selectedPack)
+            .then(function(effects) {
+                // Clear existing table rows
+                table.innerHTML = "";
+
+                // Create table headers
+                var headerRow = table.insertRow();
+                var nameHeader = headerRow.insertCell();
+                var descriptionHeader = headerRow.insertCell();
+                var effectIDHeader = headerRow.insertCell();
+                nameHeader.textContent = "Name";
+                descriptionHeader.textContent = "Description";
+                effectIDHeader.textContent = "Effect ID";
+
+                // Apply CSS styles to table headers
+                nameHeader.style.padding = "8px";
+                nameHeader.style.textAlign = "center";
+                nameHeader.style.borderBottom = "1px solid #ddd";
+
+                descriptionHeader.style.padding = "8px";
+                descriptionHeader.style.textAlign = "center";
+                descriptionHeader.style.borderBottom = "1px solid #ddd";
+
+                effectIDHeader.style.padding = "8px";
+                effectIDHeader.style.textAlign = "center";
+                effectIDHeader.style.borderBottom = "1px solid #ddd";
+
+                // Populate table rows with data
+                Object.entries(effects).forEach(function([effectID, effect]) {
+                    var row = table.insertRow();
+                    var nameCell = row.insertCell();
+                    var descriptionCell = row.insertCell();
+                    var effectIDCell = row.insertCell();
+                    nameCell.textContent = effect.name;
+                    descriptionCell.textContent = ccStripHTMLTags(effect.description);
+                    effectIDCell.textContent = effectID;
+
+                    // Apply CSS styles to table cells
+                    nameCell.style.padding = "8px";
+                    nameCell.style.textAlign = "center";
+                    nameCell.style.border = "1px solid white";
+
+                    descriptionCell.style.padding = "8px";
+                    descriptionCell.style.textAlign = "center";
+                    descriptionCell.style.border = "1px solid white";
+
+                    effectIDCell.style.padding = "8px";
+                    effectIDCell.style.textAlign = "center";
+                    effectIDCell.style.border = "1px solid white";
+                });
+
+                // Apply white border to each table row (tr)
+                var rows = table.getElementsByTagName("tr");
+                for (var i = 0; i < rows.length; i++) {
+                    rows[i].style.border = "1px solid white";
+                }
+
+                // Show the table with a white border
+                var tableContainer = document.getElementById("tableContainer");
+                tableContainer.style.display = "block";
+                tableContainer.style.border = "1px solid white";
+                document.getElementById("showHideButton").textContent = "Hide Effects";
+                ccTableVisible = true;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    } else {
+        ccHideEffects();
+    }
+}
+
+function ccStripHTMLTags(html) {
+    var temp = document.createElement("div");
+    temp.innerHTML = html;
+    return temp.textContent || temp.innerText || "";
+}
+
+async function ccGetEffects(selectedGame, selectedPack) {
+    var link = `https://openapi.crowdcontrol.live/games/${selectedGame}/packs`;
+
+    try {
+        var response = await fetch(link);
+        var data = await response.json();
+
+        var selectedData = data.find(function(item) {
+            return item.gamePackID === selectedPack;
+        });
+
+        return selectedData.effects.game;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+}
+
+function ccHideEffects() {
+    var table = document.getElementById("ccEffectTable");
+    var tableContainer = document.getElementById("tableContainer");
+    table.innerHTML = "";
+    tableContainer.style.display = "none";
+    tableContainer.style.border = "none";
+    document.getElementById("showHideButton").textContent = "Show Effects";
+    ccTableVisible = false;
+}
+
+//This function handles the messages received from the websocket server
+function ccCreateWebSocket(ccUID) {
+    var url = `wss://r8073rtqd8.execute-api.us-east-1.amazonaws.com/staging/`;
+    var socket = new WebSocket(url);
+
+    // WebSocket connection established
+    socket.onopen = function(event) {
+        var message = {
+            action: "subscribe",
+            data: `{"topics":["pub/${ccUID}"]}`
+        };
+        socket.send(JSON.stringify(message));
+    };
+
+    // WebSocket message received
+    socket.onmessage = function(event) {
+        var messageObject = JSON.parse(event.data);
+        switch (messageObject.type) {
+            case "subscription-result":
+                if (messageObject.payload.success.length > 0) {
+                    ccUpdateUI(true);
+                    console.log("Crowd Control: Websocket Server Connected");
+                }
+                break;
+			case "effect-success":
+				messageObject.payload.type = 0;
+                console.log('Crowd Control: Effect Success', messageObject.payload);
+                SAMMI.triggerExt('Crowd Control: Effect Success', messageObject.payload);
+                break;
+            case "effect-failure":
+				messageObject.payload.type = 1;
+                console.log('Crowd Control: Effect Failure', messageObject.payload);
+                SAMMI.triggerExt('Crowd Control: Effect Failure', messageObject.payload);
+                break;
+            case "effect-request":
+				messageObject.payload.type = 2;
+                console.log('Crowd Control: Effect Request', messageObject.payload);
+                SAMMI.triggerExt('Crowd Control: Effect Request', messageObject.payload);			
+                break;
+            case "timed-effect-update":
+				messageObject.payload.type = 3;
+                console.log('Crowd Control: Timed Effect Update', messageObject.payload);
+                SAMMI.triggerExt('Crowd Control: Timed Effect Update', messageObject.payload);
+                break;
+        }
+    };
+
+    // WebSocket connection closed
+    socket.onclose = function(event) {
+        ccUpdateUI(false);
+        console.log("Crowd Control: Websocket Server Disconnected");
+    };
+
+    // WebSocket error occurred
+    socket.onerror = function(error) {
+        console.error("WebSocket error:", error);
+    };
+
+    // Send a message through the WebSocket connection
+    function sendMessage(message) {
+        socket.send(message);
+    }
+
+    // Close the WebSocket connection
+    function closeWebSocket() {
+        socket.close();
+    }
+
+    // Return the WebSocket object
+    return {
+        socket: socket,
+        sendMessage: sendMessage,
+        closeWebSocket: closeWebSocket
+    };
+}
+
+//SAMMI Commands
+function ccSetSAMMIEffects(variable_name, FromButton, instanceId) {
+    var gameSelect = document.getElementById("game");
+    var packSelect = document.getElementById("pack");
+
+    var selectedGame = gameSelect.value;
+    var selectedPack = packSelect.value;
+
+    ccGetEffects(selectedGame, selectedPack)
+        .then(function(effects) {
+            SAMMI.setVariable(variable_name, effects, FromButton, instanceId);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+}
+
+function ccGetGameList(variable_name, FromButton, instanceId) {
+    ccFetchGames()
+        .then(gamelist => {
+            SAMMI.setVariable(variable_name, gamelist, FromButton, instanceId);
+        });
+}
+
+function ccCheckConnectionStatus(variable_name, FromButton, instanceId) {
+    if (ccWebSocketStatus == true) {
+        SAMMI.setVariable(variable_name, true, FromButton, instanceId);
+    } else {
+        SAMMI.setVariable(variable_name, false, FromButton, instanceId);
+    }
+}
+
+function ccToggleConnection(variable_name, FromButton, instanceId) {
+    ccConnect();
+    setTimeout(function() {
+        if (ccWebSocketStatus == true) {
+            SAMMI.setVariable(variable_name, true, FromButton, instanceId);
+        } else {
+            SAMMI.setVariable(variable_name, false, FromButton, instanceId);
+        }
+    }, 3000);
+}
+
+//[Crowd Control script end]
 </script>
 <script src="https://cdn.jsdelivr.net/gh/SAMMISolutions/SAMMI-Websocket@main/dist/sammi-websocket.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
