@@ -1927,8 +1927,8 @@ async function SAMMITestTriggers() {
 ,
     SAMMITestTwitchSubGift(form) {
   const subForm = document.getElementById('SAMMITestTwitchSubs');
-  if (subForm.elements['prime'].checked) subForm.elements['tier1'].checked = true;
-  if (subForm.elements['anongift'].checked === false) subForm.elements['subgift'].checked = true;
+  if (subForm.querySelector('[value="Prime"]').checked) subForm.querySelector('[value="tier1"]').checked = true;
+  if (subForm.querySelector('[value="anongift"]').checked === false) subForm.querySelector('[value="subgift"]').checked = true;
   const tiers = subForm.querySelectorAll('input[name="tier"]');
   let selectedTier;
 
@@ -1945,7 +1945,7 @@ async function SAMMITestTriggers() {
       : selectedTier === 'Tier 3'
         ? 4
         : 1;
-  const gifterName = subForm.elements['anongift'].checked
+  const gifterName = subForm.querySelector('[value="anongift"]').checked
     ? ['Anonymous User']
     : generateName();
   const amount = parseInt(form.elements['subGiftAmount'].value) || 1;
@@ -2240,7 +2240,7 @@ async function SAMMITestTriggers() {
       case 'Progressed': {
         const sourceSelect = form.elements['hypeTrainSource'];
         const source = sourceSelect.options[sourceSelect.selectedIndex].text;
-        const [name, userID] = await getNameFromInput(form.elements['hypeTrainName'].value);
+        const [name, userID] = await getNameFromInput(form.elements.hypeTrainName);
         const amount = parseInt(form.elements['hypeTrainAmount'].value) || 10;
         data = {
           sequence_id: 2174,
