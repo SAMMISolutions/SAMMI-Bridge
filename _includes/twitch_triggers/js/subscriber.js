@@ -1,5 +1,6 @@
 async SAMMITestTwitchSubs(form, notUsed, gifted = false, gifterName = '') {
   const type = 1;
+  const month = parseInt(form.elements.submonths.value) || 1;
   const subtype = form.elements.subgift.checked
     ? 2
     : form.elements.anongift.checked
@@ -13,8 +14,7 @@ async SAMMITestTwitchSubs(form, notUsed, gifted = false, gifterName = '') {
       ? 'anonsubgift'
       : gifted
         ? 'subgift'
-        : 'resub';
-  const month = parseInt(form.elements.submonths.value) || 1;
+        : month > 1 ? 'resub' : 'sub'
   let name; let userID;
   if (gifted) {
     name = gifterName;
