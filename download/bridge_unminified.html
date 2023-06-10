@@ -286,7 +286,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
 </div>
 <!-- Tab Content -->
 <div class="tab-content" id="extensions-tabContent">
-    <div class="tab-pane" id="content-basic" role="tabpanel" title="Settings" data-type="settings">
+    <div class="tab-pane" id="content-settings" role="tabpanel" title="Settings" data-type="settings">
   <div class='row pt-3'>
     <h5>Bridge Connection</h5>
     <div class="fs-7 mb-3"><span class="me-2">Version:</span><span name="version"></span></div>
@@ -737,6 +737,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
   </div>
 
 <script>
+/* eslint-disable */  
 (function() {
   "use strict";
 /* eslint-disable */
@@ -1197,7 +1198,7 @@ class SAMMIUI {
     this.tabSortList = JSON.parse(localStorage.getItem('bridge_tabsSortList')) || [];
     this.newTabSortList = [];
     this.tabsVisibility = JSON.parse(localStorage.getItem('bridge_tabsVisibility')) || {};
-    this.lastActiveTab = localStorage.getItem('bridge_tabsActive') || 'content-basic';
+    this.lastActiveTab = localStorage.getItem('bridge_tabsActive') || 'content-settings';
   }
 
   // This method initializes the modal used by SAMMI Core to call Bridge
@@ -1290,9 +1291,9 @@ class SAMMIUI {
 
       // If the tab was dropped on the 'X', hide it
       if (overCloseButton) {
-        const draggedElement = currentDraggedSource.nextSibling.firstChild;
+        const draggedElement = document.querySelector('.draggable--original');
         draggedElement.classList.add('d-none');
-        document.getElementById(`checkbox${draggedElement.id.slice(0, -4)}`).checked = false; // Uncheck the checkbox
+        document.getElementById(`checkbox${draggedElement.children[0].id.slice(0, -4)}`).checked = false; // Uncheck the checkbox
         classInstance.saveTabsVisibility();  // save tabs visibility
       }
       currentDraggedSource = null; // Reset the stored id
@@ -1311,14 +1312,14 @@ class SAMMIUI {
   // This method initializes tabs
   initTabs() {
     // Ensures that the last active tab is the one that will be displayed first
-    this.lastActiveTab = document.getElementById(this.lastActiveTab) ? this.lastActiveTab : 'content-basic';
+    this.lastActiveTab = document.getElementById(this.lastActiveTab) ? this.lastActiveTab : 'content-settings';
 
     // Select all tab panes and sort them into default and added content
     const contentLi = this.parent.querySelectorAll('.tab-pane');
     const contentAll = Array.from(contentLi).filter((n) => n.parentNode.closest('.tab-pane') === this.parent.closest('.tab-pane'));
 
     // Separate default and added content
-    const defaultContent = contentAll.filter((e) => e.dataset.type === 'default');
+    const defaultContent = contentAll.filter((e) => e.dataset.type === 'default' || e.dataset.type === 'settings');
     const addedContent = contentAll.filter((e) => e.dataset.type !== 'default').reverse();
 
     // Reassemble content in the correct order
@@ -1331,7 +1332,7 @@ class SAMMIUI {
     content.forEach((e) => {
       e.id = e.id.replace(/^[^a-z]+|[^\w:.-]+/g, '');
       this.createExtensionTab(e);
-      this.createExtensionBox(e);
+      if (e.dataset.type !== 'settings' && e.id != 'content-extensions') this.createExtensionBox(e);
     });
 
     // Sort the tabs according to the sort list
@@ -1367,7 +1368,7 @@ class SAMMIUI {
     this.installedExt.onclick = (ev) => {
       if (ev.target.value) {
         const id = ev.target.id.slice(8);
-        if (id === 'content-basic' || id === 'content-extensions') return;
+        if (id === 'content-settings' || id === 'content-extensions') return;
         const li = document.querySelector(`[aria-controls="${id}"]`);
 
         ev.target.checked ? li.classList.remove('d-none') : li.classList.add('d-none');
@@ -1422,7 +1423,7 @@ class SAMMIUI {
     li.setAttribute('class', 'nav-item');
     li.setAttribute('role', 'presentation');
     // Determine if the element should be draggable
-    if (e.id !== 'content-basic' && e.id !== 'content-extensions') {
+    if (e.id !== 'content-settings' && e.id !== 'content-extensions') {
       li.setAttribute('draggable', 'true');
       button.setAttribute('draggable', 'true');
     } else {
