@@ -7,7 +7,7 @@ async SAMMITestTwitchBits(form) {
     user_name: name.toLowerCase(),
     // display_name: name, // bits don't display name
     user_id: userID,
-    amount: `${amount}`,
+    amount: amount,
     total_amount: totalAmount,
     message,
 
