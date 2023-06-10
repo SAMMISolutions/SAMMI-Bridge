@@ -1739,7 +1739,11 @@ async function populateExtensionTable() {
   }
 
   currentExtensions.forEach((current) => {
-    const latest = extensionData.find((e) => e.extension_name.toLowerCase().trim() === current.extension_name.toLowerCase().trim());
+    const latest = extensionData.find((e) => {
+        const extensionNameMatch = e.extension_name.toLowerCase().trim() === current.extension_name.toLowerCase().trim();
+        const alternateNamesMatch = e.alternate_names ? e.alternate_names.map(n => n.toLowerCase().trim()).includes(current.extension_name.toLowerCase().trim()) : false;
+        return extensionNameMatch || alternateNamesMatch;
+    });
     const row = document.createElement('tr');
 
     // Create the cell for the extension name
