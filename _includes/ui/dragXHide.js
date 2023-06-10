@@ -82,9 +82,9 @@ static dragXHide(draggable, classInstance) {
 
       // If the tab was dropped on the 'X', hide it
       if (overCloseButton) {
-        const draggedElement = currentDraggedSource.nextSibling.firstChild;
+        const draggedElement = document.querySelector('.draggable--original');
         draggedElement.classList.add('d-none');
-        document.getElementById(`checkbox${draggedElement.id.slice(0, -4)}`).checked = false; // Uncheck the checkbox
+        document.getElementById(`checkbox${draggedElement.children[0].id.slice(0, -4)}`).checked = false; // Uncheck the checkbox
         classInstance.saveTabsVisibility();  // save tabs visibility
       }
       currentDraggedSource = null; // Reset the stored id

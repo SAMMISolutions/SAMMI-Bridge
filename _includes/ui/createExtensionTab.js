@@ -15,7 +15,7 @@ createExtensionTab(e) {
     li.setAttribute('class', 'nav-item');
     li.setAttribute('role', 'presentation');
     // Determine if the element should be draggable
-    if (e.id !== 'content-basic' && e.id !== 'content-extensions') {
+    if (e.id !== 'content-settings' && e.id !== 'content-extensions') {
       li.setAttribute('draggable', 'true');
       button.setAttribute('draggable', 'true');
     } else {

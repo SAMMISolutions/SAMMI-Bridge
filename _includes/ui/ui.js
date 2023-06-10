@@ -11,7 +11,7 @@ class SAMMIUI {
     this.tabSortList = JSON.parse(localStorage.getItem('bridge_tabsSortList')) || [];
     this.newTabSortList = [];
     this.tabsVisibility = JSON.parse(localStorage.getItem('bridge_tabsVisibility')) || {};
-    this.lastActiveTab = localStorage.getItem('bridge_tabsActive') || 'content-basic';
+    this.lastActiveTab = localStorage.getItem('bridge_tabsActive') || 'content-settings';
   }
 
   // This method initializes the modal used by SAMMI Core to call Bridge

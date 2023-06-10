@@ -1,13 +1,13 @@
 initTabs() {
     // Ensures that the last active tab is the one that will be displayed first
-    this.lastActiveTab = document.getElementById(this.lastActiveTab) ? this.lastActiveTab : 'content-basic';
+    this.lastActiveTab = document.getElementById(this.lastActiveTab) ? this.lastActiveTab : 'content-settings';
 
     // Select all tab panes and sort them into default and added content
     const contentLi = this.parent.querySelectorAll('.tab-pane');
     const contentAll = Array.from(contentLi).filter((n) => n.parentNode.closest('.tab-pane') === this.parent.closest('.tab-pane'));
 
     // Separate default and added content
-    const defaultContent = contentAll.filter((e) => e.dataset.type === 'default');
+    const defaultContent = contentAll.filter((e) => e.dataset.type === 'default' || e.dataset.type === 'settings');
     const addedContent = contentAll.filter((e) => e.dataset.type !== 'default').reverse();
 
     // Reassemble content in the correct order
@@ -20,7 +20,7 @@ initTabs() {
     content.forEach((e) => {
       e.id = e.id.replace(/^[^a-z]+|[^\w:.-]+/g, '');
       this.createExtensionTab(e);
-      this.createExtensionBox(e);
+      if (e.dataset.type !== 'settings' && e.id != 'content-extensions') this.createExtensionBox(e);
     });
 
     // Sort the tabs according to the sort list
@@ -56,7 +56,7 @@ initTabs() {
     this.installedExt.onclick = (ev) => {
       if (ev.target.value) {
         const id = ev.target.id.slice(8);
-        if (id === 'content-basic' || id === 'content-extensions') return;
+        if (id === 'content-settings' || id === 'content-extensions') return;
         const li = document.querySelector(`[aria-controls="${id}"]`);
 
         ev.target.checked ? li.classList.remove('d-none') : li.classList.add('d-none');
