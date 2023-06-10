@@ -1701,7 +1701,7 @@ function getCurrentExtensions() {
   const currentExtensions = [];
   tabs.forEach((tab) => {
     const tabTitle = tab.title.toLowerCase(); // Convert tab title to lowercase
-    if (['twitch triggers', 'youtube triggers', 'extensions', 'status'].includes(tabTitle) || tabTitle === '') return;
+    if (['twitch triggers', 'youtube triggers', 'extensions', 'settings'].includes(tabTitle) || tabTitle === '') return;
     currentExtensions.push({
       extension_name: tab.title,
       current_version: tab.getAttribute('data-version'),
