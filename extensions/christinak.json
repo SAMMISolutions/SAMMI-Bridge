@@ -1,48 +1,273 @@
 {
     "extensions": [
         {
-            "extension_name": "Discord Controls",
+            "extension_name": "Active Window",
             "details": {
-                "author": "Christina K",
-                "description": "Control your stream with Discord!",
-                "latest_version": "1.1",
-                "download_link": "https://christinak.itch.io/discord-controls"
-            }
-        },
-        {
-            "extension_name": "Chat Logs",
-            "details": {
-                "author": "Christina K",
-                "description": "Log your Twitch chat!",
-                "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/twitch-chat-logs"
-            }
-        },
-        {
-            "extension_name": "Puzzle Game",
-            "details": {
-                "author": "Christina K",
-                "description": "A puzzle game!",
+                "author": "Christina K.",
+                "description": "Displays detailed information about your current active window, including its title, dimensions, and position.",
                 "latest_version": "2.0",
-                "download_link": "https://christinak.itch.io/sammi-puzzle-game"
+                "download_link": ""
             }
         },
         {
-            "extension_name": "Get Folder Files",
+            "extension_name": "Twitch Chat Stats",
             "details": {
-                "author": "Christina K",
-                "description": "Get all files in a folder!",
+                "author": "Christina K.",
+                "description": "Provides in-depth statistics and analysis of your Twitch chat activity.",
                 "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/get-folder-files"
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "ChatGPT for SAMMI",
+            "details": {
+                "author": "Christina K.",
+                "description": "Enriches SAMMI with the AI conversation capabilities of OpenAI's ChatGPT.",
+                "latest_version": "1.1",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Click Map by Christina K",
+            "details": {
+                "author": "Christina K.",
+                "description": "Transforms your live stream into an interactive viewer experience by enabling on-screen clicks.",
+                "latest_version": "1.2",
+                "download_link": ""
             }
         },
         {
             "extension_name": "Color Converter",
             "details": {
-                "author": "Christina K",
-                "description": "Convert colors!",
+                "author": "Christina K.",
+                "description": "Effortlessly translates various color formats to decimal RGB values.",
                 "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/sammi-color-converter"
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Connect 4",
+            "details": {
+                "author": "Christina K.",
+                "description": "Introduces the classic game of Connect 4 as a playable extension.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Discord Controls",
+            "details": {
+                "author": "Christina K.",
+                "description": "Enables direct management of Discord functionalities from within SAMMI.",
+                "latest_version": "1.1",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Discord Relay",
+            "details": {
+                "author": "Christina K.",
+                "description": "Facilitates efficient communication between Discord and SAMMI through a relay system.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Get Folder Files",
+            "details": {
+                "author": "Christina K.",
+                "description": "Lists all files in a selected folder, presented in an array format.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Google Sheets by Christina",
+            "details": {
+                "author": "Christina K.",
+                "description": "Grants the ability to view and manipulate Google Sheets directly from SAMMI.",
+                "latest_version": "1.3",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Hunter: COTW Scanner",
+            "details": {
+                "author": "Christina K.",
+                "description": "Assists players of Hunter: Call of the Wild by scanning the game environment for useful information.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "IFTTT Event",
+            "details": {
+                "author": "Christina K.",
+                "description": "Creates and manages If This Then That (IFTTT) events for enhanced automation capabilities.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "IFTTT to LioranBoard",
+            "details": {
+                "author": "Christina K.",
+                "description": "Allows for the sending of triggers from IFTTT directly to your SAMMI.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "IFTTT to SAMMI",
+            "details": {
+                "author": "Christina K.",
+                "description": "Facilitates the sending of triggers from IFTTT directly to your SAMMI.",
+                "latest_version": "1.1",
+                "download_link": ""
+            }
+        },     
+        {
+            "extension_name": "Imgur Uploader",
+            "details": {
+                "author": "Christina K.",
+                "description": "Allows for the quick and easy uploading of images to Imgur directly from SAMMI.",
+                "latest_version": "1.00",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Kick",
+            "details": {
+                "author": "Christina K.",
+                "description": "Enables integration with Kick for enhanced user management in SAMMI.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Ko-Fi Triggers",
+            "details": {
+                "author": "Christina K.",
+                "description": "Allows for the reception of triggers from Ko-Fi directly in SAMMI.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Lucky Wheel by Christina K",
+            "details": {
+                "author": "Christina K.",
+                "description": "Allows users to spin a customizable lucky wheel and claim rewards directly in SAMMI.",
+                "latest_version": "1.2",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "OBS Resizer",
+            "details": {
+                "author": "Christina K.",
+                "description": "Aids in adjusting the size and scale of OBS elements for optimized streaming visuals.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Get YouTube Video Duration",
+            "details": {
+                "author": "Christina K.",
+                "description": "Fetches the duration of a YouTube video given its URL or ID.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "AI Image Generator",
+            "details": {
+                "author": "Christina K.",
+                "description": "Generates artificial intelligence-enhanced images using various AI engines.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Patreon Triggers",
+            "details": {
+                "author": "Christina K.",
+                "description": "Allows for the reception of triggers from Patreon directly to your LioranBoard.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Puzzle Game",
+            "details": {
+                "author": "Christina K.",
+                "description": "Turns your scenes and sources into an interactive puzzle game for your viewers to engage with.",
+                "latest_version": "2.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Spotify by Christina K.",
+            "details": {
+                "author": "Christina K.",
+                "description": "Adds a Spotify player to SAMMI for enhanced music control and display.",
+                "latest_version": "1.9",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Timer",
+            "details": {
+                "author": "Christina K.",
+                "description": "Allows the dynamic setting and deletion of multiple timers for various needs.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Translate by K",
+            "details": {
+                "author": "Christina K.",
+                "description": "Facilitates the translation of text between various languages directly in SAMMI.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "TTS by Christina K",
+            "details": {
+                "author": "Christina K.",
+                "description": "A 3-in-1 text-to-speech tool for SAMMI for a more immersive and interactive streaming experience.",
+                "latest_version": "1.3",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Twitch Chat Logs",
+            "details": {
+                "author": "Christina K.",
+                "description": "Fetches and allows for the searching through any Twitch VOD chat logs for user analysis.",
+                "latest_version": "1.2",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Twitter",
+            "details": {
+                "author": "Christina K.",
+                "description": "Provides a toolset for managing your Twitter account directly from SAMMI.",
+                "latest_version": "1.0",
+                "download_link": ""
+            }
+        },
+        {
+            "extension_name": "Input Validator",
+            "details": {
+                "author": "Christina K.",
+                "description": "Checks and verifies various forms of user input for validity.",
+                "latest_version": "1.1",
+                "download_link": ""
             }
         }
     ]
