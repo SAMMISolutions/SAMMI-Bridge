@@ -275,6 +275,72 @@
                 "latest_version": "1.1",
                 "download_link": "https://img.itch.zone/aW1nLzEwMjk3NTU3LnBuZw==/105x83%23/Z4if7%2F.png"
             }
+        },
+        {
+            "extension_name": "Easy Emotes",
+            "details": {
+                "author": "Landie",
+                "description": "Easily display emotes in an image source!",
+                "latest_version": "1.0.2",
+                "download_link": "https://landie.itch.io/sammi-easy-emotes"
+            }
+        },
+        {
+            "extension_name": "File Downloader",
+            "details": {
+                "author": "Landie",
+                "description": "Download files from the internet!",
+                "latest_version": "2.0.4",
+                "download_link": "https://landie.itch.io/sammi-file-downloader"
+            }
+        },
+        {
+            "extension_name": "Folder Reader",
+            "details": {
+                "author": "Landie",
+                "description": "Reads Files and Folders from a directory (with optional filters!)",
+                "latest_version": "3.0.1",
+                "download_link": "https://landie.itch.io/sammi-folder-reader"
+            }
+        },
+        {
+            "extension_name": "Foobar2000 Control",
+            "alternate_names": [
+                "foobar2000"
+            ],
+            "details": {
+                "author": "Landie",
+                "description": "Control, fetch data, and more with SAMMI!",
+                "latest_version": "1.0.3",
+                "download_link": "https://landie.itch.io/sammi-foobar2000"
+            }
+        },
+        {
+            "extension_name": "Gamepad Triggers",
+            "details": {
+                "author": "Landie",
+                "description": "adds extension triggers for button events on a gamepad",
+                "latest_version": "1.0.1",
+                "download_link": "https://landie.itch.io/sammi-gamepad-triggers"
+            }
+        },
+        {
+            "extension_name": "LandiTube",
+            "details": {
+                "author": "Landie",
+                "description": "A fully fledged PNGTuber engine within SAMMI! commissioned by Jessyabeb!",
+                "latest_version": "0.16.0",
+                "download_link": "https://landie.itch.io/sammi-landitube"
+            }
+        },
+        {
+            "extension_name": "Sando",
+            "details": {
+                "author": "Landie",
+                "description": "A Library to make extension developer's lives easier!",
+                "latest_version": "0.16.0",
+                "download_link": "https://landie.itch.io/sammi-sando"
+            }
         }
     ]
 }
