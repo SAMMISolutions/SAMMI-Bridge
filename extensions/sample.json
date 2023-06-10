@@ -2,6 +2,7 @@
     "extensions": [
         {
             "extension_name": "Sample",
+            "alternate_names": ["My Sample", "This Sample"],
             "details": {
                 "author": "Author Name",
                 "description": "Extension Description (optional)",
