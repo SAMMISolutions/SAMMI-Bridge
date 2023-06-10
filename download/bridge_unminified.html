@@ -1822,11 +1822,13 @@ async function populateExtensionTable() {
   if (allUpToDate) {
     extensionIcon.className = 'fas fa-check-circle me-1 d-md-none';
     extensionIcon.style.color = '#4ad84a';
+    extensionIcon.title = 'Updates available';
     versionSpan.innerText = 'All up to date';
     versionSpan.style.color = '#4ad84a';
   } else {
     extensionIcon.className = 'fas fa-exclamation-circle me-1 d-md-none';
     extensionIcon.style.color = 'orange';
+    extensionIcon.title = 'Updates available';
     versionSpan.innerText = 'Updates available';
     versionSpan.style.color = 'orange';
   }
