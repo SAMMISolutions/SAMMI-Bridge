@@ -48,11 +48,13 @@ async function populateExtensionTable() {
     return; // Exit the function
   }
 
+  currentExtensions.sort((a, b) => a.extension_name.localeCompare(b.extension_name));
+
   currentExtensions.forEach((current) => {
     const latest = extensionData.find((e) => {
-        const extensionNameMatch = e.extension_name.toLowerCase().trim() === current.extension_name.toLowerCase().trim();
-        const alternateNamesMatch = e.alternate_names ? e.alternate_names.map(n => n.toLowerCase().trim()).includes(current.extension_name.toLowerCase().trim()) : false;
-        return extensionNameMatch || alternateNamesMatch;
+      const extensionNameMatch = e.extension_name.toLowerCase().trim() === current.extension_name.toLowerCase().trim();
+      const alternateNamesMatch = e.alternate_names ? e.alternate_names.map((n) => n.toLowerCase().trim()).includes(current.extension_name.toLowerCase().trim()) : false;
+      return extensionNameMatch || alternateNamesMatch;
     });
     const row = document.createElement('tr');
 
@@ -72,16 +74,19 @@ async function populateExtensionTable() {
     // Author cell
     const authorCell = document.createElement('td');
     authorCell.className = 'd-none d-sm-table-cell';
+    authorCell.title = 'Extension Author';
     authorCell.innerText = latest ? latest.details.author : 'N/A';
     row.appendChild(authorCell);
 
     // Current version cell
     const currentVersionCell = document.createElement('td');
-    currentVersionCell.innerText = current.current_version != 'unknown' ? current.current_version : 'N/A';
+    currentVersionCell.title = 'Installed Version';
+    currentVersionCell.innerText = current.current_version !== 'unknown' ? current.current_version : 'N/A';
     row.appendChild(currentVersionCell);
 
     // Latest version cell
     const latestVersionCell = document.createElement('td');
+    latestVersionCell.title = 'Latest Version';
     latestVersionCell.innerText = latest ? latest.details.latest_version : 'N/A';
     row.appendChild(latestVersionCell);
 
@@ -102,6 +107,14 @@ async function populateExtensionTable() {
             <span class="d-none d-sm-inline">${latest.details.latest_version !== current.current_version ? 'Update' : 'Download'}</span>
             <i class="fas fa-${latest.details.latest_version !== current.current_version ? 'sync' : 'download'} d-sm-none"></i>
         </a>
+      `;
+    } else {
+      // place holder to maintain cell height
+      downloadCell.innerHTML = `
+          <a href="#" style="visibility: hidden;" class="btn btn-sm">
+              <span class="d-none d-sm-inline">Placeholder</span>
+              <i class="fas fa-sync d-sm-none"></i>
+          </a>
       `;
     }
     row.appendChild(downloadCell);
