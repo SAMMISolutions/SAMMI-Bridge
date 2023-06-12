@@ -1,7 +1,10 @@
 (function initDebugLogging() {
-  dbgBridge.checked = SAMMIVars.SAMMIdebug.core;
-  SAMMIDebugLog(dbgBridge);
-}());
+  const dbgBridgeEl = document.getElementById('dbgBridge');
+  dbgBridgeEl.checked = SAMMIVars.SAMMIdebug.core;
+  // call SAMMiDebugLog when the checkbox is clicked
+  dbgBridgeEl.onclick = () => SAMMIDebugLog(dbgBridgeEl);
+  SAMMIDebugLog(dbgBridgeEl);
+}())
 
 function SAMMIDebugLog(e) {
   const core = document.getElementById('SAMMIcorelog');
