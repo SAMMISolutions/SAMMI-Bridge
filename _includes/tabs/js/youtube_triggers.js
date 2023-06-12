@@ -1,32 +1,48 @@
-function YTLiveTestEvent(e) {
+function YTLiveTestEvent() {
   class ConstructPullData {
-    constructor() {
+    constructor(id) {
       [this.display_name, this.user_id, this.picture_url] = generateName();
       this.addvalues = (params) => {
         Object.assign(this, params);
       };
+      this.id = id;
     }
   }
 
-  const pullData = new ConstructPullData(e.id);
+  const buttonIds = [
+    'ytLiveTestSub',
+    'ytLiveTestMember',
+    'ytLiveTestMilestone',
+    'ytLiveTestSuperChat',
+    'ytLiveTestSuperSticker',
+    'ytLiveTestChatMessage'
+  ];
 
-  switch (e.id) {
-    case 'ytLiveTestSub': ytLiveTestSub(pullData)
-      break;
-    case 'ytLiveTestMember': ytLiveTestMember(pullData)
-      break;
-    case 'ytLiveTestMilestone': ytLiveTestMilestone(pullData)
-      break;
-    case 'ytLiveTestSuperChat': ytLiveTestSuperChat(pullData)
-      break;
-    case 'ytLiveTestSuperSticker': ytLiveTestSuperSticker(pullData)
-      break;
-    case 'ytLiveTestChatMessage': ytLiveTestChatMessage(pullData)
-      break;
-    default:
-      break;
-  }
+  buttonIds.forEach(id => {
+    const button = document.getElementById(id);
+    const pullData = new ConstructPullData(id);
 
+    button.addEventListener('click', () => {
+      switch (pullData.id) {
+        case 'ytLiveTestSub': ytLiveTestSub(pullData)
+          break;
+        case 'ytLiveTestMember': ytLiveTestMember(pullData)
+          break;
+        case 'ytLiveTestMilestone': ytLiveTestMilestone(pullData)
+          break;
+        case 'ytLiveTestSuperChat': ytLiveTestSuperChat(pullData)
+          break;
+        case 'ytLiveTestSuperSticker': ytLiveTestSuperSticker(pullData)
+          break;
+        case 'ytLiveTestChatMessage': ytLiveTestChatMessage(pullData)
+          break;
+        default:
+          break;
+      }
+    });
+  });
+
+  // Assuming your include statements can be placed here
   {% include youtube_triggers/js/subscriber.js %}
   {% include youtube_triggers/js/member.js %}
   {% include youtube_triggers/js/milestone.js %}
