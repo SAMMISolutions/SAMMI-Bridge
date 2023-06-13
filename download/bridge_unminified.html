@@ -631,18 +631,16 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
     </div>
     <div class="align-middle align-items-center">
         <div>
-    <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestSub"
-        onclick="YTLiveTestEvent(this)">Test Subscriber</button>
+    <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestSub">Test Subscriber</button>
 </div>
         <div>
     <button style="margin-right:10px;" type="button"
-        class="btn btn-primary btn-sm" id="ytLiveTestMember" onclick="YTLiveTestEvent(this)">Test
+        class="btn btn-primary btn-sm" id="ytLiveTestMember">Test
         Member</button>
     </div>
         <div>
     <div class="btn-group align-items-center">
-        <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestMilestone"
-            onclick="YTLiveTestEvent(this)">Test Member Renewal</button>
+        <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestMilestone">Test Member Renewal</button>
         <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#YTLiveHideMilestone" role="button"
             aria-expanded="false" aria-controls="HideMilestone"></a>
     </div> <br>
@@ -661,8 +659,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
 </div>
         <div>
     <div class="btn-group align-items-center">
-        <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestSuperChat"
-            onclick="YTLiveTestEvent(this)">Test Super Chat</button>
+        <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestSuperChat">Test Super Chat</button>
         <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#YTLiveHideSuperChat" role="button"
             aria-expanded="false" aria-controls="HideSuperChat"></a>
     </div> <br>
@@ -682,8 +679,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
 </div>
         <div>
     <div class="btn-group align-items-center">
-        <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestSuperSticker"
-            onclick="YTLiveTestEvent(this)">Test Super Sticker</button>
+        <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestSuperSticker">Test Super Sticker</button>
         <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#YTLiveHideSuperSticker" role="button"
             aria-expanded="false" aria-controls="HideSuperSticker"></a>
     </div> <br>
@@ -697,8 +693,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
 </div>
         <div>
     <div class="btn-group align-items-center">
-        <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestChatMessage"
-            onclick="YTLiveTestEvent(this)">Test Chat Message</button>
+        <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestChatMessage">Test Chat Message</button>
         <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#YTLiveHideChatMessage" role="button"
             aria-expanded="false" aria-controls="HideChatMessage"></a>
     </div> <br>
@@ -1181,9 +1176,12 @@ populateExtensionTable();
 // Get Bridge Version
 getVersionFromHTML();
 
-// Test triggers
+// Initiate Twitch Test triggers
 SAMMITestTriggers();
 }, false);
+
+// Initiate YouTube Test triggers
+YTLiveTestEvent();
 
 // Create a new SAMMIUI class
 class SAMMIUI {
@@ -2581,35 +2579,51 @@ function* splitNParts(num, parts) {
 
 }
 
-function YTLiveTestEvent(e) {
+function YTLiveTestEvent() {
   class ConstructPullData {
-    constructor() {
+    constructor(id) {
       [this.display_name, this.user_id, this.picture_url] = generateName();
       this.addvalues = (params) => {
         Object.assign(this, params);
       };
+      this.id = id;
     }
   }
 
-  const pullData = new ConstructPullData(e.id);
+  const buttonIds = [
+    'ytLiveTestSub',
+    'ytLiveTestMember',
+    'ytLiveTestMilestone',
+    'ytLiveTestSuperChat',
+    'ytLiveTestSuperSticker',
+    'ytLiveTestChatMessage'
+  ];
 
-  switch (e.id) {
-    case 'ytLiveTestSub': ytLiveTestSub(pullData)
-      break;
-    case 'ytLiveTestMember': ytLiveTestMember(pullData)
-      break;
-    case 'ytLiveTestMilestone': ytLiveTestMilestone(pullData)
-      break;
-    case 'ytLiveTestSuperChat': ytLiveTestSuperChat(pullData)
-      break;
-    case 'ytLiveTestSuperSticker': ytLiveTestSuperSticker(pullData)
-      break;
-    case 'ytLiveTestChatMessage': ytLiveTestChatMessage(pullData)
-      break;
-    default:
-      break;
-  }
+  buttonIds.forEach(id => {
+    const button = document.getElementById(id);
+    const pullData = new ConstructPullData(id);
 
+    button.addEventListener('click', () => {
+      switch (pullData.id) {
+        case 'ytLiveTestSub': ytLiveTestSub(pullData)
+          break;
+        case 'ytLiveTestMember': ytLiveTestMember(pullData)
+          break;
+        case 'ytLiveTestMilestone': ytLiveTestMilestone(pullData)
+          break;
+        case 'ytLiveTestSuperChat': ytLiveTestSuperChat(pullData)
+          break;
+        case 'ytLiveTestSuperSticker': ytLiveTestSuperSticker(pullData)
+          break;
+        case 'ytLiveTestChatMessage': ytLiveTestChatMessage(pullData)
+          break;
+        default:
+          break;
+      }
+    });
+  });
+
+  // Assuming your include statements can be placed here
   function ytLiveTestSub(pullData) {
   sendTriggerToSAMMI(
     19,
@@ -2779,9 +2793,12 @@ async function getVersionFromHTML() {
 }
 
 (function initDebugLogging() {
-  dbgBridge.checked = SAMMIVars.SAMMIdebug.core;
-  SAMMIDebugLog(dbgBridge);
-}());
+  const dbgBridgeEl = document.getElementById('dbgBridge');
+  dbgBridgeEl.checked = SAMMIVars.SAMMIdebug.core;
+  // call SAMMiDebugLog when the checkbox is clicked
+  dbgBridgeEl.onclick = () => SAMMIDebugLog(dbgBridgeEl);
+  SAMMIDebugLog(dbgBridgeEl);
+}())
 
 function SAMMIDebugLog(e) {
   const core = document.getElementById('SAMMIcorelog');

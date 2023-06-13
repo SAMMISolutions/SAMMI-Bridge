@@ -1,0 +1,22 @@
+{
+    "extensions": [
+        {
+            "extension_name": "AnimeQuotes",
+            "details": {
+                "author": "Sconnargie",
+                "description": "Let you get random quots from alot of different animes with multiple configurations.",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/38918e70fe"
+            }
+        },
+        {
+            "extension_name": "Active Buttons Check/List",
+            "details": {
+                "author": "Sconnargie",
+                "description": "Commands that let you know a list/specific of all active buttons at the momment.",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/f23ff15063"
+            }
+        }
+    ]
+}
