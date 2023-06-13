@@ -1,14 +1,19 @@
-name: Merge JSON files  
+name: Merge JSON files
 
 on:
   push:
     paths:
       - 'extensions/**'
-  workflow_dispatch:      
+  pull_request:
+    types: [closed]
+    paths:
+      - 'extensions/**'
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    runs_on: ubuntu-latest
 
     steps:
     - name: Checkout code
