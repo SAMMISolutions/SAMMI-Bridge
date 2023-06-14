@@ -99,17 +99,18 @@ async function populateExtensionTable() {
 
     // Download/Update cell
     const downloadCell = document.createElement('td');
-    if (latest) {
+    if (latest && latest.details.download_link !== '') {
+      const updateAvail = !compareVersions(current.current_version, latest.details.latest_version);
       downloadCell.innerHTML = `
         <a href="${latest.details.download_link}" target="_blank" rel="noopener noreferrer" 
             class="btn btn-sm"
-            style="${latest.details.latest_version !== current.current_version ? 'background-color: #a15900' : 'background-color: #0a8263'}">
-            <span class="d-none d-sm-inline">${latest.details.latest_version !== current.current_version ? 'Update' : 'Download'}</span>
-            <i class="fas fa-${latest.details.latest_version !== current.current_version ? 'sync' : 'download'} d-sm-none"></i>
+            style="${updateAvail ? 'background-color: #a15900' : 'background-color: #0a8263'}">
+            <span class="d-none d-sm-inline">${updateAvail ? 'Update' : 'Download'}</span>
+            <i class="fas fa-${updateAvail ? 'sync' : 'download'} d-sm-none"></i>
         </a>
       `;
     } else {
-      // place holder to maintain cell height
+      // place holder to maintain table dimensions
       downloadCell.innerHTML = `
           <a href="#" style="visibility: hidden;" class="btn btn-sm">
               <span class="d-none d-sm-inline">Placeholder</span>
@@ -118,11 +119,9 @@ async function populateExtensionTable() {
       `;
     }
     row.appendChild(downloadCell);
-
     if (!latest) {
       row.style.backgroundColor = '#afab68';
-      allUpToDate = false;
-    } else if (latest.details.latest_version !== current.current_version) {
+    } else if (!compareVersions(current.current_version, latest.details.latest_version)) {
       allUpToDate = false;
     }
     tbody.appendChild(row);
@@ -142,6 +141,36 @@ async function populateExtensionTable() {
     versionSpan.style.color = 'orange';
   }
 }
+
+// Compare versions function
+function compareVersions(current, latest) {
+  if (!current || current === '') return false;
+  if (!latest || latest === '') return true;
+
+  var latestParts = latest.split('.');
+  var currentParts = current.split('.');
+
+  var maxLength = Math.max(latestParts.length, currentParts.length);
+
+  for (var i = 0; i < maxLength; i++) {
+    var latestPart = latestParts[i] ? parseInt(latestParts[i], 10).toString() : '';
+    var currentPart = currentParts[i] ? parseInt(currentParts[i], 10).toString() : '';
+
+    var maxSegmentLength = Math.max(latestPart.length, currentPart.length);
+
+    latestPart = latestPart.padEnd(maxSegmentLength, '0');
+    currentPart = currentPart.padEnd(maxSegmentLength, '0');
+
+    if (parseInt(currentPart, 10) > parseInt(latestPart, 10)) {
+      return true;
+    } else if (parseInt(currentPart, 10) < parseInt(latestPart, 10)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 
 function waitForExtensions() {
   return new Promise((resolve, reject) => {
