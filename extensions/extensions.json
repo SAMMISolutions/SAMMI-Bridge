@@ -1,6 +1,276 @@
 {
     "extensions": [
         {
+            "extension_name": "Big Key Guessing Game",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Big Key Guessing Game for the ALTTP Randomizer",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/18080fc931"
+            }
+        },
+        {
+            "extension_name": "Clipshow",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Play random clips while beeing in specific scenes",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/296f7ecfdf"
+            }
+        },
+        {
+            "extension_name": "DC Twitch Clips Extension",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Create clips and send them to discord with a single command.",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/4bc2a50cbd"
+            }
+        },
+        {
+            "extension_name": "Discord Extension",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Send messages, screenshot of your sources Embeds directly to your discord webhook.",
+                "latest_version": "2.3",
+                "download_link": "https://ko-fi.com/s/e28d13a4c2"
+            }
+        },
+        {
+            "extension_name": "Discord Live Notifications",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Automatically create live notifications on discord when starting the stream",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/183f93de71"
+            }
+        },
+        {
+            "extension_name": "Get Random Clip",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Extension to get a random clip from a username based on different parameters",
+                "latest_version": "1.3",
+                "download_link": "https://ko-fi.com/s/7e552664df"
+            }
+        },
+        {
+            "extension_name": "Get Pronouns",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Get pronouns from the pronouns.alejo.io API",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/5f590b145b"
+            }
+        },
+        {
+            "extension_name": "Hype Train",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Animates Hype Trains automatically",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/81d4121ee1"
+            }
+        },
+        {
+            "extension_name": "Loyalty System",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Loyalty system for Twitch",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/77d7b43612"
+            }
+        },
+        {
+            "extension_name": "Multi Predictions and Polls",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Animate Predictions and Polls",
+                "latest_version": "1.3",
+                "download_link": "https://ko-fi.com/s/ff39e90061"
+            }
+        },
+        {
+            "extension_name": "Onscreen Timer",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Runs an onscreen timer that can easily be modified",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/f591cd8f68"
+            }
+        },
+        {
+            "extension_name": "PokemonAndFriend Mod",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Interactive Pokemon Game where viewers can catch Pokemon live on stream",
+                "latest_version": "1.2.8",
+                "download_link": "https://ko-fi.com/s/aa74935ab0"
+            }
+        },
+        {
+            "extension_name": "PaF - PvP Add On",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "AddOn for the PaF Mod which let's your viewers fight with their Pokemon",
+                "latest_version": "1.1.7",
+                "download_link": "https://ko-fi.com/s/ee36c1c6fe"
+            }
+        },
+        {
+            "extension_name": "Pokemon Shoutout",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Small Pokemon Shoutout for Raids and the SO Command",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/a3ad47aa6f"
+            }
+        },
+        {
+            "extension_name": "Pretzel Extension",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Extension that let's you check infos for the current song on Pretzel",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/d893ae4265"
+            }
+        },
+        {
+            "extension_name": "Progress Bars",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Dynamic Progress Bars to animate your Streamgoals",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/9c13fed187"
+            }
+        },
+        {
+            "extension_name": "Quote System",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Simple Quote System for Twitch",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/e01da6a63f"
+            }
+        },
+        {
+            "extension_name": "Quote System",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Simple Quote System for Twitch",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/e01da6a63f"
+            }
+        },
+        {
+            "extension_name": "SAMMI Voice - Trigger Manipulation",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Adjusts your SAMMI Voice Triggers",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/65598548d6"
+            }
+        },
+        {
+            "extension_name": "Screenshot Extension",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Take screenshots of your sources and scenes",
+                "latest_version": "1.3",
+                "download_link": "https://ko-fi.com/s/168da134d9"
+            }
+        },
+        {
+            "extension_name": "Seas Custom Points Chat Bot (YT & Twitch)",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Custom Points Chatbot for Youtube and Twitch",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/2c42911d34"
+            }
+        },
+        {
+            "extension_name": "Slotmachine",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Slot Machine that can be customized easily",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/2719e72ee3"
+            }
+        },
+        {
+            "extension_name": "Stream Leaderboard",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Creates a leaderboard for bits, subs, donations per stream",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/ee173469a5"
+            }
+        },
+        {
+            "extension_name": "User Cooldowns",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Extension to check User Cooldowns",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/e782f89c95"
+            }
+        },
+        {
+            "extension_name": "Crowd Control",
+            "alternate_names": [],
+            "details": {
+                "author": "SAMMISolutions",
+                "description": "Extension to trigger Crowd Control Triggers",
+                "latest_version": "1.0",
+                "download_link": "https://sammisolutions.itch.io/crowd-control"
+            }
+        },
+        {
+            "extension_name": "The Run GG",
+            "alternate_names": [],
+            "details": {
+                "author": "SAMMISolutions",
+                "description": "Speedrunning extension that integrates with LiveSplit and therun.gg.",
+                "latest_version": "1.0",
+                "download_link": "https://sammisolutions.itch.io/the-run"
+            }
+        },
+        {
+            "extension_name": "Voicemod",
+            "alternate_names": [],
+            "details": {
+                "author": "SAMMISolutions",
+                "description": "Extension to trigger Voicemod Triggers and to change Voicemod settings",
+                "latest_version": "1.0",
+                "download_link": "https://sammisolutions.itch.io/voicemod"
+            }
+        },
+        {
             "extension_name": "Active Window",
             "details": {
                 "author": "Christina K.",
@@ -358,6 +628,33 @@
                 "description": "Commands that let you know a list/specific of all active buttons at the momment.",
                 "latest_version": "1.0",
                 "download_link": "https://ko-fi.com/s/f23ff15063"
+            }
+        },
+        {
+            "extension_name": "Emote Stripper",
+            "details": {
+                "author": "wolbee",
+                "description": "Extension to remove emotes from a Twitch Chat message",
+                "latest_version": "1.0.0",
+                "download_link": "https://ko-fi.com/s/e90041df2a"
+            }
+        },
+        {
+            "extension_name": "Reply to Message",
+            "details": {
+                "author": "wolbee",
+                "description": "Extension to allow SAMMI to reply to Twitch Chat messages",
+                "latest_version": "1.0.0",
+                "download_link": "https://ko-fi.com/s/68c629c022"
+            }
+        },
+        {
+            "extension_name": "TITS Connection",
+            "details": {
+                "author": "wolbee",
+                "description": "Extension to allow SAMMI and T.I.T.S. to interact",
+                "latest_version": "1.0.0",
+                "download_link": "https://ko-fi.com/s/fb289771a8"
             }
         }
     ]
