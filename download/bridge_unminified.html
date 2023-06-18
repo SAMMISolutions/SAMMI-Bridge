@@ -237,6 +237,11 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
       animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) infinite both;
       transform-origin: center center;
     }
+
+    #ExtensionsSortName, #ExtensionsSortAuthor, #ExtensionsSortDownload {
+      cursor: pointer;
+    }
+    
   </style>
 </head>
 
@@ -339,8 +344,8 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
         <table class="table table-sm table-hover table-dark" id="extensionTable" style="color: #afb1b8;">
             <thead style="background-color: #182b50;">
                 <tr>
-                    <th class="pl-5 d-none d-sm-table-cell">Name</th>
-                    <th class="pl-5">Author</th>
+                    <th class="pl-5 d-none d-sm-table-cell" id="ExtensionsSortName">Name</th>
+                    <th class="pl-5" id="ExtensionsSortAuthor">Author</th>
                     <th class="pl-5">
                       <span class="d-none d-sm-inline">Current</span>
                       <i class="fas fa-clock d-sm-none"></i>
@@ -349,7 +354,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
                       <span class="d-none d-sm-inline">Latest</span>
                       <i class="fas fa-rocket d-sm-none"></i>
                     </th>
-                    <th class="pl-5">
+                    <th class="pl-5" id="ExtensionsSortDownload">
                       <span class="d-none d-sm-inline">Download</span>
                       <i class="fas fa-download d-sm-none"></i>
                     </th>
@@ -1320,7 +1325,7 @@ class SAMMIUI {
 
     // Separate default and added content
     const defaultContent = contentAll.filter((e) => e.dataset.type === 'default' || e.dataset.type === 'settings');
-    const addedContent = contentAll.filter((e) => e.dataset.type !== 'default').reverse();
+    const addedContent = contentAll.filter((e) => e.dataset.type !== 'default' && e.dataset.type !== 'settings' ).reverse();
 
     // Reassemble content in the correct order
     const content = [...defaultContent, ...addedContent];
@@ -1333,6 +1338,8 @@ class SAMMIUI {
       e.id = e.id.replace(/^[^a-z]+|[^\w:.-]+/g, '');
       this.createExtensionTab(e);
       if (e.dataset.type !== 'settings' && e.id != 'content-extensions') this.createExtensionBox(e);
+      e.setAttribute('data-title', e.title);
+      e.removeAttribute('title');
     });
 
     // Sort the tabs according to the sort list
@@ -1698,13 +1705,13 @@ async function getExtensionsData() {
 
 // Function to get current installed extensions
 function getCurrentExtensions() {
-  const tabs = document.querySelectorAll('.tab-pane');
+  const tabs = document.querySelectorAll('#extensions-tabContent > .tab-pane');
   const currentExtensions = [];
   tabs.forEach((tab) => {
-    const tabTitle = tab.title.toLowerCase(); // Convert tab title to lowercase
+    const tabTitle = tab.dataset.title.toLowerCase(); // Convert tab title to lowercase
     if (['twitch triggers', 'youtube triggers', 'extensions', 'settings'].includes(tabTitle) || tabTitle === '') return;
     currentExtensions.push({
-      extension_name: tab.title,
+      extension_name: tab.dataset.title,
       current_version: tab.getAttribute('data-version'),
     });
   });
@@ -1831,6 +1838,80 @@ async function populateExtensionTable() {
     versionSpan.innerText = 'Updates available';
     versionSpan.style.color = 'orange';
   }
+
+  // at the end of populateExtensionTable function
+  document.getElementById('ExtensionsSortName').addEventListener('click', () => {
+    sortTable(0);
+  });
+  document.getElementById('ExtensionsSortAuthor').addEventListener('click', () => {
+    sortTable(1);
+  });
+  document.getElementById('ExtensionsSortDownload').addEventListener('click', () => {
+    sortTable(4);
+  });
+}
+
+function sortTable(n) {
+  let table; let rows; let switching; let i; let x; let y; let shouldSwitch; let dir; let
+    switchcount = 0;
+  table = document.getElementById('extensionTable');
+  switching = true;
+  dir = 'asc';
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName('TD')[n];
+      y = rows[i + 1].getElementsByTagName('TD')[n];
+
+      // check for the 'Download' column
+      if (n === 4) {
+        let xDownloadValue = x.querySelector('a span').innerText.toLowerCase();
+        let yDownloadValue = y.querySelector('a span').innerText.toLowerCase();
+        if (xDownloadValue === 'download') xDownloadValue = 1;
+        else if (xDownloadValue === 'update') xDownloadValue = 2;
+        else xDownloadValue = 3; // Placeholder
+
+        if (yDownloadValue === 'download') yDownloadValue = 1;
+        else if (yDownloadValue === 'update') yDownloadValue = 2;
+        else yDownloadValue = 3; // Placeholder
+
+        if (dir === 'asc') {
+          if (xDownloadValue > yDownloadValue) {
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir === 'desc') {
+          if (xDownloadValue < yDownloadValue) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+      } else {
+        // continue as normal for other columns
+        if (dir == 'asc') {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir == 'desc') {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount++;
+    } else if (switchcount == 0 && dir == 'asc') {
+      dir = 'desc';
+      switching = true;
+    }
+  }
 }
 
 // Compare versions function
@@ -1838,30 +1919,29 @@ function compareVersions(current, latest) {
   if (!current || current === '') return false;
   if (!latest || latest === '') return true;
 
-  var latestParts = latest.split('.');
-  var currentParts = current.split('.');
+  const latestParts = latest.split('.');
+  const currentParts = current.split('.');
 
-  var maxLength = Math.max(latestParts.length, currentParts.length);
+  const maxLength = Math.max(latestParts.length, currentParts.length);
 
-  for (var i = 0; i < maxLength; i++) {
-    var latestPart = latestParts[i] ? parseInt(latestParts[i], 10).toString() : '';
-    var currentPart = currentParts[i] ? parseInt(currentParts[i], 10).toString() : '';
+  for (let i = 0; i < maxLength; i++) {
+    let latestPart = latestParts[i] ? parseInt(latestParts[i], 10).toString() : '';
+    let currentPart = currentParts[i] ? parseInt(currentParts[i], 10).toString() : '';
 
-    var maxSegmentLength = Math.max(latestPart.length, currentPart.length);
+    const maxSegmentLength = Math.max(latestPart.length, currentPart.length);
 
     latestPart = latestPart.padEnd(maxSegmentLength, '0');
     currentPart = currentPart.padEnd(maxSegmentLength, '0');
 
     if (parseInt(currentPart, 10) > parseInt(latestPart, 10)) {
       return true;
-    } else if (parseInt(currentPart, 10) < parseInt(latestPart, 10)) {
+    } if (parseInt(currentPart, 10) < parseInt(latestPart, 10)) {
       return false;
     }
   }
 
   return true;
 }
-
 
 function waitForExtensions() {
   return new Promise((resolve, reject) => {
