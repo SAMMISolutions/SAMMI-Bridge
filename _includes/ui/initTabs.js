@@ -8,7 +8,7 @@ initTabs() {
 
     // Separate default and added content
     const defaultContent = contentAll.filter((e) => e.dataset.type === 'default' || e.dataset.type === 'settings');
-    const addedContent = contentAll.filter((e) => e.dataset.type !== 'default').reverse();
+    const addedContent = contentAll.filter((e) => e.dataset.type !== 'default' && e.dataset.type !== 'settings' ).reverse();
 
     // Reassemble content in the correct order
     const content = [...defaultContent, ...addedContent];
@@ -21,6 +21,8 @@ initTabs() {
       e.id = e.id.replace(/^[^a-z]+|[^\w:.-]+/g, '');
       this.createExtensionTab(e);
       if (e.dataset.type !== 'settings' && e.id != 'content-extensions') this.createExtensionBox(e);
+      e.setAttribute('data-title', e.title);
+      e.removeAttribute('title');
     });
 
     // Sort the tabs according to the sort list
