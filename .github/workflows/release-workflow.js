@@ -1,11 +1,9 @@
-// scripts/copy-and-extract.js
-
 const fs = require('fs');
 const path = require('path');
 
 // Copy the file
-const srcPath = path.resolve(__dirname, '../download/bridge.html');
-const destPath = path.resolve(__dirname, '../release/bridge.html');
+const srcPath = path.resolve(__dirname, '../../download/bridge.html');
+const destPath = path.resolve(__dirname, '../../release/bridge.html');
 fs.copyFileSync(srcPath, destPath);
 
 // Extract the version
