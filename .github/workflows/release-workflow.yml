@@ -23,6 +23,14 @@ jobs:
         id: version
         run: |
           echo "::set-output name=VERSION::$(node .github/workflows/release-workflow.js)"
+          
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Add bridge.html to release directory" -a
+          git push
 
       - name: Create Release
         id: create_release
