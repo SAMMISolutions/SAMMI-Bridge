@@ -1204,6 +1204,17 @@ class SAMMIUI {
     this.newTabSortList = [];
     this.tabsVisibility = JSON.parse(localStorage.getItem('bridge_tabsVisibility')) || {};
     this.lastActiveTab = localStorage.getItem('bridge_tabsActive') || 'content-settings';
+    let defaultSettingsTab = "content-settings";
+    let defaultExtensionTab = "content-extensions";
+    // Filter out the tabSortList array from these two entries
+    this.tabSortList = this.tabSortList.filter((item) => {
+      if (item === defaultSettingsTab || item === defaultExtensionTab) {
+        return false;
+      }
+      return true;
+    });
+    // and now add them back to the beginning of the array
+    this.tabSortList.unshift(defaultSettingsTab, defaultExtensionTab);
   }
 
   // This method initializes the modal used by SAMMI Core to call Bridge
