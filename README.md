@@ -67,7 +67,7 @@ SAMMI.deleteArray(arrayName, slot, buttonId = 'global')
 - example: `SAMMI.deleteArray('myArray',1,'ID1')`
 
 ```js
-SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigger = false)
+SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigger = false, hideCommand = false)
 ```
 - Send an extension command (to create extension boxes) to SAMMI 
 - `name` - name of the extension command 
