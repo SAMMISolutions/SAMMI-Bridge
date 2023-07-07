@@ -110,15 +110,8 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigg
     - (optional) int `sizeModifier` - horizontal box size, 1 is normal
     - (optional) [] `selectOptions` - array of options for the user to select (when using Select box type)
     - (optional) boolean `sendAsExtensionTrigger` - will fire an extension trigger within SAMMI instead of sending the data to Bridge, useful for relaying information between buttons while providing your users with a friendly interface. Works the same as Trigger Extension Trigger command, except you can have custom boxes. (THIS FEATURE ONLY WORKS IN SAMMI 2022.5.1 AND BRIDGE 7.11 or newer)
-- example: 
-  ```js 
-  SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
-    rewardName: ['Reward Name', 14, 'Some Reward name'],
-    rewardName2: ['Reward Name 2', 14, 'And another reward name']
-  }, true)
-  ```
-  will create an extension command named Lucky Wheel with 2 text boxes. Will send its data as an Extension Trigger within SAMMI instead of sending it to Bridge. 
-- example2: 
+    - (optional) boolean `hideCommand` - will completely hide the command from the extension menu if set to true
+- example 1: 
   ```js 
   SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
     color: ['Wheel Color', 18, 0, null, ['blue', 'yellow', 'green']],
@@ -127,7 +120,24 @@ SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigg
   })
   ``` 
   will create an extension command named Lucky wheel with one select box with options, one regular text box and one box to select an image file. Will send its data to Bridge. 
+- example 2: 
+  ```js 
+  SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
+    rewardName: ['Reward Name', 14, 'Some Reward name'],
+    rewardName2: ['Reward Name 2', 14, 'And another reward name']
+  }, true)
+  ```
+  will create an extension command named Lucky Wheel with 2 text boxes. Will send its data as an Extension Trigger within SAMMI instead of sending it to Bridge. 
 
+- example 3: 
+  ```js 
+  SAMMI.extCommand('Lucky Wheel', 3355443, 52, {
+    color: ['Wheel Color', 18, 0, null, ['blue', 'yellow', 'green']],
+    rewardName: ['Reward Name', 14, 'Your Reward name'],
+    rewardImage: ['Reward Image', 23, 'image.png']
+  }, true, true)
+  ``` 
+  will create the same extension command as above, however it will be hidden from the extension menu in SAMMI. 
 
 ```js
 SAMMI.triggerExt(trigger, pullData)
