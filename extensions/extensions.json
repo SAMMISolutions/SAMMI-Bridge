@@ -7,7 +7,7 @@
                 "author": "Chrizzz",
                 "description": "Big Key Guessing Game for the ALTTP Randomizer",
                 "latest_version": "1.1",
-                "download_link": "https://ko-fi.com/s/18080fc931"
+                "download_link": "https://ko-fi.com/s/91f08c3c04"
             }
         },
         {
@@ -17,7 +17,7 @@
                 "author": "Chrizzz",
                 "description": "Play random clips while beeing in specific scenes",
                 "latest_version": "1.0",
-                "download_link": "https://ko-fi.com/s/296f7ecfdf"
+                "download_link": "https://ko-fi.com/s/657a802fb7"
             }
         },
         {
@@ -27,7 +27,7 @@
                 "author": "Chrizzz",
                 "description": "Create clips and send them to discord with a single command.",
                 "latest_version": "1.1",
-                "download_link": "https://ko-fi.com/s/4bc2a50cbd"
+                "download_link": "https://ko-fi.com/s/601e4e3a83"
             }
         },
         {
@@ -37,7 +37,7 @@
                 "author": "Chrizzz",
                 "description": "Send messages, screenshot of your sources Embeds directly to your discord webhook.",
                 "latest_version": "2.3",
-                "download_link": "https://ko-fi.com/s/e28d13a4c2"
+                "download_link": "https://ko-fi.com/s/4858c2ede1"
             }
         },
         {
@@ -47,7 +47,7 @@
                 "author": "Chrizzz",
                 "description": "Automatically create live notifications on discord when starting the stream",
                 "latest_version": "1.1",
-                "download_link": "https://ko-fi.com/s/183f93de71"
+                "download_link": "https://ko-fi.com/s/4844399f1f"
             }
         },
         {
@@ -57,7 +57,7 @@
                 "author": "Chrizzz",
                 "description": "Extension to get a random clip from a username based on different parameters",
                 "latest_version": "1.3",
-                "download_link": "https://ko-fi.com/s/7e552664df"
+                "download_link": "https://ko-fi.com/s/90575f1126"
             }
         },
         {
@@ -87,7 +87,7 @@
                 "author": "Chrizzz",
                 "description": "Loyalty system for Twitch",
                 "latest_version": "1.1",
-                "download_link": "https://ko-fi.com/s/77d7b43612"
+                "download_link": "https://ko-fi.com/s/dfb767ca05"
             }
         },
         {
@@ -97,7 +97,7 @@
                 "author": "Chrizzz",
                 "description": "Animate Predictions and Polls",
                 "latest_version": "1.3",
-                "download_link": "https://ko-fi.com/s/ff39e90061"
+                "download_link": "https://ko-fi.com/s/b819900937"
             }
         },
         {
@@ -107,7 +107,7 @@
                 "author": "Chrizzz",
                 "description": "Runs an onscreen timer that can easily be modified",
                 "latest_version": "1.1",
-                "download_link": "https://ko-fi.com/s/f591cd8f68"
+                "download_link": "https://ko-fi.com/s/3db949357a"
             }
         },
         {
@@ -127,7 +127,7 @@
                 "author": "Chrizzz",
                 "description": "AddOn for the PaF Mod which let's your viewers fight with their Pokemon",
                 "latest_version": "1.1.7",
-                "download_link": "https://ko-fi.com/s/ee36c1c6fe"
+                "download_link": "https://ko-fi.com/s/094864fb0a"
             }
         },
         {
@@ -137,7 +137,7 @@
                 "author": "Chrizzz",
                 "description": "Small Pokemon Shoutout for Raids and the SO Command",
                 "latest_version": "1.1",
-                "download_link": "https://ko-fi.com/s/a3ad47aa6f"
+                "download_link": "https://ko-fi.com/s/c729d284ce"
             }
         },
         {
@@ -157,7 +157,7 @@
                 "author": "Chrizzz",
                 "description": "Dynamic Progress Bars to animate your Streamgoals",
                 "latest_version": "1.0",
-                "download_link": "https://ko-fi.com/s/9c13fed187"
+                "download_link": "https://ko-fi.com/s/68f9d1518b"
             }
         },
         {
@@ -167,17 +167,7 @@
                 "author": "Chrizzz",
                 "description": "Simple Quote System for Twitch",
                 "latest_version": "1.1",
-                "download_link": "https://ko-fi.com/s/e01da6a63f"
-            }
-        },
-        {
-            "extension_name": "Quote System",
-            "alternate_names": [],
-            "details": {
-                "author": "Chrizzz",
-                "description": "Simple Quote System for Twitch",
-                "latest_version": "1.1",
-                "download_link": "https://ko-fi.com/s/e01da6a63f"
+                "download_link": "https://ko-fi.com/s/8c92e53077"
             }
         },
         {
@@ -197,7 +187,7 @@
                 "author": "Chrizzz",
                 "description": "Take screenshots of your sources and scenes",
                 "latest_version": "1.3",
-                "download_link": "https://ko-fi.com/s/168da134d9"
+                "download_link": "https://ko-fi.com/s/e441439f06"
             }
         },
         {
@@ -217,7 +207,7 @@
                 "author": "Chrizzz",
                 "description": "Slot Machine that can be customized easily",
                 "latest_version": "1.1",
-                "download_link": "https://ko-fi.com/s/2719e72ee3"
+                "download_link": "https://ko-fi.com/s/7f2aa8dd20"
             }
         },
         {
@@ -227,7 +217,17 @@
                 "author": "Chrizzz",
                 "description": "Creates a leaderboard for bits, subs, donations per stream",
                 "latest_version": "1.1",
-                "download_link": "https://ko-fi.com/s/ee173469a5"
+                "download_link": "https://ko-fi.com/s/0eadbf1661"
+            }
+        },
+        {
+            "extension_name": "Thermal Printer Extension",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Prints Subs, Bits and Channel Point messages on a ESC/POS printer",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/40e9c93891"
             }
         },
         {
@@ -237,7 +237,7 @@
                 "author": "Chrizzz",
                 "description": "Extension to check User Cooldowns",
                 "latest_version": "1.1",
-                "download_link": "https://ko-fi.com/s/e782f89c95"
+                "download_link": "https://ko-fi.com/s/395151415d"
             }
         },
         {
