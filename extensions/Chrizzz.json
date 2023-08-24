@@ -239,6 +239,46 @@
                 "latest_version": "1.1",
                 "download_link": "https://ko-fi.com/s/395151415d"
             }
+        },
+        {
+            "extension_name": "Hue Light Control",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Control your Philips Hue Lights with this extension",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/b18530f796"
+            }
+        },
+        {
+            "extension_name": "Elgato Light Control",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Control your Elgato Lights with this extension",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/1daa28bce6"
+            }
+        },
+        {
+            "extension_name": "Pokebox",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Visual Overview for your Pokemon on Discord",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/ee46724040"
+            }
+        },
+        {
+            "extension_name": "Socials Rotation",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Displays your socials live on stream in a space saving way",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/c85062efdd"
+            }
         }
     ]
 }
