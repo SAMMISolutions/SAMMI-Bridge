@@ -5,7 +5,7 @@
             "details": {
                 "author": "Landie",
                 "description": "Easily display emotes in an image source!",
-                "latest_version": "1.0.2",
+                "latest_version": "2.0.1",
                 "download_link": "https://landie.itch.io/sammi-easy-emotes"
             }
         },
@@ -51,7 +51,7 @@
             "details": {
                 "author": "Landie",
                 "description": "A fully fledged PNGTuber engine within SAMMI! commissioned by Jessyabeb!",
-                "latest_version": "0.16.0",
+                "latest_version": "0.20.0",
                 "download_link": "https://landie.itch.io/sammi-landitube"
             }
         },
@@ -60,7 +60,7 @@
             "details": {
                 "author": "Landie",
                 "description": "A Library to make extension developer's lives easier!",
-                "latest_version": "0.16.0",
+                "latest_version": "2.1.0",
                 "download_link": "https://landie.itch.io/sammi-sando"
             }
         }

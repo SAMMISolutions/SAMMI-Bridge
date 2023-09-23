@@ -86,7 +86,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Loyalty system for Twitch",
-                "latest_version": "1.1",
+                "latest_version": "1.2",
                 "download_link": "https://ko-fi.com/s/dfb767ca05"
             }
         },
@@ -166,7 +166,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Simple Quote System for Twitch",
-                "latest_version": "1.1",
+                "latest_version": "1.2",
                 "download_link": "https://ko-fi.com/s/8c92e53077"
             }
         },
@@ -241,12 +241,92 @@
             }
         },
         {
+            "extension_name": "Hue Light Control",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Control your Philips Hue Lights with this extension",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/b18530f796"
+            }
+        },
+        {
+            "extension_name": "Elgato Light Control",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Control your Elgato Lights with this extension",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/1daa28bce6"
+            }
+        },
+        {
+            "extension_name": "Pokebox",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Visual Overview for your Pokemon on Discord",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/ee46724040"
+            }
+        },
+        {
+            "extension_name": "Socials Rotation",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Displays your socials live on stream in a space saving way",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/c85062efdd"
+            }
+        },
+        {
+            "extension_name": "Battleship",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Battleship Minigame for Twitch and Youtube",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/chrizzz_1508/shop"
+            }
+        },
+        {
+            "extension_name": "PaF - Evolution Add On",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Evolution AddOn for the Pokemon and Friends Mod",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/20991c9069"
+            }
+        },
+        {
+            "extension_name": "Google Vision OCR",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "OCR with Google Vision",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/94dfb69f80"
+            }
+        },
+        {
+            "extension_name": "IronOCR - Text Recognition",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "OCR with IronOCR",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/94dfb69f80"
+            }
+        },
+        {
             "extension_name": "Crowd Control",
             "alternate_names": [],
             "details": {
                 "author": "SAMMISolutions",
                 "description": "Extension to trigger Crowd Control Triggers",
-                "latest_version": "1.0",
+                "latest_version": "1.1",
                 "download_link": "https://sammisolutions.itch.io/crowd-control"
             }
         },
@@ -542,7 +622,7 @@
             "details": {
                 "author": "Christina K.",
                 "description": "Checks and verifies various forms of user input for validity.",
-                "latest_version": "1.1",
+                "latest_version": "1.2",
                 "download_link": "https://img.itch.zone/aW1nLzEwMjk3NTU3LnBuZw==/105x83%23/Z4if7%2F.png"
             }
         },
@@ -551,7 +631,7 @@
             "details": {
                 "author": "Landie",
                 "description": "Easily display emotes in an image source!",
-                "latest_version": "1.0.2",
+                "latest_version": "2.0.1",
                 "download_link": "https://landie.itch.io/sammi-easy-emotes"
             }
         },
@@ -599,7 +679,7 @@
             "details": {
                 "author": "Landie",
                 "description": "A fully fledged PNGTuber engine within SAMMI! commissioned by Jessyabeb!",
-                "latest_version": "0.16.0",
+                "latest_version": "0.20.0",
                 "download_link": "https://landie.itch.io/sammi-landitube"
             }
         },
@@ -608,7 +688,7 @@
             "details": {
                 "author": "Landie",
                 "description": "A Library to make extension developer's lives easier!",
-                "latest_version": "0.16.0",
+                "latest_version": "2.1.0",
                 "download_link": "https://landie.itch.io/sammi-sando"
             }
         },
