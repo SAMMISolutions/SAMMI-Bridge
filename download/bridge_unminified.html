@@ -1101,6 +1101,41 @@ function SAMMICommands() {
     },
 
     /**
+     * Saves a number/string into an ini file
+     * @param {string} fileName - name of the ini file
+     * @param {number} section - section name
+     * @param {string} key - key name
+     * @param {string|number} value - value to save
+     * @param {string} type - type of the value, text or number
+     */
+    async saveIni(fileName = '', section = '', key = '', value = '', type = 'text') {
+      return sendToSAMMI('SaveIni', { fileName, section, key, value, type });
+    },
+
+    /**
+     * Loads a number/string from an ini file
+     * @param {string} fileName - name of the ini file
+     * @param {number} section - section name
+     * @param {string} key - key name
+     * @param {string} type - type of the value, text or number
+     */
+    async loadIni(fileName = '', section = '', key = '', type = 'text') {
+      return sendToSAMMI('LoadIni', { fileName, section, key, type });
+    },
+
+
+    /**
+     * Sends an HTTP request
+     * @param {string} url - url to send the request to
+     * @param {string} method - request method, GET, POST, PUT, DELETE
+     * @param {json} headers - stringified JSON object of headers (optional)
+     * @param {json} body - stringified request body (optional)
+     */
+    async httpRequest(url = '', method = 'GET', headers = {}, body = {}) {
+      return sendToSAMMI('HttpRequest', { url, method, headers, body });
+    },
+
+    /**
      * Sends a notification (tray icon bubble) message to SAMMI
      * @param {string} msg - message to show
      */
