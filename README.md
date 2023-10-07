@@ -166,6 +166,80 @@ SAMMI.modifyButton(id, color, text, image, border)
 - example: `SAMMI.modifyButton('ID1', 4934525, 'Hello', 'buttonImage.png', 5)`
 
 ```js
+SAMMI.editButton(deckId, buttonId)
+```
+- Opens an edit commands window in SAMMI for the selected button
+- Highly experimental, use at your own risk
+- `deckId` - deck ID where the button resides
+- `buttonId` - button ID to open
+- example: `SAMMI.editButton("20220625173133284190011", "MyAwesomeButton")`
+
+```js
+SAMMI.saveIni(fileName, section, key, value, type = "string" | "number")
+```
+- Saves a value to an INI file
+- `fileName` - file name
+- `section` - section name
+- `key` - key name
+- `value` - value to save
+- `type` - type of the value, either string or number
+- example: `SAMMI.saveIni("test.ini", "mySection", "myKey", "Hello world!", "string")`
+
+```js
+SAMMI.loadIni(fileName, section, key, type = "string" | "number")
+```
+- Loads a value from an INI file
+- `fileName` - file name
+- `section` - section name
+- `key` - key name
+- `type` - type of the value, either string or number
+- example: `SAMMI.loadIni("test.ini", "section", "key", "string").then(response => console.log(response))`
+
+```js
+SAMMI.openURL(url)
+```
+- Opens an URL in your default browser
+- Useful when Bridge is docked in OBS to avoid opening URLs in OBS
+- `url` - full URL to open
+- example: `SAMMI.openURL("https://google.com")`
+
+```js
+SAMMI.httpRequest(url, method = 'GET', headers [optional], body [optional])
+```
+- Sends an HTTP request via SAMMI to avoid CORS issues
+- `url` - full URL to send the request to
+- `method` - HTTP method, GET, POST, PUT, DELETE etc.
+- `headers` - object containing all headers
+- `body` - body of the request
+- example 1: 
+  ```js
+  SAMMI.httpRequest('https://icanhazdadjoke.com', "GET", { "Accept: application/json" }, {}).then(response => {
+    const data = JSON.parse(response.Value)
+    console.log(data)
+  })
+  ```
+- example 2: 
+  ```js
+  const headers = {
+    'Client-id': 'XXX',
+    'Authorization': 'Bearer XXX',
+    'Content-Type': 'application/json'
+  }
+
+  const body = {
+      'title': "Test Bridge Reward",
+      'cost': 50000
+  }
+
+  SAMMI.httpRequest('https://api.twitch.tv/helix/channel_points/custom_rewards?broadcaster_id=XXX', "POST", headers, body)
+  .then(response => {
+      const data = JSON.parse(response.Value)
+      console.log(data)
+  })
+  ```
+
+
+```js
 SAMMI.popUp(message)
 ```
 - Send a popup message to SAMMI
