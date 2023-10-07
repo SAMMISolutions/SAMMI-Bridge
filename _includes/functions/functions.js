@@ -248,6 +248,19 @@ function SAMMICommands() {
       });
     },
 
+
+    /**
+      * Opens edit command screen in SAMMI for the selected button
+      * @param {string} deckId - deckId ID to edit
+      * @param {string} buttonId - button ID to edit
+    */
+    async editButton(deckId = '', buttonId = '') {
+      return sendToSAMMI('EditButton', {
+        buttonId,
+        deckId,
+      });
+    },
+
     /**
      * Retrieves all currently modified buttons
      * - object of button objects that are currently modified
@@ -354,6 +367,17 @@ function SAMMICommands() {
         Message: msg,
       });
     },
+    /**
+     * Opens a URL in the default browser from SAMMI
+     * @param {string} url - url to open
+     */
+    async openURL(url = '') {
+      return sendToSAMMI('OpenURL', {
+        url
+      });
+    },
+
+
     generateMessage() {
       const messages = [
         'All that glitters is not gold. Fair is foul, and foul is fair Hover through the fog and filthy air. These violent delights have violent ends. Hell is empty and all the devils are here. By the pricking of my thumbs, Something wicked this way comes. Open, locks, Whoever knocks!',
