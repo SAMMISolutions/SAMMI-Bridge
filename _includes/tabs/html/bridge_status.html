@@ -1,25 +1,27 @@
 <div class="tab-pane" id="content-settings" role="tabpanel" title="Settings" data-type="settings">
   <div class='row pt-3'>
     <h5>Bridge Connection</h5>
-    <div class="fs-7 mb-3"><span class="me-2">Version:</span><span name="version"></span></div>
+    <div class="fs-7 mb-2"><span class="me-2">Version:</span><span name="version"></span></div>
+    <div class="fs-7 mb-0"><span class="me-2">Current IP:</span><span name="currentIP"></span></div>
+    <div class="fs-7 mb-2"><span class="me-2">Current Port:</span><span name="currentPort"></span></div>
     <div class="col">
       <div class="row">
         <label for="inputPassword" class="col-sm-5 col-form-label">IP Address:</label>
         <div class="col-sm-4 w-auto">
-          <input type="text" id="nIPbox" name="nIPbox" value='127.0.0.1' class="form-control form-control-sm">
+          <input type="text" name="nIPbox" value='127.0.0.1' class="form-control form-control-sm">
         </div>
       </div>
       <div class="row">
         <label for="inputPassword" class="col-sm-5 col-form-label">Port:</label>
         <div class="col-sm-4 w-auto">
-          <input type="number" min="0" max="65535" id="nPortBox" name="nPortBox" value=9425
+          <input type="number" min="0" max="65535" name="nPortBox" value=9425
             class="form-control form-control-sm">
         </div>
       </div>
       <div class="row">
         <label for="inputPassword" class="col-sm-5 col-form-label">Password (optional):</label>
         <div class="col-sm-4 w-auto">
-          <input id="nPassBox" type="password" name="nPassBox" size="20" value='' class="form-control form-control-sm">
+          <input type="password" name="nPassBox" size="20" value='' class="form-control form-control-sm">
         </div>
       </div>
       <div class="mt-1 row">

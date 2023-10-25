@@ -2,11 +2,17 @@
 class SAMMICore {
   constructor() {
     // Grab elements from the DOM once and store references
-    this.nIPbox = document.querySelector('#nIPbox');
-    this.nPortBox = document.querySelector('#nPortBox');
-    this.nPassBox = document.querySelector('#nPassBox');
+    this.contentSettings = document.querySelector("#content-settings");
+    this.currentIP = this.contentSettings.querySelector("[name='currentIP']");
+    this.currentPort = this.contentSettings.querySelector("[name='currentPort']");
+    this.nIPbox = this.contentSettings.querySelector("[name='nIPbox']");
+    this.nPortBox = this.contentSettings.querySelector("[name='nPortBox']");
+    this.nPassBox = this.contentSettings.querySelector("[name='nPassBox']");
     this.cnctButton = document.querySelector('#cnctbutton');
     this.retriedWithNewPort = false; // flag to indicate if we have retried with a new port
+    this.force_close = false;
+    this.currentTimeout = null;
+    this.attemptedPort = null;
     this.connectSettings = JSON.parse(localStorage.getItem('lsParams')) || {
       ip: '127.0.0.1',
       port: 9425,
@@ -31,34 +37,38 @@ class SAMMICore {
     })();
 
     // Load connection data and attempt to connect on instantiation
-    this.loadConnection();
+    this.initConnection();
     this.connectToSAMMI();
   }
 
-  loadConnection() {
+  initConnection() {
     this.nIPbox.value = this.connectSettings.ip || '127.0.0.1';
     this.nPortBox.value = this.connectSettings.port || 9425;
     this.nPassBox.value = this.connectSettings.pass || '';
+    this.cnctButton.addEventListener('click', () => {
+      this.connectButton();
+    });
   }
 
   connectButton() {
+    clearTimeout(this.currentTimeout);
+    this.currentTimeout = null;
+    sammiclient.removeAllListeners();
     if (sammiclient && sammiclient._connected) {
-      SAMMIVars.force_close = true;
+      // manual disconnect 
+      this.force_close = true;
       sammiclient.send('Close');
       sammiclient.disconnect();
       this.connectionStatus('toclient', 'disconnected', 'Connection Closed', 'red');
       this.cnctButton.innerText = 'Disconnecting';
     } else {
-      console.log('SAMMI manually connected.');
-      SAMMICore.tryClearWaitingTimeout();
+      // manual connect
+      this.force_open = true;
+      this.connectSettings.port = parseInt(this.nPortBox.value, 10);  // Update the port
+      this.connectSettings.ip = this.nIPbox.value;  // Update the IP
+      this.connectSettings.pass = this.nPassBox.value;  // Update the password
       this.connectToSAMMI();
     }
-  }
-
-  static tryClearWaitingTimeout() {
-    try {
-      clearTimeout(SAMMIVars.waiting_to_connect);
-    } catch (e) { }
   }
 
   // change connection status
@@ -68,31 +78,63 @@ class SAMMICore {
     document.getElementById(`${id}_circle`).setAttribute('fill', fill);
   }
 
+  checkConnection() {
+    if (sammiclient._connected) return;
+    const errorMessage = sammiclient._socket.readyState == 0 ? 'No response, attempting to reconnect.' : 'Connection error. Attempting to reconnect.';
+    console.log(errorMessage);
+
+    clearTimeout(this.currentTimeout);
+    sammiclient.removeAllListeners();
+
+    // Attempt to reconnect if not manual disconnect
+    this.connectionStatus(
+      'toclient',
+      'disconnected',
+      errorMessage,
+      'red',
+    );
+
+    // retry with a new port
+    if (!this.retriedWithNewPort) {
+      this.retriedWithNewPort = true;
+      this.attemptedPort = parseInt(this.connectSettings.port) + 100;
+    } else {
+      this.retriedWithNewPort = false;
+      this.attemptedPort = this.connectSettings.port;
+    }
+
+    // reconnect in 2.5 seconds
+    this.currentTimeout = setTimeout(() => this.connectToSAMMI(), 2500);
+  }
+
   connectToSAMMI() {
     const debugBridge = document.querySelector('#dbgBridge');
     if (debugBridge) SAMMIDebugLog(debugBridge);
 
-    SAMMICore.tryClearWaitingTimeout();
+    clearTimeout(this.currentTimeout);
+    this.currentTimeout = null;
 
-    const p = SAMMIVars;
+    this.currentIP.innerHTML = "";
+    this.currentPort.innerHTML = "";
 
     this.connectionStatus('toclient', 'connecting', 'Connecting', 'orange');
 
+    const portToUse = this.retriedWithNewPort ? this.attemptedPort : this.connectSettings.port;
+
     // CONNECT TO SAMMI
     sammiclient.connect({
-      address: `${this.nIPbox.value}:${this.nPortBox.value}`,
-      password: `${this.nPassBox.value}`,
+      address: `${this.connectSettings.ip}:${portToUse}`,
+      password: `${this.connectSettings.pass}`,
       name: 'SAMMI Bridge',
     })
       .then(() => {
         // check connection is live in 5 seconds
-        setTimeout(() => {
-          checkConnection();
-        }, 5000);
+        this.connectionErrorOccurred = false;
+        this.currentTimeout = setTimeout(() => this.checkConnection(), 2000);
       })
       .catch((e) => {
-        checkConnection();
-        // console.log('SAMMI Connection Error', e);
+        this.connectionErrorOccurred = true;
+        this.checkConnection();
       });
 
     // CONNECTION OPENED
@@ -115,12 +157,13 @@ class SAMMICore {
       });
 
       // Save connection params to storage only if we did not retry with a new port
-      if (!this.retriedWithNewPort) {
         this.connectSettings.ip = this.nIPbox.value;
         this.connectSettings.port = this.nPortBox.value;
         this.connectSettings.pass = this.nPassBox.value;
         localStorage.setItem('lsParams', JSON.stringify(this.connectSettings));
-      }
+
+      this.currentIP.innerHTML = this.connectSettings.ip;
+      this.currentPort.innerHTML = this.retriedWithNewPort ? this.attemptedPort : this.connectSettings.port;
 
       // set current browser as global variable
       SAMMI.setVariable('browser_name', this.browser);
@@ -134,11 +177,19 @@ class SAMMICore {
 
     // CONNECTION CLOSED
     sammiclient.on('ConnectionClosed', () => {
-      SAMMICore.tryClearWaitingTimeout();
+      // If a connection error just happened, return early
+      if (this.connectionErrorOccurred) {
+        return;
+      }
+      clearTimeout(this.currentTimeout);
+      this.currentTimeout = null;
       sammiclient.removeAllListeners();
 
+      this.currentIP.innerHTML = "";
+      this.currentPort.innerHTML = "";
+
       // Attempt to reconnect if not manual disconnect
-      if (!p.force_close) {
+      if (!this.force_close) {
         this.connectionStatus(
           'toclient',
           'disconnected',
@@ -146,15 +197,12 @@ class SAMMICore {
           'red',
         );
         console.log('SAMMI disconnected. Attempting to reconnect in 5s.');
-        p.waiting_to_connect = setTimeout(() => {
-          this.connectToSAMMI();
-        }, 5000);
+        this.currentTimeout = setTimeout(() => this.connectToSAMMI(), 5000);
       } else {
         console.log('SAMMI disconnected by user.');
         this.connectionStatus('toclient', 'disconnected', 'Connection Closed', 'red');
       }
-
-      p.force_close = false;
+      this.force_close = false;
       this.cnctButton.innerText = 'Connect';
     });
 
@@ -190,38 +238,5 @@ class SAMMICore {
       SammiExtensionReceived(json.CommandName, json.Data);
     });
 
-    const checkConnection = () => {
-      if (!sammiclient._connected) {
-        if (sammiclient._socket.readyState == 0) {
-          SAMMICore.tryClearWaitingTimeout();
-          sammiclient.removeAllListeners();
-
-          // Attempt to reconnect if not manual disconnect
-          this.connectionStatus(
-            'toclient',
-            'disconnected',
-            'No response, attempting to reconnect.',
-            'red',
-          );
-          console.log('SAMMI is not responding. Attempting to reconnect in 5s.');
-          p.waiting_to_connect = setTimeout(() => {
-            this.connectToSAMMI();
-          }, 5000);
-        }
-
-        // connection is still in connecting state, might be caused by port being hogged, so attempt to reconnect using a new port
-        // retry with a new port
-        if (!this.retriedWithNewPort) {
-          this.retriedWithNewPort = true;
-          this.nPortBox.value = parseInt(this.connectSettings.port) + 100;
-        }
-        // else retry with the same port
-        else {
-          this.retriedWithNewPort = false;
-          this.nPortBox.value = this.connectSettings.port;
-        }
-
-      }
-    };
   }
 }

@@ -14,6 +14,7 @@ const SAMMIVars = {
   SAMMIdebug: JSON.parse(localStorage.getItem('SAMMIdebug')) || {},
   twitchList: {},
   force_close: false,
+  force_open: false,
   box_newline: 0,
   box_checkbox: 2,
   box_obs_scenes: 4,
