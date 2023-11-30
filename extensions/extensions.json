@@ -627,6 +627,66 @@
             }
         },
         {
+            "extension_name": "Emotes To URLs",
+            "alternate_names": [],
+            "details": {
+                "author": "Flipstream",
+                "description": "This extension is used to convert all Twitch emotes in a chat message the user has unlocked into in-line URLs. ",
+                "latest_version": "2.1",
+                "download_link": "https://flipstream.org/stream-tech/sammi-extensions/twitch-emotes-to-urls"
+            }
+        },
+        {
+            "extension_name": "Format Number",
+            "alternate_names": [],
+            "details": {
+                "author": "Flipstream",
+                "description": "This extension is a very simple number format tool that accepts a real value and returns a number formatted string based on the JavaScript Intl.NumberFormat() function.",
+                "latest_version": "2.2",
+                "download_link": "https://flipstream.org/stream-tech/sammi-extensions/format-number"
+            }
+        },
+        {
+            "extension_name": "HEX to HSB",
+            "alternate_names": [],
+            "details": {
+                "author": "Flipstream",
+                "description": "Extension that converts an HTML 6-character color RGB value into Hue, Saturation, and Brightness (HSB) values.",
+                "latest_version": "1.1",
+                "download_link": "https://flipstream.org/stream-tech/sammi-extensions/hex-to-hsb"
+            }
+        },
+        {
+            "extension_name": "HEX to xyY",
+            "alternate_names": [],
+            "details": {
+                "author": "Flipstream",
+                "description": "This extension converts a validated six character HEX color code into xyY coordinate and brightness values compatible with Phillips Hue lights.",
+                "latest_version": "1.1",
+                "download_link": "https://flipstream.org/stream-tech/sammi-extensions/hex-to-xyy"
+            }
+        },
+        {
+            "extension_name": "LIFX Controls",
+            "alternate_names": [],
+            "details": {
+                "author": "Flipstream",
+                "description": "Extension to control LIFX bulbs and load scenes via the LIFX HTTP API",
+                "latest_version": "2.4",
+                "download_link": "https://flipstream.org/stream-tech/sammi-extensions/lifx-controls"
+            }
+        },
+        {
+            "extension_name": "Validate Color",
+            "alternate_names": [],
+            "details": {
+                "author": "Flipstream",
+                "description": "This extension is used to convert a CSS color name to an HTML hex code, or validate a HTML hex code to ensure it contains only six characters with valid hex values of 0-F.",
+                "latest_version": "2.3",
+                "download_link": "https://flipstream.org/stream-tech/sammi-extensions/validate-color"
+            }
+        },
+        {
             "extension_name": "Easy Emotes",
             "details": {
                 "author": "Landie",
