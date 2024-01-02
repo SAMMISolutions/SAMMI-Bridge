@@ -321,6 +321,51 @@
             }
         },
         {
+            "extension_name": "Zoom and Follow",
+            "details": {
+                "author": "MisterK_Qc",
+                "description": "Zoom on a source, follow the cursor and auto move camera when cursor is behind",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/8c8847b3ea"
+            }
+        },
+        {
+            "extension_name": "Get Current Weather",
+            "details": {
+                "author": "MisterK_Qc",
+                "description": "Get the current weather of a specific city",
+                "latest_version": "2.1",
+                "download_link": "https://ko-fi.com/s/1c2fb23c06"
+            }
+        },
+        {
+            "extension_name": "Currency Converter",
+            "details": {
+                "author": "MisterK_Qc",
+                "description": "Convert amount from a currency to another one",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/e54d62a0d7"
+            }
+        },
+        {
+            "extension_name": "Govee Light Control",
+            "details": {
+                "author": "MisterK_Qc",
+                "description": "Control your Govee lights",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/4f152c1e9e"
+            }
+        },
+        {
+            "extension_name": "Lorembarnak",
+            "details": {
+                "author": "MisterK_Qc",
+                "description": "Generate Quebec swearing (french)",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/5dd068b04f"
+            }
+        },
+        {
             "extension_name": "Crowd Control",
             "alternate_names": [],
             "details": {
