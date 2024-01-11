@@ -348,7 +348,7 @@
             }
         },
         {
-            "extension_name": "Govee Light Control",
+            "extension_name": "Govee Control",
             "details": {
                 "author": "MisterK_Qc",
                 "description": "Control your Govee lights",
