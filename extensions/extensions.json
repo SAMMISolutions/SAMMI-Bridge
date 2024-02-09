@@ -464,7 +464,7 @@
             "details": {
                 "author": "Christina K.",
                 "description": "Enables direct management of Discord functionalities from within SAMMI.",
-                "latest_version": "1.2",
+                "latest_version": "1.3",
                 "download_link": "https://christinak.itch.io/discord-controls"
             }
         },
@@ -478,12 +478,15 @@
             }
         },
         {
-            "extension_name": "Get Folder Files",
+            "extension_name": "Folder Files",
+            "alternate_names": [
+                "Get Folder Files"
+            ],
             "details": {
                 "author": "Christina K.",
-                "description": "Lists all files in a selected folder, presented in an array format.",
-                "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/get-folder-files"
+                "description": "Scan a folder and manipulate files with lots of useful features.",
+                "latest_version": "2.0",
+                "download_link": "https://christinak.itch.io/folder-files"
             }
         },
         {
@@ -678,7 +681,34 @@
                 "author": "Christina K.",
                 "description": "Checks and verifies various forms of user input for validity.",
                 "latest_version": "1.2",
-                "download_link": "https://img.itch.zone/aW1nLzEwMjk3NTU3LnBuZw==/105x83%23/Z4if7%2F.png"
+                "download_link": "https://christinak.itch.io/input-validator"
+            }
+        },
+        {
+            "extension_name": "Palworld Paldex",
+            "details": {
+                "author": "Christina K.",
+                "description": "Get information about a Pal in the Paldex.",
+                "latest_version": "1.1",
+                "download_link": "https://christinak.itch.io/palworld-paldex"
+            }
+        },
+        {
+            "extension_name": "Native Screenshot",
+            "details": {
+                "author": "Christina K.",
+                "description": "Capture and manage screenshots natively in SAMMI.",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/native-screenshot"
+            }
+        },
+        {
+            "extension_name": "Speech To Text",
+            "details": {
+                "author": "Christina K.",
+                "description": "Transcribe your speech effortlessly with a simple push of a button in SAMMI.",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/speech-to-text"
             }
         },
         {
