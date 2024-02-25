@@ -129,8 +129,8 @@ Here are the parameters:
      - `defaultValue`: The default value for the variable associated with this box.
      - (optional) `sizeModifier`: An optional parameter that adjusts the horizontal size of the box. It defaults to `1`. 0.5 is half the size, 2 is double the size, etc. Note that by changing the size of one box, you will also change the size of all other boxes in the extension command, as the total sum of all boxes' sizes must be equal to the number boxes themselves to fit in the extension command.
      - (optional) `selectOptions`: An optional array of options for the user to choose from (relevant only for specific box types like Select box).
-     - (optional) `sendAsExtensionTrigger`: A boolean parameter (default is `false`) that, when set to `true`, triggers an extension within SAMMI instead of sending data to Bridge. This is useful for relaying information between buttons.
-     - (optional) `hideCommand`: Another boolean parameter (default is `false`) that, when set to `true`, hides the command from the extension menu in SAMMI. Useful for commands that are only used internally.
+ - (optional) `sendAsExtensionTrigger`: A boolean parameter (default is `false`) that, when set to `true`, triggers an extension within SAMMI instead of sending data to Bridge. This is useful for relaying information between buttons.
+ - (optional) `hideCommand`: Another boolean parameter (default is `false`) that, when set to `true`, hides the command from the extension menu in SAMMI. Useful for commands that are only used internally.
 
 #### Box Types
 | boxType | Description |
