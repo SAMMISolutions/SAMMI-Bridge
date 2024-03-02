@@ -1,5 +1,5 @@
 <!--For Extension info, read How to make extensions.txt in Extension folder-->
-<!--Bridge V7.22-->
+<!--Bridge V7.30-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -454,10 +454,6 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
         <input type="number" min="1" max="99999" name="bitsamount" class="form-control form-control-sm w-auto me-2" value=10>
       </div>
       <div class="form-check ps-0 d-flex align-items-center mb-2">
-        <label class="form-check-label me-1">Total bits:</label>
-        <input type="number" min="1" max="99999" name="bitstotal" class="form-control form-control-sm w-auto me-2" value=100>
-      </div>
-      <div class="form-check ps-0 d-flex align-items-center mb-2">
         <label class="form-check-label me-1">Message:</label>
         <textarea name="bitsmessage" class="form-control form-control-sm w-75" rows="1" style="margin:5px 0px;">Hello World!</textarea>
       </div>
@@ -557,13 +553,9 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
    <div class="d-flex align-items-center">
       <button type="submit" class="btn btn-primary btn-sm me-2">Test Hype Train</button>
       <select class="form-select form-select-sm w-auto me-2" aria-label="Hype Train Type" name="hypeTrainType">
-         <option value="approaching" selected>Approaching</option>
-         <option value="started">Started</option>
-         <option value="updated">Updated</option>
-         <option value="progressed">Progressed</option>
-         <option value="levelup">Leveled Up</option>
-         <option value="ended">Ended</option>
-         <option value="cdexpired">Cooldown Expired</option>
+         <option value="begin">Begin</option>
+         <option value="progress">Progress</option>
+         <option value="end">End</option>
       </select>
       <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidehypetrain" role="button" aria-expanded="false"
          aria-controls="hidebits"></a>
@@ -571,38 +563,45 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
    <div class="collapse mb-1" id="hidehypetrain">
       <div class="form-group mb-2">
          <label>Current level:</label>
-         <input type="number" class="form-control form-control-sm w-auto" min="2" max="50" name="hypeTrainLevel" value=3>
+         <input type="number" class="form-control form-control-sm w-auto" min="1" max="50" name="hypeTrainLevel" value=3>
       </div>
       <div class="form-group mb-2">
-         <label>(Updated/Progressed) Display Name:</label>
-         <input type="text" class="form-control form-control-sm w-auto" name="hypeTrainName">
+         <label>Current goal:</label>
+         <input type="number" class="form-control form-control-sm w-auto" min="1" max="10000" name="hypeTrainGoal" value=3>
       </div>
       <div class="form-group mb-2">
-         <label>(Updated/Progressed) Source:</label>
-         <select class="form-select form-select-sm w-auto" aria-label="Hype Train Source" name="hypeTrainSource">
-            <option value="BITS" selected>BITS</option>
-            <option value="SUBS">SUBS</option>
-         </select>
-      </div>
-      <div class="form-group mb-2">
-         <label>Amount:</label>
-         <input type="number" class="form-control form-control-sm w-auto" min="1" max="10000" name="hypeTrainAmount" value=100>
-      </div>
-      <div class="form-group mb-2">
-         <label>(Ended) Ending reason:</label>
-         <select class="form-select form-select-sm w-auto" aria-label="Hype Train Ended Reason" name="hypeTrainEndReason">
-            <option value="COMPLETED" selected>COMPLETED</option>
-            <option value="EXPIRED">EXPIRED</option>
-         </select>
+         <label>Goal progress:</label>
+         <input type="number" class="form-control form-control-sm w-auto" min="1" max="10000" name="hypeTrainProgress" value=3>
       </div>
    </div>
 </form>
    <form id="SAMMITestTwitchShoutout" class="SAMMITestTriggers">
    <div class="form-group d-flex align-items-center">
-       <button type="submit" class="btn btn-primary btn-sm me-1">Test Shoutout</button>
+       <button type="submit" class="btn btn-primary btn-sm me-1">Test Shoutout Created</button>
        <label class="me-2">Username:</label>
-       <input type="text" class="form-control form-control-sm w-auto" id="name">
+       <input type="text" class="form-control form-control-sm w-auto" name="name">
    </div>
+</form>
+   <form id="SAMMITestTwitchShoutoutReceive" class="SAMMITestTriggers">
+   <div class="form-group d-flex align-items-center">
+       <button type="submit" class="btn btn-primary btn-sm me-1">Test Shoutout Received</button>
+       <label class="me-2">From Username:</label>
+       <input type="text" class="form-control form-control-sm w-auto" name="name">
+   </div>
+</form>
+   <form id="SAMMITestTwitchAdbreak" class="SAMMITestTriggers">
+    <button type="submit" class="btn btn-primary btn-sm me-1">Test Ad Break</button>
+    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hideadbreak" role="button" aria-expanded="false"
+        aria-controls="hideadbreak"></a>
+    <div class="collapse" id="hideadbreak">
+        <div class="form-group mb-2">
+            <label>Requester Username:</label>
+            <input type="text" class="form-control form-control-sm w-auto" name="name">
+        </div>
+        <div class="form-group mb-2">
+            <input type="checkbox" class="form-check-input" name="adbreakAuto"> Is Automatic
+        </div>
+    </div>
 </form>
    <form id="SAMMITestTwitchChat" class="SAMMITestTriggers">
     <div>
@@ -619,7 +618,9 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
              <label class="form-check-label me-1">Message:</label>
              <textarea class="form-control form-control-sm w-75" name="chatMsg">Hello World</textarea>
         </div> 
-       <input type="checkbox" class="form-check-input" name="chatFirstTime"> 1st Message<br>
+       <input type="checkbox" class="form-check-input" name="chatWhisper"> Whisper
+       <input type="checkbox" class="form-check-input" name="chatFirstTime"> 1st Message
+       <br>
        <input type="checkbox" class="form-check-input" name="chatBroadcaster"> Broadcaster 
        <input type="checkbox" class="form-check-input" name="chatMod"> Mod 
        <input type="checkbox" class="form-check-input" name="chatSub"> Subscriber 
@@ -637,6 +638,26 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
    </div>
 </form>
 
+   <form id="SAMMITestTwitchStream" class="SAMMITestTriggers">
+   <div class="form-group d-flex align-items-center">
+       <button type="submit" class="btn btn-primary btn-sm me-1">Test Stream</button>
+       <select class="form-select form-select-sm w-auto me-2" aria-label="Type" name="streamType">
+        <option value="started" selected>Started</option>
+        <option value="ended">Ended</option>
+     </select>
+   </div>
+</form>
+   <form id="SAMMITestTwitchCharity" class="SAMMITestTriggers">
+   <div class="form-group d-flex align-items-center">
+       <button type="submit" class="btn btn-primary btn-sm me-1">Test Charity</button>
+       <select class="form-select form-select-sm w-auto me-2" aria-label="Type" name="charityType">
+        <option value="start" selected>Started</option>
+        <option value="progress">Progressed</option>
+        <option value="stop">Stopped</option>
+        <option value="donate">Donated</option>
+     </select>
+   </div>
+</form>
 
 </div>
     <!--YouTube Triggers-->
@@ -753,6 +774,12 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
 /* eslint-disable */
 // Twitch client ID to use for Twitch API requests
 window.TWITCH_CLIENT_ID = 'xolexwv18o8i5uqsga0bw3z39cpg0c';
+// default Twitch user 
+window.defaultTwitchUser = {
+  display_name: "Default User",
+  login: "defaultuser",
+  user_id: "123456789",
+}
 // init object with all available SAMMI command methods
 const SAMMI = new SAMMICommands();
 window.SAMMI = SAMMI;
@@ -1747,6 +1774,8 @@ class SAMMICore {
 
       await SAMMI.getTwitchList().then((data) => {
         window.TWITCH_CLIENT_ID = data.twitch_list.clientId ? data.twitch_list.clientId : window.TWITCH_CLIENT_ID;
+        delete data.twitch_list.clientId;
+        window.defaultTwitchUser = Object.keys(data.twitch_list).length > 0 ? data.twitch_list[Object.keys(data.twitch_list)[0]] : window.defaultTwitchUser;
       });
 
       // Save connection params to storage only if we did not retry with a new port
@@ -2188,9 +2217,32 @@ async function SAMMITestTriggers() {
     message,
     month,
     community_gift: gifted ? 1 : 0,
+    system_message: subtype === 1 ? `${name[0]} subscribed with ${selectedTier}. [test trigger]` : `${name[0]} gifted a ${selectedTier} sub to ${giftedName[0]}! [test trigger]`,
+    cumulative_total: 0,
+    name_color: "#189A8D",
+    emote_list: null,
+    message_id: "e2d6ecd6-0ef0-44b7-97f7-cdcd334e1723",
+    duration_months: 0,
+    badge_list: [ 
+    {
+        "info": "",
+        "id": "1",
+        "set_id": "moderator"
+    },
+    {
+        "info": "1",
+        "id": "0",
+        "set_id": "subscriber"
+    }
+]
+
+
   };
   sendTriggerToSAMMI(type, msg, data, pullData);
 }
+
+
+
 ,
     SAMMITestTwitchSubGift(form) {
   const subForm = document.getElementById('SAMMITestTwitchSubs');
@@ -2220,8 +2272,9 @@ async function SAMMITestTriggers() {
     user_name: gifterName[0].toLowerCase(),
     display_name: gifterName[0],
     user_id: gifterName[1],
-    amount: `${amount}`,
+    amount: amount,
     tier: selectedTier,
+    cumulative_total: 0,
   };
   sendTriggerToSAMMI(
     2,
@@ -2243,16 +2296,13 @@ async function SAMMITestTriggers() {
     async SAMMITestTwitchBits(form) {
   const [name, userID] = await getNameFromInput(form.elements.name);
   const amount = parseInt(form.elements.bitsamount.value) || 50;
-  const totalAmount = parseInt(form.elements.bitstotal.value) || amount + 100;
   const message = form.elements.bitsmessage.value || SAMMI.generateMessage();
   const pullData = {
     user_name: name.toLowerCase(),
-    // display_name: name, // bits don't display name
+    display_name: name,
     user_id: userID,
     amount: amount,
-    total_amount: totalAmount,
     message,
-
   };
   sendTriggerToSAMMI(
     5,
@@ -2273,7 +2323,6 @@ async function SAMMITestTriggers() {
     ? form.elements.channelPointsMsg.value || SAMMI.generateMessage()
     : '';
   const cost = parseInt(form.elements.channelPointsCost.value) || 50;
-  const image = 'https://static-cdn.jtvnw.net/custom-reward-images/default-4.png';
   const rewardId = generateUUID();
   const redeemId = generateUUID();
   const pullData = {
@@ -2282,9 +2331,11 @@ async function SAMMITestTriggers() {
     user_id: userID,
     channel_id: channelID,
     redeem_name: redeemName,
+    reward_description: "Test Reward Description",
+    redeemed_at: twitchTimestamp(Date.now()),
+    status: "unfulfilled",
     message,
     cost,
-    image,
     reward_id: rewardId,
     redeem_id: redeemId,
   };
@@ -2308,6 +2359,7 @@ async function SAMMITestTriggers() {
     display_name: name,
     user_id: userID,
     amount,
+    picture_url: "https:\\/\\/static-cdn.jtvnw.net\\/user-default-pictures-uv\\/dbdc9198-def8-11e9-8681-784f43822e80-profile_image-300x300.png"
   };
 
   sendTriggerToSAMMI(
@@ -2334,6 +2386,9 @@ async function SAMMITestTriggers() {
       prediction_id: '1621385a-1f26-4197-82fc-6352003a69db',
       prediction_name: 'My Test Prediction',
       winning_outcome: type === 'Resolved' ? `e960f614-d379-494a-8b45-0c7500978${getRandomInt(0, amount - 1)}ea` : '',
+      started_at: twitchTimestamp(type === 'Created' ? Date.now() : type === 'Voted' ? Date.now() - Math.floor(Math.random() * parseInt(duration) * 1000) : Date.now() - parseInt(duration) * 1000),
+      locks_at: twitchTimestamp(Date.now() + parseInt(duration) * 1000),
+      prediction_name: 'My Test Prediction',
     };
     const pullData = populateWithOutcomeInfo(baseData, amount, type);
 
@@ -2348,264 +2403,151 @@ async function SAMMITestTriggers() {
 }
 ,
     SAMMITestTwitchPoll(form) {
-    const pollSelect = form.elements['pollType'];
-    const amount = form.elements['pollChoiceAmount'].value || getRandomInt(2, 5);
-    const duration = form.elements['pollDuration'].value || getRandomInt(60, 600);
-    const type = pollSelect.options[pollSelect.selectedIndex].text || 'Created';
-    const typeNum = type === 'Created' ? 0 : type === 'Voted' ? 1 : type === 'Ended' ? 2 : 3;
-    const allowPoints = !!form.elements['pollAllowPoints'].checked;
-    // total votes is 0 if the poll was just Created, else get random amount based on choices amount
-    const voteTotal = (type !== 'Created') ? getRandomInt(amount, amount * 50) : 0;
-    const baseData = {
-      duration: parseInt(duration),
-      event: type,
-      poll_id: '9dd6a7a7-78f4-46ef-b674-e2864ad7fa07',
-      poll_name: 'My Test Poll',
-      choice_amount: parseInt(amount),
-      vote_total: voteTotal,
-      vote_total_base: 0,
-      vote_total_bits: 0,
-      vote_total_points: 0,
-      top_vote_list: Array.from(Array(amount).keys()),
-    };
-    const pullData = populateWithChoiceInfo(baseData, amount, type, false, allowPoints, voteTotal);
+  const pollSelect = form.elements['pollType'];
+  const amount = form.elements['pollChoiceAmount'].value || getRandomInt(2, 5);
+  const duration = form.elements['pollDuration'].value || getRandomInt(60, 600);
+  const type = pollSelect.options[pollSelect.selectedIndex].text || 'Created';
+  const typeNum = type === 'Created' ? 0 : type === 'Voted' ? 1 : type === 'Ended' ? 2 : 3;
+  const allowPoints = !!form.elements['pollAllowPoints'].checked;
+  // total votes is 0 if the poll was just Created, else get random amount based on choices amount
+  const voteTotal = (type !== 'Created') ? getRandomInt(amount, amount * 50) : 0;
+  const baseData = {
+    duration: parseInt(duration),
+    event: type,
+    poll_id: '9dd6a7a7-78f4-46ef-b674-e2864ad7fa07',
+    poll_name: 'My Test Poll',
+    choice_amount: parseInt(amount),
+    vote_total: voteTotal,
+    vote_total_base: 0,
+    vote_total_bits: 0,
+    vote_total_points: 0,
+    top_vote_list: Array.from(Array(amount).keys()),
+    channel_points_voting: {
+      is_enabled: allowPoints,
+      amount_per_vote: 5
+    },
+    started_at: twitchTimestamp(type === 'Created' ? Date.now() : type === 'Voted' ? Date.now() - Math.floor(Math.random() * parseInt(duration) * 1000) : Date.now() - parseInt(duration) * 1000),
+    ends_at: twitchTimestamp(Date.now() + parseInt(duration) * 1000),
+  }
+const pullData = populateWithChoiceInfo(baseData, amount, type, false, allowPoints, voteTotal);
 
-    sendTriggerToSAMMI(
-      16,
-      `Poll ${type} [test trigger] fired!`,
-      {
-        type: typeNum,
-      },
-      pullData,
-    );
+sendTriggerToSAMMI(
+  16,
+  `Poll ${type} [test trigger] fired!`,
+  {
+    type: typeNum,
+  },
+  pullData,
+);
 }
 ,
     async SAMMITestTwitchHypeTrain(form) {
-    const hypeSelect = form.elements['hypeTrainType'];
-    const type = hypeSelect.options[hypeSelect.selectedIndex].text;
-    const currentLevel = form.elements['hypeTrainLevel'].value || 1;
-    const currentGoal = getRandomInt(1000, 2000);
-    const goalProgres = getRandomInt(100, currentGoal - 50);
-    const typeNums = {
-      Approaching: 0, Started: 1, Updated: 2, 'Leveled Up': 3, Ended: 4, 'Cooldown Expired': 5, Progressed: 6,
+  const hypeSelect = form.elements['hypeTrainType'];
+  const type = hypeSelect.options[hypeSelect.selectedIndex].text;
+  const currentLevel = parseInt(form.elements['hypeTrainLevel'].value) || 1;
+  const currentGoal = parseInt(form.elements['hypeTrainGoal'].value) || getRandomInt(1000, 2000);
+  const goalProgres = parseInt(form.elements['hypeTrainProgress'].value) || getRandomInt(100, currentGoal - 50);
+  const typeNums = {
+    Begin: 1, Progress: 4, End: 6,
+  };
+  const typeNum = typeNums[type];
+  const hypeTrainId = `${getRandomInt(10, 99)}b8f628-5075-4213-95ac-6ceeac9426fe`;
+  const lastContributionUser = generateName();
+  const topBitsContributionUser = generateName(lastContributionUser);
+  const topSubContributionUser = generateName(topBitsContributionUser);
+  const last_contribution = {
+    user_name: lastContributionUser[0].toLowerCase(),
+    user_id: lastContributionUser[1],
+    total: getRandomInt(100, 1000),
+    display_name: lastContributionUser[0],
+    type: getRandomInt(0, 1) === 0 ? 'bits' : 'subscription',
+  }
+  const top_subscription_contribution = {
+    user_name: topSubContributionUser[0].toLowerCase(),
+    user_id: topSubContributionUser[1],
+    total: getRandomInt(100, 1000),
+    display_name: topSubContributionUser[0],
+
+  }
+  const top_bits_contribution = {
+    user_name: topBitsContributionUser[0].toLowerCase(),
+    user_id: topBitsContributionUser[1],
+    total: getRandomInt(100, 1000),
+    display_name: topBitsContributionUser[0],
+  }
+
+  let pullData;
+
+  if (type == "Begin" || type == "Progress") {
+    pullData = {
+      id: hypeTrainId,
+      current_goal: currentGoal,
+      goal_progress: goalProgres,
+      total_progress: goalProgres,
+      expires_at: twitchTimestamp(Date.now() + 1000 * 60 * 60),
+      from_channel_id: 93566099,
+      event: type.toLowerCase(),
+      top_other_contribution: {},
+      goal_progress: goalProgres,
+      current_goal: currentGoal,
+      last_contribution: last_contribution,
+      current_level: currentLevel,
+      top_subscription_contribution: top_subscription_contribution,
+      top_bits_contribution: top_bits_contribution,
     };
-    const typeNum = typeNums[type];
-    let baseObj = {};
-    // base SAMMI trigger values are the same for the following types
-    if (typeNum == 1 || typeNum == 3 || typeNum == 6) {
-      baseObj = {
-        current_level: parseInt(currentLevel),
-        current_goal: currentGoal,
-        goal_progress: goalProgres,
-        total_progress: goalProgres,
-
-      };
+  }
+  // End
+  else {
+    pullData = {
+      total_progress: goalProgres,
+      cooldown_ends_at: twitchTimestamp(Date.now() + 1000 * 60 * 60),
+      top_other_contribution: {},
+      ended_at: twitchTimestamp(Date.now()),
+      id: hypeTrainId,
+      last_contribution: last_contribution,
+      current_level: currentLevel,
+      top_subscription_contribution: top_subscription_contribution,
+      top_bits_contribution: top_bits_contribution,
     }
+  }
 
-    const hypeTrainId = `${getRandomInt(10, 99)}b8f628-5075-4213-95ac-6ceeac9426fe`;
+  pullData.event = type.toLowerCase();
+  pullData.type = typeNum;
 
-    // this reward object is added to approaching events
-    // not sure if it changes depending on the broadcaster
-    const level_one_rewards = [{
-      id: 'emotesv2_3114c3d12dc44f53810140f632128b54',
-      reward_level: 0.0,
-      group_id: '',
-      token: 'HypeSleep',
-      type: 'EMOTE',
-      set_id: '1a8f0108-5aee-4125-8067-d39e983e934b',
-    }, {
-      id: 'emotesv2_7d457ecda087479f98501f80e23b5a04',
-      reward_level: 0.0,
-      group_id: 1,
-      token: 'HypePat',
-      type: 'EMOTE',
-      set_id: '1a8f0108-5aee-4125-8067-d39e983e934b',
-    }, {
-      id: 'emotesv2_e7a6e7e24a844e709c4d93c0845422e1',
-      reward_level: 0.0,
-      group_id: '',
-      token: 'HypeLUL',
-      type: 'EMOTE',
-      set_id: '1a8f0108-5aee-4125-8067-d39e983e934b',
-    }, {
-      id: 'emotesv2_e2a11d74a4824cbf9a8b28079e5e67dd',
-      reward_level: 0.0,
-      group_id: '',
-      token: 'HypeCool',
-      type: 'EMOTE',
-      set_id: '1a8f0108-5aee-4125-8067-d39e983e934b',
-    }, {
-      id: 'emotesv2_036fd741be4141198999b2ca4300668e',
-      reward_level: 0.0,
-      group_id: '',
-      token: 'HypeLove1',
-      type: 'EMOTE',
-      set_id: '1a8f0108-5aee-4125-8067-d39e983e934b',
-    }];
-
-    const progress = {
-      remaining_seconds: typeNum !== 1 ? getRandomInt(10, 299) : 299,
-      total: goalProgres,
-      value: goalProgres,
-      goal: currentGoal,
-      level: {
-        impressions: getRandomInt(100, 900),
-        rewards: level_one_rewards,
-        value: parseInt(currentLevel),
-        goal: currentGoal,
-      },
-    };
-
-    // types of all participations
-    const particTypes = ['BITS.CHEER', 'BITS.EXTENSION', 'BITS.POLL', 'SUBS.TIER_2_SUB', 'SUBS.TIER_2_GIFTED_SUB', 'SUBS.TIER_1_GIFTED_SUB', 'SUBS.TIER_1_SUB', 'SUBS.TIER_3_SUB', 'SUBS.TIER_3_GIFTED_SUB'];
-    let data;
-
-    switch (type) {
-      default:
-        data = {};
-        break;
-      case 'Approaching': {
-        // participants is an array of user IDs
-        const participants = Array(getRandomInt(2, 10)).fill(generateName()[1]);
-        data = {
-          approaching_hype_train_id: hypeTrainId,
-          channel_id: generateName()[1],
-          goal: 3,
-          is_boost_train: 0,
-          participants,
-          level_one_rewards,
-          creator_color: '639315',
-          // array of one single value? can it be more? probably..
-          events_remaining_durations: [getRandomInt(50, 300)],
-        };
-      }
-        break;
-      case 'Started': {
-        // started and updated at will be the same
-        const started = Date.now();
-        data = {
-          id: hypeTrainId,
-          channel_id: generateName()[1],
-          started_at: started,
-          updated_at: started,
-          expires_at: started + 300000,
-          ended_at: null,
-          ending_reason: null,
-          participations: {
-            // get two random participation types and generate their values
-            [particTypes[getRandomInt(0, 2)]]: getRandomInt(1, 1000),
-            [particTypes[getRandomInt(3, 8)]]: getRandomInt(1, 10),
-          },
-          conductors: {},
-          // this is supposed to return very long complex object, leaving blank for tests
-          config: {},
-          progress,
-          is_boost_train: 0,
-        };
-      }
-        break;
-      case 'Progressed': {
-        const sourceSelect = form.elements['hypeTrainSource'];
-        const source = sourceSelect.options[sourceSelect.selectedIndex].text;
-        const [name, userID] = await getNameFromInput(form.elements.hypeTrainName);
-        const amount = parseInt(form.elements['hypeTrainAmount'].value) || 10;
-        data = {
-          sequence_id: 2174,
-          user_profile_image_url: 'https://static-cdn.jtvnw.net/custom-reward-images/default-4.png',
-          user_id: userID,
-          user_display_name: name,
-          user_login: name.toLowerCase(),
-          source,
-          progress,
-          is_boost_train: 0,
-          quantity: amount || 10,
-        };
-      }
-        break;
-      case 'Updated': {
-        const [name, userID] = await getNameFromInput(form.elements.hypeTrainName);
-        const sourceSelect = form.elements['hypeTrainSource'];
-        const source = sourceSelect.options[sourceSelect.selectedIndex].text;
-        const particType = source === 'BITS' ? particTypes[getRandomInt(0, 2)] : particTypes[getRandomInt(3, 8)];
-        const particTypeValue = parseInt(form.elements['hypeTrainAmount'].value) || 10;
-        baseObj = {
-          display_name: name,
-          user_name: name.toLowerCase(),
-          user_id: userID,
-        };
-        data = {
-          participations: {
-            [particType]: particTypeValue,
-          },
-          source,
-          user: {
-            profile_image_url: 'https://static-cdn.jtvnw.net/custom-reward-images/default-4.png',
-            id: userID,
-            display_name: name,
-            login: name.toLowerCase(),
-          },
-        };
-      }
-        break;
-      case 'Leveled Up':
-        data = {
-          progress,
-          time_to_expire: Date.now() + getRandomInt(10000, 300000),
-          is_boost_train: 0,
-        };
-        break;
-      case 'Ended': {
-        const reasonSelect = form.elements['hypeTrainEndReason'];
-        const reason = reasonSelect.options[reasonSelect.selectedIndex].text;
-        baseObj = {
-          ending_reason: reason,
-        };
-        data = {
-          ending_reason: reason,
-          ended_at: Date.now(),
-          is_boost_train: 0,
-        };
-      }
-        break;
-      case 'Cooldown Expired': {
-        // not sure what Pubsub sends for this event
-        data = {};
-      }
-    }
-
-    baseObj.type = typeNum;
-    baseObj.data = data;
-
-    sendTriggerToSAMMI(
-      17,
-      `Hype Train ${type} [test trigger] fired!`,
-      { type: typeNum },
-      baseObj,
-    );
-  },
+  sendTriggerToSAMMI(
+    17,
+    `Hype Train ${type} [test trigger] fired!`,
+    { type: typeNum },
+    pullData,
+  );
+},
     async SAMMITestTwitchChat(form) {
-    const [name, userID] = await getNameFromInput(form.elements['name']);
-    const message = form.elements['chatMsg'].value || SAMMI.generateMessage();
-    const channel = Math.floor(Math.random() * 1000000000).toString();
-    const color = '189A8D';
-    const emoteList = '304822798:0-9/304682444:11-19';
-    const firstTime = form.elements['chatFirstTime'].checked ? '1' : '0';
+  const [name, userID] = await getNameFromInput(form.elements['name']);
+  const message = form.elements['chatMsg'].value || SAMMI.generateMessage();
+  const channel = Math.floor(Math.random() * 1000000000).toString();
+  const color = '189A8D';
+  const emoteList = '304822798:0-9/304682444:11-19';
+  const firstTime = form.elements['chatFirstTime'].checked ? '1' : '0';
+  const chatWhisper = form.elements['chatWhisper'].checked
+
+  // regular message
+  if (!chatWhisper) {
     const badge = [];
     if (form.elements['chatBroadcaster'].checked) badge.push('broadcaster/1');
     if (form.elements['chatMod'].checked) badge.push('moderator/1');
     if (form.elements['chatVip'].checked) badge.push('vip/1');
     if (form.elements['chatFounder'].checked) badge.push('founder/1');
     if (form.elements['chatSub'].checked) {
-        const tier = parseInt(form.elements['chatMsgSubTier'].value);
-        let month = form.elements['chatMsgSubMonth'].value != 1 ? parseInt(form.elements['chatMsgSubMonth'].value) : 0;
-        month = month > 3 && month < 6
+      const tier = parseInt(form.elements['chatMsgSubTier'].value);
+      let month = form.elements['chatMsgSubMonth'].value != 1 ? parseInt(form.elements['chatMsgSubMonth'].value) : 0;
+      month = month > 3 && month < 6
         ? (month = 3)
         : month > 6 && month < 9
           ? (month = 6)
           : month > 9 && month < 12
             ? (month = 9)
             : month;
-        const subBadge = tier === 1
+      const subBadge = tier === 1
         ? `subscriber/${month}`
         : tier === 2
           ? `subscriber/${2000 + month}`
@@ -2624,6 +2566,7 @@ async function SAMMITestTriggers() {
       name_color: color,
       first_time: firstTime,
       from_channel_id: 123456789,
+      custom_redeem_id: ""
     };
     SAMMI.trigger(0, {
       message,
@@ -2636,18 +2579,46 @@ async function SAMMITestTriggers() {
       trigger_data: pullData,
     });
   }
+  // whisper
+  else {
+    const pullData = {
+      sender_user_name: name.toLowerCase(),
+      sender_display_name: name,
+      sender_user_id: userID,
+      sender_color: "#000000",
+      recipient_user_name: window.defaultTwitchUser.login,
+      recipient_display_name: window.defaultTwitchUser.display_name,
+      recipient_user_id: window.defaultTwitchUser.user_id,
+      recipient_color: "#000000",
+      badge_list: [],
+      emote_list: [],
+      message,
+      sent: 0
+    };
+    SAMMI.trigger(13, {
+      message,
+      sent: 0,
+      trigger_data: pullData,
+    });
+  }
+}
 
 ,
     async SAMMITestTwitchShoutout(form) {
-    const [name, userID] = await getNameFromInput(form.elements.name);
+    const [name, userID] =  await getNameFromInput(form.elements.name)
     const pullData = {
       id: '33426a33-0454-4e00-a9ad-4ee5ca74d75d',
       user_name: name.toLowerCase(),
       display_name: name,
       user_id: userID,
-      name_color: '',
       picture_url: 'https://static-cdn.jtvnw.net/user-default-pictures-uv/dbdc9198-def8-11e9-8681-784f43822e80-profile_image-300x300.png',
-      recent_categories: '',
+      started_at: twitchTimestamp(Date.now()),
+      target_cooldown_ends_at: twitchTimestamp(Date.now() + 1000 * 60 * 60),
+      cooldown_ends_at: twitchTimestamp(Date.now() + 1000 * 60 * 2),
+      moderator_user_name: 'testmod',
+      moderator_display_name: 'TestMod',
+      moderator_user_id: '123456789',
+      viewer_count: getRandomInt(1, 1000),
     };
     sendTriggerToSAMMI(
       28,
@@ -2656,7 +2627,125 @@ async function SAMMITestTriggers() {
       pullData,
     );
   }
-  
+  ,
+    async SAMMITestTwitchShoutoutReceive(form) {
+  const [name, userID] = await getNameFromInput(form.elements.name)
+  const pullData = {
+    from_user_name: name.toLowerCase(),
+    from_display_name: name,
+    from_user_id: userID,
+    started_at: twitchTimestamp(Date.now()),
+    viewer_count: getRandomInt(1, 1000),
+  };
+  sendTriggerToSAMMI(
+    37,
+    `Shoutout received from ${pullData.from_display_name}! [test trigger]`,
+    {},
+    pullData,
+  );
+}
+,
+    async SAMMITestTwitchAdbreak(form) {
+    const [name, userID] =  await getNameFromInput(form.elements.name)
+    const isAutomatic = form.elements.adbreakAuto.checked ? 1 : 0;
+    const pullData = {
+      display_name: window.defaultTwitchUser.display_name,
+      user_name: window.defaultTwitchUser.login,
+      user_id: window.defaultTwitchUser.user_id,
+      started_at: twitchTimestamp(Date.now()),
+      duration: 60,
+      is_automatic: isAutomatic,
+      requester_user_id: userID,
+      requester_user_name: name.toLowerCase(),
+      requester_display_name: name,
+    };
+    sendTriggerToSAMMI(
+      33,
+      `Ad break started [test trigger].`,
+      {},
+      pullData,
+    );
+  }
+  ,
+    async SAMMITestTwitchStream(form) {
+  const typeSelect = form.elements['streamType'];
+  const type = typeSelect.options[typeSelect.selectedIndex].value
+  const pullData = {
+    display_name: window.defaultTwitchUser.display_name,
+    user_name: window.defaultTwitchUser.login,
+    user_id: window.defaultTwitchUser.user_id,
+    started_at: twitchTimestamp(Date.now()),
+  };
+  if (type == "started") {
+    pullData.id = "43355732987";
+    pullData.started_at = twitchTimestamp(Date.now() - 120000);
+  }
+
+  sendTriggerToSAMMI(
+    38,
+    `Stream ${type}: ${pullData.display_name} [test trigger].`,
+    {
+      type: type == "started" ? 0 : 1,
+    },
+    pullData,
+  );
+}
+,
+    async SAMMITestTwitchCharity(form) {
+  const typeSelect = form.elements['charityType'];
+  const type = typeSelect.options[typeSelect.selectedIndex].value
+  const typeEnums = {
+    start: 0,
+    progress: 1,
+    stop: 2,
+    donate: 3,
+  }
+  let pullData; 
+  if (type != "donate") {
+    pullData = {
+      target_amount: 20000,
+      charity_website: "https://sammi.solutions",
+      started_at: twitchTimestamp(Date.now()),
+      event: type,
+      charity_description: "Example Description",
+      target_amount_currency: "USD",
+      charity_name: "Example Charity",
+      id: "dce01786-41cf-04c6-6219-a5ebe15bd3c1",
+      charity_logo: "https://abc.cloudfront.net/ppgf/1000/100.png",
+      current_amount_currency: "USD",
+      current_amount: type == "start" ?  0 : getRandomInt(0, 15000),
+      type: typeEnums[type],
+    }
+  }
+
+  else {
+    const user = generateName();
+    pullData = {
+      charity_website: "https://sammi.solutions",
+      user_name: user[0].toLowerCase(),
+      event: "donate",
+      charity_description: "Example Description",
+      user_id: user[1],
+      campaign_id: "06d77f21-659e-c3e9-1f92-f6201237cddf",
+      charity_name: "Example Charity",
+      id: "d63da6b1-f0be-48ab-fbd2-6d844e242082",
+      display_name: user[0],
+      charity_logo: "https://abc.cloudfront.net/ppgf/1000/100.png",
+      amount: 1500.0,
+      currency: "USD",
+      type: typeEnums[type],
+    }
+  }
+
+  sendTriggerToSAMMI(
+    34,
+    `Charity ${type} event triggered [test trigger].`,
+    {
+      type: typeEnums[type],
+    },
+    pullData,
+  );
+}
   };
 
   class ConstructPullData {
@@ -2704,31 +2793,33 @@ async function SAMMITestTriggers() {
     if (tryToGetID.indexOf('User not found') === -1) return tryToGetID;
     return defaultID;
   }
-  function generateName(name = '') {
-    const names = [
-      ['Melonax', '41809329'],
-      ['RamsReef', '91464575'],
-      ['Wellzish', '461898318'],
-      ['Andilippi', '47504449'],
-      ['Cyanidesugar', '76159058'],
-      ['Silverlink', '489730'],
-      ['wolbee', '72573038'],
-      ['Davidihewlett', '116807809'],
-      ['DearAsMax', '478335805'],
-      ['Estudiando_Ajedrez', '184806573'],
-      ['RoadieGamer', '450427842'],
-      ['chrizzz_1508', '88246295'],
-      ['MisterK_Qc', '475765680'],
-      ['Falinere', '144606537'],
-      ['Landie', '78949799'],
-      ['Phat32', '24565497'],
-      ['mofalkmusic', '443568234'],
-      ['NikiYanagi', '528140333'],
-    ];
-    const randomName = names[Math.floor(Math.random() * names.length)];
-    if (name !== randomName) return randomName;
-    return generateName(name);
-  }
+  function generateName(name = "") {
+  const names = [
+    ["Melonax", "41809329"],
+    ["RamsReef", "91464575"],
+    ["Wellzish", "461898318"],
+    ["Andilippi", "47504449"],
+    ["Cyanidesugar", "76159058"],
+    ["Silverlink", "489730"],
+    ["wolbee", "72573038"],
+    ["Davidihewlett", "116807809"],
+    ["DearAsMax", "478335805"],
+    ["Estudiando_Ajedrez", "184806573"],
+    ["RoadieGamer", "450427842"],
+    ["chrizzz_1508", "88246295"],
+    ["MisterK_Qc", "475765680"],
+    ["Digi_Bunny", "125959963"],
+    ["Falinere", "144606537"],
+    ["Landie", "78949799"],
+    ["Phat32", "24565497"],
+    ["mofalkmusic", "443568234"],
+    ["NikiYanagi", "528140333"],
+  ];
+  const randomName = names[Math.floor(Math.random() * names.length)];
+  if (name !== randomName) return randomName;
+  return generateName(name);
+}
+
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * ((max + 1) - min) + min);
   }
@@ -2743,6 +2834,12 @@ function* splitNParts(num, parts) {
   yield num - sumParts;
 }
 
+  function twitchTimestamp(timestamp) {
+    const date = new Date(timestamp);
+    const isoString = date.toISOString();
+    const formattedTimestamp = isoString.substring(0, 20) + isoString.substring(20, 23) + "000000Z";
+    return formattedTimestamp;
+}
   function populateWithChoiceInfo(obj, amount, type, allowBits, allowPoints, voteTotal) {
   // split total votes into parts for each choice
   const choiceVotesSplit = [...splitNParts(voteTotal, amount)];
@@ -2798,8 +2895,31 @@ function* splitNParts(num, parts) {
     const total_user = total_points !== 0 ? getRandomInt(Math.ceil(total_points / 10), total_points) : 0;
     // avoid having NaN if 0
     const percentage = total_points !== 0 ? parseInt((total_points / voteTotal) * 100) : 0;
+    let top_predictors = [];
+    if (type != 'Created' && total_points > 0) {
+      let total_channel_points_used = 0;
+      for (let userCount = 0; userCount < total_user; userCount++) {
+        const username = generateName();
+        // random value between 1 and total points minus channel points used if we have more than 1 predictor
+        const channel_points_used = userCount === total_user - 1 ? total_points - total_channel_points_used : getRandomInt(1, total_points - total_channel_points_used - (total_user - userCount - 1));
+        total_channel_points_used += channel_points_used;
+        top_predictors.push({
+          "channel_points_used": channel_points_used,
+          "channel_points_won": null,
+          "user_name": username[0],
+          "user_id": username[1],
+          "user_login": username[0].toLowerCase()
+        });
+      }
+    }
     const outcome = {
-      total_points, percentage, total_user, id: `e960f614-d379-494a-8b45-0c7500978${i}ea`, name: `Test Choice ${i + 1}`,
+      total_points,
+      percentage,
+      total_user,
+      id: `e960f614-d379-494a-8b45-0c7500978${i}ea`,
+      name: `Test Choice ${i + 1}`,
+      color: 'blue',
+      top_predictors: top_predictors
     };
     obj[`outcome_${i + 1}_info`] = outcome;
   }
