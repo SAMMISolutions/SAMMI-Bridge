@@ -7,7 +7,6 @@ async SAMMITestTwitchPoints(form) {
     ? form.elements.channelPointsMsg.value || SAMMI.generateMessage()
     : '';
   const cost = parseInt(form.elements.channelPointsCost.value) || 50;
-  const image = 'https://static-cdn.jtvnw.net/custom-reward-images/default-4.png';
   const rewardId = generateUUID();
   const redeemId = generateUUID();
   const pullData = {
@@ -16,9 +15,11 @@ async SAMMITestTwitchPoints(form) {
     user_id: userID,
     channel_id: channelID,
     redeem_name: redeemName,
+    reward_description: "Test Reward Description",
+    redeemed_at: twitchTimestamp(Date.now()),
+    status: "unfulfilled",
     message,
     cost,
-    image,
     reward_id: rewardId,
     redeem_id: redeemId,
   };

@@ -63,6 +63,29 @@ async SAMMITestTwitchSubs(form, notUsed, gifted = false, gifterName = '') {
     message,
     month,
     community_gift: gifted ? 1 : 0,
+    system_message: subtype === 1 ? `${name[0]} subscribed with ${selectedTier}. [test trigger]` : `${name[0]} gifted a ${selectedTier} sub to ${giftedName[0]}! [test trigger]`,
+    cumulative_total: 0,
+    name_color: "#189A8D",
+    emote_list: null,
+    message_id: "e2d6ecd6-0ef0-44b7-97f7-cdcd334e1723",
+    duration_months: 0,
+    badge_list: [ 
+    {
+        "info": "",
+        "id": "1",
+        "set_id": "moderator"
+    },
+    {
+        "info": "1",
+        "id": "0",
+        "set_id": "subscriber"
+    }
+]
+
+
   };
   sendTriggerToSAMMI(type, msg, data, pullData);
 }
+
+
+

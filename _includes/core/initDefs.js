@@ -1,6 +1,12 @@
 /* eslint-disable */
 // Twitch client ID to use for Twitch API requests
 window.TWITCH_CLIENT_ID = 'xolexwv18o8i5uqsga0bw3z39cpg0c';
+// default Twitch user 
+window.defaultTwitchUser = {
+  display_name: "Default User",
+  login: "defaultuser",
+  user_id: "123456789",
+}
 // init object with all available SAMMI command methods
 const SAMMI = new SAMMICommands();
 window.SAMMI = SAMMI;

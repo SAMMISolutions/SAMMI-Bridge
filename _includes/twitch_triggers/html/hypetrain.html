@@ -2,13 +2,9 @@
    <div class="d-flex align-items-center">
       <button type="submit" class="btn btn-primary btn-sm me-2">Test Hype Train</button>
       <select class="form-select form-select-sm w-auto me-2" aria-label="Hype Train Type" name="hypeTrainType">
-         <option value="approaching" selected>Approaching</option>
-         <option value="started">Started</option>
-         <option value="updated">Updated</option>
-         <option value="progressed">Progressed</option>
-         <option value="levelup">Leveled Up</option>
-         <option value="ended">Ended</option>
-         <option value="cdexpired">Cooldown Expired</option>
+         <option value="begin">Begin</option>
+         <option value="progress">Progress</option>
+         <option value="end">End</option>
       </select>
       <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidehypetrain" role="button" aria-expanded="false"
          aria-controls="hidebits"></a>
@@ -16,29 +12,15 @@
    <div class="collapse mb-1" id="hidehypetrain">
       <div class="form-group mb-2">
          <label>Current level:</label>
-         <input type="number" class="form-control form-control-sm w-auto" min="2" max="50" name="hypeTrainLevel" value=3>
+         <input type="number" class="form-control form-control-sm w-auto" min="1" max="50" name="hypeTrainLevel" value=3>
       </div>
       <div class="form-group mb-2">
-         <label>(Updated/Progressed) Display Name:</label>
-         <input type="text" class="form-control form-control-sm w-auto" name="hypeTrainName">
+         <label>Current goal:</label>
+         <input type="number" class="form-control form-control-sm w-auto" min="1" max="10000" name="hypeTrainGoal" value=3>
       </div>
       <div class="form-group mb-2">
-         <label>(Updated/Progressed) Source:</label>
-         <select class="form-select form-select-sm w-auto" aria-label="Hype Train Source" name="hypeTrainSource">
-            <option value="BITS" selected>BITS</option>
-            <option value="SUBS">SUBS</option>
-         </select>
-      </div>
-      <div class="form-group mb-2">
-         <label>Amount:</label>
-         <input type="number" class="form-control form-control-sm w-auto" min="1" max="10000" name="hypeTrainAmount" value=100>
-      </div>
-      <div class="form-group mb-2">
-         <label>(Ended) Ending reason:</label>
-         <select class="form-select form-select-sm w-auto" aria-label="Hype Train Ended Reason" name="hypeTrainEndReason">
-            <option value="COMPLETED" selected>COMPLETED</option>
-            <option value="EXPIRED">EXPIRED</option>
-         </select>
+         <label>Goal progress:</label>
+         <input type="number" class="form-control form-control-sm w-auto" min="1" max="10000" name="hypeTrainProgress" value=3>
       </div>
    </div>
 </form>

@@ -11,7 +11,11 @@ async function SAMMITestTriggers() {
     {% include twitch_triggers/js/polls.js %},
     {% include twitch_triggers/js/hypetrain.js %},
     {% include twitch_triggers/js/chat.js %},
-    {% include twitch_triggers/js/shoutout.js %}
+    {% include twitch_triggers/js/shoutout.js %},
+    {% include twitch_triggers/js/shoutout_receive.js %},
+    {% include twitch_triggers/js/adbreak.js %},
+    {% include twitch_triggers/js/stream.js %},
+    {% include twitch_triggers/js/charity.js %}
   };
 
   class ConstructPullData {
@@ -44,6 +48,7 @@ async function SAMMITestTriggers() {
   {% include twitch_triggers/helpers/generateName.js %}
   {% include twitch_triggers/helpers/getRandomInt.js %}
   {% include twitch_triggers/helpers/splitNParts.js %}
+  {% include twitch_triggers/helpers/twitchTimestamp.js %}
   {% include twitch_triggers/helpers/populateWithChoiceInfo.js %}
   {% include twitch_triggers/helpers/populateWithOutcomeInfo.js %}
   {% include twitch_triggers/helpers/generateUUID.js %}

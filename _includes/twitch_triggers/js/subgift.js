@@ -26,8 +26,9 @@ SAMMITestTwitchSubGift(form) {
     user_name: gifterName[0].toLowerCase(),
     display_name: gifterName[0],
     user_id: gifterName[1],
-    amount: `${amount}`,
+    amount: amount,
     tier: selectedTier,
+    cumulative_total: 0,
   };
   sendTriggerToSAMMI(
     2,

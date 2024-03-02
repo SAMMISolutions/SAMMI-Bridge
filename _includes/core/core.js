@@ -154,6 +154,8 @@ class SAMMICore {
 
       await SAMMI.getTwitchList().then((data) => {
         window.TWITCH_CLIENT_ID = data.twitch_list.clientId ? data.twitch_list.clientId : window.TWITCH_CLIENT_ID;
+        delete data.twitch_list.clientId;
+        window.defaultTwitchUser = Object.keys(data.twitch_list).length > 0 ? data.twitch_list[Object.keys(data.twitch_list)[0]] : window.defaultTwitchUser;
       });
 
       // Save connection params to storage only if we did not retry with a new port

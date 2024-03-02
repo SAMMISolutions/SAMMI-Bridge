@@ -33,6 +33,7 @@ GEM
     ethon (0.16.0)
       ffi (>= 1.15.0)
     eventmachine (1.2.7)
+    eventmachine (1.2.7-x64-mingw32)
     execjs (2.9.1)
     faraday (2.7.11)
       base64
@@ -40,6 +41,7 @@ GEM
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
     ffi (1.16.3)
+    ffi (1.16.3-x64-mingw32)
     ffi (1.16.3-x64-unknown)
     forwardable-extended (2.6.0)
     gemoji (3.0.1)
@@ -223,6 +225,8 @@ GEM
       jekyll-seo-tag (~> 2.1)
     minitest (5.20.0)
     mutex_m (0.1.2)
+    nokogiri (1.15.4-x64-mingw32)
+      racc (~> 1.4)
     nokogiri (1.15.4-x64-unknown)
       racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
@@ -266,6 +270,7 @@ GEM
     webrick (1.8.1)
 
 PLATFORMS
+  x64-mingw32
   x64-unknown
   x86_64-linux
 
@@ -277,4 +282,4 @@ DEPENDENCIES
   webrick (~> 1.7)
 
 BUNDLED WITH
-   2.4.21
+   2.4.22

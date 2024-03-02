@@ -12,6 +12,9 @@ SAMMITestTwitchPrediction(form) {
       prediction_id: '1621385a-1f26-4197-82fc-6352003a69db',
       prediction_name: 'My Test Prediction',
       winning_outcome: type === 'Resolved' ? `e960f614-d379-494a-8b45-0c7500978${getRandomInt(0, amount - 1)}ea` : '',
+      started_at: twitchTimestamp(type === 'Created' ? Date.now() : type === 'Voted' ? Date.now() - Math.floor(Math.random() * parseInt(duration) * 1000) : Date.now() - parseInt(duration) * 1000),
+      locks_at: twitchTimestamp(Date.now() + parseInt(duration) * 1000),
+      prediction_name: 'My Test Prediction',
     };
     const pullData = populateWithOutcomeInfo(baseData, amount, type);
 

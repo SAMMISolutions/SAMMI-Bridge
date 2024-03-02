@@ -6,6 +6,7 @@ async SAMMITestTwitchRaid(form) {
     display_name: name,
     user_id: userID,
     amount,
+    picture_url: "https:\\/\\/static-cdn.jtvnw.net\\/user-default-pictures-uv\\/dbdc9198-def8-11e9-8681-784f43822e80-profile_image-300x300.png"
   };
 
   sendTriggerToSAMMI(
