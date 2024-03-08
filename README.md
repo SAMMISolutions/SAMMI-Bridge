@@ -281,7 +281,7 @@ SAMMI.httpRequest(url, method = 'GET', headers [optional], body [optional])
 - `body` - body of the request
 - example 1: 
   ```js
-  SAMMI.httpRequest('https://icanhazdadjoke.com', "GET", { "Accept: application/json" }, {}).then(response => {
+  SAMMI.httpRequest("https://icanhazdadjoke.com", "GET", { Accept: "application/json" }, {}).then(response => {
     const data = JSON.parse(response.Value)
     console.log(data)
   })
