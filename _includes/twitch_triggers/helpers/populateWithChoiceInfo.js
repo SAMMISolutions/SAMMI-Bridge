@@ -2,8 +2,11 @@ function populateWithChoiceInfo(obj, amount, type, allowBits, allowPoints, voteT
   // split total votes into parts for each choice
   const choiceVotesSplit = [...splitNParts(voteTotal, amount)];
   const topVotes = { ...choiceVotesSplit };
-  const topVotesSorted = Object.keys(topVotes).sort((a, b) => parseInt(topVotes[b]) - parseInt(topVotes[a]));
-  obj.top_vote_list = topVotesSorted;
+  const topVotesSorted = Object.keys(topVotes)
+  .sort((a, b) => parseInt(topVotes[b]) - parseInt(topVotes[a]))
+  .map(key => parseInt(key));
+
+obj.top_vote_list = topVotesSorted;
 
   for (let i = 0; i < amount; i++) {
     const choiceInfo = {};
