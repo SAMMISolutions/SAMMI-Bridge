@@ -11,7 +11,7 @@ async SAMMITestTwitchBits(form) {
   };
   sendTriggerToSAMMI(
     5,
-    `${pullData.user_name} donated ${amount} bits! [test trigger]`,
+    `${pullData.display_name} donated ${amount} bits! [test trigger]`,
     {
       amount,
     },
