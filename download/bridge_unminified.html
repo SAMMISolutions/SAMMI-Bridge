@@ -2411,6 +2411,13 @@ async function SAMMITestTriggers() {
   const allowPoints = !!form.elements['pollAllowPoints'].checked;
   // total votes is 0 if the poll was just Created, else get random amount based on choices amount
   const voteTotal = (type !== 'Created') ? getRandomInt(amount, amount * 50) : 0;
+
+    // Creating top_vote_list using a for loop
+    const topVoteList = [];
+    for (let i = 0; i < amount; i++) {
+      topVoteList.push(i);
+    }
+
   const baseData = {
     duration: parseInt(duration),
     event: type,
@@ -2421,7 +2428,7 @@ async function SAMMITestTriggers() {
     vote_total_base: 0,
     vote_total_bits: 0,
     vote_total_points: 0,
-    top_vote_list: Array.from(Array(amount).keys()),
+    topVoteList,
     channel_points_voting: {
       is_enabled: allowPoints,
       amount_per_vote: 5
@@ -2846,93 +2853,132 @@ function* splitNParts(num, parts) {
     return formattedTimestamp;
 }
   function populateWithChoiceInfo(obj, amount, type, allowBits, allowPoints, voteTotal) {
-  // split total votes into parts for each choice
-  const choiceVotesSplit = [...splitNParts(voteTotal, amount)];
-  const topVotes = { ...choiceVotesSplit };
-  const topVotesSorted = Object.keys(topVotes)
-  .sort((a, b) => parseInt(topVotes[b]) - parseInt(topVotes[a]))
-  .map(key => parseInt(key));
+  // Initialize the choice votes split array
+  const choiceVotesSplit = new Array(amount).fill(0);
 
-obj.top_vote_list = topVotesSorted;
+  let remainingVotes = voteTotal;
+  for (let i = 0; i < amount; i++) {
+    if (i === amount - 1) {
+      choiceVotesSplit[i] = remainingVotes;
+    } else {
+      const part = voteTotal > 0 ? getRandomInt(1, remainingVotes - (amount - i - 1)) : 0;
+      choiceVotesSplit[i] = part;
+      remainingVotes -= part;
+    }
+  }
+
+  // Calculate the top votes sorted array
+  const voteWithIndex = choiceVotesSplit.map((votes, index) => ({ votes, index }));
+  voteWithIndex.sort((a, b) => b.votes - a.votes);
+  const topVotesSorted = voteWithIndex.map(item => item.index);
+  obj.top_vote_list = topVotesSorted;
 
   for (let i = 0; i < amount; i++) {
-    const choiceInfo = {};
-    const choiceInfoVotes = {};
-    const choiceInfoTokens = {};
-    const baseValue = 0;
-    // fill all possible fields with 0 base value
-    ['percentage', 'total_voters'].forEach((val) => choiceInfo[val] = baseValue);
-    ['base', 'bits', 'channel_points', 'total'].forEach((val) => choiceInfoVotes[val] = baseValue);
-    ['bits', 'channel_points'].forEach((val) => choiceInfoTokens[val] = baseValue);
-    choiceInfo.choice_id = `ddb2f066-1e36-4099-a71b-50621f90b${i}cd`;
-    choiceInfo.title = `Test Choice ${i + 1}`;
-    if (type !== 'Created' && choiceVotesSplit[i] !== 0) {
-      // split into base, bits and points votes amount based on total choice votes
-      const choiceVotesTypeSplit = (allowBits && allowPoints) ? [...splitNParts(choiceVotesSplit[i], 3)] : (allowBits || allowPoints) ? [...splitNParts(choiceVotesSplit[i], 0), 0] : [choiceVotesSplit[i], 0, 0];
-      choiceInfo.percentage = parseInt((choiceVotesSplit[i] / voteTotal) * 100);
-      // total voters will be the same as total votes if no bits or points are enabled
-      choiceInfo.total_voters = (allowBits || allowPoints) ? getRandomInt(choiceVotesSplit[i], choiceVotesSplit[i] / 10) : choiceVotesSplit[i];
-      // populate the different vote types based on if bits and points are enabled or not
-      choiceInfoVotes.total = choiceVotesSplit[i];
-      choiceInfoVotes.base = choiceVotesTypeSplit[0];
-      choiceInfoVotes.bits = allowBits ? choiceVotesTypeSplit[1] : 0;
-      choiceInfoVotes.channel_points = allowPoints ? choiceVotesTypeSplit[2] || choiceVotesTypeSplit[1] : 0;
-      // tokens are when someone votes with 5 channel points, they get 1 vote and 5 tokens?
-      choiceInfoTokens.bits = allowBits ? choiceInfoVotes.bits * 5 : 0;
-      choiceInfoTokens.channel_points = allowPoints ? choiceInfoVotes.channel_points * 10 : 0;
-      // add up all the base, bits and channel points botes
-      obj.vote_total_base += choiceInfoVotes.base;
-      obj.vote_total_bits += choiceInfoVotes.bits;
-      obj.vote_total_points += choiceInfoVotes.channel_points;
+    const choiceVotes = choiceVotesSplit[i];
+    const choiceInfo = {
+      choice_id: `ddb2f066-1e36-4099-a71b-50621f90b${i}cd`,
+      title: `Test Choice ${i + 1}`,
+      percentage: type !== 'Created' && choiceVotes !== 0 ? parseInt((choiceVotes / voteTotal) * 100) : 0,
+      total_voters: type !== 'Created' && choiceVotes !== 0 ? getRandomInt(Math.ceil(choiceVotes / 10), choiceVotes) : 0,
+      votes: {
+        total: choiceVotes,
+        base: 0,
+        bits: 0,
+        channel_points: 0
+      },
+      tokens: {
+        bits: 0,
+        channel_points: 0
+      }
+    };
+
+    if (type !== 'Created' && choiceVotes !== 0) {
+      const splitFactors = allowBits && allowPoints ? 3 : allowBits || allowPoints ? 2 : 1;
+      let splitVotes = new Array(splitFactors).fill(0);
+      for (let j = 0; j < splitFactors; j++) {
+        splitVotes[j] = j === splitFactors - 1 ? choiceVotes : getRandomInt(1, choiceVotes);
+      }
+
+      choiceInfo.votes.base = splitVotes[0];
+      choiceInfo.votes.bits = allowBits ? splitVotes[1] : 0;
+      choiceInfo.votes.channel_points = allowPoints ? splitVotes[2] || splitVotes[1] : 0;
+
+      choiceInfo.tokens.bits = allowBits ? choiceInfo.votes.bits * 5 : 0;
+      choiceInfo.tokens.channel_points = allowPoints ? choiceInfo.votes.channel_points * 10 : 0;
+
+      obj.vote_total_base += choiceInfo.votes.base;
+      obj.vote_total_bits += choiceInfo.votes.bits;
+      obj.vote_total_points += choiceInfo.votes.channel_points;
     }
-    choiceInfo.votes = choiceInfoVotes;
-    choiceInfo.tokens = choiceInfoTokens;
+
     obj[`choice_${i + 1}_info`] = choiceInfo;
   }
+
   return obj;
 }
 
   function populateWithOutcomeInfo(obj, amount, type) {
-  const voteTotal = (type !== 'Created') ? getRandomInt(amount, amount * 50) : 0;
-  // split total votes into parts for each outcome
-  const outcomeVotesSplit = [...splitNParts(voteTotal, amount)];
-  // create all outcome objects
+  const voteTotal = type !== 'Created' ? getRandomInt(amount, amount * 50) : 0;
+
+  // Initialize outcomeVotesSplit with zeros
+  const outcomeVotesSplit = [];
   for (let i = 0; i < amount; i++) {
-    const total_points = outcomeVotesSplit[i];
-    // total users are less or equal total votes
-    const total_user = total_points !== 0 ? getRandomInt(Math.ceil(total_points / 10), total_points) : 0;
-    // avoid having NaN if 0
-    const percentage = total_points !== 0 ? parseInt((total_points / voteTotal) * 100) : 0;
-    let top_predictors = [];
-    if (type != 'Created' && total_points > 0) {
-      let total_channel_points_used = 0;
-      for (let userCount = 0; userCount < total_user; userCount++) {
-        const username = generateName();
-        // random value between 1 and total points minus channel points used if we have more than 1 predictor
-        const channel_points_used = userCount === total_user - 1 ? total_points - total_channel_points_used : getRandomInt(1, total_points - total_channel_points_used - (total_user - userCount - 1));
-        total_channel_points_used += channel_points_used;
-        top_predictors.push({
-          "channel_points_used": channel_points_used,
-          "channel_points_won": null,
-          "user_name": username[0],
-          "user_id": username[1],
-          "user_login": username[0].toLowerCase()
-        });
-      }
+    outcomeVotesSplit[i] = 0;
+  }
+
+  let remainingVotes = voteTotal;
+
+  // Distribute votes evenly across choices
+  for (let i = 0; i < amount - 1; i++) {
+    if (voteTotal > 0 && amount > 1) {
+      const part = getRandomInt(1, remainingVotes - (amount - i - 1));
+      outcomeVotesSplit[i] = part;
+      remainingVotes -= part;
     }
-    const outcome = {
-      total_points,
-      percentage,
-      total_user,
+  }
+  // Assign remaining votes to the last element
+  outcomeVotesSplit[amount - 1] = remainingVotes;
+
+  for (let i = 0; i < amount; i++) {
+    const totalPoints = outcomeVotesSplit[i];
+    const totalUsers = totalPoints !== 0 ? getRandomInt(Math.ceil(totalPoints / 10), totalPoints) : 0;
+    const percentage = totalPoints !== 0 ? parseInt((totalPoints / voteTotal) * 100) : 0;
+
+    const topPredictors = generateTopPredictors(type, totalUsers, totalPoints);
+
+    obj[`outcome_${i + 1}_info`] = {
+      total_points: totalPoints,
+      percentage: percentage,
+      total_user: totalUsers,
       id: `e960f614-d379-494a-8b45-0c7500978${i}ea`,
       name: `Test Choice ${i + 1}`,
       color: 'blue',
-      top_predictors: top_predictors
+      top_predictors: topPredictors
     };
-    obj[`outcome_${i + 1}_info`] = outcome;
   }
   obj.vote_total = voteTotal;
   return obj;
+}
+
+function generateTopPredictors(type, totalUsers, totalPoints) {
+  let topPredictors = [];
+  let totalChannelPointsUsed = 0;
+
+  for (let userCount = 0; userCount < totalUsers; userCount++) {
+    const remainingPoints = totalPoints - totalChannelPointsUsed;
+    const channelPointsUsed = userCount === totalUsers - 1 ? remainingPoints : getRandomInt(1, remainingPoints);
+    totalChannelPointsUsed += channelPointsUsed;
+    const username = generateName();
+    topPredictors.push({
+      "channel_points_used": channelPointsUsed,
+      "channel_points_won": null,
+      "user_name": username[0],
+      "user_id": username[1],
+      "user_login": username[0].toLowerCase()
+    });
+  }
+
+  return topPredictors;
 }
 
   function generateUUID() {
