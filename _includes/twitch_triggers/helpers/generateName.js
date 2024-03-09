@@ -19,6 +19,11 @@ function generateName(name = "") {
     ["Phat32", "24565497"],
     ["mofalkmusic", "443568234"],
     ["NikiYanagi", "528140333"],
+    ["JulesGingerHell", "183621816"],
+    ["TheTomCanuck", "159048036"],
+    ["JzTurrini", "251893889"],
+    ["FilmScotland", "152404618"],
+    ["xeokn", "21202346"]
   ];
   const randomName = names[Math.floor(Math.random() * names.length)];
   if (name !== randomName) return randomName;
