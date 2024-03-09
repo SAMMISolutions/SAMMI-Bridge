@@ -1,63 +1,42 @@
 function populateWithOutcomeInfo(obj, amount, type) {
-  const voteTotal = type !== 'Created' ? getRandomInt(amount, amount * 50) : 0;
-
-  // Initialize outcomeVotesSplit with zeros
-  const outcomeVotesSplit = [];
+  const voteTotal = (type !== 'Created') ? getRandomInt(amount, amount * 50) : 0;
+  // split total votes into parts for each outcome
+  const outcomeVotesSplit = [...splitNParts(voteTotal, amount)];
+  // create all outcome objects
   for (let i = 0; i < amount; i++) {
-    outcomeVotesSplit[i] = 0;
-  }
-
-  let remainingVotes = voteTotal;
-
-  // Distribute votes evenly across choices
-  for (let i = 0; i < amount - 1; i++) {
-    if (voteTotal > 0 && amount > 1) {
-      const part = getRandomInt(1, remainingVotes - (amount - i - 1));
-      outcomeVotesSplit[i] = part;
-      remainingVotes -= part;
+    const total_points = outcomeVotesSplit[i];
+    // total users are less or equal total votes
+    const total_user = total_points !== 0 ? getRandomInt(Math.ceil(total_points / 10), total_points) : 0;
+    // avoid having NaN if 0
+    const percentage = total_points !== 0 ? parseInt((total_points / voteTotal) * 100) : 0;
+    let top_predictors = [];
+    if (type != 'Created' && total_points > 0) {
+      let total_channel_points_used = 0;
+      for (let userCount = 0; userCount < total_user; userCount++) {
+        const username = generateName();
+        // random value between 1 and total points minus channel points used if we have more than 1 predictor
+        const channel_points_used = userCount === total_user - 1 ? total_points - total_channel_points_used : getRandomInt(1, total_points - total_channel_points_used - (total_user - userCount - 1));
+        total_channel_points_used += channel_points_used;
+        top_predictors.push({
+          "channel_points_used": channel_points_used,
+          "channel_points_won": null,
+          "user_name": username[0],
+          "user_id": username[1],
+          "user_login": username[0].toLowerCase()
+        });
+      }
     }
-  }
-  // Assign remaining votes to the last element
-  outcomeVotesSplit[amount - 1] = remainingVotes;
-
-  for (let i = 0; i < amount; i++) {
-    const totalPoints = outcomeVotesSplit[i];
-    const totalUsers = totalPoints !== 0 ? getRandomInt(Math.ceil(totalPoints / 10), totalPoints) : 0;
-    const percentage = totalPoints !== 0 ? parseInt((totalPoints / voteTotal) * 100) : 0;
-
-    const topPredictors = generateTopPredictors(type, totalUsers, totalPoints);
-
-    obj[`outcome_${i + 1}_info`] = {
-      total_points: totalPoints,
-      percentage: percentage,
-      total_user: totalUsers,
+    const outcome = {
+      total_points,
+      percentage,
+      total_user,
       id: `e960f614-d379-494a-8b45-0c7500978${i}ea`,
       name: `Test Choice ${i + 1}`,
       color: 'blue',
-      top_predictors: topPredictors
+      top_predictors: top_predictors
     };
+    obj[`outcome_${i + 1}_info`] = outcome;
   }
   obj.vote_total = voteTotal;
   return obj;
-}
-
-function generateTopPredictors(type, totalUsers, totalPoints) {
-  let topPredictors = [];
-  let totalChannelPointsUsed = 0;
-
-  for (let userCount = 0; userCount < totalUsers; userCount++) {
-    const remainingPoints = totalPoints - totalChannelPointsUsed;
-    const channelPointsUsed = userCount === totalUsers - 1 ? remainingPoints : getRandomInt(1, remainingPoints);
-    totalChannelPointsUsed += channelPointsUsed;
-    const username = generateName();
-    topPredictors.push({
-      "channel_points_used": channelPointsUsed,
-      "channel_points_won": null,
-      "user_name": username[0],
-      "user_id": username[1],
-      "user_login": username[0].toLowerCase()
-    });
-  }
-
-  return topPredictors;
 }

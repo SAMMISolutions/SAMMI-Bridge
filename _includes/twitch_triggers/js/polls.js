@@ -7,13 +7,6 @@ SAMMITestTwitchPoll(form) {
   const allowPoints = !!form.elements['pollAllowPoints'].checked;
   // total votes is 0 if the poll was just Created, else get random amount based on choices amount
   const voteTotal = (type !== 'Created') ? getRandomInt(amount, amount * 50) : 0;
-
-    // Creating top_vote_list using a for loop
-    const topVoteList = [];
-    for (let i = 0; i < amount; i++) {
-      topVoteList.push(i);
-    }
-
   const baseData = {
     duration: parseInt(duration),
     event: type,
@@ -24,7 +17,7 @@ SAMMITestTwitchPoll(form) {
     vote_total_base: 0,
     vote_total_bits: 0,
     vote_total_points: 0,
-    topVoteList,
+    top_vote_list: Array.from(Array(amount).keys()),
     channel_points_voting: {
       is_enabled: allowPoints,
       amount_per_vote: 5
