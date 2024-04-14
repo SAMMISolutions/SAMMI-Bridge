@@ -1,46 +1,32 @@
 {
-    "extensions": [
-        {
-            "extension_name": "Announcement Trigger",
-            "details": {
-                "author": "wolbee",
-                "description": "Extension to allow SAMMI to trigger buttons from a Twitch Announcement",
-                "latest_version": "0.1.2",
-                "download_link": "https://ko-fi.com/s/9e8af42169"
-            }
-        },{
-            "extension_name": "Emoji & Emote Sanitiser",
-            "alternate_names": ["Emote Stripper"],
-            "details": {
-                "author": "wolbee",
-                "description": "Extension to remove emotes from a Twitch Chat message",
-                "latest_version": "1.1.0",
-                "download_link": "https://ko-fi.com/s/e90041df2a"
-            }
-        },{
-            "extension_name": "More String & Number Commands",
-            "details": {
-                "author": "wolbee",
-                "description": "Extension to add additional String and Number commands to SAMMI",
-                "latest_version": "0.4.0",
-                "download_link": "https://ko-fi.com/s/54bc315b2d"
-            }
-        },{
-            "extension_name": "Reply to Message",
-            "details": {
-                "author": "wolbee",
-                "description": "If you're on SAMMI 2023.3.0 or higher, use the built-in command instead! Extension to allow SAMMI to reply to Twitch Chat messages",
-                "latest_version": "1.0.0",
-                "download_link": "https://ko-fi.com/s/68c629c022"
-            }
-        },{
-            "extension_name": "TITS Connection",
-            "details": {
-                "author": "wolbee",
-                "description": "Extension to allow SAMMI and T.I.T.S. to interact",
-                "latest_version": "1.2.1",
-                "download_link": "https://ko-fi.com/s/fb289771a8"
-            }
-        }
-    ]
+  "extensions": [
+    {
+      "extension_name": "Emoji & Emote Sanitiser",
+      "alternate_names": ["Emote Stripper"],
+      "details": {
+        "author": "wolbee",
+        "description": "Extension to remove emotes from a Twitch Chat message or Twitch Cheer message",
+        "latest_version": "1.2.1",
+        "download_link": "https://ko-fi.com/s/e90041df2a"
+      }
+    },
+    {
+      "extension_name": "More String & Number Commands",
+      "details": {
+        "author": "wolbee",
+        "description": "Extension to add additional String and Number commands to SAMMI",
+        "latest_version": "0.6.0",
+        "download_link": "https://ko-fi.com/s/54bc315b2d"
+      }
+    },
+    {
+      "extension_name": "TITS Connection",
+      "details": {
+        "author": "wolbee",
+        "description": "Extension to allow SAMMI and T.I.T.S. to interact",
+        "latest_version": "1.2.1",
+        "download_link": "https://ko-fi.com/s/fb289771a8"
+      }
+    }
+  ]
 }
