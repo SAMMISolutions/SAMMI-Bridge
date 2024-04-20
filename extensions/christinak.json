@@ -290,6 +290,15 @@
                 "latest_version": "1.1",
                 "download_link": "https://christinak.itch.io/palworld-triggers"
             }
+        },
+        {
+            "extension_name": "Deck Hopper Advanced",
+            "details": {
+                "author": "Christina K.",
+                "description": "Extension for Deck Hopper to support all its advanced features.",
+                "latest_version": "1.2",
+                "download_link": "https://christinak.itch.io/deck-hopper-advanced"
+            }
         }
     ]
 }
