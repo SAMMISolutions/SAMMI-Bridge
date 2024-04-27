@@ -169,7 +169,7 @@
             "details": {
                 "author": "Christina K.",
                 "description": "Generates artificial intelligence-enhanced images using various AI engines.",
-                "latest_version": "1.0",
+                "latest_version": "1.2",
                 "download_link": "https://christinak.itch.io/ai-image-generator"
             }
         },
@@ -298,6 +298,15 @@
                 "description": "Extension for Deck Hopper to support all its advanced features.",
                 "latest_version": "1.2",
                 "download_link": "https://christinak.itch.io/deck-hopper-advanced"
+            }
+        },
+        {
+            "extension_name": "Advanced Button Functions",
+            "details": {
+                "author": "Christina K.",
+                "description": "Run a random button, check if a button is running or blocked, and more!",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/advanced-buttons"
             }
         }
     ]
