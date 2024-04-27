@@ -703,6 +703,15 @@
             }
         },
         {
+            "extension_name": "Deck Hopper Advanced",
+            "details": {
+                "author": "Christina K.",
+                "description": "Extension for Deck Hopper to support all its advanced features.",
+                "latest_version": "1.2",
+                "download_link": "https://christinak.itch.io/deck-hopper-advanced"
+            }
+        },
+        {
             "extension_name": "Emotes To URLs",
             "alternate_names": [],
             "details": {
