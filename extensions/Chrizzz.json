@@ -36,7 +36,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Send messages, screenshot of your sources Embeds directly to your discord webhook.",
-                "latest_version": "2.5",
+                "latest_version": "2.6",
                 "download_link": "https://ko-fi.com/s/4858c2ede1"
             }
         },
@@ -196,7 +196,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Custom Points Chatbot for Youtube and Twitch",
-                "latest_version": "1.1",
+                "latest_version": "1.2",
                 "download_link": "https://ko-fi.com/s/4a1d3ba0ed"
             }
         },
@@ -318,6 +318,66 @@
                 "description": "OCR with IronOCR",
                 "latest_version": "1.0",
                 "download_link": "https://ko-fi.com/s/94dfb69f80"
+            }
+        },
+	{
+            "extension_name": "Hangman",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Hangman Mini Game",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/609cebebf7"
+            }
+        },
+	{
+            "extension_name": "Chatbox",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Customizable Chatbox for OBS",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/ea7045d778"
+            }
+        },
+	{
+            "extension_name": "OBS Audio Monitoring",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Extension to measure the sound levels in OBS",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/9e20de0f8a"
+            }
+        },
+	{
+            "extension_name": "WebSocket Connector",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Extension to connect to WebSocket servers",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/7714a9fb38"
+            }
+        },
+	{
+            "extension_name": "Regular Expressions",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Extension to use RegEx in SAMMI",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/41cd5640f4"
+            }
+        },
+	{
+            "extension_name": "Subathon",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Subathon extension for SAMMI",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/a95e38595b"
             }
         }
     ]
