@@ -2874,7 +2874,8 @@ obj.top_vote_list = topVotesSorted;
       choiceInfo.total_voters = (allowBits || allowPoints) ? getRandomInt(choiceVotesSplit[i], choiceVotesSplit[i] / 10) : choiceVotesSplit[i];
       // populate the different vote types based on if bits and points are enabled or not
       choiceInfoVotes.total = choiceVotesSplit[i];
-      choiceInfoVotes.base = choiceVotesTypeSplit[0];
+      //choiceInfoVotes.base = choiceVotesTypeSplit[0];
+      choiceInfoVotes.base = 0;
       choiceInfoVotes.bits = allowBits ? choiceVotesTypeSplit[1] : 0;
       choiceInfoVotes.channel_points = allowPoints ? choiceVotesTypeSplit[2] || choiceVotesTypeSplit[1] : 0;
       // tokens are when someone votes with 5 channel points, they get 1 vote and 5 tokens?
