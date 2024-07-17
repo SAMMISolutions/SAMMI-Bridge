@@ -665,7 +665,7 @@
             "details": {
                 "author": "Christina K.",
                 "description": "Adds a Spotify player to SAMMI for enhanced music control and display.",
-                "latest_version": "1.9",
+                "latest_version": "2.1",
                 "download_link": "https://christinak.itch.io/sammi-spotify"
             }
         },
@@ -778,6 +778,15 @@
                 "description": "Run a random button, check if a button is running or blocked, and more!",
                 "latest_version": "1.0",
                 "download_link": "https://christinak.itch.io/advanced-buttons"
+            }
+        },
+        {
+            "extension_name": "Dynamic Triggers",
+            "details": {
+                "author": "Christina K.",
+                "description": "Attach triggers to buttons dynamically via SAMMI commands.",
+                "latest_version": "1.1",
+                "download_link": "https://christinak.itch.io/dynamic-triggers"
             }
         },
         {
