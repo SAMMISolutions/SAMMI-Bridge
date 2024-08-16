@@ -790,6 +790,15 @@
             }
         },
         {
+            "extension_name": "Discord Triggers",
+            "details": {
+                "author": "Christina K.",
+                "description": "Listen to Discord events in SAMMI.",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/discord-triggers"
+            }
+        },
+        {
             "extension_name": "Emotes To URLs",
             "alternate_names": [],
             "details": {
@@ -941,7 +950,7 @@
             "details": {
                 "author": "wolbee",
                 "description": "Extension to remove emotes from a Twitch Chat message or Twitch Cheer message",
-                "latest_version": "1.2.1",
+                "latest_version": "1.2.2",
                 "download_link": "https://ko-fi.com/s/e90041df2a"
             }
         },
