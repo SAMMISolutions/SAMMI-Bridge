@@ -475,7 +475,10 @@
             }
         },
         {
-            "extension_name": "Twitch Chat Stats",
+            "extension_name": "Chat Stats",
+            "alternate_names": [
+                "Twitch Chat Stats"
+            ],
             "details": {
                 "author": "Christina K.",
                 "description": "Provides in-depth statistics and analysis of your Twitch chat activity.",
@@ -745,7 +748,10 @@
             }
         },
         {
-            "extension_name": "Speech To Text",
+            "extension_name": "STT by K",
+            "alternate_names": [
+                "Speech To Text"
+            ],
             "details": {
                 "author": "Christina K.",
                 "description": "Transcribe your speech effortlessly with a simple push of a button in SAMMI.",
@@ -796,6 +802,15 @@
                 "description": "Listen to Discord events in SAMMI.",
                 "latest_version": "1.0",
                 "download_link": "https://christinak.itch.io/discord-triggers"
+            }
+        },
+        {
+            "extension_name": "Auto Deck Backup",
+            "details": {
+                "author": "Christina K.",
+                "description": "Automatically backup your decks.",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/auto-deck-backup"
             }
         },
         {
