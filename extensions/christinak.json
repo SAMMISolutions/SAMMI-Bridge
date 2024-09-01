@@ -15,7 +15,7 @@
             "details": {
                 "author": "Christina K.",
                 "description": "Provides in-depth statistics and analysis of your Twitch chat activity.",
-                "latest_version": "1.2",
+                "latest_version": "1.3",
                 "download_link": "https://christinak.itch.io/twitch-chat-stats"
             }
         },
@@ -51,7 +51,7 @@
             "details": {
                 "author": "Christina K.",
                 "description": "Enables direct management of Discord functionalities from within SAMMI.",
-                "latest_version": "1.3",
+                "latest_version": "1.4",
                 "download_link": "https://christinak.itch.io/discord-controls"
             }
         },
@@ -59,8 +59,8 @@
             "extension_name": "Discord Relay",
             "details": {
                 "author": "Christina K.",
-                "description": "Facilitates efficient communication between Discord and SAMMI through a relay system.",
-                "latest_version": "1.0",
+                "description": "Relay messages between Discord and Twitch or YouTube chat.",
+                "latest_version": "2.0",
                 "download_link": "https://christinak.itch.io/sammi-discord-relay"
             }
         },
@@ -234,7 +234,7 @@
             "details": {
                 "author": "Christina K.",
                 "description": "Fetches and allows for the searching through any Twitch VOD chat logs for user analysis.",
-                "latest_version": "1.2",
+                "latest_version": "1.3",
                 "download_link": "https://christinak.itch.io/twitch-chat-logs"
             }
         },
@@ -307,7 +307,7 @@
             "details": {
                 "author": "Christina K.",
                 "description": "Run a random button, check if a button is running or blocked, and more!",
-                "latest_version": "1.0",
+                "latest_version": "1.1",
                 "download_link": "https://christinak.itch.io/advanced-buttons"
             }
         },
@@ -316,7 +316,7 @@
             "details": {
                 "author": "Christina K.",
                 "description": "Attach triggers to buttons dynamically via SAMMI commands.",
-                "latest_version": "1.1",
+                "latest_version": "1.2",
                 "download_link": "https://christinak.itch.io/dynamic-triggers"
             }
         },
@@ -336,6 +336,15 @@
                 "description": "Automatically backup your decks.",
                 "latest_version": "1.0",
                 "download_link": "https://christinak.itch.io/auto-deck-backup"
+            }
+        },
+        {
+            "extension_name": "DateTime Triggers",
+            "details": {
+                "author": "Christina K.",
+                "description": "Trigger a button based on the date and time.",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/datetime-triggers"
             }
         }
 
