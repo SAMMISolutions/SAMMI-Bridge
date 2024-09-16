@@ -426,6 +426,15 @@
             }
         },
         {
+            "extension_name": "Home Assistant",
+            "details": {
+                "author": "PrimusNZ",
+                "description": "Allows SAMMI to interface with Home Assistant to turn switches and lights on or off, or trigger scenes and scripts",
+                "latest_version": "0.3",
+                "download_link": "https://github.com/PrimusNZ/SAMMI-HomeAssistant"
+            }
+        },
+        {
             "extension_name": "Crowd Control",
             "alternate_names": [],
             "details": {
