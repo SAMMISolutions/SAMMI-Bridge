@@ -426,6 +426,15 @@
             }
         },
         {
+            "extension_name": "Home Assistant",
+            "details": {
+                "author": "PrimusNZ",
+                "description": "Allows SAMMI to interface with Home Assistant to turn switches and lights on or off, or trigger scenes and scripts",
+                "latest_version": "0.3",
+                "download_link": "https://github.com/PrimusNZ/SAMMI-HomeAssistant"
+            }
+        },
+        {
             "extension_name": "Crowd Control",
             "alternate_names": [],
             "details": {
@@ -946,6 +955,24 @@
                 "description": "A Library to make extension developer's lives easier!",
                 "latest_version": "2.2.2",
                 "download_link": "https://landie.itch.io/sammi-sando"
+            }
+        },
+        {
+            "extension_name": "Sammi Audio Player",
+            "details": {
+                "author": "mxpuffin",
+                "description": "Play audio through Sammi with more control",
+                "latest_version": "1.1.1",
+                "download_link": "https://mxpuffin.itch.io/sammi-audio-player"
+            }
+        },
+        {
+            "extension_name": "⚡ PiShock for SAMMI v2",
+            "details": {
+                "author": "mxpuffin",
+                "description": "Gives you access to easily send pishock commands through sammi.",
+                "latest_version": "1.0",
+                "download_link": "https://mxpuffin.itch.io/sammi-pishock-extension"
             }
         },
         {
