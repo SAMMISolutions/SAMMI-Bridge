@@ -16,7 +16,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Play random clips while beeing in specific scenes",
-                "latest_version": "1.0",
+                "latest_version": "1.1",
                 "download_link": "https://ko-fi.com/s/657a802fb7"
             }
         },
@@ -56,7 +56,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Extension to get a random clip from a username based on different parameters",
-                "latest_version": "1.3",
+                "latest_version": "1.4",
                 "download_link": "https://ko-fi.com/s/90575f1126"
             }
         },
@@ -136,7 +136,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Small Pokemon Shoutout for Raids and the SO Command",
-                "latest_version": "1.1",
+                "latest_version": "1.2",
                 "download_link": "https://ko-fi.com/s/c729d284ce"
             }
         },
@@ -206,7 +206,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Slot Machine that can be customized easily",
-                "latest_version": "1.1",
+                "latest_version": "1.2",
                 "download_link": "https://ko-fi.com/s/7f2aa8dd20"
             }
         },
@@ -378,6 +378,86 @@
                 "description": "Subathon extension for SAMMI",
                 "latest_version": "1.0",
                 "download_link": "https://ko-fi.com/s/a95e38595b"
+            }
+        },
+        {
+            "extension_name": "Viewer Memory",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Memory Mini Game for Twitch",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/15674a09aa"
+            }
+        },
+        {
+            "extension_name": "Task Tracker",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Animated task list in OBS",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/8ec40276a0"
+            }
+        },
+        {
+            "extension_name": "Emote Magic",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Animates your emotes in various ways",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/e63aac95a2"
+            }
+        },
+        {
+            "extension_name": "Vote Slider",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Animates simple votes in OBS",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/5655d4f962"
+            }
+        },
+        {
+            "extension_name": "Channel Point Reward Animator",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Animates channel point redemptions",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/8c5c62f3a7"
+            }
+        },
+        {
+            "extension_name": "Channel Point Reward Animator",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Animates channel point redemptions",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/8c5c62f3a7"
+            }
+        },
+        {
+            "extension_name": "Bingo",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Bingo for Twitch",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/9ed4418136"
+            }
+        },
+        {
+            "extension_name": "Connect Four",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Connect Four mini game",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/34f45785c5"
             }
         },
         {
