@@ -1,0 +1,22 @@
+{
+    "extensions": [
+        {
+            "extension_name": "Sammi Audio Player",
+            "details": {
+                "author": "mxpuffin",
+                "description": "Play audio through Sammi with more control",
+                "latest_version": "1.1.1",
+                "download_link": "https://mxpuffin.itch.io/sammi-audio-player"
+            }
+        },
+        {
+            "extension_name": "⚡ PiShock for SAMMI v2",
+            "details": {
+                "author": "mxpuffin",
+                "description": "Gives you access to easily send pishock commands through sammi.",
+                "latest_version": "1.0",
+                "download_link": "https://mxpuffin.itch.io/sammi-pishock-extension"
+            }
+        }
+    ]
+}
