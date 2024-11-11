@@ -10,11 +10,29 @@
             }
         },
         {
+            "extension_name": "RPG System",
+            "details": {
+                "author": "mxpuffin",
+                "description": "Add customisable skills users can level up.",
+                "latest_version": "1.1.1",
+                "download_link": "https://mxpuffin.itch.io/sammi-rpg-levelling-extension"
+            }
+        },
+        {
+            "extension_name": "RPG Stats",
+            "details": {
+                "author": "mxpuffin",
+                "description": "Addon for RPG System, adds customisable stats you can add to users.",
+                "latest_version": "1.0.0",
+                "download_link": "https://mxpuffin.itch.io/sammi-rpg-levelling-extension"
+            }
+        },
+        {
             "extension_name": "⚡ PiShock for SAMMI v2",
             "details": {
                 "author": "mxpuffin",
                 "description": "Gives you access to easily send pishock commands through sammi.",
-                "latest_version": "1.0",
+                "latest_version": "1.0.0",
                 "download_link": "https://mxpuffin.itch.io/sammi-pishock-extension"
             }
         }
