@@ -930,6 +930,15 @@
             }
         },
         {
+            "extension_name": "Spotify",
+            "details": {
+                "author": "Christina K.",
+                "description": "Spotify player for SAMMI and OBS overlay.",
+                "latest_version": "3.0",
+                "download_link": "https://christinak.itch.io/sammi-spotify"
+            }
+        },
+        {
             "extension_name": "Emotes To URLs",
             "alternate_names": [],
             "details": {
