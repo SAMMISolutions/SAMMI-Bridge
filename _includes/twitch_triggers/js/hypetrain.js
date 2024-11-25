@@ -45,8 +45,6 @@ async SAMMITestTwitchHypeTrain(form) {
       from_channel_id: 93566099,
       event: type.toLowerCase(),
       top_other_contribution: {},
-      goal_progress: goalProgres,
-      current_goal: currentGoal,
       last_contribution: last_contribution,
       current_level: currentLevel,
       top_subscription_contribution: top_subscription_contribution,
