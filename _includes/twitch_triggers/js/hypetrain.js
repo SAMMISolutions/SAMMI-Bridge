@@ -5,7 +5,7 @@ async SAMMITestTwitchHypeTrain(form) {
   const currentGoal = parseInt(form.elements['hypeTrainGoal'].value) || getRandomInt(1000, 2000);
   const goalProgres = parseInt(form.elements['hypeTrainProgress'].value) || getRandomInt(100, currentGoal - 50);
   const typeNums = {
-    Begin: 1, Progress: 4, End: 6,
+    Begin: 1, End: 4, Progress: 6,
   };
   const typeNum = typeNums[type];
   const hypeTrainId = `${getRandomInt(10, 99)}b8f628-5075-4213-95ac-6ceeac9426fe`;
