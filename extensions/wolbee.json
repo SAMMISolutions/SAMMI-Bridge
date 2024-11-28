@@ -6,7 +6,7 @@
       "details": {
         "author": "wolbee",
         "description": "Extension to remove emotes from a Twitch Chat message or Twitch Cheer message",
-        "latest_version": "1.2.2",
+        "latest_version": "1.2.3",
         "download_link": "https://ko-fi.com/s/e90041df2a"
       }
     },
@@ -15,7 +15,7 @@
       "details": {
         "author": "wolbee",
         "description": "Extension to add additional String and Number commands to SAMMI",
-        "latest_version": "0.6.0",
+        "latest_version": "0.7.1",
         "download_link": "https://ko-fi.com/s/54bc315b2d"
       }
     },
