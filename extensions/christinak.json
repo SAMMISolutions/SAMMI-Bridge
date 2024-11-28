@@ -366,12 +366,12 @@
             }
         },
         {
-            "extension_name": "Spotify",
+            "extension_name": "Minesweeper",
             "details": {
                 "author": "Christina K.",
-                "description": "Spotify player for SAMMI and OBS overlay.",
-                "latest_version": "3.0",
-                "download_link": "https://christinak.itch.io/sammi-spotify"
+                "description": "Play Minesweeper with your viewers.",
+                "latest_version": "1.0",
+                "download_link": "https://christinak.itch.io/minesweeper"
             }
         }
     ]
