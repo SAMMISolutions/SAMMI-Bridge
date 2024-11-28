@@ -754,6 +754,9 @@
         },
         {
             "extension_name": "Spotify by Christina K.",
+            "alternate_names": [
+                "Spotify"
+            ],
             "details": {
                 "author": "Christina K.",
                 "description": "Adds a Spotify player to SAMMI for enhanced music control and display.",
