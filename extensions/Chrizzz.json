@@ -16,7 +16,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Play random clips while beeing in specific scenes",
-                "latest_version": "1.1",
+                "latest_version": "2.0",
                 "download_link": "https://ko-fi.com/s/657a802fb7"
             }
         },
@@ -56,7 +56,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Extension to get a random clip from a username based on different parameters",
-                "latest_version": "1.4",
+                "latest_version": "2.0",
                 "download_link": "https://ko-fi.com/s/90575f1126"
             }
         },
@@ -116,7 +116,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Interactive Pokemon Game where viewers can catch Pokemon live on stream",
-                "latest_version": "1.3.1",
+                "latest_version": "1.3.2",
                 "download_link": "https://ko-fi.com/s/aa74935ab0"
             }
         },
@@ -430,7 +430,7 @@
                 "download_link": "https://ko-fi.com/s/8c5c62f3a7"
             }
         },
-		{
+	{
             "extension_name": "Channel Point Reward Animator",
             "alternate_names": [],
             "details": {
@@ -440,7 +440,7 @@
                 "download_link": "https://ko-fi.com/s/8c5c62f3a7"
             }
         },
-		{
+	{
             "extension_name": "Bingo",
             "alternate_names": [],
             "details": {
@@ -450,7 +450,7 @@
                 "download_link": "https://ko-fi.com/s/9ed4418136"
             }
         },
-		{
+	{
             "extension_name": "Connect Four",
             "alternate_names": [],
             "details": {
@@ -458,6 +458,16 @@
                 "description": "Connect Four mini game",
                 "latest_version": "1.0",
                 "download_link": "https://ko-fi.com/s/34f45785c5"
+            }
+        },
+	{
+            "extension_name": "QR Code Generator",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "QR Code Generator",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/0469b9e1dc"
             }
         }
     ]
