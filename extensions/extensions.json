@@ -519,8 +519,8 @@
             "extension_name": "Home Assistant",
             "details": {
                 "author": "PrimusNZ",
-                "description": "Allows SAMMI to interface with Home Assistant to turn switches and lights on or off, or trigger scenes and scripts",
-                "latest_version": "0.4",
+                "description": "Allows SAMMI to interface with Home Assistant to turn switches and lights on or off, or trigger scenes and scripts. Also trigger TTS using your home assistant instance",
+                "latest_version": "0.5",
                 "download_link": "https://github.com/PrimusNZ/SAMMI-HomeAssistant"
             }
         },
