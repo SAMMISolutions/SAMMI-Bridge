@@ -16,7 +16,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Play random clips while beeing in specific scenes",
-                "latest_version": "1.1",
+                "latest_version": "2.0",
                 "download_link": "https://ko-fi.com/s/657a802fb7"
             }
         },
@@ -56,7 +56,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Extension to get a random clip from a username based on different parameters",
-                "latest_version": "1.4",
+                "latest_version": "2.0",
                 "download_link": "https://ko-fi.com/s/90575f1126"
             }
         },
@@ -116,7 +116,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Interactive Pokemon Game where viewers can catch Pokemon live on stream",
-                "latest_version": "1.3.1",
+                "latest_version": "1.3.2",
                 "download_link": "https://ko-fi.com/s/aa74935ab0"
             }
         },
@@ -461,6 +461,16 @@
             }
         },
         {
+            "extension_name": "QR Code Generator",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "QR Code Generator",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/0469b9e1dc"
+            }
+        },
+        {
             "extension_name": "Zoom and Follow",
             "details": {
                 "author": "MisterK_Qc",
@@ -509,8 +519,8 @@
             "extension_name": "Home Assistant",
             "details": {
                 "author": "PrimusNZ",
-                "description": "Allows SAMMI to interface with Home Assistant to turn switches and lights on or off, or trigger scenes and scripts",
-                "latest_version": "0.4",
+                "description": "Allows SAMMI to interface with Home Assistant to turn switches and lights on or off, or trigger scenes and scripts. Also trigger TTS using your home assistant instance",
+                "latest_version": "0.5",
                 "download_link": "https://github.com/PrimusNZ/SAMMI-HomeAssistant"
             }
         },
@@ -754,6 +764,9 @@
         },
         {
             "extension_name": "Spotify by Christina K.",
+            "alternate_names": [
+                "Spotify"
+            ],
             "details": {
                 "author": "Christina K.",
                 "description": "Adds a Spotify player to SAMMI for enhanced music control and display.",
@@ -1069,7 +1082,7 @@
             "details": {
                 "author": "mxpuffin",
                 "description": "Play audio through Sammi with more control",
-                "latest_version": "1.1.1",
+                "latest_version": "2.0.0",
                 "download_link": "https://mxpuffin.itch.io/sammi-audio-player"
             }
         },
@@ -1078,7 +1091,7 @@
             "details": {
                 "author": "mxpuffin",
                 "description": "Add customisable skills users can level up.",
-                "latest_version": "1.2.0",
+                "latest_version": "1.2.1",
                 "download_link": "https://mxpuffin.itch.io/sammi-rpg-levelling-extension"
             }
         },
