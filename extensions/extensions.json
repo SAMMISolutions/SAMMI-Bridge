@@ -1141,7 +1141,7 @@
             }
         },
         {
-            "extension_name": "Emoji and Emote Sanitiser",
+            "extension_name": "Emote and Emoji Sanitiser",
             "alternate_names": [
                 "Emote Stripper"
             ],
