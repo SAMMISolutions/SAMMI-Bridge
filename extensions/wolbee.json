@@ -10,7 +10,7 @@
       }
     },
     {
-      "extension_name": "Emoji & Emote Sanitiser",
+      "extension_name": "Emote and Emoji Sanitiser",
       "alternate_names": ["Emote Stripper"],
       "details": {
         "author": "wolbee",
@@ -25,7 +25,7 @@
       "details": {
         "author": "wolbee",
         "description": "Extension to add additional commands to SAMMI, that probably aren't useful enough to add natively, but wolbee thought they were cool",
-        "latest_version": "1.0.0",
+        "latest_version": "1.1.0",
         "download_link": "https://ko-fi.com/s/54bc315b2d"
       }
     },

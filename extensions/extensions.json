@@ -116,7 +116,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Interactive Pokemon Game where viewers can catch Pokemon live on stream",
-                "latest_version": "1.3.2",
+                "latest_version": "1.3.3",
                 "download_link": "https://ko-fi.com/s/aa74935ab0"
             }
         },
@@ -704,7 +704,7 @@
             "details": {
                 "author": "Christina K.",
                 "description": "Allows for the reception of triggers from Ko-Fi directly in SAMMI.",
-                "latest_version": "1.0",
+                "latest_version": "1.1",
                 "download_link": "https://christinak.itch.io/ko-fi-triggers"
             }
         },
@@ -758,7 +758,7 @@
             "details": {
                 "author": "Christina K.",
                 "description": "Turns your scenes and sources into an interactive puzzle game for your viewers to engage with.",
-                "latest_version": "2.0",
+                "latest_version": "2.1",
                 "download_link": "https://christinak.itch.io/sammi-puzzle-game"
             }
         },
@@ -1141,7 +1141,7 @@
             }
         },
         {
-            "extension_name": "Emoji & Emote Sanitiser",
+            "extension_name": "Emote and Emoji Sanitiser",
             "alternate_names": [
                 "Emote Stripper"
             ],
@@ -1160,7 +1160,7 @@
             "details": {
                 "author": "wolbee",
                 "description": "Extension to add additional commands to SAMMI, that probably aren't useful enough to add natively, but wolbee thought they were cool",
-                "latest_version": "1.0.0",
+                "latest_version": "1.1.0",
                 "download_link": "https://ko-fi.com/s/54bc315b2d"
             }
         },
