@@ -28,6 +28,15 @@
             }
         },
         {
+            "extension_name": "SAMMI Starter Pack",
+            "details": {
+                "author": "mxpuffin",
+                "description": "A handful of useful tools and commands to get you started with SAMMI",
+                "latest_version": "0.5.0",
+                "download_link": "https://mxpuffin.itch.io/sammi-starter-pack"
+            }
+        },
+        {
             "extension_name": "⚡ PiShock for SAMMI v2",
             "details": {
                 "author": "mxpuffin",
@@ -35,6 +44,6 @@
                 "latest_version": "1.0.0",
                 "download_link": "https://mxpuffin.itch.io/sammi-pishock-extension"
             }
-        }
+        },
     ]
 }
