@@ -471,6 +471,16 @@
             }
         },
         {
+            "extension_name": "Stream Credits",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Stream Credits",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/38cfebe823"
+            }
+        },
+        {
             "extension_name": "Zoom and Follow",
             "details": {
                 "author": "MisterK_Qc",
