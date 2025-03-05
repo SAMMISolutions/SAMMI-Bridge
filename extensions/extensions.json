@@ -578,9 +578,9 @@
             "extension_name": "Active Window",
             "details": {
                 "author": "Christina K.",
-                "description": "Displays detailed information about your current active window, including its title, dimensions, and position.",
+                "description": "Get detailed information about your current active window.",
                 "latest_version": "2.0",
-                "download_link": "https://christinak.itch.io/sammi-active-window"
+                "download_link": "https://docs.christinak.ca/extensions/active-window"
             }
         },
         {
@@ -590,27 +590,27 @@
             ],
             "details": {
                 "author": "Christina K.",
-                "description": "Provides in-depth statistics and analysis of your Twitch chat activity.",
+                "description": "In-depth statistics and analysis of your Twitch Chat activity.",
                 "latest_version": "1.4",
-                "download_link": "https://christinak.itch.io/twitch-chat-stats"
+                "download_link": "https://docs.christinak.ca/extensions/chat-stats"
             }
         },
         {
             "extension_name": "ChatGPT for SAMMI",
             "details": {
                 "author": "Christina K.",
-                "description": "Enriches SAMMI with the AI conversation capabilities of OpenAI's ChatGPT.",
+                "description": "Talk to ChatGPT directly in SAMMI.",
                 "latest_version": "2.0",
-                "download_link": "https://christinak.itch.io/chatgpt"
+                "download_link": "https://docs.christinak.ca/extensions/chatgpt"
             }
         },
         {
             "extension_name": "Click Map by Christina K",
             "details": {
                 "author": "Christina K.",
-                "description": "Transforms your live stream into an interactive viewer experience by enabling on-screen clicks.",
+                "description": "Viewers can interact with your stream by clicking on your live video overlay! ",
                 "latest_version": "1.2",
-                "download_link": "https://christinak.itch.io/sammi-click-map"
+                "download_link": "https://docs.christinak.ca/extensions/click-map"
             }
         },
         {
@@ -619,25 +619,25 @@
                 "author": "Christina K.",
                 "description": "Effortlessly translates various color formats to decimal RGB values.",
                 "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/sammi-color-converter"
+                "download_link": "https://docs.christinak.ca/extensions/color-converter"
             }
         },
         {
             "extension_name": "Discord Controls",
             "details": {
                 "author": "Christina K.",
-                "description": "Enables direct management of Discord functionalities from within SAMMI.",
+                "description": "Control your Discord server straight from SAMMI.",
                 "latest_version": "1.6",
-                "download_link": "https://christinak.itch.io/discord-controls"
+                "download_link": "https://docs.christinak.ca/extensions/discord-controls"
             }
         },
         {
             "extension_name": "Discord Relay",
             "details": {
                 "author": "Christina K.",
-                "description": "Relay messages between Discord and Twitch or YouTube chat.",
+                "description": "Relay chat messages between Twitch or YouTube and Discord.",
                 "latest_version": "2.0",
-                "download_link": "https://christinak.itch.io/sammi-discord-relay"
+                "download_link": "https://docs.christinak.ca/extensions/discord-relay"
             }
         },
         {
@@ -647,27 +647,27 @@
             ],
             "details": {
                 "author": "Christina K.",
-                "description": "Scan a folder and manipulate files with lots of useful features.",
+                "description": "Get a random file, media length and more.",
                 "latest_version": "2.0",
-                "download_link": "https://christinak.itch.io/folder-files"
+                "download_link": "https://docs.christinak.ca/extensions/folder-files"
             }
         },
         {
             "extension_name": "Google Sheets by Christina",
             "details": {
                 "author": "Christina K.",
-                "description": "Grants the ability to view and manipulate Google Sheets directly from SAMMI.",
+                "description": "View and manipulate Google Sheets directly from SAMMI.",
                 "latest_version": "1.3",
-                "download_link": "https://christinak.itch.io/sammi-google-sheets"
+                "download_link": "https://docs.christinak.ca/extensions/google-sheets"
             }
         },
         {
             "extension_name": "IFTTT Event",
             "details": {
                 "author": "Christina K.",
-                "description": "Creates and manages If This Then That (IFTTT) events for enhanced automation capabilities.",
+                "description": "Trigger IFTTT events from SAMMI.",
                 "latest_version": "2.0",
-                "download_link": "https://github.com/christinna9031/SAMMI-IFTTT-Events/releases"
+                "download_link": "https://docs.christinak.ca/extensions/ifttt-event"
             }
         },
         {
@@ -677,31 +677,25 @@
             ],
             "details": {
                 "author": "Christina K.",
-                "description": "Facilitates the sending of triggers from IFTTT directly to your SAMMI.",
+                "description": "Receive Triggers from your IFTTT directly in SAMMI.",
                 "latest_version": "1.1",
-                "download_link": "https://christinak.itch.io/ifttt-to-sammi"
-            }
-        },
-        {
-            "extension_name": "Imgur Uploader",
-            "details": {
-                "author": "Christina K.",
-                "description": "Allows for the quick and easy uploading of images to Imgur directly from SAMMI.",
-                "latest_version": "1.00",
-                "download_link": ""
+                "download_link": "https://docs.christinak.ca/extensions/ifttt-sammi"
             }
         },
         {
             "extension_name": "Kick",
             "details": {
                 "author": "Christina K.",
-                "description": "Enables integration with Kick for enhanced user management in SAMMI.",
+                "description": "Full Kick integration for SAMMI.",
                 "latest_version": "1.4",
-                "download_link": "https://christinak.itch.io/kick-for-sammi"
+                "download_link": "https://docs.christinak.ca/extensions/kick"
             }
         },
         {
             "extension_name": "Kick Streaming",
+            "alternate_names": [
+                "Kick"
+            ],
             "details": {
                 "author": "Christina K.",
                 "description": "Enables integration with Kick for enhanced user management in SAMMI.",
@@ -713,18 +707,18 @@
             "extension_name": "Ko-Fi Triggers",
             "details": {
                 "author": "Christina K.",
-                "description": "Allows for the reception of triggers from Ko-Fi directly in SAMMI.",
+                "description": "Ko-fi events delivered straight to your SAMMI.",
                 "latest_version": "1.1",
-                "download_link": "https://christinak.itch.io/ko-fi-triggers"
+                "download_link": "https://docs.christinak.ca/extensions/ko-fi"
             }
         },
         {
             "extension_name": "Lucky Wheel by Christina K",
             "details": {
                 "author": "Christina K.",
-                "description": "Allows users to spin a customizable lucky wheel and claim rewards directly in SAMMI.",
+                "description": "Spin a customizable lucky wheel and get result in SAMMI.",
                 "latest_version": "2.0",
-                "download_link": "https://christinak.itch.io/sammi-lucky-wheel"
+                "download_link": "https://docs.christinak.ca/extensions/lucky-wheel"
             }
         },
         {
@@ -749,27 +743,27 @@
             "extension_name": "AI Image Generator",
             "details": {
                 "author": "Christina K.",
-                "description": "Generates artificial intelligence-enhanced images using various AI engines.",
+                "description": "Generate images using DALL-E.",
                 "latest_version": "1.2",
-                "download_link": "https://christinak.itch.io/ai-image-generator"
+                "download_link": "https://docs.christinak.ca/extensions/ai-image-generator"
             }
         },
         {
             "extension_name": "Patreon Triggers",
             "details": {
                 "author": "Christina K.",
-                "description": "Allows for the reception of triggers from Patreon directly to your LioranBoard.",
+                "description": "Receive Patreon triggers directly in SAMMI.",
                 "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/patreon-triggers"
+                "download_link": "https://docs.christinak.ca/extensions/patreon-triggers"
             }
         },
         {
             "extension_name": "Puzzle Game",
             "details": {
                 "author": "Christina K.",
-                "description": "Turns your scenes and sources into an interactive puzzle game for your viewers to engage with.",
+                "description": "Turn your sources into an interactive puzzle game for your viewers.",
                 "latest_version": "2.1",
-                "download_link": "https://christinak.itch.io/sammi-puzzle-game"
+                "download_link": "https://docs.christinak.ca/extensions/puzzle-game"
             }
         },
         {
@@ -779,36 +773,36 @@
             ],
             "details": {
                 "author": "Christina K.",
-                "description": "Adds a Spotify player to SAMMI for enhanced music control and display.",
+                "description": "Control Spotify and request songs from SAMMI.",
                 "latest_version": "3.1",
-                "download_link": "https://christinak.itch.io/sammi-spotify"
+                "download_link": "https://docs.christinak.ca/extensions/spotify"
             }
         },
         {
             "extension_name": "Timer",
             "details": {
                 "author": "Christina K.",
-                "description": "Allows the dynamic setting and deletion of multiple timers for various needs.",
+                "description": "Set and stop timers to trigger your buttons.",
                 "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/sammi-timer"
+                "download_link": "https://docs.christinak.ca/extensions/timer"
             }
         },
         {
             "extension_name": "Translate by K",
             "details": {
                 "author": "Christina K.",
-                "description": "Facilitates the translation of text between various languages directly in SAMMI.",
+                "description": "Translate tool for all your streaming needs.",
                 "latest_version": "1.1",
-                "download_link": "https://christinak.itch.io/translate-by-k"
+                "download_link": "https://docs.christinak.ca/extensions/translate"
             }
         },
         {
             "extension_name": "TTS by Christina K",
             "details": {
                 "author": "Christina K.",
-                "description": "A 3-in-1 text-to-speech tool for SAMMI for a more immersive and interactive streaming experience.",
+                "description": "A 3-in-1 text-to-speech tool for SAMMI.",
                 "latest_version": "1.5",
-                "download_link": "https://christinak.itch.io/sammi-text-to-speech"
+                "download_link": "https://docs.christinak.ca/extensions/text-to-speech"
             }
         },
         {
@@ -818,27 +812,27 @@
             ],
             "details": {
                 "author": "Christina K.",
-                "description": "Fetches and allows for the searching through any Twitch VOD chat logs for user analysis.",
+                "description": "Retrieve and search through any Twitch VOD chat logs.",
                 "latest_version": "1.3",
-                "download_link": "https://christinak.itch.io/twitch-chat-logs"
+                "download_link": "https://docs.christinak.ca/extensions/twitch-chat-logs"
             }
         },
         {
             "extension_name": "Twitter",
             "details": {
                 "author": "Christina K.",
-                "description": "Provides a toolset for managing your Twitter account directly from SAMMI.",
+                "description": "Send Tweets and update your Twitter profile directly from SAMMI.",
                 "latest_version": "2.0",
-                "download_link": "https://christinak.itch.io/sammi-twitter"
+                "download_link": "https://docs.christinak.ca/extensions/twitter"
             }
         },
         {
             "extension_name": "Input Validator",
             "details": {
                 "author": "Christina K.",
-                "description": "Checks and verifies various forms of user input for validity.",
+                "description": "Check and verify various forms of user input.",
                 "latest_version": "1.3",
-                "download_link": "https://christinak.itch.io/input-validator"
+                "download_link": "https://docs.christinak.ca/extensions/twitter"
             }
         },
         {
@@ -847,7 +841,7 @@
                 "author": "Christina K.",
                 "description": "Get information about a Pal in the Paldex.",
                 "latest_version": "1.1",
-                "download_link": "https://christinak.itch.io/palworld-paldex"
+                "download_link": "https://docs.christinak.ca/extensions/palworld-paldex"
             }
         },
         {
@@ -856,7 +850,7 @@
                 "author": "Christina K.",
                 "description": "Capture and manage screenshots natively in SAMMI.",
                 "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/native-screenshot"
+                "download_link": "https://docs.christinak.ca/extensions/native-screenshot"
             }
         },
         {
@@ -866,9 +860,9 @@
             ],
             "details": {
                 "author": "Christina K.",
-                "description": "Transcribe your speech effortlessly with a simple push of a button in SAMMI.",
+                "description": "Transcribe your speech with a simple push of a button in SAMMI.",
                 "latest_version": "1.1",
-                "download_link": "https://christinak.itch.io/speech-to-text"
+                "download_link": "https://docs.christinak.ca/extensions/speech-to-text"
             }
         },
         {
@@ -877,7 +871,7 @@
                 "author": "Christina K.",
                 "description": "Listen to in-game events in Palworld.",
                 "latest_version": "1.3",
-                "download_link": "https://christinak.itch.io/palworld-triggers"
+                "download_link": "https://docs.christinak.ca/extensions/palworld-triggers"
             }
         },
         {
@@ -895,43 +889,43 @@
                 "author": "Christina K.",
                 "description": "Run a random button, check if a button is running or blocked, and more!",
                 "latest_version": "1.2",
-                "download_link": "https://christinak.itch.io/advanced-buttons"
+                "download_link": "https://docs.christinak.ca/extensions/advanced-buttons"
             }
         },
         {
             "extension_name": "Dynamic Triggers",
             "details": {
                 "author": "Christina K.",
-                "description": "Attach triggers to buttons dynamically via SAMMI commands.",
+                "description": "Attach temporary triggers to buttons in SAMMI.",
                 "latest_version": "1.2",
-                "download_link": "https://christinak.itch.io/dynamic-triggers"
+                "download_link": "https://docs.christinak.ca/extensions/dynamic-triggers"
             }
         },
         {
             "extension_name": "Discord Triggers",
             "details": {
                 "author": "Christina K.",
-                "description": "Listen to Discord events in SAMMI.",
+                "description": "Receive Discord server events in SAMMI.",
                 "latest_version": "2.0",
-                "download_link": "https://christinak.itch.io/discord-triggers"
+                "download_link": "https://docs.christinak.ca/extensions/discord-triggers"
             }
         },
         {
             "extension_name": "Auto Deck Backup",
             "details": {
                 "author": "Christina K.",
-                "description": "Automatically backup your decks.",
+                "description": "Automatically back up your decks to cloud.",
                 "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/auto-deck-backup"
+                "download_link": "https://docs.christinak.ca/extensions/auto-deck-backup"
             }
         },
         {
             "extension_name": "DateTime Triggers",
             "details": {
                 "author": "Christina K.",
-                "description": "Trigger a button based on the date and time.",
+                "description": "Trigger buttons in SAMMI based on date and time.",
                 "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/datetime-triggers"
+                "download_link": "https://docs.christinak.ca/extensions/datetime-triggers"
             }
         },
         {
@@ -940,7 +934,7 @@
                 "author": "Christina K.",
                 "description": "Donation events delivered straight to your SAMMI.",
                 "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/donation-triggers"
+                "download_link": "https://docs.christinak.ca/extensions/donation-triggers"
             }
         },
         {
@@ -949,16 +943,25 @@
                 "author": "Christina K.",
                 "description": "Get YouTube video info, duration, captions and more.",
                 "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/youtube-info"
+                "download_link": "https://docs.christinak.ca/extensions/youtube-info"
             }
         },
         {
             "extension_name": "Minesweeper",
             "details": {
                 "author": "Christina K.",
-                "description": "Play Minesweeper with your viewers.",
+                "description": "Play Minesweeper with your viewers!",
                 "latest_version": "1.0",
-                "download_link": "https://christinak.itch.io/minesweeper"
+                "download_link": "https://docs.christinak.ca/extensions/minesweeper"
+            }
+        },
+        {
+            "extension_name": "Lens Hopper",
+            "details": {
+                "author": "Christina K.",
+                "description": "Turn any OBS source or image into AI art.",
+                "latest_version": "1.0",
+                "download_link": "https://docs.christinak.ca/extensions/lens-hopper"
             }
         },
         {
