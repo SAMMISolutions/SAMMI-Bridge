@@ -1,0 +1,22 @@
+{
+    "extensions": [
+        {
+            "extension_name": "OBSCURE - Poetry",
+            "details": {
+                "author": "PoetryandLilies",
+                "description": "This extension adds some obscure OBS commands to SAMMI",
+                "latest_version": "1.0.0",
+                "download_link": "https://poetryandlilies.itch.io/obscure-poetry-sammi-extension"
+            }
+        },
+        {
+            "extension_name": "Simple Conversions",
+            "details": {
+                "author": "PoetryandLilies",
+                "description": "This extension adds simple conversion commands",
+                "latest_version": "1.0.0",
+                "download_link": "https://poetryandlilies.itch.io/simple-conversions"
+            }
+        }
+    ]
+}
