@@ -1,11 +1,11 @@
 {
     "extensions": [
         {
-            "extension_name": "OBSCURE - Poetry",
+            "extension_name": "OBSCURE",
             "details": {
                 "author": "PoetryandLilies",
-                "description": "This extension adds some obscure OBS commands to SAMMI",
-                "latest_version": "1.0.0",
+                "description": "OBS Commands Usually Rarely Employed -  Obscure OBS Commands Extension",
+                "latest_version": "1.1.0",
                 "download_link": "https://poetryandlilies.itch.io/obscure-poetry-sammi-extension"
             }
         },
