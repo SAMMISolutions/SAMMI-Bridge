@@ -1,0 +1,22 @@
+{
+    "extensions": [
+        {
+            "extension_name": "OBSCURE",
+            "details": {
+                "author": "PoetryandLilies",
+                "description": "OBS Commands Usually Rarely Employed -  Obscure OBS Commands Extension",
+                "latest_version": "1.1.0",
+                "download_link": "https://poetryandlilies.itch.io/obscure-poetry-sammi-extension"
+            }
+        },
+        {
+            "extension_name": "Simple Conversions",
+            "details": {
+                "author": "PoetryandLilies",
+                "description": "This extension adds simple conversion commands",
+                "latest_version": "1.1.0",
+                "download_link": "https://poetryandlilies.itch.io/simple-conversions"
+            }
+        }
+    ]
+}
