@@ -14,7 +14,7 @@
             "details": {
                 "author": "mxpuffin",
                 "description": "Add customisable skills users can level up.",
-                "latest_version": "1.2.1",
+                "latest_version": "1.3.2",
                 "download_link": "https://mxpuffin.itch.io/sammi-rpg-levelling-extension"
             }
         },
@@ -23,7 +23,7 @@
             "details": {
                 "author": "mxpuffin",
                 "description": "Addon for RPG System, adds customisable stats you can add to users.",
-                "latest_version": "1.0.0",
+                "latest_version": "1.1.0",
                 "download_link": "https://mxpuffin.itch.io/sammi-rpg-levelling-extension"
             }
         },
@@ -32,7 +32,7 @@
             "details": {
                 "author": "mxpuffin",
                 "description": "A handful of useful tools and commands to get you started with SAMMI",
-                "latest_version": "0.6.2",
+                "latest_version": "0.8.2",
                 "download_link": "https://mxpuffin.itch.io/sammi-starter-pack"
             }
         },
@@ -43,6 +43,15 @@
                 "description": "Gives you access to easily send pishock commands through sammi.",
                 "latest_version": "1.0.1",
                 "download_link": "https://mxpuffin.itch.io/sammi-pishock-extension"
+            }
+        },
+        {
+            "extension_name": "Discord Webhook Helper",
+            "details": {
+                "author": "mxpuffin",
+                "description": "An extension that allows you to use discord webhook with ease.",
+                "latest_version": "0.1.5",
+                "download_link": "https://mxpuffin.itch.io/sammi-discord-webhook-helper"
             }
         }
     ]
