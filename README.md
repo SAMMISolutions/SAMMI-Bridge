@@ -154,11 +154,13 @@ Here are the parameters:
 22 | File path, defaultValue should be a string, returns the selected file path
 23 | Image path, defaultValue should be a string, returns the selected image path
 24 | Twitch reward redeem ID, defaultValue should be a number, returns the selected reward ID
+25 | Option Box, allows you to specify an array of extension command names, which are used to swap the command to the selected option.
 30 | No box at all, only label is present
 32 | OBS Pull Box 
 33 | Select Deck Box, defaultValue should be a number
 34 | Password Box, same as 14, except the string is displayed as *****
 35 | Twitch Account Box, select box with all linked Twitch accounts, returns the selected option
+37 | Synchronous Value Box, adds synchronous support to your extension command, this means SAMMI will wait until a value is returned to the instance where the command was called. SAMMI will timeout after 30s and return undefined if you have not returned a value by then. **TODO** *Explain how to use the custom parameters to extend timeout duration* 
 
 ![Example Box Types](https://i.imgur.com/LP4OICw.png)
 
@@ -194,6 +196,42 @@ This extension command will create the same extension command as above, however 
     rewardName2: ['Reward Name 2', 14, 'And another reward name']
   }, true, true)
   ```
+![](https://i.imgur.com/H6xJkwF.png)
+
+This extension command creates a single visible command, which can be used to swap between hidden commands. This is useful if you're adding multiple, similar functioning commands.
+
+```js
+const MyExtensionCommands = [
+    "My Extension: Command 1",
+    "My Extension: Command 2",
+    "My Extension: Command 3",
+];
+SAMMI.extCommand("My Extension: Command Selector", 4467268, 52, {
+    option: ["Option", 25, "Select Command", 1, MyExtensionCommands]
+}, false, false);
+
+SAMMI.extCommand("My Extension: Command 1", 4467268, 52, {
+    option: ["Option", 25, "Command 1", 1, MyExtensionCommands],
+}, true, true);
+SAMMI.extCommand("My Extension: Command 2", 4467268, 52, {
+    option: ["Option", 25, "Command 2", 1, MyExtensionCommands],
+}, true, true);
+SAMMI.extCommand("My Extension: Command 3", 4467268, 52, {
+    option: ["Option", 25, "Command 3", 1, MyExtensionCommands],
+}, true, true);
+```
+![](https://i.imgur.com/pU231bs.png)
+
+This extension command is synchronous. This means SAMMI automatically waits for a value. If for some reason SAMMI never gets a value back from you, it will timeout after 30s. 
+
+```js
+SAMMI.extCommand("My Extension: Basic Math", 4467268, 52, {
+    value1: ["Value 1", 14, "", 1.2],
+    opreator: ["Operator", 9, "+", 0.4],
+    value2: ["Value 2", 14, "", 1.2],
+    saveVar: ["Save Variable As", 37, "", 1.2]
+}, false, false);
+```
 
 ### Trigger Extension
 ```js
