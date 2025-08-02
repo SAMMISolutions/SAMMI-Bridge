@@ -128,7 +128,7 @@ Here are the parameters:
      - `boxType`: An integer that indicates the type of box. This integer corresponds to different types of boxes (e.g., resizable text box, check box, OBS Scenes box, etc.). See the table below for a list of all box types.
      - `defaultValue`: The default value for the variable associated with this box.
      - (optional) `sizeModifier`: An optional parameter that adjusts the horizontal size of the box. It defaults to `1`. 0.5 is half the size, 2 is double the size, etc. Note that by changing the size of one box, you will also change the size of all other boxes in the extension command, as the total sum of all boxes' sizes must be equal to the number boxes themselves to fit in the extension command.
-     - (optional) `selectOptions`: An optional array of options for the user to choose from (relevant only for specific box types like Select box).
+     - (optional) `options`: A object of options for the `boxType` chosen. For box types with dropdown menus, can instead be an array of options a user picks from.
  - (optional) `sendAsExtensionTrigger`: A boolean parameter (default is `false`) that, when set to `true`, triggers an extension within SAMMI instead of sending data to Bridge. This is useful for relaying information between buttons.
  - (optional) `hideCommand`: Another boolean parameter (default is `false`) that, when set to `true`, hides the command from the extension menu in SAMMI. Useful for commands that are only used internally.
 
@@ -154,11 +154,13 @@ Here are the parameters:
 22 | File path, defaultValue should be a string, returns the selected file path
 23 | Image path, defaultValue should be a string, returns the selected image path
 24 | Twitch reward redeem ID, defaultValue should be a number, returns the selected reward ID
+25 | Option Box, allows you to specify an array of extension command names, which are used to swap the command to the selected option.
 30 | No box at all, only label is present
 32 | OBS Pull Box 
 33 | Select Deck Box, defaultValue should be a number
 34 | Password Box, same as 14, except the string is displayed as *****
 35 | Twitch Account Box, select box with all linked Twitch accounts, returns the selected option
+37 | Save Variable Box, used when you need to set a variable to the button instance this command was called in. SAMMI will timeout after 30s and return undefined if you have not returned a value by then, so it is crucial that you always return a value even on fail.<br><br>Options:<br>- `timeoutAfter`: sets a custom timeout duration in milliseconds for the command to wait. default: `30000` 
 
 ![Example Box Types](https://i.imgur.com/LP4OICw.png)
 
@@ -194,6 +196,42 @@ This extension command will create the same extension command as above, however 
     rewardName2: ['Reward Name 2', 14, 'And another reward name']
   }, true, true)
   ```
+![](https://i.imgur.com/H6xJkwF.png)
+
+This extension command creates a single visible command, which can be used to swap between hidden commands. This is useful if you're adding multiple, similar functioning commands.
+
+```js
+const MyExtensionCommands = [
+    "My Extension: Command 1",
+    "My Extension: Command 2",
+    "My Extension: Command 3",
+];
+SAMMI.extCommand("My Extension: Command Selector", 4467268, 52, {
+    option: ["Option", 25, "Select Command", 1, MyExtensionCommands]
+}, false, false);
+
+SAMMI.extCommand("My Extension: Command 1", 4467268, 52, {
+    option: ["Option", 25, "Command 1", 1, MyExtensionCommands],
+}, true, true);
+SAMMI.extCommand("My Extension: Command 2", 4467268, 52, {
+    option: ["Option", 25, "Command 2", 1, MyExtensionCommands],
+}, true, true);
+SAMMI.extCommand("My Extension: Command 3", 4467268, 52, {
+    option: ["Option", 25, "Command 3", 1, MyExtensionCommands],
+}, true, true);
+```
+![a list of commands](https://i.imgur.com/pU231bs.png)
+
+This extension command has a save variable parameter. This means SAMMI automatically waits for a value. It also includes an options object with the `timeoutAfter` key set to set a timeout of `1000` milliseconds rather than the default `30000` milliseconds.
+
+```js
+SAMMI.extCommand("My Extension: Basic Math", 4467268, 52, {
+    value1: ["Value 1", 14, "", 1.2],
+    opreator: ["Operator", 9, "+", 0.4],
+    value2: ["Value 2", 14, "", 1.2],
+    saveVar: ["Save Variable As", 37, "", 1.2, {timeoutAfter: 10000}]
+}, false, false);
+```
 
 ### Trigger Extension
 ```js
