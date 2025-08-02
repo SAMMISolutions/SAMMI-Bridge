@@ -128,7 +128,7 @@ Here are the parameters:
      - `boxType`: An integer that indicates the type of box. This integer corresponds to different types of boxes (e.g., resizable text box, check box, OBS Scenes box, etc.). See the table below for a list of all box types.
      - `defaultValue`: The default value for the variable associated with this box.
      - (optional) `sizeModifier`: An optional parameter that adjusts the horizontal size of the box. It defaults to `1`. 0.5 is half the size, 2 is double the size, etc. Note that by changing the size of one box, you will also change the size of all other boxes in the extension command, as the total sum of all boxes' sizes must be equal to the number boxes themselves to fit in the extension command.
-     - (optional) `selectOptions`: An optional array of options for the user to choose from (relevant only for specific box types like Select box).
+     - (optional) `options`: A object of options for the `boxType` chosen. For box types with dropdown menus, can instead be an array of options a user picks from.
  - (optional) `sendAsExtensionTrigger`: A boolean parameter (default is `false`) that, when set to `true`, triggers an extension within SAMMI instead of sending data to Bridge. This is useful for relaying information between buttons.
  - (optional) `hideCommand`: Another boolean parameter (default is `false`) that, when set to `true`, hides the command from the extension menu in SAMMI. Useful for commands that are only used internally.
 
@@ -160,7 +160,7 @@ Here are the parameters:
 33 | Select Deck Box, defaultValue should be a number
 34 | Password Box, same as 14, except the string is displayed as *****
 35 | Twitch Account Box, select box with all linked Twitch accounts, returns the selected option
-37 | Synchronous Value Box, adds synchronous support to your extension command, this means SAMMI will wait until a value is returned to the instance where the command was called. SAMMI will timeout after 30s and return undefined if you have not returned a value by then. **TODO** *Explain how to use the custom parameters to extend timeout duration* 
+37 | Save Variable Box, used when you need to set a variable to the button instance this command was called in. SAMMI will timeout after 30s and return undefined if you have not returned a value by then, so it is crucial that you always return a value even on fail.<br><br>Options:<br>- `timeoutAfter`: sets a custom timeout duration in milliseconds for the command to wait. default: `30000` 
 
 ![Example Box Types](https://i.imgur.com/LP4OICw.png)
 
@@ -220,9 +220,9 @@ SAMMI.extCommand("My Extension: Command 3", 4467268, 52, {
     option: ["Option", 25, "Command 3", 1, MyExtensionCommands],
 }, true, true);
 ```
-![](https://i.imgur.com/pU231bs.png)
+![a list of commands](https://i.imgur.com/pU231bs.png)
 
-This extension command is synchronous. This means SAMMI automatically waits for a value. If for some reason SAMMI never gets a value back from you, it will timeout after 30s. 
+This extension command has a save variable parameter. This means SAMMI automatically waits for a value. If for some reason SAMMI never gets a value back from you, it will timeout after 30s. 
 
 ```js
 SAMMI.extCommand("My Extension: Basic Math", 4467268, 52, {
