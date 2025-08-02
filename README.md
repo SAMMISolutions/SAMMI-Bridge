@@ -222,14 +222,14 @@ SAMMI.extCommand("My Extension: Command 3", 4467268, 52, {
 ```
 ![a list of commands](https://i.imgur.com/pU231bs.png)
 
-This extension command has a save variable parameter. This means SAMMI automatically waits for a value. If for some reason SAMMI never gets a value back from you, it will timeout after 30s. 
+This extension command has a save variable parameter. This means SAMMI automatically waits for a value. It also includes an options object with the `timeoutAfter` key set to set a timeout of `1000` milliseconds rather than the default `30000` milliseconds.
 
 ```js
 SAMMI.extCommand("My Extension: Basic Math", 4467268, 52, {
     value1: ["Value 1", 14, "", 1.2],
     opreator: ["Operator", 9, "+", 0.4],
     value2: ["Value 2", 14, "", 1.2],
-    saveVar: ["Save Variable As", 37, "", 1.2]
+    saveVar: ["Save Variable As", 37, "", 1.2, {timeoutAfter: 10000}]
 }, false, false);
 ```
 
