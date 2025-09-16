@@ -7,7 +7,7 @@ function ytLiveTestSuperChat(pullData) {
     channel_url: `https://www.youtube.com/channel/${pullData.user_id}`,
     chat_id: 'e5LT2xEURi9BQzf2rLe5eB3325081929219850',
     amount,
-    amount_as_string: `${amount}`,
+    amount_as_string: `$${amount / 1000000}`,
     currency: 'USD',
     message,
     tier,
