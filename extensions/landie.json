@@ -42,7 +42,7 @@
             "details": {
                 "author": "Landie",
                 "description": "adds extension triggers for button events on a gamepad",
-                "latest_version": "1.0.1",
+                "latest_version": "1.0.2",
                 "download_link": "https://landie.itch.io/sammi-gamepad-triggers"
             }
         },
@@ -66,3 +66,4 @@
         }
     ]
 }
+
