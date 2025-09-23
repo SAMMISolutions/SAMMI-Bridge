@@ -56,7 +56,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Extension to get a random clip from a username based on different parameters",
-                "latest_version": "2.0",
+                "latest_version": "2.1",
                 "download_link": "https://ko-fi.com/s/90575f1126"
             }
         },
@@ -296,7 +296,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Evolution AddOn for the Pokemon and Friends Mod",
-                "latest_version": "1.2",
+                "latest_version": "1.3",
                 "download_link": "https://ko-fi.com/s/20991c9069"
             }
         },
@@ -482,3 +482,4 @@
         }
     ]
 }
+
