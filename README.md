@@ -2,7 +2,7 @@
 Current version of SAMMI Bridge. Find more about SAMMI at [sammi.solutions](https://sammi.solutions)
 
 ## Download
-[Latest Release](https://github.com/SAMMISolutions/SAMMISolutions/SAMMI-Bridge/releases)
+[Latest Release](https://github.com/SAMMISolutions/SAMMI-Bridge/releases)
 
 ## Table of Contents
 - [For Users](#for-users)
