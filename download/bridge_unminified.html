@@ -702,7 +702,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
     <div class="collapse" id="YTLiveHideSuperChat">
         <div class="form-check ps-0 d-flex align-items-center">
             <label class="form-check-label me-1">Amount:</label>
-            <input type="number" min="1" max="100000" class="form-control form-control-sm w-auto  me-2"
+            <input type="number" min="1" max="500000000" class="form-control form-control-sm w-auto  me-2"
                 id="YTLiveSuperChatAmount">
             <label class="form-check-label me-1">Tier:</label>
             <input type="number" class="form-control form-control-sm w-auto" min="1" max="9" id="YTLiveSuperChatTier">
@@ -713,6 +713,7 @@ href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon
         </div>
     </div>
 </div>
+
         <div>
     <div class="btn-group align-items-center">
         <button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm" id="ytLiveTestSuperSticker">Test Super Sticker</button>
@@ -3057,7 +3058,7 @@ function YTLiveTestEvent() {
     channel_url: `https://www.youtube.com/channel/${pullData.user_id}`,
     chat_id: 'e5LT2xEURi9BQzf2rLe5eB3325081929219850',
     amount,
-    amount_as_string: `${amount}`,
+    amount_as_string: `$${amount / 1000000}`,
     currency: 'USD',
     message,
     tier,
