@@ -16,7 +16,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Play random clips while beeing in specific scenes",
-                "latest_version": "2.0",
+                "latest_version": "2.1",
                 "download_link": "https://ko-fi.com/s/657a802fb7"
             }
         },
@@ -136,7 +136,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Small Pokemon Shoutout for Raids and the SO Command",
-                "latest_version": "1.2",
+                "latest_version": "2.0",
                 "download_link": "https://ko-fi.com/s/c729d284ce"
             }
         },
@@ -296,7 +296,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Evolution AddOn for the Pokemon and Friends Mod",
-                "latest_version": "1.3",
+                "latest_version": "1.4",
                 "download_link": "https://ko-fi.com/s/20991c9069"
             }
         },
@@ -482,4 +482,5 @@
         }
     ]
 }
+
 
