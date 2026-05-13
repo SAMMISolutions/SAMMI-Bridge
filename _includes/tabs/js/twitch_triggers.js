@@ -5,6 +5,8 @@ async function SAMMITestTriggers() {
     {% include twitch_triggers/js/subscriber.js %},
     {% include twitch_triggers/js/subgift.js %},
     {% include twitch_triggers/js/bits.js %},
+    {% include twitch_triggers/js/powerups.js %},
+    {% include twitch_triggers/js/watchstreak.js %},
     {% include twitch_triggers/js/points.js %},
     {% include twitch_triggers/js/raid.js %},
     {% include twitch_triggers/js/predictions.js %},
@@ -15,7 +17,9 @@ async function SAMMITestTriggers() {
     {% include twitch_triggers/js/shoutout_receive.js %},
     {% include twitch_triggers/js/adbreak.js %},
     {% include twitch_triggers/js/stream.js %},
-    {% include twitch_triggers/js/charity.js %}
+    {% include twitch_triggers/js/charity.js %},
+    {% include twitch_triggers/js/custom_powerups.js %},
+    {% include twitch_triggers/js/twitch_extension.js %}
   };
 
   class ConstructPullData {

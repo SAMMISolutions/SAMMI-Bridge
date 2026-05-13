@@ -1,21 +1,22 @@
 async SAMMITestTwitchSubs(form, notUsed, gifted = false, gifterName = '') {
   const type = 1;
   const month = parseInt(form.elements.submonths.value) || 1;
-  const subtype = form.elements.subgift.checked
-    ? 2
-    : form.elements.anongift.checked
-      ? 4
-      : gifted
-        ? 2
-        : 1;
-  const context = form.elements.subgift.checked
-    ? 'subgift'
-    : form.elements.anongift.checked
-      ? 'anonsubgift'
-      : gifted
-        ? 'subgift'
-        : month > 1 ? 'resub' : 'sub'
-  let name; let userID;
+  const subtype = form.elements.subgift.checked ?
+    2 :
+    form.elements.anongift.checked ?
+    4 :
+    gifted ?
+    2 :
+    1;
+  const context = form.elements.subgift.checked ?
+    'subgift' :
+    form.elements.anongift.checked ?
+    'anonsubgift' :
+    gifted ?
+    'subgift' :
+    month > 1 ? 'resub' : 'sub'
+  let name;
+  let userID;
   if (gifted) {
     name = gifterName;
   } else if (form.elements.anongift.checked) {
@@ -28,23 +29,21 @@ async SAMMITestTwitchSubs(form, notUsed, gifted = false, gifterName = '') {
   const message = form.elements.submessage.value || SAMMI.generateMessage();
   const tiers = form.querySelectorAll('input[name="tier"]');
   let selectedTier;
-
   for (const tier of tiers) {
     if (tier.checked) {
       selectedTier = tier.value;
     }
   }
-
-  const selecterTierNum = selectedTier === 'Tier 1'
-    ? 1
-    : selectedTier === 'Tier 2'
-      ? 2
-      : selectedTier === 'Tier 3'
-        ? 4
-        : 8;
-  const msg = subtype !== 1
-    ? `${name[0]} gifted a sub to ${giftedName[0]}! [test trigger]`
-    : `${name[0]} subscribed for ${month} months! [test trigger]`;
+  const selecterTierNum = selectedTier === 'Tier 1' ?
+    1 :
+    selectedTier === 'Tier 2' ?
+    2 :
+    selectedTier === 'Tier 3' ?
+    4 :
+    8;
+  const msg = subtype !== 1 ?
+    `${name[0]} gifted a sub to ${giftedName[0]}! [test trigger]` :
+    `${name[0]} subscribed for ${month} months! [test trigger]`;
   const data = {
     tier: selecterTierNum,
     month,
@@ -69,23 +68,17 @@ async SAMMITestTwitchSubs(form, notUsed, gifted = false, gifterName = '') {
     emote_list: null,
     message_id: "e2d6ecd6-0ef0-44b7-97f7-cdcd334e1723",
     duration_months: 0,
-    badge_list: [ 
-    {
+    badge_list: [{
         "info": "",
         "id": "1",
         "set_id": "moderator"
-    },
-    {
+      },
+      {
         "info": "1",
         "id": "0",
         "set_id": "subscriber"
-    }
-]
-
-
+      }
+    ]
   };
   sendTriggerToSAMMI(type, msg, data, pullData);
 }
-
-
-

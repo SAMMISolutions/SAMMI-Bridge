@@ -25,14 +25,12 @@ SAMMITestTwitchPoll(form) {
     started_at: twitchTimestamp(type === 'Created' ? Date.now() : type === 'Voted' ? Date.now() - Math.floor(Math.random() * parseInt(duration) * 1000) : Date.now() - parseInt(duration) * 1000),
     ends_at: twitchTimestamp(Date.now() + parseInt(duration) * 1000),
   }
-const pullData = populateWithChoiceInfo(baseData, amount, type, false, allowPoints, voteTotal);
-
-sendTriggerToSAMMI(
-  16,
-  `Poll ${type} [test trigger] fired!`,
-  {
-    type: typeNum,
-  },
-  pullData,
-);
+  const pullData = populateWithChoiceInfo(baseData, amount, type, false, allowPoints, voteTotal);
+  sendTriggerToSAMMI(
+    16,
+    `Poll ${type} [test trigger] fired!`, {
+      type: typeNum,
+    },
+    pullData,
+  );
 }

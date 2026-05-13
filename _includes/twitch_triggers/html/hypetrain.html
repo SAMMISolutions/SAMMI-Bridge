@@ -1,26 +1,25 @@
 <form id="SAMMITestTwitchHypeTrain" class="SAMMITestTriggers">
-   <div class="d-flex align-items-center">
-      <button type="submit" class="btn btn-primary btn-sm me-2">Test Hype Train</button>
-      <select class="form-select form-select-sm w-auto me-2" aria-label="Hype Train Type" name="hypeTrainType">
-         <option value="begin">Begin</option>
-         <option value="progress">Progress</option>
-         <option value="end">End</option>
-      </select>
-      <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidehypetrain" role="button" aria-expanded="false"
-         aria-controls="hidebits"></a>
-   </div>
-   <div class="collapse mb-1" id="hidehypetrain">
-      <div class="form-group mb-2">
-         <label>Current level:</label>
-         <input type="number" class="form-control form-control-sm w-auto" min="1" max="50" name="hypeTrainLevel" value=3>
-      </div>
-      <div class="form-group mb-2">
-         <label>Current goal:</label>
-         <input type="number" class="form-control form-control-sm w-auto" min="1" max="10000" name="hypeTrainGoal" value=3>
-      </div>
-      <div class="form-group mb-2">
-         <label>Goal progress:</label>
-         <input type="number" class="form-control form-control-sm w-auto" min="1" max="10000" name="hypeTrainProgress" value=3>
-      </div>
-   </div>
+  <div class="d-flex align-items-center">
+    <button type="submit" class="btn btn-primary btn-sm me-2">Hype Train</button>
+    <select class="form-select form-select-sm w-auto me-2" aria-label="Hype Train Type" name="hypeTrainType">
+      <option value="begin">Begin</option>
+      <option value="progress">Progress</option>
+      <option value="end">End</option>
+    </select>
+    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidehypetrain" role="button" aria-expanded="false" aria-controls="hidebits"></a>
+  </div>
+  <div class="collapse mb-1" id="hidehypetrain" data-bs-parent="#content-triggers">
+    <div class="form-group mb-2">
+      <label>Current level:</label>
+      <input type="number" class="form-control form-control-sm w-auto" min="1" max="50" name="hypeTrainLevel" value=3>
+    </div>
+    <div class="form-group mb-2">
+      <label>Current goal:</label>
+      <input type="number" class="form-control form-control-sm w-auto" min="1" max="10000" name="hypeTrainGoal" value=150>
+    </div>
+    <div class="form-group mb-2">
+      <label>Goal progress:</label>
+      <input type="number" class="form-control form-control-sm w-auto" min="1" max="10000" name="hypeTrainProgress" value=50>
+    </div>
+  </div>
 </form>

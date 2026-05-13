@@ -7,6 +7,15 @@ window.defaultTwitchUser = {
   login: "defaultuser",
   user_id: "123456789",
 }
+window.SAMMIRefreshBridge = function SAMMIRefreshBridge() {
+  var href = window.location.href;
+  var hashIndex = href.indexOf('#');
+  var hash = hashIndex === -1 ? '' : href.slice(hashIndex);
+  var base = hashIndex === -1 ? href : href.slice(0, hashIndex);
+  base = base.replace(/([?&])sammi_reload=[^&]*&?/, '$1').replace(/[?&]$/, '');
+  var separator = base.indexOf('?') === -1 ? '?' : '&';
+  window.location.href = base + separator + 'sammi_reload=' + new Date().getTime() + hash;
+};
 // init object with all available SAMMI command methods
 const SAMMI = new SAMMICommands();
 window.SAMMI = SAMMI;

@@ -11,11 +11,9 @@ async SAMMITestTwitchStream(form) {
     pullData.id = "43355732987";
     pullData.started_at = twitchTimestamp(Date.now() - 120000);
   }
-
   sendTriggerToSAMMI(
     38,
-    `Stream ${type}: ${pullData.display_name} [test trigger].`,
-    {
+    `Stream ${type}: ${pullData.display_name} [test trigger].`, {
       type: type == "started" ? 0 : 1,
     },
     pullData,

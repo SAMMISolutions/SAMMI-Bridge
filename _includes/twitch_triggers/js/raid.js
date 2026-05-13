@@ -8,11 +8,9 @@ async SAMMITestTwitchRaid(form) {
     amount,
     picture_url: "https:\\/\\/static-cdn.jtvnw.net\\/user-default-pictures-uv\\/dbdc9198-def8-11e9-8681-784f43822e80-profile_image-300x300.png"
   };
-
   sendTriggerToSAMMI(
     4,
-    `${pullData.display_name} is raiding you with ${amount} viewers! [test trigger]`,
-    {
+    `${pullData.display_name} is raiding you with ${amount} viewers! [test trigger]`, {
       amount,
     },
     pullData,

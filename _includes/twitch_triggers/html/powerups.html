@@ -1,0 +1,27 @@
+<form id="SAMMITestTwitchPowerups" class="SAMMITestTriggers">
+        <button type="submit" class="btn btn-primary btn-sm me-1">Default Power-Ups</button>
+        <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidepowerups" role="button" aria-expanded="false" aria-controls="hidepowerups"></a>
+        <div class="collapse" id="hidepowerups" data-bs-parent="#content-triggers">
+          <div class="form-check ps-0 d-flex align-items-center mb-2">
+            <label class="form-check-label me-1">Power Up:</label>
+            <select name="poweruptype" class="form-select form-select-sm w-auto me-2">
+              <option value="gigantify">Gigantify an Emote</option>
+              <option value="message_effect">Message Effects</option>
+              <option value="celebration">On-Screen Celebrations</option>
+            </select>
+          </div>
+
+          <div class="form-check ps-0 d-flex align-items-center mb-2">
+            <label class="form-check-label me-1">Username:</label>
+            <input type="text" name="name" class="form-control form-control-sm w-auto me-2" value="">
+          </div>
+          <div class="form-check ps-0 d-flex align-items-center mb-2">
+            <label class="form-check-label me-1">Amount of bits:</label>
+            <input type="number" min="1" max="99999" name="bitsamount" class="form-control form-control-sm w-auto me-2" value=10>
+          </div>
+          <div class="form-check ps-0 d-flex align-items-center mb-2">
+            <label class="form-check-label me-1">Message:</label>
+            <textarea name="powerupsmessage" class="form-control form-control-sm w-75" rows="1" style="margin:5px 0px;">Hello World!</textarea>
+          </div>
+        </div>
+      </form>

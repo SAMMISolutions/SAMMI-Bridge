@@ -99,12 +99,13 @@ async function populateExtensionTable() {
 
     // Download/Update cell
     const downloadCell = document.createElement('td');
+    downloadCell.className = 'extension-download-cell';
     if (latest && latest.details.download_link !== '') {
       const updateAvail = !compareVersions(current.current_version, latest.details.latest_version);
       downloadCell.innerHTML = `
-        <a href="${latest.details.download_link}" target="_blank" rel="noopener noreferrer" 
-            class="btn btn-sm"
-            style="${updateAvail ? 'background-color: #a15900' : 'background-color: #0a8263'}">
+        <a href="${latest.details.download_link}" target="_blank" rel="noopener noreferrer"
+            class="btn btn-sm extension-download-button ${updateAvail ? 'is-update' : 'is-download'}"
+            title="${updateAvail ? 'Update' : 'Download'}">
             <span class="d-none d-sm-inline">${updateAvail ? 'Update' : 'Download'}</span>
             <i class="fas fa-${updateAvail ? 'sync' : 'download'} d-sm-none"></i>
         </a>
@@ -112,7 +113,7 @@ async function populateExtensionTable() {
     } else {
       // place holder to maintain table dimensions
       downloadCell.innerHTML = `
-          <a href="#" style="visibility: hidden;" class="btn btn-sm">
+          <a href="#" class="btn btn-sm extension-download-button is-placeholder" tabindex="-1" aria-hidden="true">
               <span class="d-none d-sm-inline">Placeholder</span>
               <i class="fas fa-sync d-sm-none"></i>
           </a>

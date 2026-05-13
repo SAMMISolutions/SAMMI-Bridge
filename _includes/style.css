@@ -1,230 +1,1310 @@
-    body {
-      font-family: 'Lato', sans-serif;
-      background-color: #040b15;
-    }
-    h1 {
-    font-size: calc(1.2em + 1vw);
-    }
-    a {
-      color: #ffac7c;
-      text-decoration: underline;
-    }
-    a:hover {
-      color: #ff6810;
-      text-decoration: underline;
-    }
-    .tslCollapse, .tslCollapse:hover, .tslCollapse a {
-      text-decoration: none;
-      color: #FFFFFF;
-    }
-    .tslCollapse.collapsed:before {
-      content:'Show Options \01F847' ;
-      width:15px;
-    }
-    .tslCollapse:before {
-      content:'Hide Options \01F845' ;
-      width:15px;
-    }
-    .SAMMITestTriggers .form-check-input[type=checkbox] {
-      vertical-align: text-bottom;
-    }
-    #footer .tslCollapse.collapsed:before {
-      content:'Show Tabs \01F847' ;
-      width:15px;
-    }
-    #footer .tslCollapse:before {
-      content:'Hide Tabs \01F845' ;
-      width:15px;
-    }
+      :root {
+        --bg: #020617;
+        --panel: rgba(15, 23, 42, 0.94);
+        --surface: rgba(30, 41, 59, 0.62);
+        --surface-soft: rgba(148, 163, 184, 0.10);
+        --text: #e5e7eb;
+        --muted: #cbd5e1;
+        --muted-2: #94a3b8;
+        --accent: #2563eb;
+        --accent-2: #7c3aed;
+        --accent-3: #22c55e;
+        --danger: #fb7185;
+        --warning: #fbbf24;
+        --border: rgba(255, 255, 255, 0.10);
+        --border-strong: rgba(255, 255, 255, 0.18);
+        --shadow: 0 22px 64px rgba(0, 0, 0, 0.34);
+      }
 
-    #SAMMIcorelog {
-      background:#040b15;
-      padding:5px 15px;
-      display:block;
-      position: relative;
-      float: left;
-      text-align: left;
-      max-height: 50%;
-      overflow-y: auto;
-    }
+      * {
+        box-sizing: border-box;
+      }
 
-    #debugLogContent, #debugLog {
-      border:none;
-      background-color:rgba(0,0,0,0);
-      box-shadow:none;
-    }
-    #debugLog .nav-link {
-      padding: .2rem 1rem;
-    }
-    #SAMMIBridge {
-      overflow: hidden;
-      padding:5px;
-      margin:2px;
-      padding: 1px 
-    }
-    samp {
-      width: 200px;
-      word-break: break-all;
-      white-space: normal;
-    }
+      html {
+        min-height: 100%;
+      }
 
-    input{
-    padding:0px;
-    margin:1px 1px
-    }
-    button{
-    padding:2px 5px;
-    margin:3px 0;
-    box-shadow:2 2px #c5c5c5
-    }
-    button:active{
-    background-color:#797979;
-    color:#fff;
-    box-shadow:0 0 rgb(223, 223, 223);
-    transform:translateY(1px)
-    }
-    .nav {
-      padding-left: 0;
-      margin-bottom: 0;
-    }
-    .nav-pills .nav-link {
-      font-family: Arial;
-      padding: .4em .6em .1em .6em;
-      margin: 2px 1px 0px 1px!important;
-      background: rgb(175,177,184);
-      background-color: linear-gradient(0deg, rgba(175,177,184,1) 15%, rgba(203,203,213,1) 61%);
-      font-weight: bold;
-      color:rgb(31, 32, 54);
-      border-radius: 5px 5px 0px 0px;
-      text-shadow: 0px 1px 2px rgb(195, 195, 195);
-      transition: 0.01s;
-    }
-    .nav-pills > li > .nav-link.active {
-      /*background-image: linear-gradient(to bottom, #E28B3B, #B96C23);*/
-      background-image: linear-gradient(to bottom, #761a2c , #761a2c );
-      border: 1px solid #761a2c;
-      color: rgb(255, 255, 255);
-      border: 1px solid #761a2c;
-      text-shadow: 1px 1px 3px rgb(0 0 0 / 100%);
-    }
-    .nav-item
-      {
+      body {
+        min-height: 100vh;
+        margin: 0;
+        color: var(--text);
+        background:
+          linear-gradient(135deg, rgba(37, 99, 235, 0.18), transparent 35%),
+          linear-gradient(315deg, rgba(124, 58, 237, 0.14), transparent 38%),
+          linear-gradient(180deg, #020617 0%, #08111f 48%, #0f172a 100%);
+        font-family: Inter, Lato, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      body > .container {
+        width: min(1400px, calc(100% - 28px));
+        max-width: none;
+        padding: 26px 0 48px;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        padding-bottom: 4px;
+        color: transparent;
+        background: linear-gradient(135deg, #ffffff 18%, #93c5fd 52%, #c4b5fd 92%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        font-size: clamp(2.05rem, 5vw, 3.35rem);
+        font-weight: 800;
+        letter-spacing: 0;
+        line-height: 1.14;
+      }
+
+      h5 {
+        margin: 0 0 14px;
+        color: #ffffff;
+        font-size: 1.25rem;
+        font-weight: 780;
+        letter-spacing: 0;
+      }
+
+      a {
+        color: #93c5fd;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #bfdbfe;
+        text-decoration: underline;
+      }
+
+      body > .container > h1 + .row.justify-content-center {
+        width: fit-content;
+        max-width: 100%;
+        margin: 0 auto 18px;
+        padding: 9px 15px;
+        gap: 12px;
+        background: rgba(15, 23, 42, 0.78);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
+        backdrop-filter: blur(16px);
+      }
+
+      body > .container > h1 + .row.justify-content-center .col {
+        display: inline-flex;
+        align-items: center;
+        width: auto;
+        gap: 4px;
+        white-space: nowrap;
+      }
+
+      body > .container > .row.justify-content-center.g-0 {
+        justify-content: flex-start !important;
+        margin-top: 2px;
+        padding: 0 20px;
+      }
+
+      #extensions-tab {
+        width: 100%;
+      }
+
+      .nav {
+        gap: 5px;
+        padding-left: 0;
+        margin-bottom: 0;
+      }
+
+      .nav-pills .nav-link {
+        min-height: 34px;
+        padding: 7px 11px 6px;
+        margin: 0 !important;
+        color: var(--muted);
+        background: rgba(148, 163, 184, 0.15);
+        border: 1px solid var(--border);
+        border-bottom-color: rgba(255, 255, 255, 0.06);
+        border-radius: 10px 10px 0 0;
+        box-shadow: none;
+        font-family: inherit;
+        font-weight: 740;
+        letter-spacing: 0;
+        text-shadow: none;
+        transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+      }
+
+      .nav-pills .nav-link:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.09);
+        border-color: var(--border-strong);
+        text-decoration: none;
+      }
+
+      .nav-pills > li > .nav-link.active {
+        color: #ffffff;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        border-color: rgba(147, 197, 253, 0.34);
+        box-shadow: 0 14px 34px rgba(37, 99, 235, 0.22);
+        text-shadow: none;
+      }
+
+      .nav-item {
         z-index: 998;
       }
+
+      #extensions-tabContent {
+        width: 100%;
+        min-height: 50px;
+        padding: 22px;
+        overflow: visible;
+        color: var(--text);
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.97), rgba(15, 23, 42, 0.91));
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+      }
+
+      #extensions-tabContent > .tab-pane {
+        min-height: 260px;
+      }
+
+      .tab-content {
+        color: var(--text);
+      }
+
+      #content-settings > .row,
+      #content-extensions > .row {
+        margin: 0;
+        padding: 12px 0 18px;
+        background: transparent;
+        border: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 0;
+      }
+
+      #content-extensions > .row {
+        padding-bottom: 12px;
+        border-bottom: 0;
+      }
+
+      #content-settings > .row + .row {
+        padding-top: 20px;
+      }
+
+      .SAMMITestTriggers,
+      #content-yttriggers > div {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+        padding: 9px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+      }
+
+      .SAMMITestTriggers:last-child,
+      #content-yttriggers > div:last-child {
+        border-bottom: 0;
+      }
+
+      .SAMMITestTriggers > div:first-child,
+      .SAMMITestTriggers > .form-check:first-child,
+      .SAMMITestTriggers .btn-group,
+      #content-yttriggers .yt-trigger-row,
+      #content-yttriggers .btn-group {
+        display: flex !important;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        max-width: 100%;
+      }
+
+      .SAMMITestTriggers .form-group,
+      .SAMMITestTriggers .form-check,
+      #content-yttriggers .form-group,
+      #content-yttriggers .form-check {
+        min-width: 0;
+      }
+
+      .SAMMITestTriggers .collapse,
+      .SAMMITestTriggers .collapsing,
+      #content-yttriggers .collapse,
+      #content-yttriggers .collapsing {
+        flex: 0 0 100%;
+        width: 100%;
+        min-width: 0;
+        margin-top: 8px;
+        padding: 0 0 0 12px;
+        box-sizing: border-box;
+        background: transparent;
+        border: 0;
+        border-left: 2px solid rgba(147, 197, 253, 0.24);
+        border-radius: 0;
+      }
+
+      .SAMMITestTriggers .collapsing,
+      #content-yttriggers .collapsing {
+        overflow: hidden;
+        transition: height 220ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+        will-change: height;
+        transform: translateZ(0);
+      }
+
+
+      .trigger-category {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+        padding: 9px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+      }
+
+      .trigger-category-title {
+        cursor: default !important;
+        pointer-events: none;
+      }
+
+      .trigger-category-options {
+        flex: 0 0 100%;
+        width: 100%;
+        min-width: 0;
+        margin-top: 8px;
+        padding: 0 0 0 12px;
+        box-sizing: border-box;
+        background: transparent;
+        border: 0;
+        border-left: 2px solid rgba(147, 197, 253, 0.24);
+        border-radius: 0;
+      }
+
+      .trigger-category-options .SAMMITestTriggers {
+        border-bottom-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .SAMMITestTriggers .form-check-input[type=checkbox] {
+        vertical-align: text-bottom;
+      }
+
+      label,
+      .form-check-label {
+        color: var(--muted);
+        font-weight: 650;
+      }
+
+      input:not([type=checkbox]):not([type=radio]),
+      textarea,
+      select,
+      .form-control,
+      .form-select,
+      .form-select-sm {
+        min-height: 32px;
+        padding: 5px 10px;
+        color: #f8fafc;
+        background-color: rgba(2, 6, 23, 0.62);
+        border: 1px solid var(--border-strong);
+        border-radius: 8px;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      }
+
+      select,
+      .form-select,
+      .form-select-sm {
+        min-width: 92px;
+        padding-right: 2.25rem;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23cbd5e1' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 0.72rem center;
+        background-size: 14px 10px;
+      }
+
+      .form-select-sm {
+        height: auto !important;
+      }
+
+      .form-control:focus,
+      .form-select:focus,
+      .form-select-sm:focus,
+      input:not([type=checkbox]):not([type=radio]):focus,
+      textarea:focus,
+      select:focus {
+        color: #ffffff;
+        background-color: rgba(2, 6, 23, 0.76);
+        border-color: rgba(147, 197, 253, 0.74);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
+        outline: 0;
+      }
+
+      input[type=checkbox],
+      input[type=radio] {
+        accent-color: var(--accent);
+      }
+
+      textarea {
+        min-height: 34px;
+      }
+
+      button,
+      .btn {
+        min-height: 32px;
+        padding: 5px 10px;
+        margin: 2px 0;
+        border-radius: 8px;
+        box-shadow: none;
+        font-weight: 700;
+        letter-spacing: 0;
+        white-space: normal;
+        transition: transform 140ms ease, background 140ms ease, border-color 140ms ease, color 140ms ease;
+      }
+
+      button:active,
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .btn-primary {
+        color: #ffffff;
+        background: rgba(71, 85, 105, 0.78);
+        border-color: rgba(148, 163, 184, 0.28);
+      }
+
+      .btn-primary:hover,
+      .btn-primary:focus {
+        color: #ffffff;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        border-color: rgba(147, 197, 253, 0.38);
+      }
+
+      .btn-secondary {
+        background: rgba(51, 65, 85, 0.88);
+        border-color: rgba(148, 163, 184, 0.30);
+      }
+
+      .tslCollapse,
+      .tslCollapse:hover,
+      .tslCollapse a {
+        display: inline-flex;
+        align-items: center;
+        color: #e0f2fe;
+        text-decoration: none;
+      }
+
+      .tslCollapse:before,
+      .tslCollapse.collapsed:before {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 3px 8px;
+        color: #dbeafe;
+        background: rgba(37, 99, 235, 0.15);
+        border: 1px solid rgba(147, 197, 253, 0.18);
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .tslCollapse.collapsed:before {
+        content: 'Show Options \01F847';
+      }
+
+      .tslCollapse:before {
+        content: 'Hide Options \01F845';
+      }
+
+      /* Keep test trigger option panels instant in OBS browser docks. */
+      #content-triggers .collapsing,
+      #content-yttriggers .collapsing {
+        height: auto !important;
+        overflow: visible !important;
+        transition: none !important;
+      }
+
+      #content-triggers .collapse,
+      #content-yttriggers .collapse {
+        transition: none !important;
+      }
+
+      #content-triggers .collapse > *,
+      #content-yttriggers .collapse > * {
+        margin-top: 0;
+      }
+
+      #footer {
+        --bs-gutter-x: 0;
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin: 20px 0 0 !important;
+        padding: 12px 0 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        background: transparent;
+        border: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      #footer > * {
+        max-width: 100% !important;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        box-sizing: border-box;
+      }
+
+      #footer > .tslCollapse {
+        display: flex;
+        width: 100%;
+        min-width: 0;
+        justify-content: center;
+      }
+
+      #footer > .tslCollapse:before,
+      #footer > .tslCollapse.collapsed:before {
+        width: 100%;
+        justify-content: center;
+      }
+
+      #footer #extensions-tab-buttons {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px 12px;
+        align-items: stretch;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-top: 12px !important;
+      }
+
+      #footer #extensions-tab-buttons .btn {
+        width: 100%;
+        min-width: 0;
+        min-height: 44px;
+        margin: 0 !important;
+        white-space: normal;
+      }
+
+      #footer #installedextensions {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 26px;
+      }
+
+      #footer #installedextensions.collapse:not(.show) {
+        display: none;
+      }
+
+      #footer #installedextensions.show {
+        display: block;
+      }
+
+      #installedextensions .tab-visibility-table {
+        width: 100% !important;
+        max-width: 100%;
+        min-width: 0;
+        margin-top: 10px;
+        box-sizing: border-box;
+        color: var(--text);
+        table-layout: fixed;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        border: 1px solid rgba(147, 197, 253, 0.16);
+        border-radius: 12px;
+      }
+
+      #installedextensions .tab-visibility-table th,
+      #installedextensions .tab-visibility-table td {
+        padding: 9px 12px;
+        background: rgba(15, 23, 42, 0.62);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        vertical-align: middle;
+      }
+
+      #installedextensions .tab-visibility-table thead,
+      #installedextensions .tab-visibility-table thead tr,
+      #installedextensions .tab-visibility-table thead th {
+        color: #dbeafe !important;
+        background: rgba(30, 64, 175, 0.38) !important;
+        background-color: rgba(30, 64, 175, 0.38) !important;
+        box-shadow: none !important;
+      }
+
+      #installedextensions .tab-visibility-table th {
+        font-weight: 750;
+      }
+
+      #installedextensions .tab-visibility-table tr:last-child td {
+        border-bottom: 0;
+      }
+
+      #installedextensions .tab-visibility-table .visible-column {
+        width: 116px;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      #installedextensions .tab-visibility-table td:nth-child(2),
+      #installedextensions .tab-visibility-table th:nth-child(2) {
+        width: auto;
+      }
+
+      #footer .tslCollapse.collapsed:before {
+        content: 'Show Tabs \01F847';
+      }
+
+      #footer .tslCollapse:before {
+        content: 'Hide Tabs \01F845';
+      }
+
+      #extensions-tab-buttons {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .table-responsive {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        border: 1px solid rgba(147, 197, 253, 0.16);
+        border-radius: 12px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #content-extensions {
+        padding: 0;
+      }
+
+      #content-extensions h5 {
+        margin: 0;
+        font-size: 1.32rem;
+      }
+
+      #content-extensions p {
+        margin: 14px 0 0;
+        color: var(--muted);
+      }
+
+      #extensionTable {
+        width: 100% !important;
+        max-width: 100%;
+        min-width: 0;
+        margin: 0;
+        box-sizing: border-box;
+        color: var(--text) !important;
+        table-layout: fixed;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+
+      #extensionTable.table-dark,
+      #extensionTable.table-dark > :not(caption) > * > * {
+        color: var(--text) !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+      }
+
+      #extensionTable thead,
+      #extensionTable thead tr,
+      #extensionTable thead th {
+        background: rgba(30, 64, 175, 0.38) !important;
+        background-color: rgba(30, 64, 175, 0.38) !important;
+        box-shadow: none !important;
+      }
+
+      #extensionTable thead th {
+        padding: 10px 12px;
+        color: #dbeafe !important;
+        border-bottom: 1px solid rgba(147, 197, 253, 0.24);
+        font-weight: 750;
+        white-space: nowrap;
+      }
+
+      #extensionTable thead th:first-child {
+        border-top-left-radius: 10px;
+      }
+
+      #extensionTable thead th:last-child {
+        border-top-right-radius: 10px;
+      }
+
+      #extensionTable tbody td {
+        padding: 11px 12px;
+        color: var(--muted) !important;
+        background: rgba(15, 23, 42, 0.62) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        vertical-align: middle;
+      }
+
+      #extensionTable tbody tr:last-child td {
+        border-bottom: 0;
+      }
+
+      #extensionTable tbody tr:hover td {
+        color: #ffffff !important;
+        background: rgba(37, 99, 235, 0.16) !important;
+      }
+
+      #extensionTable td:first-child {
+        font-weight: 650;
+        word-break: break-word;
+      }
+
+      #extensionTable th:nth-child(1),
+      #extensionTable td:nth-child(1) {
+        width: 32%;
+      }
+
+      #extensionTable th:nth-child(2),
+      #extensionTable td:nth-child(2) {
+        width: 26%;
+      }
+
+      #extensionTable th:nth-child(3),
+      #extensionTable td:nth-child(3),
+      #extensionTable th:nth-child(4),
+      #extensionTable td:nth-child(4) {
+        width: 14%;
+      }
+
+      #extensionTable th.extension-download-header,
+      #extensionTable .extension-download-cell {
+        width: 14%;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      #extensionTable th.extension-download-header i,
+      #extensionTable .extension-download-cell i {
+        display: inline-flex;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .extension-download-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 34px;
+        min-height: 32px;
+        padding: 5px 10px;
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 8px;
+        text-decoration: none;
+      }
+
+      .extension-download-button:hover,
+      .extension-download-button:focus {
+        color: #ffffff !important;
+        text-decoration: none;
+        filter: brightness(1.08);
+      }
+
+      .extension-download-button.is-download {
+        background: #0a8263;
+      }
+
+      .extension-download-button.is-update {
+        background: #a15900;
+      }
+
+      .extension-download-button.is-placeholder {
+        visibility: hidden;
+      }
+
+      #ExtensionsSortName,
+      #ExtensionsSortAuthor,
+      #ExtensionsSortDownload {
+        cursor: pointer;
+      }
+
+      #SAMMIcorelog {
+        display: block;
+        position: relative;
+        float: left;
+        max-height: 50%;
+        padding: 10px 14px;
+        overflow-y: auto;
+        color: var(--muted);
+        text-align: left;
+        background: rgba(2, 6, 23, 0.72);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+
+      #debugLogContent,
+      #debugLog {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+      }
+
+      #debugLog .nav-link {
+        padding: .2rem 1rem;
+      }
+
+      #SAMMIBridge {
+        padding: 1px;
+        margin: 2px;
+        overflow: hidden;
+      }
+
+      samp {
+        width: 200px;
+        word-break: break-all;
+        white-space: normal;
+      }
+
+      .notabs > .tab-pane {
+        display: block !important;
+        opacity: 1 !important;
+      }
+
+      .notabs button,
+      .notabs input {
+        color: #ffffff;
+        background-color: rgba(15, 23, 42, 0.86);
+        border-color: var(--border-strong);
+      }
+
+      #close-tab-button {
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        z-index: 9998;
+        width: 60px;
+        height: 60px;
+        padding: 10px;
+        color: rgba(255, 255, 255, 0.92);
+        background: rgba(15, 23, 42, 0.92);
+        border: 1px solid var(--border-strong);
+        border-radius: 50%;
+        line-height: 38px;
+        text-align: center;
+        transform: translateX(-50%);
+        pointer-events: auto;
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
+      }
+
+      #close-tab-button.hovered {
+        color: var(--danger);
+      }
+
+      .connected {
+        color: var(--accent-3);
+      }
+
+      .disconnected {
+        color: var(--danger);
+      }
+
+      .connecting {
+        color: var(--warning);
+      }
+
+      .opacity-90 {
+        opacity: 0.9;
+      }
+
+      .draggable-source--is-dragging {
+        opacity: 0;
+      }
+
+      @keyframes shake {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        20% { transform: translate(0, 0) rotate(-3deg); }
+        40% { transform: translate(0, 0) rotate(3deg); }
+        60% { transform: translate(0, 0) rotate(-3deg); }
+        80% { transform: translate(0, 0) rotate(3deg); }
+        100% { transform: translate(0, 0) rotate(0deg); }
+      }
+
+      .shaking {
+        animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) infinite both;
+        transform-origin: center center;
+      }
+
+
+
+      /* Cleaner stacked layout for trigger option fields inside Show Options panels. */
+      #content-triggers .collapse,
+      #content-yttriggers .collapse {
+        padding-top: 10px;
+      }
+
+      #content-triggers .collapse .form-group,
+      #content-triggers .collapse .form-check:not(.form-check-inline),
+      #content-yttriggers .collapse .form-group,
+      #content-yttriggers .collapse .form-check:not(.form-check-inline) {
+        display: block !important;
+        align-items: initial !important;
+        margin-bottom: 15px !important;
+      }
+
+      #content-triggers .collapse .form-group > label:first-child,
+      #content-triggers .collapse .form-check:not(.form-check-inline) > label:first-child,
+      #content-yttriggers .collapse .form-group > label:first-child,
+      #content-yttriggers .collapse .form-check:not(.form-check-inline) > label:first-child {
+        display: block;
+        margin: 0 0 8px 0 !important;
+        padding: 0;
+      }
+
+      #content-triggers .collapse,
+      #content-yttriggers .collapse {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      #content-triggers .collapse .form-group,
+      #content-triggers .collapse .form-check:not(.form-check-inline),
+      #content-yttriggers .collapse .form-group,
+      #content-yttriggers .collapse .form-check:not(.form-check-inline) {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+      }
+
+      #content-triggers .collapse input:not([type=checkbox]):not([type=radio]),
+      #content-triggers .collapse textarea,
+      #content-triggers .collapse select,
+      #content-triggers .collapse .form-control,
+      #content-triggers .collapse .form-select,
+      #content-triggers .collapse .form-select-sm,
+      #content-yttriggers .collapse input:not([type=checkbox]):not([type=radio]),
+      #content-yttriggers .collapse textarea,
+      #content-yttriggers .collapse select,
+      #content-yttriggers .collapse .form-control,
+      #content-yttriggers .collapse .form-select,
+      #content-yttriggers .collapse .form-select-sm {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        margin-top: 0 !important;
+        box-sizing: border-box;
+      }
+
+      #content-triggers .collapse input[type=number],
+      #content-yttriggers .collapse input[type=number] {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      #content-triggers .collapse textarea,
+      #content-yttriggers .collapse textarea {
+        min-width: 0;
+        resize: vertical;
+      }
+
+      #content-triggers .collapse .form-check-inline,
+      #content-yttriggers .collapse .form-check-inline {
+        margin-top: 0;
+        margin-bottom: 4px;
+      }
+
+      @media (max-width: 576px) {
+        body > .container {
+          width: min(100% - 16px, 1400px);
+          padding-top: 14px;
+        }
+
+        body > .container > h1 + .row.justify-content-center {
+          width: 100%;
+          justify-content: center;
+          border-radius: 14px;
+        }
+
+        .nav {
+          gap: 4px;
+        }
+
+        .nav-pills .nav-link {
+          min-height: 31px;
+          padding: 6px 9px;
+          font-size: 0.92em;
+        }
+
+        #extensions-tabContent {
+          padding: 14px;
+          border-radius: 14px;
+        }
+
+        body > .container > .row.justify-content-center.g-0 {
+          padding: 0 14px;
+        }
+
+        #footer {
+          padding-right: 0;
+          padding-left: 0;
+        }
+
+        #footer #extensions-tab-buttons {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        #installedextensions .tab-visibility-table .visible-column {
+          width: 96px;
+        }
+
+        #extensionTable thead th:nth-child(1),
+        #extensionTable tbody td:nth-child(1) {
+          width: 38%;
+        }
+
+        #extensionTable thead th:nth-child(3),
+        #extensionTable tbody td:nth-child(3),
+        #extensionTable thead th:nth-child(4),
+        #extensionTable tbody td:nth-child(4) {
+          width: 17%;
+        }
+
+        #extensionTable th.extension-download-header,
+        #extensionTable .extension-download-cell {
+          width: 28%;
+        }
+
+        .SAMMITestTriggers,
+        #content-yttriggers > div {
+          gap: 7px;
+          padding: 8px 0;
+        }
+
+        button,
+        .btn {
+          font-size: 0.93em;
+        }
+
+        .table-responsive {
+          border-radius: 10px;
+        }
+
+        #extensionTable thead th,
+        #extensionTable tbody td {
+          padding: 9px 10px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        #extensions-tabContent {
+          padding: 12px;
+        }
+
+        #extensionTable thead th,
+        #extensionTable tbody td,
+        #installedextensions .tab-visibility-table th,
+        #installedextensions .tab-visibility-table td {
+          padding-right: 8px;
+          padding-left: 8px;
+        }
+
+        #extensionTable th.extension-download-header,
+        #extensionTable .extension-download-cell {
+          width: 30%;
+        }
+
+        #footer #extensions-tab-buttons {
+          gap: 9px;
+        }
+      }
     
-    .tab-content {
-      /*background-color: rgba(39, 55, 110, 0.5);*/
-      background-color: rgba(22, 53, 100, 0.769);
-      box-shadow: 0.5rem 0.5rem 0.5rem #00000080;
-      min-height:50px;
-      width:100%;
-      border-radius:3px;
-      overflow:hidden;
-      padding:20px;
-    }
-    .draggable-source--is-dragging {
-      opacity: 0;
-    }
 
-    @media (max-width: 576px) {
-      .nav-pills .nav-link {
-          border-radius: 5px 5px 0px 0px;
-          font-weight:bold;
-          padding: .2em .4em .1em .4em;
-          font-size: 0.92em 
-    }
-      button{
-        font-size:0.93em;
-          padding:2px 5px;
-        margin:3px 0;
-        box-shadow:2 2px #c5c5c5
-    }
-    button:active{
-        background-color:#797979;
-        color:#fff;
-        box-shadow:0 0 rgb(223, 223, 223);
-        transform:translateY(1px)
-    }
-    }
+      /* Force all Show Options controls to use the available panel width. */
+      #extensions-tabContent #content-triggers .collapse,
+      #extensions-tabContent #content-yttriggers .collapse {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+      }
 
-    .btn-primary {
-      background-color: #535861b5;
-      border-color: rgb(72 78 89);
+      #extensions-tabContent #content-triggers .collapse .form-group,
+      #extensions-tabContent #content-triggers .collapse .form-check:not(.form-check-inline),
+      #extensions-tabContent #content-yttriggers .collapse .form-group,
+      #extensions-tabContent #content-yttriggers .collapse .form-check:not(.form-check-inline) {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+      }
 
-    }
+      #extensions-tabContent #content-triggers .collapse input.form-control,
+      #extensions-tabContent #content-triggers .collapse input.form-control-sm,
+      #extensions-tabContent #content-triggers .collapse textarea.form-control,
+      #extensions-tabContent #content-triggers .collapse textarea.form-control-sm,
+      #extensions-tabContent #content-triggers .collapse select.form-select,
+      #extensions-tabContent #content-triggers .collapse select.form-select-sm,
+      #extensions-tabContent #content-yttriggers .collapse input.form-control,
+      #extensions-tabContent #content-yttriggers .collapse input.form-control-sm,
+      #extensions-tabContent #content-yttriggers .collapse textarea.form-control,
+      #extensions-tabContent #content-yttriggers .collapse textarea.form-control-sm,
+      #extensions-tabContent #content-yttriggers .collapse select.form-select,
+      #extensions-tabContent #content-yttriggers .collapse select.form-select-sm {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        flex: 0 1 auto !important;
+        margin-right: 0 !important;
+        box-sizing: border-box !important;
+      }
 
-    .btn-primary:hover {
-      background-color: #60646ad9;
-      border-color: #60646ad9
+      #extensions-tabContent #content-triggers .collapse textarea.form-control,
+      #extensions-tabContent #content-triggers .collapse textarea.form-control-sm,
+      #extensions-tabContent #content-yttriggers .collapse textarea.form-control,
+      #extensions-tabContent #content-yttriggers .collapse textarea.form-control-sm {
+        resize: vertical;
+      }
 
-    }
+      /* Keep native dropdowns readable and compact inside Show Options panels.
+         Very wide native select popups look broken in OBS/Chromium, so selects stay responsive
+         but cap their visual width while all text inputs/textareas can still use the full row. */
+      #extensions-tabContent #content-triggers .collapse select,
+      #extensions-tabContent #content-triggers .collapse select.form-select,
+      #extensions-tabContent #content-triggers .collapse select.form-select-sm,
+      #extensions-tabContent #content-yttriggers .collapse select,
+      #extensions-tabContent #content-yttriggers .collapse select.form-select,
+      #extensions-tabContent #content-yttriggers .collapse select.form-select-sm {
+        width: min(100%, 420px) !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        color-scheme: dark;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
 
-    .notabs>.tab-pane {
-      display: block !important;
-      opacity: 1 !important;
-    }
-    .notabs button, .notabs input{
-    color:#fff;
-    background-color:#4c4c4c;
-    border-color:#464546
-    }
+      #extensions-tabContent #content-triggers .collapse select option,
+      #extensions-tabContent #content-yttriggers .collapse select option {
+        color: #f8fafc;
+        background-color: #020617;
+      }
 
-    #close-tab-button {
-      display: none;
-      position: absolute;
-      top: 0%;  /* adjust this to position the button lower or higher */
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 40px;
-      color: rgba(255, 255, 255, 0.9);
-      background-color: rgba(5, 11, 20, 0.9);
-      padding: 10px;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      line-height: 40px;
-      text-align: center;
-      z-index: 9998; /* Ensure it overlays other elements */
-      pointer-events: auto
-    }
-
-    #close-tab-button.hovered {
-      color: rgba(255, 0, 0, 0.9);
-    }
-
-
-    .connected{
-    color:#4ad84a
-    }
-    .disconnected{
-    color:#fb4848
-    }
-
-    .connecting{
-    color:#fbbd48
-    }
+      #extensions-tabContent #content-triggers .collapse select option:checked,
+      #extensions-tabContent #content-yttriggers .collapse select option:checked {
+        color: #ffffff;
+        background-color: #1e40af;
+      }
 
 
 
-    .opacity-90{
-    opacity:0.9
-    }
+      /* Extension table: keep unknown/local-only extensions visually neutral and switch to compact controls earlier. */
+      #extensionTable tbody tr,
+      #extensionTable tbody tr[style] {
+        background-color: transparent !important;
+      }
 
-    @keyframes shake {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      20% { transform: translate(0, 0) rotate(-3deg); }
-      40% { transform: translate(0, 0) rotate(3deg); }
-      60% { transform: translate(0, 0) rotate(-3deg); }
-      80% { transform: translate(0, 0) rotate(3deg); }
-      100% { transform: translate(0, 0) rotate(0deg); }
-    }
+      @media (max-width: 767.98px) {
+        #extensionTable th:nth-child(1),
+        #extensionTable td:nth-child(1) {
+          width: 46% !important;
+        }
 
-    .shaking {
-      animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) infinite both;
-      transform-origin: center center;
-    }
+        #extensionTable th:nth-child(3),
+        #extensionTable td:nth-child(3),
+        #extensionTable th:nth-child(4),
+        #extensionTable td:nth-child(4) {
+          width: 18% !important;
+          text-align: center;
+        }
 
-    #ExtensionsSortName, #ExtensionsSortAuthor, #ExtensionsSortDownload {
-      cursor: pointer;
-    }
-    
+        #extensionTable th.extension-download-header,
+        #extensionTable .extension-download-cell {
+          width: 18% !important;
+          padding-left: 8px !important;
+          padding-right: 8px !important;
+        }
+
+        .extension-download-button {
+          min-width: 32px;
+          padding-left: 8px;
+          padding-right: 8px;
+        }
+      }
+
+      /* Hidden tabs should not leave empty gaps in the nav rows. */
+      #extensions-tab > .nav-item.d-none {
+        display: none !important;
+      }
+
+      #extensions-tab {
+        align-items: flex-end;
+        align-content: flex-start;
+      }
+
+
+      /* Extension table: prevent horizontal scrollbars by switching to compact mode early. */
+      #content-extensions .table-responsive {
+        overflow-x: hidden !important;
+      }
+
+      #extensionTable tbody tr[style] td,
+      #extensionTable tbody tr[style] th {
+        background: rgba(15, 23, 42, 0.62) !important;
+        background-color: rgba(15, 23, 42, 0.62) !important;
+        color: var(--muted) !important;
+      }
+
+      @media (max-width: 1199.98px) {
+        #extensionTable {
+          table-layout: fixed !important;
+          width: 100% !important;
+        }
+
+        #extensionTable th,
+        #extensionTable td {
+          padding-left: 8px !important;
+          padding-right: 8px !important;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        #extensionTable th:nth-child(1),
+        #extensionTable td:nth-child(1) {
+          width: 58% !important;
+        }
+
+        #extensionTable th:nth-child(3),
+        #extensionTable td:nth-child(3),
+        #extensionTable th:nth-child(4),
+        #extensionTable td:nth-child(4) {
+          width: 14% !important;
+          text-align: center;
+          white-space: nowrap;
+        }
+
+        #extensionTable th.extension-download-header,
+        #extensionTable .extension-download-cell {
+          width: 14% !important;
+          text-align: center;
+          white-space: nowrap;
+        }
+
+        .extension-download-button {
+          min-width: 30px !important;
+          width: 30px !important;
+          min-height: 30px !important;
+          padding: 4px 0 !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #extensionTable th,
+        #extensionTable td {
+          padding-left: 6px !important;
+          padding-right: 6px !important;
+          font-size: 0.92em;
+        }
+
+        #extensionTable th:nth-child(1),
+        #extensionTable td:nth-child(1) {
+          width: 55% !important;
+        }
+
+        #extensionTable th:nth-child(3),
+        #extensionTable td:nth-child(3),
+        #extensionTable th:nth-child(4),
+        #extensionTable td:nth-child(4),
+        #extensionTable th.extension-download-header,
+        #extensionTable .extension-download-cell {
+          width: 15% !important;
+        }
+
+        .extension-download-button {
+          min-width: 28px !important;
+          width: 28px !important;
+        }
+      }
+
+
+
+      /* Keep Show Options layout stable while Bootstrap temporarily switches .collapse to .collapsing. */
+      #content-triggers .collapsing,
+      #content-yttriggers .collapsing,
+      #extensions-tabContent #content-triggers .collapsing,
+      #extensions-tabContent #content-yttriggers .collapsing {
+        flex: 0 0 100% !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        padding: 10px 0 0 12px !important;
+        box-sizing: border-box !important;
+        background: transparent !important;
+        border: 0 !important;
+        border-left: 2px solid rgba(147, 197, 253, 0.24) !important;
+        border-radius: 0 !important;
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+      }
+
+      #content-triggers .collapsing .form-group,
+      #content-triggers .collapsing .form-check:not(.form-check-inline),
+      #content-yttriggers .collapsing .form-group,
+      #content-yttriggers .collapsing .form-check:not(.form-check-inline),
+      #extensions-tabContent #content-triggers .collapsing .form-group,
+      #extensions-tabContent #content-triggers .collapsing .form-check:not(.form-check-inline),
+      #extensions-tabContent #content-yttriggers .collapsing .form-group,
+      #extensions-tabContent #content-yttriggers .collapsing .form-check:not(.form-check-inline) {
+        display: block !important;
+        align-items: initial !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        margin-bottom: 15px !important;
+        box-sizing: border-box !important;
+      }
+
+      #content-triggers .collapsing .form-group > label:first-child,
+      #content-triggers .collapsing .form-check:not(.form-check-inline) > label:first-child,
+      #content-yttriggers .collapsing .form-group > label:first-child,
+      #content-yttriggers .collapsing .form-check:not(.form-check-inline) > label:first-child {
+        display: block !important;
+        margin: 0 0 8px 0 !important;
+        padding: 0 !important;
+      }
+
+      #extensions-tabContent #content-triggers .collapsing input.form-control,
+      #extensions-tabContent #content-triggers .collapsing input.form-control-sm,
+      #extensions-tabContent #content-triggers .collapsing textarea.form-control,
+      #extensions-tabContent #content-triggers .collapsing textarea.form-control-sm,
+      #extensions-tabContent #content-triggers .collapsing select.form-select,
+      #extensions-tabContent #content-triggers .collapsing select.form-select-sm,
+      #extensions-tabContent #content-yttriggers .collapsing input.form-control,
+      #extensions-tabContent #content-yttriggers .collapsing input.form-control-sm,
+      #extensions-tabContent #content-yttriggers .collapsing textarea.form-control,
+      #extensions-tabContent #content-yttriggers .collapsing textarea.form-control-sm,
+      #extensions-tabContent #content-yttriggers .collapsing select.form-select,
+      #extensions-tabContent #content-yttriggers .collapsing select.form-select-sm {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        flex: 0 1 auto !important;
+        margin-right: 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      #extensions-tabContent #content-triggers .collapsing select,
+      #extensions-tabContent #content-triggers .collapsing select.form-select,
+      #extensions-tabContent #content-triggers .collapsing select.form-select-sm,
+      #extensions-tabContent #content-yttriggers .collapsing select,
+      #extensions-tabContent #content-yttriggers .collapsing select.form-select,
+      #extensions-tabContent #content-yttriggers .collapsing select.form-select-sm {
+        width: min(100%, 420px) !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        color-scheme: dark;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }

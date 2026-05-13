@@ -3,9 +3,9 @@ async SAMMITestTwitchPoints(form) {
   const channelID = generateName[1];
   const redeemName = form.elements.channelPointsName.value || 'Test Reward';
   const userInput = form.elements.channelPointsInput.checked;
-  const message = userInput
-    ? form.elements.channelPointsMsg.value || SAMMI.generateMessage()
-    : '';
+  const message = userInput ?
+    form.elements.channelPointsMsg.value || SAMMI.generateMessage() :
+    '';
   const cost = parseInt(form.elements.channelPointsCost.value) || 50;
   const rewardId = generateUUID();
   const redeemId = generateUUID();
@@ -25,8 +25,7 @@ async SAMMITestTwitchPoints(form) {
   };
   sendTriggerToSAMMI(
     3,
-    `${pullData.display_name} has redeemed ${redeemName}! [test trigger]`,
-    {
+    `${pullData.display_name} has redeemed ${redeemName}! [test trigger]`, {
       redeemname: redeemName,
       message,
       user_name: pullData.user_name,

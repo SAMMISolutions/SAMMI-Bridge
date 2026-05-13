@@ -1,7 +1,12 @@
 <form id="SAMMITestTwitchFollow" class="SAMMITestTriggers">
-    <div class="form-check ps-0 d-flex align-items-center">
-        <button type="submit" class="btn btn-primary btn-sm me-1">Test Follower</button>
-        <label class="form-check-label me-1">Username:</label>
-        <input type="text" class="form-control form-control-sm w-auto me-2" name="name">
+  <div class="form-check ps-0 d-flex align-items-center">
+    <button type="submit" class="btn btn-primary btn-sm me-1">Follower</button>
+    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidefollow" role="button" aria-expanded="false" aria-controls="hidefollow"></a>
+  </div>
+  <div class="collapse" id="hidefollow" data-bs-parent="#content-triggers">
+    <div class="form-group mb-2">
+      <label>Username:</label>
+      <input type="text" class="form-control form-control-sm w-auto" name="name">
     </div>
+  </div>
 </form>

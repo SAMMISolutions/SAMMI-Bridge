@@ -1,0 +1,20 @@
+<form id="SAMMITestTwitchWatchStreak" class="SAMMITestTriggers">
+  <button type="submit" class="btn btn-primary btn-sm me-1">Watch Streak</button>
+  <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidewatchstreak" role="button" aria-expanded="false" aria-controls="hidewatchstreak"></a>
+  <div class="collapse" id="hidewatchstreak" data-bs-parent="#content-triggers">
+    <div class="form-check ps-0 d-flex align-items-center mb-2">
+      <label class="form-check-label me-1">Username:</label>
+      <input type="text" name="name" class="form-control form-control-sm w-auto me-2">
+    </div>
+
+    <div class="form-check ps-0 d-flex align-items-center mb-2">
+      <label class="form-check-label me-1">Amount:</label>
+      <input type="number" min="1" max="999" name="amount" class="form-control form-control-sm w-auto me-2" value="5">
+    </div>
+
+    <div class="form-check ps-0 d-flex align-items-center mb-2">
+      <label class="form-check-label me-1">Message:</label>
+      <textarea name="message" class="form-control form-control-sm w-75" rows="1">Hello World!</textarea>
+    </div>
+  </div>
+</form>

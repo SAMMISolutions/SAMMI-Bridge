@@ -9,8 +9,7 @@ async SAMMITestTwitchShoutoutReceive(form) {
   };
   sendTriggerToSAMMI(
     37,
-    `Shoutout received from ${pullData.from_display_name}! [test trigger]`,
-    {},
+    `Shoutout received from ${pullData.from_display_name}! [test trigger]`, {},
     pullData,
   );
 }

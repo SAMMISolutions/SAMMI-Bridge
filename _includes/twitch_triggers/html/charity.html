@@ -1,11 +1,17 @@
 <form id="SAMMITestTwitchCharity" class="SAMMITestTriggers">
-   <div class="form-group d-flex align-items-center">
-       <button type="submit" class="btn btn-primary btn-sm me-1">Test Charity</button>
-       <select class="form-select form-select-sm w-auto me-2" aria-label="Type" name="charityType">
+  <div class="form-group d-flex align-items-center">
+    <button type="submit" class="btn btn-primary btn-sm me-1">Charity</button>
+    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidecharity" role="button" aria-expanded="false" aria-controls="hidecharity"></a>
+  </div>
+  <div class="collapse" id="hidecharity" data-bs-parent="#content-triggers">
+    <div class="form-group mb-2">
+      <label>Event:</label>
+      <select class="form-select form-select-sm w-auto me-2" aria-label="Type" name="charityType">
         <option value="start" selected>Started</option>
         <option value="progress">Progressed</option>
         <option value="stop">Stopped</option>
         <option value="donate">Donated</option>
-     </select>
-   </div>
+      </select>
+    </div>
+  </div>
 </form>

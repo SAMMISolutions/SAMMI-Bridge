@@ -7,7 +7,7 @@ async SAMMITestTwitchCharity(form) {
     stop: 2,
     donate: 3,
   }
-  let pullData; 
+  let pullData;
   if (type != "donate") {
     pullData = {
       target_amount: 20000,
@@ -20,12 +20,10 @@ async SAMMITestTwitchCharity(form) {
       id: "dce01786-41cf-04c6-6219-a5ebe15bd3c1",
       charity_logo: "https://abc.cloudfront.net/ppgf/1000/100.png",
       current_amount_currency: "USD",
-      current_amount: type == "start" ?  0 : getRandomInt(0, 15000),
+      current_amount: type == "start" ? 0 : getRandomInt(0, 15000),
       type: typeEnums[type],
     }
-  }
-
-  else {
+  } else {
     const user = generateName();
     pullData = {
       charity_website: "https://sammi.solutions",
@@ -43,11 +41,9 @@ async SAMMITestTwitchCharity(form) {
       type: typeEnums[type],
     }
   }
-
   sendTriggerToSAMMI(
     34,
-    `Charity ${type} event triggered [test trigger].`,
-    {
+    `Charity ${type} event triggered [test trigger].`, {
       type: typeEnums[type],
     },
     pullData,

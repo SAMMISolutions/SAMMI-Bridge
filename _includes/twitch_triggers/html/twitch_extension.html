@@ -1,0 +1,24 @@
+<form id="SAMMITestTwitchExtension" class="SAMMITestTriggers">
+  <div>
+    <button type="submit" class="btn btn-primary btn-sm me-1">Twitch Extension</button>
+    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidetwitchextension" role="button" aria-expanded="false" aria-controls="hidetwitchextension"></a>
+  </div>
+  <div class="collapse" id="hidetwitchextension" data-bs-parent="#content-triggers">
+    <div class="form-group mb-2">
+      <label>Display Name:</label>
+      <input type="text" class="form-control form-control-sm w-auto" name="name">
+    </div>
+    <div class="form-group mb-2">
+      <label>Redemption Name:</label>
+      <input type="text" class="form-control form-control-sm w-auto" name="twitchExtensionRedemptionName">
+    </div>
+    <div class="form-group mb-2">
+      <label>Trigger Name:</label>
+      <input type="text" class="form-control form-control-sm w-auto" name="twitchExtensionTriggerName">
+    </div>
+    <div class="form-group mb-2">
+      <label>Power:</label>
+      <input type="number" class="form-control form-control-sm w-auto" min="0" max="999" name="twitchExtensionAmount" value=100>
+    </div>
+  </div>
+</form>

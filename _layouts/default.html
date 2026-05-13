@@ -1,67 +1,31 @@
 <!--For Extension info, read How to make extensions.txt in Extension folder-->
-<!--Bridge V7.30-->
+<!--Bridge V9.00-->
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <title>SAMMI Bridge</title>
-{% include header/meta.html %}
-{% include header/favicon.html %}
-{% include header/stylesheet.html %}
-  <style>
+  <head>
+    <title>SAMMI Bridge</title>
+    <meta charset="utf-8">
+    <meta name="title" content="SAMMI Bridge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="SAMMI component which allows SAMMI to connect to its extensions.">
+    <meta name="keywords" content="SAMMI, Bridge, Twitch, Stream">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/SAMMISolutions/SAMMI-Bridge/main/favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SAMMISolutions/SAMMI-Bridge@main/lib/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
 {% include style.css %}
-  </style>
-</head>
+</style>
+  </head>
 
-<body>
-  <div class="container">
-    {{ content }}
-  </div>
+  <body>
+    <div class="container">
+{{ content }}    </div>
 
-<script>
-/* eslint-disable */  
-(function() {
-  "use strict";
-{% include core/initDefs.js %}
-{% include functions/functions.js %}
+      {% include bridge_script.html %}
+{% include external_scripts.html %}</body>
 
-window.addEventListener('load', function () {
-// Instantiate SAMMICore and SAMMIUI, and setup socket connection...
-const sammiclient = new SAMMIWebSocket();
-window.sammiclient = sammiclient
-window.lioranboardclient = sammiclient
-const sammiCore = new SAMMICore();
-const sammiUI = new SAMMIUI();
-
-
-// Initialize SAMMIUI
-sammiUI.initModal();
-sammiUI.initTabs();
-populateExtensionTable();
-
-// Get Bridge Version
-getVersionFromHTML();
-
-// Initiate Twitch Test triggers
-SAMMITestTriggers();
-}, false);
-
-// Initiate YouTube Test triggers
-YTLiveTestEvent();
-
-{% include ui/ui.js %}
-{% include core/core.js %}
-{% include tabs/js/extension_updates.js %}
-{% include tabs/js/twitch_triggers.js %}
-{% include tabs/js/youtube_triggers.js %}
-{% include tabs/js/bridge_version.js %}
-{% include tabs/js/message_logging.js %}
-})();
-
-{% include ext_commands.js %}
-{% include ext_hooks.js %}
-{% include ext_scripts.js %}
-</script>
-{% include external_scripts.html %}
-</body>
 </html>

@@ -6,7 +6,6 @@ async SAMMITestTwitchChat(form) {
   const emoteList = '304822798:0-9/304682444:11-19';
   const firstTime = form.elements['chatFirstTime'].checked ? '1' : '0';
   const chatWhisper = form.elements['chatWhisper'].checked
-
   // regular message
   if (!chatWhisper) {
     const badge = [];
@@ -17,21 +16,20 @@ async SAMMITestTwitchChat(form) {
     if (form.elements['chatSub'].checked) {
       const tier = parseInt(form.elements['chatMsgSubTier'].value);
       let month = form.elements['chatMsgSubMonth'].value != 1 ? parseInt(form.elements['chatMsgSubMonth'].value) : 0;
-      month = month > 3 && month < 6
-        ? (month = 3)
-        : month > 6 && month < 9
-          ? (month = 6)
-          : month > 9 && month < 12
-            ? (month = 9)
-            : month;
-      const subBadge = tier === 1
-        ? `subscriber/${month}`
-        : tier === 2
-          ? `subscriber/${2000 + month}`
-          : `subscriber/${3000 + month}`;
+      month = month > 3 && month < 6 ?
+        (month = 3) :
+        month > 6 && month < 9 ?
+        (month = 6) :
+        month > 9 && month < 12 ?
+        (month = 9) :
+        month;
+      const subBadge = tier === 1 ?
+        `subscriber/${month}` :
+        tier === 2 ?
+        `subscriber/${2000 + month}` :
+        `subscriber/${3000 + month}`;
       badge.push(subBadge);
     }
-
     const pullData = {
       user_name: name.toLowerCase(),
       display_name: name,
@@ -79,4 +77,3 @@ async SAMMITestTwitchChat(form) {
     });
   }
 }
-

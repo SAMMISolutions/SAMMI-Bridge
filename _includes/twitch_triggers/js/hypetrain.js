@@ -1,80 +1,77 @@
 async SAMMITestTwitchHypeTrain(form) {
-  const hypeSelect = form.elements['hypeTrainType'];
-  const type = hypeSelect.options[hypeSelect.selectedIndex].text;
-  const currentLevel = parseInt(form.elements['hypeTrainLevel'].value) || 1;
-  const currentGoal = parseInt(form.elements['hypeTrainGoal'].value) || getRandomInt(1000, 2000);
-  const goalProgres = parseInt(form.elements['hypeTrainProgress'].value) || getRandomInt(100, currentGoal - 50);
+  const hypeSelect = form.elements["hypeTrainType"];
+  const typeLabel = hypeSelect.options[hypeSelect.selectedIndex].text; // "Begin" | "Progress" | "End"
+  const eventType = typeLabel.toLowerCase(); // "begin" | "progress" | "end"
+  const currentLevel = parseInt(form.elements["hypeTrainLevel"]?.value, 10) || 1;
+  const goal = parseInt(form.elements["hypeTrainGoal"]?.value, 10) || getRandomInt(500, 2000);
+  const progress = parseInt(form.elements["hypeTrainProgress"]?.value, 10) || getRandomInt(1, Math.max(2, goal - 50));
+  // In EventSub examples, begin/progress commonly have total==progress. End has total but no progress/goal.
+  const total = (typeLabel === "End") ?
+    getRandomInt(Math.max(1, progress), Math.max(2, progress + 500)) :
+    progress;
   const typeNums = {
-    Begin: 1, Progress: 4, End: 6,
+    Begin: 1,
+    Progress: 6,
+    End: 4
   };
-  const typeNum = typeNums[type];
+  const typeNum = typeNums[typeLabel];
   const hypeTrainId = `${getRandomInt(10, 99)}b8f628-5075-4213-95ac-6ceeac9426fe`;
-  const lastContributionUser = generateName();
-  const topBitsContributionUser = generateName(lastContributionUser);
-  const topSubContributionUser = generateName(topBitsContributionUser);
-  const last_contribution = {
-    user_name: lastContributionUser[0].toLowerCase(),
-    user_id: lastContributionUser[1],
-    total: getRandomInt(100, 1000),
-    display_name: lastContributionUser[0],
-    type: getRandomInt(0, 1) === 0 ? 'bits' : 'subscription',
+  const now = Date.now();
+  const startedAt = twitchTimestamp(now - getRandomInt(30, 180) * 1000);
+  // Helpers for contributions (EventSub v2 shape)
+  const makeUser = (avoid = null) => generateName(avoid); // returns [displayName, userId] in your code
+  const bitsUser = makeUser();
+  const subUser = makeUser(bitsUser); // avoid duplicate
+  const top_contributions = [{
+      user_id: bitsUser[1].toString(),
+      user_login: bitsUser[0].toLowerCase(),
+      user_name: bitsUser[0],
+      type: "bits",
+      total: getRandomInt(10, 500),
+    },
+    {
+      user_id: subUser[1].toString(),
+      user_login: subUser[0].toLowerCase(),
+      user_name: subUser[0],
+      type: "subscription",
+      total: getRandomInt(1, 25), // subs count often smaller; tweak if you want
+    },
+  ];
+  // pullData IS the event object directly
+  const pullData = {
+    // required by you
+    event: eventType,
+    // common EventSub fields (and your important values)
+    id: hypeTrainId,
+    broadcaster_user_id: "93566099",
+    broadcaster_user_login: "test_channel",
+    broadcaster_user_name: "Test_Channel",
+    total: total,
+    top_contributions: top_contributions,
+    level: currentLevel,
+    started_at: startedAt,
+    type: "regular",
+  };
+  // Only include fields that exist for each event type
+  if (eventType === "begin" || eventType === "progress") {
+    pullData.progress = progress;
+    pullData.goal = goal;
+    pullData.expires_at = twitchTimestamp(now + 60 * 1000);
   }
-  const top_subscription_contribution = {
-    user_name: topSubContributionUser[0].toLowerCase(),
-    user_id: topSubContributionUser[1],
-    total: getRandomInt(100, 1000),
-    display_name: topSubContributionUser[0],
-
+  if (eventType === "end") {
+    pullData.ended_at = twitchTimestamp(now);
+    pullData.cooldown_ends_at = twitchTimestamp(now + 60 * 60 * 1000);
   }
-  const top_bits_contribution = {
-    user_name: topBitsContributionUser[0].toLowerCase(),
-    user_id: topBitsContributionUser[1],
-    total: getRandomInt(100, 1000),
-    display_name: topBitsContributionUser[0],
+  // Begin-only fields
+  if (eventType === "begin") {
+    pullData.all_time_high_level = Math.max(currentLevel, getRandomInt(currentLevel, currentLevel + 3));
+    pullData.all_time_high_total = Math.max(total, getRandomInt(total, total + 3000));
   }
-
-  let pullData;
-
-  if (type == "Begin" || type == "Progress") {
-    pullData = {
-      id: hypeTrainId,
-      current_goal: currentGoal,
-      goal_progress: goalProgres,
-      total_progress: goalProgres,
-      expires_at: twitchTimestamp(Date.now() + 1000 * 60 * 60),
-      from_channel_id: 93566099,
-      event: type.toLowerCase(),
-      top_other_contribution: {},
-      goal_progress: goalProgres,
-      current_goal: currentGoal,
-      last_contribution: last_contribution,
-      current_level: currentLevel,
-      top_subscription_contribution: top_subscription_contribution,
-      top_bits_contribution: top_bits_contribution,
-    };
-  }
-  // End
-  else {
-    pullData = {
-      total_progress: goalProgres,
-      cooldown_ends_at: twitchTimestamp(Date.now() + 1000 * 60 * 60),
-      top_other_contribution: {},
-      ended_at: twitchTimestamp(Date.now()),
-      id: hypeTrainId,
-      last_contribution: last_contribution,
-      current_level: currentLevel,
-      top_subscription_contribution: top_subscription_contribution,
-      top_bits_contribution: top_bits_contribution,
-    }
-  }
-
-  pullData.event = type.toLowerCase();
-  pullData.type = typeNum;
-
   sendTriggerToSAMMI(
     17,
-    `Hype Train ${type} [test trigger] fired!`,
-    { type: typeNum },
-    pullData,
+    `Hype Train ${typeLabel} [test trigger] fired!`, {
+      type: typeNum
+    },
+    pullData
   );
 }

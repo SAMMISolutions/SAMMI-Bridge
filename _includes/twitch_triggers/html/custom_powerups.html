@@ -1,0 +1,24 @@
+<form id="SAMMITestTwitchCustomPowerUps" class="SAMMITestTriggers">
+  <div>
+    <button type="submit" class="btn btn-primary btn-sm me-1">Custom Power-Up</button>
+    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidecustompowerups" role="button" aria-expanded="false" aria-controls="hidecustompowerups"></a>
+  </div>
+  <div class="collapse" id="hidecustompowerups" data-bs-parent="#content-triggers">
+    <div class="form-group mb-2">
+      <label>Username:</label>
+      <input type="text" class="form-control form-control-sm w-auto" name="name">
+    </div>
+    <div class="form-group mb-2">
+      <label>Power-Up Name:</label>
+      <input type="text" class="form-control form-control-sm w-auto mb-1" name="customPowerUpName">
+    </div>
+    <div class="form-group mb-2">
+      <label>Bits Value:</label>
+      <input type="number" class="form-control form-control-sm w-auto" min="1" max="100000" name="customPowerUpBits" value=10>
+    </div>
+    <div class="form-group mb-2">
+      <label>Message:</label>
+      <textarea class="form-control form-control-sm w-75" rows="1" name="customPowerUpMessage"></textarea>
+    </div>
+  </div>
+</form>

@@ -7,8 +7,7 @@ async SAMMITestTwitchFollow(form) {
   };
   sendTriggerToSAMMI(
     6,
-    `${pullData.display_name} followed you! [test trigger]`,
-    {},
+    `${pullData.display_name} followed you! [test trigger]`, {},
     pullData,
   );
 }

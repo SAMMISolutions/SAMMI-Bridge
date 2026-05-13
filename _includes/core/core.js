@@ -78,6 +78,10 @@ class SAMMICore {
     document.getElementById(`${id}_circle`).setAttribute('fill', fill);
   }
 
+  reloadBridgeFresh() {
+    window.SAMMIRefreshBridge();
+  }
+
   checkConnection() {
     if (sammiclient._connected) return;
     const errorMessage = sammiclient._socket.readyState == 0 ? 'No response, attempting to reconnect.' : 'Connection error. Attempting to reconnect.';
@@ -220,7 +224,7 @@ class SAMMICore {
 
     // RELOAD SAMMI Bridge
     sammiclient.on('ResetPlease', () => {
-      window.location.reload();
+      this.reloadBridgeFresh();
     });
 
     // PING SAMMI Bridge
