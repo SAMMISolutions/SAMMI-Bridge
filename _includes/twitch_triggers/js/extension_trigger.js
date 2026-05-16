@@ -1,7 +1,17 @@
 SAMMITestExtensionTrigger(form) {
+  const defaultPayload = {
+    String: 'Test',
+    Number: 5,
+    Array: [1, 2, 3],
+    Object: {
+      String: 'Test',
+      Number: 1,
+    },
+  };
   let payload;
   try {
-    payload = JSON.parse(form.elements.extensionTriggerPayload.value || '{}');
+    const payloadText = form.elements.extensionTriggerPayload.value.trim() || JSON.stringify(defaultPayload, null, 2);
+    payload = JSON.parse(payloadText);
   } catch (error) {
     SAMMI.alert(`Extension Trigger payload is not valid JSON: ${error.message}`);
     return;
@@ -10,7 +20,8 @@ SAMMITestExtensionTrigger(form) {
     SAMMI.alert('Extension Trigger payload must be a JSON object.');
     return;
   }
-  const triggerName = payload.trigger_name || payload.trigger || payload.name || 'Extension Trigger';
+  const triggerNameInput = (form.elements.extensionTriggerName.value || '').trim();
+  const triggerName = triggerNameInput || payload.trigger_name || payload.trigger || payload.name || 'Extension Trigger';
   const pullData = Object.assign({}, payload, {
     trigger_name: triggerName,
     trigger_type: 12,

@@ -594,8 +594,20 @@ layout: default
           </div>
           <div class="collapse" id="hideextensiontrigger" data-bs-parent="#content-triggers">
             <div class="form-group mb-2">
+              <label>Trigger Name:</label>
+              <input type="text" class="form-control form-control-sm" name="extensionTriggerName" placeholder="Extension Trigger">
+            </div>
+            <div class="form-group mb-2">
               <label>Payload JSON:</label>
-              <textarea class="form-control form-control-sm" rows="5" name="extensionTriggerPayload">{}</textarea>
+              <textarea class="form-control form-control-sm" rows="8" name="extensionTriggerPayload" placeholder='{
+  "String": "Test",
+  "Number": 5,
+  "Array": [1, 2, 3],
+  "Object": {
+    "String": "Test",
+    "Number": 1
+  }
+}'></textarea>
             </div>
           </div>
         </form>
