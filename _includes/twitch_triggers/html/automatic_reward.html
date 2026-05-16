@@ -1,0 +1,38 @@
+<form id="SAMMITestTwitchAutomaticReward" class="SAMMITestTriggers">
+  <div>
+    <button type="submit" class="btn btn-primary btn-sm me-1">Automatic Reward Redemption</button>
+    <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hideautomaticreward" role="button" aria-expanded="false" aria-controls="hideautomaticreward"></a>
+  </div>
+  <div class="collapse" id="hideautomaticreward" data-bs-parent="#content-triggers">
+    <div class="form-group mb-2">
+      <label>Username:</label>
+      <input type="text" class="form-control form-control-sm w-auto" name="name">
+    </div>
+    <div class="form-group mb-2">
+      <label>Reward Type:</label>
+      <select class="form-select form-select-sm w-auto" name="automaticRewardType">
+        <option value="send_highlighted_message" selected>Highlight my Message</option>
+        <option value="single_message_bypass_sub_mode">Send a Message in Sub-Only Mode</option>
+        <option value="random_sub_emote_unlock">Unlock a Random Sub Emote</option>
+        <option value="chosen_sub_emote_unlock">Choose an Emote to Unlock</option>
+        <option value="chosen_modified_sub_emote_unlock">Modify a Single Emote</option>
+      </select>
+    </div>
+    <div class="form-group mb-2">
+      <label>Reward Cost:</label>
+      <input type="number" class="form-control form-control-sm w-auto" min="1" max="999999" name="automaticRewardCost" value=100>
+    </div>
+    <div class="form-group mb-2">
+      <label>Message:</label>
+      <textarea class="form-control form-control-sm w-75" rows="1" name="automaticRewardMessage"></textarea>
+    </div>
+    <div class="form-group mb-2">
+      <label>Emote ID:</label>
+      <input type="text" class="form-control form-control-sm w-auto" name="automaticRewardEmoteId">
+    </div>
+    <div class="form-group mb-2">
+      <label>Emote Name:</label>
+      <input type="text" class="form-control form-control-sm w-auto" name="automaticRewardEmoteName">
+    </div>
+  </div>
+</form>

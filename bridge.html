@@ -144,26 +144,35 @@ layout: default
             </div>
             <div class="form-check ps-0 d-flex align-items-center mb-2">
               <label class="form-check-label me-1">Message:</label>
-              <textarea class="form-control form-control-sm" name="chatMsg">Hello World</textarea>
-            </div>
-            <input type="checkbox" class="form-check-input" name="chatWhisper"> Whisper<br>
-            <input type="checkbox" class="form-check-input" name="chatFirstTime"> 1st Message<br>
-            <input type="checkbox" class="form-check-input" name="chatBroadcaster"> Broadcaster<br>
-            <input type="checkbox" class="form-check-input" name="chatMod"> Mod<br>
-            <input type="checkbox" class="form-check-input" name="chatSub"> Subscriber<br>
-            <input type="checkbox" class="form-check-input" name="chatVip"> VIP<br>
-            <input type="checkbox" class="form-check-input" name="chatFounder"> Founder<br><br>
-            <div class="form-group mb-2">
-              <label>Subscriber Tier:</label>
-              <select name="chatMsgSubTier" class="form-select form-select-sm">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
+              <textarea class="form-control form-control-sm" name="chatMsg"></textarea>
             </div>
             <div class="form-group mb-2">
-              <label>Month:</label>
-              <input type="number" class="form-control form-control-sm" min=0 max=12 maxlength="2" oninput="javascript: if (parseInt(this.value) > parseInt(this.max)) this.value = this.max;" name="chatMsgSubMonth" value=1>
+              <label>Message Options:</label>
+              <input type="checkbox" class="form-check-input" name="chatFirstTime"> 1st Message<br>
+              <input type="checkbox" class="form-check-input" name="chatBroadcaster"> Broadcaster<br>
+              <input type="checkbox" class="form-check-input" name="chatLeadModerator"> Lead Moderator<br>
+              <input type="checkbox" class="form-check-input" name="chatMod"> Moderator<br>
+              <input type="checkbox" class="form-check-input" name="chatSub"> Subscriber<br>
+              <input type="checkbox" class="form-check-input" name="chatVip"> VIP<br>
+              <input type="checkbox" class="form-check-input" name="chatFounder"> Founder<br>
+              <input type="checkbox" class="form-check-input" name="chatOwnChat" checked> Is Own Chat<br>
+              <input type="checkbox" class="form-check-input" name="chatTurbo"> Turbo
+            </div>
+          </div>
+        </form>
+          <form id="SAMMITestTwitchWhisper" class="SAMMITestTriggers">
+          <div>
+            <button type="submit" class="btn btn-primary btn-sm me-1">Whisper</button>
+            <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hidewhisper" role="button" aria-expanded="false" aria-controls="hidewhisper"></a>
+          </div>
+          <div class="collapse" id="hidewhisper" data-bs-parent="#content-triggers">
+            <div class="form-group mb-2">
+              <label>Username:</label>
+              <input type="text" class="form-control form-control-sm" name="name">
+            </div>
+            <div class="form-group mb-2">
+              <label>Message:</label>
+              <textarea class="form-control form-control-sm" rows="1" name="whisperMessage"></textarea>
             </div>
           </div>
         </form>
@@ -384,6 +393,44 @@ layout: default
             </div>
           </div>
         </form>
+          <form id="SAMMITestTwitchAutomaticReward" class="SAMMITestTriggers">
+          <div>
+            <button type="submit" class="btn btn-primary btn-sm me-1">Automatic Reward Redemption</button>
+            <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hideautomaticreward" role="button" aria-expanded="false" aria-controls="hideautomaticreward"></a>
+          </div>
+          <div class="collapse" id="hideautomaticreward" data-bs-parent="#content-triggers">
+            <div class="form-group mb-2">
+              <label>Username:</label>
+              <input type="text" class="form-control form-control-sm" name="name">
+            </div>
+            <div class="form-group mb-2">
+              <label>Reward Type:</label>
+              <select class="form-select form-select-sm" name="automaticRewardType">
+                <option value="send_highlighted_message" selected>Highlight my Message</option>
+                <option value="single_message_bypass_sub_mode">Send a Message in Sub-Only Mode</option>
+                <option value="random_sub_emote_unlock">Unlock a Random Sub Emote</option>
+                <option value="chosen_sub_emote_unlock">Choose an Emote to Unlock</option>
+                <option value="chosen_modified_sub_emote_unlock">Modify a Single Emote</option>
+              </select>
+            </div>
+            <div class="form-group mb-2">
+              <label>Reward Cost:</label>
+              <input type="number" class="form-control form-control-sm" min="1" max="999999" name="automaticRewardCost" value=100>
+            </div>
+            <div class="form-group mb-2">
+              <label>Message:</label>
+              <textarea class="form-control form-control-sm" rows="1" name="automaticRewardMessage"></textarea>
+            </div>
+            <div class="form-group mb-2">
+              <label>Emote ID:</label>
+              <input type="text" class="form-control form-control-sm" name="automaticRewardEmoteId">
+            </div>
+            <div class="form-group mb-2">
+              <label>Emote Name:</label>
+              <input type="text" class="form-control form-control-sm" name="automaticRewardEmoteName">
+            </div>
+          </div>
+        </form>
           <form id="SAMMITestTwitchPoints" class="SAMMITestTriggers">
           <div>
             <button type="submit" class="btn btn-primary btn-sm me-1">Channel Point Redemption</button>
@@ -454,11 +501,12 @@ layout: default
                 <option value="progress">Voted</option>
                 <option value="end">Locked</option>
                 <option value="archive">Resolved</option>
+                <option value="cancel">Canceled</option>
               </select>
             </div>
             <div class="form-group mb-2">
               <label>Outcome amount:</label>
-              <input type="number" class="form-control form-control-sm" min="2" max="10" name="predictChoiceAmount" value=3>
+              <input type="number" class="form-control form-control-sm" min="2" max="5" name="predictChoiceAmount" value=3>
             </div>
             <div class="form-group mb-2">
               <label>Duration:</label>
@@ -536,6 +584,18 @@ layout: default
                 <option value="stop">Stopped</option>
                 <option value="donate">Donated</option>
               </select>
+            </div>
+          </div>
+        </form>
+          <form id="SAMMITestExtensionTrigger" class="SAMMITestTriggers">
+          <div>
+            <button type="submit" class="btn btn-primary btn-sm me-1">Extension Trigger</button>
+            <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hideextensiontrigger" role="button" aria-expanded="false" aria-controls="hideextensiontrigger"></a>
+          </div>
+          <div class="collapse" id="hideextensiontrigger" data-bs-parent="#content-triggers">
+            <div class="form-group mb-2">
+              <label>Payload JSON:</label>
+              <textarea class="form-control form-control-sm" rows="5" name="extensionTriggerPayload">{}</textarea>
             </div>
           </div>
         </form>
@@ -679,4 +739,3 @@ layout: default
               class="btn btn-primary btn-sm me-1">Reset Tab Order</button> <button onclick="SAMMIRefreshBridge()"
               class="btn btn-primary btn-sm me-1">Refresh</button></span>
         </div>
-  

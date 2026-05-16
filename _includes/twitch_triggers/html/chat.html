@@ -10,22 +10,46 @@
     </div>
     <div class="form-check ps-0 d-flex align-items-center mb-2">
       <label class="form-check-label me-1">Message:</label>
-      <textarea class="form-control form-control-sm w-75" name="chatMsg">Hello World</textarea>
+      <textarea class="form-control form-control-sm w-75" name="chatMsg"></textarea>
     </div>
-    <input type="checkbox" class="form-check-input" name="chatWhisper"> Whisper
-    <input type="checkbox" class="form-check-input" name="chatFirstTime"> 1st Message
-    <br>
-    <input type="checkbox" class="form-check-input" name="chatBroadcaster"> Broadcaster
-    <input type="checkbox" class="form-check-input" name="chatMod"> Mod
-    <input type="checkbox" class="form-check-input" name="chatSub"> Subscriber
-    <input type="checkbox" class="form-check-input" name="chatVip"> VIP
-    <input type="checkbox" class="form-check-input" name="chatFounder"> Founder <br>
-    Subscriber Tier:
-    <select name="chatMsgSubTier">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-    </select>
-    Month: <input type="number" min=0 max=12 maxlength="2" oninput="javascript: if (parseInt(this.value) > parseInt(this.max)) this.value = this.max;" name="chatMsgSubMonth" value=1>
+    <div class="form-group mb-2">
+      <label class="d-block">Message Options:</label>
+      <div class="form-check form-check-inline">
+        <input type="checkbox" class="form-check-input" name="chatFirstTime">
+        <label class="form-check-label">1st Message</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="checkbox" class="form-check-input" name="chatBroadcaster">
+        <label class="form-check-label">Broadcaster</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="checkbox" class="form-check-input" name="chatLeadModerator">
+        <label class="form-check-label">Lead Moderator</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="checkbox" class="form-check-input" name="chatMod">
+        <label class="form-check-label">Moderator</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="checkbox" class="form-check-input" name="chatSub">
+        <label class="form-check-label">Subscriber</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="checkbox" class="form-check-input" name="chatVip">
+        <label class="form-check-label">VIP</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="checkbox" class="form-check-input" name="chatFounder">
+        <label class="form-check-label">Founder</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="checkbox" class="form-check-input" name="chatOwnChat" checked>
+        <label class="form-check-label">Is Own Chat</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="checkbox" class="form-check-input" name="chatTurbo">
+        <label class="form-check-label">Turbo</label>
+      </div>
+    </div>
   </div>
 </form>

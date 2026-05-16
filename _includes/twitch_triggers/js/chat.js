@@ -1,79 +1,75 @@
 async SAMMITestTwitchChat(form) {
   const [name, userID] = await getNameFromInput(form.elements['name']);
   const message = form.elements['chatMsg'].value || SAMMI.generateMessage();
-  const channel = Math.floor(Math.random() * 1000000000).toString();
-  const color = '189A8D';
-  const emoteList = '304822798:0-9/304682444:11-19';
+  const channelId = window.defaultTwitchUser.user_id;
+  const channel = window.defaultTwitchUser.login;
+  const color = '008000';
+  const messageId = generateUUID();
   const firstTime = form.elements['chatFirstTime'].checked ? '1' : '0';
-  const chatWhisper = form.elements['chatWhisper'].checked
-  // regular message
-  if (!chatWhisper) {
-    const badge = [];
-    if (form.elements['chatBroadcaster'].checked) badge.push('broadcaster/1');
-    if (form.elements['chatMod'].checked) badge.push('moderator/1');
-    if (form.elements['chatVip'].checked) badge.push('vip/1');
-    if (form.elements['chatFounder'].checked) badge.push('founder/1');
-    if (form.elements['chatSub'].checked) {
-      const tier = parseInt(form.elements['chatMsgSubTier'].value);
-      let month = form.elements['chatMsgSubMonth'].value != 1 ? parseInt(form.elements['chatMsgSubMonth'].value) : 0;
-      month = month > 3 && month < 6 ?
-        (month = 3) :
-        month > 6 && month < 9 ?
-        (month = 6) :
-        month > 9 && month < 12 ?
-        (month = 9) :
-        month;
-      const subBadge = tier === 1 ?
-        `subscriber/${month}` :
-        tier === 2 ?
-        `subscriber/${2000 + month}` :
-        `subscriber/${3000 + month}`;
-      badge.push(subBadge);
-    }
-    const pullData = {
-      user_name: name.toLowerCase(),
-      display_name: name,
-      user_id: userID,
-      message,
-      emote_list: emoteList,
-      badge_list: badge.join(','),
-      channel,
-      name_color: color,
-      first_time: firstTime,
-      from_channel_id: 123456789,
-      custom_redeem_id: ""
-    };
-    SAMMI.trigger(0, {
-      message,
-      user_name: name.toLowerCase(),
-      broadcaster: form.elements['chatBroadcaster'].checked,
-      moderator: form.elements['chatMod'].checked,
-      sub: form.elements['chatSub'].checked,
-      vip: form.elements['chatVip'].checked,
-      founder: form.elements['chatFounder'].checked,
-      trigger_data: pullData,
-    });
-  }
-  // whisper
-  else {
-    const pullData = {
-      sender_user_name: name.toLowerCase(),
-      sender_display_name: name,
-      sender_user_id: userID,
-      sender_color: "#000000",
-      recipient_user_name: window.defaultTwitchUser.login,
-      recipient_display_name: window.defaultTwitchUser.display_name,
-      recipient_user_id: window.defaultTwitchUser.user_id,
-      recipient_color: "#000000",
-      badge_list: [],
-      emote_list: [],
-      message,
-      sent: 0
-    };
-    SAMMI.trigger(13, {
-      message,
-      sent: 0,
-      trigger_data: pullData,
-    });
-  }
+  const isBroadcaster = form.elements['chatBroadcaster'].checked ? 1 : 0;
+  const isLeadModerator = form.elements['chatLeadModerator'].checked ? 1 : 0;
+  const isModerator = form.elements['chatMod'].checked || isLeadModerator ? 1 : 0;
+  const isSubscriber = form.elements['chatSub'].checked ? 1 : 0;
+  const isVip = form.elements['chatVip'].checked ? 1 : 0;
+  const isFounder = form.elements['chatFounder'].checked ? 1 : 0;
+  const isOwnChat = form.elements['chatOwnChat'].checked ? 1 : 0;
+  const isTurbo = form.elements['chatTurbo'].checked ? 1 : 0;
+  const badges = [];
+  if (isBroadcaster) badges.push('broadcaster/1');
+  if (isLeadModerator) badges.push('lead_moderator/1');
+  if (isModerator && !isLeadModerator) badges.push('moderator/1');
+  if (isSubscriber) badges.push('subscriber/6');
+  if (isVip) badges.push('vip/1');
+  if (isFounder) badges.push('founder/1');
+  if (isTurbo) badges.push('turbo/1');
+  const badgeList = badges.join(',');
+  const pullData = {
+    source_room_id: '',
+    reply_parent_display_name: '',
+    is_vip: isVip,
+    reply_parent_user_login: '',
+    reply_parent_user_id: '',
+    user_name: name.toLowerCase(),
+    is_subscriber: isSubscriber,
+    is_lead_moderator: isLeadModerator,
+    reply_thread_parent_msg_id: '',
+    from_channel_id: Number(channelId),
+    name_color: color,
+    user_id: userID,
+    room_id: channelId,
+    is_mod: isModerator,
+    message,
+    source_badges: '',
+    unix_timestamp: Date.now().toString(),
+    reply_parent_msg_body: '',
+    first_time: firstTime,
+    reply_parent_msg_id: '',
+    source_badge_info: '',
+    emote_list: '',
+    is_founder: isFounder,
+    is_broadcaster: isBroadcaster,
+    source_id: '',
+    is_own_chat: isOwnChat,
+    reply_thread_parent_user_login: '',
+    bits: '',
+    channel,
+    display_name: name,
+    message_id: messageId,
+    is_turbo: isTurbo,
+    custom_reward_id: '',
+    trigger_type: 0,
+    badge_list: badgeList,
+  };
+  SAMMI.trigger(0, {
+    message,
+    user_name: pullData.user_name,
+    broadcaster: isBroadcaster,
+    moderator: isModerator,
+    lead_moderator: isLeadModerator,
+    sub: isSubscriber,
+    vip: isVip,
+    founder: isFounder,
+    is_own_chat: isOwnChat,
+    trigger_data: pullData,
+  });
 }

@@ -1,5 +1,5 @@
 function populateWithOutcomeInfo(obj, amount, type) {
-              const voteTotal = (type !== 'Created') ? getRandomInt(amount, amount * 50) : 0;
+              const voteTotal = (type !== 'Created' && type !== 'Canceled') ? getRandomInt(amount, amount * 50) : 0;
               // split total votes into parts for each outcome
               const outcomeVotesSplit = [...splitNParts(voteTotal, amount)];
               // create all outcome objects
@@ -8,9 +8,9 @@ function populateWithOutcomeInfo(obj, amount, type) {
                 // total users are less or equal total votes
                 const total_user = total_points !== 0 ? getRandomInt(Math.ceil(total_points / 10), total_points) : 0;
                 // avoid having NaN if 0
-                const percentage = total_points !== 0 ? parseInt((total_points / voteTotal) * 100) : 0;
+                const percentage = total_points !== 0 ? parseInt((total_points / voteTotal) * 100) : type === 'Canceled' ? 'nan' : 0;
                 let top_predictors = [];
-                if (type != 'Created' && total_points > 0) {
+                if (type != 'Created' && type !== 'Canceled' && total_points > 0) {
                   let total_channel_points_used = 0;
                   for (let userCount = 0; userCount < total_user; userCount++) {
                     const username = generateName();
@@ -32,11 +32,12 @@ function populateWithOutcomeInfo(obj, amount, type) {
                   total_user,
                   id: `e960f614-d379-494a-8b45-0c7500978${i}ea`,
                   name: `Test Choice ${i + 1}`,
-                  color: 'blue',
+                  color: i % 2 === 0 ? 'blue' : 'pink',
                   top_predictors: top_predictors
                 };
                 obj[`outcome_${i + 1}_info`] = outcome;
               }
               obj.vote_total = voteTotal;
+              obj.vote_total_points = voteTotal;
               return obj;
             }
