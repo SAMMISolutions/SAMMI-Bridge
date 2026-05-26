@@ -35,6 +35,7 @@
             force_close: false,
             force_open: false,
             box_newline: 0,
+            box_normal_bottom: 1,
             box_checkbox: 2,
             box_obs_scenes: 4,
             box_obs_sources: 5,
@@ -42,22 +43,48 @@
             box_keyboard: 7,
             box_compare: 8,
             box_math: 9,
+            box_sound: 10,
             cbox_sound: 10,
             box_slider: 11,
+            box_extension: 12,
+            box_variable_bottom: 13,
             box_normal: 14,
+            box_normal_top: 14,
             box_variable: 15,
+            box_variable_top: 15,
+            box_smooth_type: 16,
             box_color: 17,
             box_selectvalue: 18,
             box_selectstring: 19,
             box_selectstringwritable: 20,
+            box_triggerpull: 21,
             box_loadfile: 22,
             box_imagefile: 23,
             box_twitch_reward: 24,
+            box_redeemid: 24,
+            box_commands: 25,
+            box_youtube_category: 26,
+            box_youtube_account: 27,
+            box_sourcesettings: 28,
+            box_filtersettings: 29,
             box_nobox: 30,
+            box_nothing: 30,
+            box_obs_requests: 31,
             box_obs_pull: 32,
             box_select_deck: 33,
+            box_decks: 33,
             box_password: 34,
             box_twitch_account: 35,
+            box_source_change_settings_request: 36,
+            box_save_variable: 37,
+            box_aitum_requests: 38,
+            box_loadfolder: 39,
+            box_meld_scene: 40,
+            box_meld_track: 41,
+            box_meld_layer: 42,
+            box_meld_effect: 43,
+            box_meld_item: 44,
+            box_meld_pull: 45,
           };
           window.SAMMIVars = SAMMIVars;
           const LBVars = SAMMIVars;
@@ -119,8 +146,9 @@
                * @param {string} name - name of the extension command
                * @param {string} color - box color, accepts hex/dec colors (include # for hex), default 3355443
                * @param {string} height - height of the box in pixels, 52 for regular or 80 for resizable box, default 52
-               * @param {Object} boxes
+               * @param {Object|number[]} boxes
                * - one object per box, key = boxVariable, value = array of box params
+               * - or an optional row units array, for example `[3, 5, 2]`, followed by row heights and boxes
                * - boxVariable = variable to save the box value under
                * - boxName = name of the box shown in the user interface
                * - boxType = type of the box, 0 = resizable, 2 = checkbox (true/false), 14 = regular box, 15 = variable box, 18 = select box, see extension guide for more
@@ -130,8 +158,26 @@
                * @param {[boxName: string, boxType: number, defaultValue: (string | number), sizeModifier: (number|undefined), selectOptions: Array|undefined]} boxes.boxVariable
                * */
               async extCommand(name = '', color = 3355443, height = 52, boxes = {}, triggerButton = false, hidden = false) {
-                const ext = new SammiConstructExtCommand(name, color, height, triggerButton, hidden);
-                for (const [key, value] of Object.entries(boxes)) {
+                let rowUnits;
+                let rowHeights;
+                let commandBoxes = boxes || {};
+                let sendAsExtensionTrigger = triggerButton;
+                let hideCommand = hidden;
+                if (Array.isArray(boxes)) {
+                  rowUnits = boxes;
+                  if (Array.isArray(triggerButton)) {
+                    rowHeights = triggerButton;
+                    commandBoxes = arguments[5] || {};
+                    sendAsExtensionTrigger = arguments[6] || false;
+                    hideCommand = arguments[7] || false;
+                  } else {
+                    commandBoxes = triggerButton || {};
+                    sendAsExtensionTrigger = arguments[5] || false;
+                    hideCommand = arguments[6] || false;
+                  }
+                }
+                const ext = new SammiConstructExtCommand(name, color, height, sendAsExtensionTrigger, hideCommand, rowUnits, rowHeights);
+                for (const [key, value] of Object.entries(commandBoxes)) {
                   ext.addBox(key, value);
                 }
                 return sendToSAMMI('SendExtensionCommands', {
@@ -155,7 +201,9 @@
               },
               /**
                * Request an array of all decks
-               * - Replies with an array ["Deck1 Name","Unique ID",crc32,"Deck2 Name","Unique ID",crc32,...]
+               * - Replies with deck objects containing deckName, deckId, crc, status, and buttons
+               * - status is a number: 1.0 enabled, 0.0 disabled
+               * - button payloads include id, group_id, text, queueable, border, border_color, font_color, and font_shadow
                * - Use crc32 value to verify deck you saved localy is the same
                */
               async getDeckList() {
@@ -227,9 +275,20 @@
               /**
                * Sends a trigger
                * @param {number} type - type of trigger
-               * - trigger types: 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem
-               * 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey
-               * 8 Timer, 9 OBS Trigger, 10 SAMMI Bridge, 11 twitch moderation, 12 extension trigger
+               * - trigger types: 0 Twitch Chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch Redeem,
+               * 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey, 8 Timer,
+               * 9 OBS Trigger, 10 SAMMI Trigger, 11 Twitch Moderation, 12 Extension Trigger,
+               * 13 Twitch Whisper, 14 Twitch Host (deprecated), 15 Twitch Prediction,
+               * 16 Twitch Poll, 17 Twitch Hype Train, 18 YouTube Chat, 19 YouTube Subscriber,
+               * 20 YouTube Super Chat, 21 YouTube Super Sticker, 22 YouTube Member,
+               * 23 Deck App, 24 Trigger Button, 25 Trigger Button Delay, 26 Webhook,
+               * 27 Twitch Low Trust, 28 Twitch Shoutout, 29 SAMMI Voice, 30 Crowd Control,
+               * 31 Voicemod, 32 Pulsoid, 33 Twitch Ad Break, 34 Twitch Charity,
+               * 35 Twitch Announcement, 36 Twitch Guest Star, 37 Twitch Shoutout Received,
+               * 38 Twitch Stream, 39 Elgato Stream Deck, 40 Twitch Automatic Reward,
+               * 41 Twitch Channel Update, 42 Gamepad, 43 Twitch Watch Streak,
+               * 44 Twitch Default Power-Ups, 45 Twitch Custom EventSub, 46 Twitch EventSub Status,
+               * 47 Twitch Combo, 48 Twitch Extension, 49 Twitch Custom Power-Ups, 50 Meld Trigger
                * @param {object} data - whatever data is required for the trigger, see manual
                */
               async trigger(type = -1, data = {
@@ -243,9 +302,7 @@
               /**
                * Sends a test trigger that will automatically include channel ID for from_channel_id pull value
                * @param {number} type - type of trigger
-               * - trigger types: 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem
-               * 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey
-               * 8 Timer, 9 OBS Trigger, 10 SAMMI Bridge, 11 twitch moderation, 12 extension trigger
+               * - see SAMMI.trigger for the full trigger type list
                * @param {object} data - whatever data is required for the trigger, see manual
                */
               async testTrigger(type, data) {
@@ -275,21 +332,31 @@
               /**
                * Modifies a button
                * @param {string} id - button ID to modify
-               * @param {number|undefined} color - decimal button color (BGR)
+               * @param {number|Object|undefined} color - decimal button color (BGR), or a modification object
                * @param {string|undefined} text - button text
                * @param {string|undefined} image - button image file name
-               * @param {number|undefined} border - border size, 0-7
+               * @param {number|undefined} border - border size, 0-8
+               * @param {number|undefined} fontColor - decimal font color (BGR)
+               * @param {number|undefined} borderColor - decimal border color (BGR)
+               * @param {boolean|undefined} fontShadow - show font shadow
                * - leave parameters empty to reset button back to default values
                */
-              async modifyButton(id, color, text = '', image, border) {
+              async modifyButton(id, color, text, image, border, fontColor, borderColor, fontShadow) {
+                const data = {};
+                if (color && typeof color === 'object' && !Array.isArray(color)) {
+                  Object.assign(data, color);
+                } else {
+                  if (color !== undefined) data.color = color;
+                  if (text !== undefined) data.text = text;
+                  if (image !== undefined) data.image = image;
+                  if (border !== undefined) data.border = border;
+                  if (fontColor !== undefined) data.font_color = fontColor;
+                  if (borderColor !== undefined) data.border_color = borderColor;
+                  if (fontShadow !== undefined) data.font_shadow = fontShadow;
+                }
                 return sendToSAMMI('ModifyButton', {
                   ButtonId: id,
-                  Data: {
-                    color: color || undefined,
-                    text: text || undefined,
-                    image: image || undefined,
-                    border: border || undefined,
-                  },
+                  Data: data,
                 });
               },
               /**
@@ -451,13 +518,15 @@
               return res;
             } // construct extension command object
             class SammiConstructExtCommand {
-              constructor(name, color, height, triggerButton = false, hidden = false) {
+              constructor(name, color, height, triggerButton = false, hidden = false, rowUnits = undefined, rowHeights = undefined) {
                 let p = 0;
                 this.name = name;
                 this.color = color;
                 this.height = height;
                 this.triggerButton = triggerButton;
                 this.hidden = hidden;
+                if (Array.isArray(rowUnits)) this.row_units = rowUnits;
+                if (Array.isArray(rowHeights)) this.row_heights = rowHeights;
                 this.addBox = (boxVar, params) => {
                   this[`ud_t${p}`] = boxVar;
                   this[`ud_n${p}`] = params[0];

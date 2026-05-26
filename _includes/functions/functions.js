@@ -59,8 +59,9 @@ function SAMMICommands() {
      * @param {string} name - name of the extension command
      * @param {string} color - box color, accepts hex/dec colors (include # for hex), default 3355443
      * @param {string} height - height of the box in pixels, 52 for regular or 80 for resizable box, default 52
-     * @param {Object} boxes
+     * @param {Object|number[]} boxes
      * - one object per box, key = boxVariable, value = array of box params
+     * - or an optional row units array, for example `[3, 5, 2]`, followed by row heights and boxes
      * - boxVariable = variable to save the box value under
      * - boxName = name of the box shown in the user interface
      * - boxType = type of the box, 0 = resizable, 2 = checkbox (true/false), 14 = regular box, 15 = variable box, 18 = select box, see extension guide for more
@@ -70,9 +71,29 @@ function SAMMICommands() {
      * @param {[boxName: string, boxType: number, defaultValue: (string | number), sizeModifier: (number|undefined), selectOptions: Array|undefined]} boxes.boxVariable
      * */
     async extCommand(name = '', color = 3355443, height = 52, boxes = {}, triggerButton = false, hidden = false) {
-      const ext = new SammiConstructExtCommand(name, color, height, triggerButton, hidden);
+      let rowUnits;
+      let rowHeights;
+      let commandBoxes = boxes || {};
+      let sendAsExtensionTrigger = triggerButton;
+      let hideCommand = hidden;
 
-      for (const [key, value] of Object.entries(boxes)) {
+      if (Array.isArray(boxes)) {
+        rowUnits = boxes;
+        if (Array.isArray(triggerButton)) {
+          rowHeights = triggerButton;
+          commandBoxes = arguments[5] || {};
+          sendAsExtensionTrigger = arguments[6] || false;
+          hideCommand = arguments[7] || false;
+        } else {
+          commandBoxes = triggerButton || {};
+          sendAsExtensionTrigger = arguments[5] || false;
+          hideCommand = arguments[6] || false;
+        }
+      }
+
+      const ext = new SammiConstructExtCommand(name, color, height, sendAsExtensionTrigger, hideCommand, rowUnits, rowHeights);
+
+      for (const [key, value] of Object.entries(commandBoxes)) {
         ext.addBox(key, value);
       }
 
@@ -100,7 +121,9 @@ function SAMMICommands() {
 
     /**
      * Request an array of all decks
-     * - Replies with an array ["Deck1 Name","Unique ID",crc32,"Deck2 Name","Unique ID",crc32,...]
+     * - Replies with deck objects containing deckName, deckId, crc, status, and buttons
+     * - status is a number: 1.0 enabled, 0.0 disabled
+     * - button payloads include id, group_id, text, queueable, border, border_color, font_color, and font_shadow
      * - Use crc32 value to verify deck you saved localy is the same
      */
     async getDeckList() {
@@ -230,21 +253,33 @@ function SAMMICommands() {
     /**
      * Modifies a button
      * @param {string} id - button ID to modify
-     * @param {number|undefined} color - decimal button color (BGR)
+     * @param {number|Object|undefined} color - decimal button color (BGR), or a modification object
      * @param {string|undefined} text - button text
      * @param {string|undefined} image - button image file name
-     * @param {number|undefined} border - border size, 0-7
+     * @param {number|undefined} border - border size, 0-8
+     * @param {number|undefined} fontColor - decimal font color (BGR)
+     * @param {number|undefined} borderColor - decimal border color (BGR)
+     * @param {boolean|undefined} fontShadow - show font shadow
      * - leave parameters empty to reset button back to default values
      */
-    async modifyButton(id, color, text = '', image, border) {
+    async modifyButton(id, color, text, image, border, fontColor, borderColor, fontShadow) {
+      const data = {};
+
+      if (color && typeof color === 'object' && !Array.isArray(color)) {
+        Object.assign(data, color);
+      } else {
+        if (color !== undefined) data.color = color;
+        if (text !== undefined) data.text = text;
+        if (image !== undefined) data.image = image;
+        if (border !== undefined) data.border = border;
+        if (fontColor !== undefined) data.font_color = fontColor;
+        if (borderColor !== undefined) data.border_color = borderColor;
+        if (fontShadow !== undefined) data.font_shadow = fontShadow;
+      }
+
       return sendToSAMMI('ModifyButton', {
         ButtonId: id,
-        Data: {
-          color: color || undefined,
-          text: text || undefined,
-          image: image || undefined,
-          border: border || undefined,
-        },
+        Data: data,
       });
     },
 
@@ -406,13 +441,15 @@ function SAMMICommands() {
   } // construct extension command object
 
   class SammiConstructExtCommand {
-    constructor(name, color, height, triggerButton = false, hidden = false) {
+    constructor(name, color, height, triggerButton = false, hidden = false, rowUnits = undefined, rowHeights = undefined) {
       let p = 0;
       this.name = name;
       this.color = color;
       this.height = height;
       this.triggerButton = triggerButton;
       this.hidden = hidden;
+      if (Array.isArray(rowUnits)) this.row_units = rowUnits;
+      if (Array.isArray(rowHeights)) this.row_heights = rowHeights;
 
       this.addBox = (boxVar, params) => {
         this[`ud_t${p}`] = boxVar;

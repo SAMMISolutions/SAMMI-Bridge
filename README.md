@@ -16,6 +16,7 @@ Current version of SAMMI Bridge. Find more about SAMMI at [sammi.solutions](http
   - [Extension Command](#extension-command)
   - [Trigger Extension](#trigger-extension)
   - [Trigger Button](#trigger-button)
+  - [Release Button](#release-button)
   - [Modify Button](#modify-button)
   - [Edit Button](#edit-button)
   - [Save Ini File](#save-ini-file)
@@ -36,6 +37,7 @@ Current version of SAMMI Bridge. Find more about SAMMI at [sammi.solutions](http
   - [Get Modified Buttons](#get-modified-buttons)
   - [Get Twitch List](#get-twitch-list)
   - [Trigger](#trigger)
+  - [Test Trigger](#test-trigger)
   - [Close](#close)
   - [Generate Message](#generate-message)
   - [Listening to Extension Data Received from SAMMI](#listening-to-extension-data-received-from-sammi)
@@ -48,7 +50,7 @@ Current version of SAMMI Bridge. Find more about SAMMI at [sammi.solutions](http
 **YouTube Triggers** tab allows you to test all available YouTube triggers by sending fake payload that mimics real triggers to SAMMI. 
  
 ## For Extension Devs
-SAMMI Bridge uses [SAMMI websocket library](https://github.com/SAMMISolutions/SAMMI-Websocket) to make sending and receiving data easier: h. 
+SAMMI Bridge uses [SAMMI websocket library](https://github.com/SAMMISolutions/SAMMI-Websocket) to make sending and receiving data easier.
 You can use promises for sending data to SAMMI. Message ids are generated automatically. 
 
 ```js
@@ -113,6 +115,8 @@ SAMMI.deleteArray(arrayName, slot, buttonId = 'global')
 ### Extension Command
 ```js
 SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigger = false, hideCommand = false)
+SAMMI.extCommand(name, color, height, rowUnits, boxes, sendAsExtensionTrigger = false, hideCommand = false)
+SAMMI.extCommand(name, color, height, rowUnits, rowHeights, boxes, sendAsExtensionTrigger = false, hideCommand = false)
 ```
 This function is used to send an extension command to SAMMI, e.g. what users see when they add the extension command to their button. 
 Here are the parameters:
@@ -120,6 +124,8 @@ Here are the parameters:
 - `name`: This is a string that represents the name of the extension command, as it will appear in SAMMI Core to the users.
 - `color` (optional): This parameter determines the color of the extension box, and it accepts colors in BGR hex format (e.g., `3355443`). If you don't provide this parameter, it defaults to `3355443`.
 - `height` (optional): This parameter sets the height of the extension box in pixels. You can use `52` for a regular box or `80` for a resizable text box. If you omit this parameter, it defaults to `52`.
+- `rowUnits` (optional): An array that defines how many width units each command row uses. For example `[3, 5, 2]` creates three command rows. Boxes are placed into each row until their `sizeModifier` values add up to that row's unit count, then SAMMI continues on the next row.
+- `rowHeights` (optional): An array that defines the height of each command row in pixels, for example `[52, 80, 52]`. If omitted, SAMMI uses the command's default row height for each row. Boxes are aligned to the top of their row.
 - `boxes`: This is an object containing all the extension boxes available inside the extension command. Each box is represented by a key-value pair within the `boxes` object.
    - The object key (`boxVariable`): This is a string that represents a variable name under which the box value will be saved, and passed to Bridge when the extension command is triggered. 
       - The following values are reserved variables and cannot be used as `boxVariable`: `cmd`, `dis`, `ext`, `extcmd`, `ms`, `obsid`, `pos`, `sef`, `vis`, `xpan`.   
@@ -128,39 +134,68 @@ Here are the parameters:
      - `boxType`: An integer that indicates the type of box. This integer corresponds to different types of boxes (e.g., resizable text box, check box, OBS Scenes box, etc.). See the table below for a list of all box types.
      - `defaultValue`: The default value for the variable associated with this box.
      - (optional) `sizeModifier`: An optional parameter that adjusts the horizontal size of the box. It defaults to `1`. 0.5 is half the size, 2 is double the size, etc. Note that by changing the size of one box, you will also change the size of all other boxes in the extension command, as the total sum of all boxes' sizes must be equal to the number boxes themselves to fit in the extension command.
-     - (optional) `options`: A object of options for the `boxType` chosen. For box types with dropdown menus, can instead be an array of options a user picks from.
+     - (optional) `options`: An object of options for the `boxType` chosen. For box types with dropdown menus, this can instead be an array of options a user picks from.
  - (optional) `sendAsExtensionTrigger`: A boolean parameter (default is `false`) that, when set to `true`, triggers an extension within SAMMI instead of sending data to Bridge. This is useful for relaying information between buttons.
  - (optional) `hideCommand`: Another boolean parameter (default is `false`) that, when set to `true`, hides the command from the extension menu in SAMMI. Useful for commands that are only used internally.
 
 #### Box Types
-| boxType | Description |
----|---
-0 | Resizable text box that allows for newline, defaultValue should be a string
-2 | Check box, defaultValue must be set to true or false, will return true or false when triggered
-4 | OBS Scenes box - allows user to select an OBS scene from a dropdown
-5 | OBS Sources box - allows user to select an OBS source from a dropdown
-6 | OBS Filters box - allows user to select an OBS filter from a dropdown
-7 | Keyboard button, defaultValue should be 0, returns the select key code
-8 | Compare box, defaultValue should be `==`, returns a string from the compare box, such as `=|` or `>=`
-9 | Math box, defaultValue should be `=`, returns a string from the compare box, such as `|` or `+=`
-10 | Sound path box, defaultValue should be `""`, returns its path
-11 | Slider 0 to 100%, defaultValue should be 0-1, returns a float 0 to 1
-14 | Normal white box, defaultValue can be anything
-15 | Variable box (yellow box), defaultValue should be a string, returns whatever variable is in the yellow box
-17 | Color box, defaultValue should be a number, returns the selected color
-18 | Select box value, defaultValue should be `0`, shows a list of all the options you provided when clicked and returns a numeric value of the selected option
-19 | Select box string, defaultValue should be a string, returns a string the user selected
-20 | Select box string typeable, defaultValue should be a string, returns a string the user selected or typed in the box
-22 | File path, defaultValue should be a string, returns the selected file path
-23 | Image path, defaultValue should be a string, returns the selected image path
-24 | Twitch reward redeem ID, defaultValue should be a number, returns the selected reward ID
-25 | Option Box, allows you to specify an array of extension command names, which are used to swap the command to the selected option.
-30 | No box at all, only label is present
-32 | OBS Pull Box 
-33 | Select Deck Box, defaultValue should be a number
-34 | Password Box, same as 14, except the string is displayed as *****
-35 | Twitch Account Box, select box with all linked Twitch accounts, returns the selected option
-37 | Save Variable Box, used when you need to set a variable to the button instance this command was called in. SAMMI will timeout after 30s and return undefined if you have not returned a value by then, so it is crucial that you always return a value even on fail.<br><br>Options:<br>- `timeoutAfter`: sets a custom timeout duration in milliseconds for the command to wait. default: `30000` 
+You can use the numeric values directly, or use the helper constants exposed on `SAMMIVars` / `LBVars` where available, for example `SAMMIVars.box_selectstringwritable`.
+
+| boxType | Helper constant | Description |
+|---:|---|---|
+| 0 | `box_newline` | Resizable text box that allows newlines. Default value should be a string. |
+| 1 | `box_normal_bottom` | Single-line text box aligned to the bottom of the command row. |
+| 2 | `box_checkbox` | Checkbox. Default value must be `true` or `false`; returns a boolean. |
+| 4 | `box_obs_scenes` | OBS scene selector. Stores the selected scene name. |
+| 5 | `box_obs_sources` | OBS source selector. Stores the selected source name. |
+| 6 | `box_obs_filters` | OBS filter selector. Stores the selected filter name. |
+| 7 | `box_keyboard` | Keyboard key selector. Default value should be `0`; returns the selected key code. |
+| 8 | `box_compare` | Compare operator selector. Common values include `==`, `!=`, `>`, `<`, `>=`, `<=`. |
+| 9 | `box_math` | Math/operator selector. Common values include `=`, `+=`, `-=`, `*=`, `/=`, `mod`, `div`, `concat`, bitwise operators, and math helpers. |
+| 10 | `box_sound` / `cbox_sound` | Audio file path picker with preview controls. Returns the selected path. |
+| 11 | `box_slider` | Slider from `0` to `1`, displayed as 0-100%. |
+| 12 | `box_extension` | Extension command selector. Mostly used internally by SAMMI's own extension command flow. |
+| 13 | `box_variable_bottom` | Yellow variable/value box aligned to the bottom of the command row. |
+| 14 | `box_normal` / `box_normal_top` | Single-line text box aligned to the top of the command row. |
+| 15 | `box_variable` / `box_variable_top` | Yellow variable/value box aligned to the top of the command row. |
+| 16 | `box_smooth_type` | Smooth transition type selector used by movement/animation commands. |
+| 17 | `box_color` | Color picker box. Default value should be a decimal BGR color. |
+| 18 | `box_selectvalue` | Dropdown that returns the numeric index of the selected option. Default value should be a number. |
+| 19 | `box_selectstring` | Dropdown that returns the selected option string. |
+| 20 | `box_selectstringwritable` | Typeable dropdown. Returns either a selected option string or custom typed text. |
+| 21 | `box_triggerpull` | Trigger Pull selector. Lets users pick a trigger payload key. |
+| 22 | `box_loadfile` | File path picker. Returns the selected file path. |
+| 23 | `box_imagefile` | Image file path picker. Returns the selected image path. |
+| 24 | `box_twitch_reward` / `box_redeemid` | Twitch Channel Point reward selector. Returns the selected reward ID. |
+| 25 | `box_commands` | Command option box. Provide an array of extension command names to let the user swap between related commands. |
+| 26 | `box_youtube_category` | YouTube category selector for the selected YouTube account. |
+| 27 | `box_youtube_account` | YouTube account selector. |
+| 28 | `box_sourcesettings` | OBS source settings helper. Provides a "Check Settings" helper for source/input settings. |
+| 29 | `box_filtersettings` | OBS filter settings helper. Provides a "Check Settings" helper for source filter settings. |
+| 30 | `box_nobox` / `box_nothing` | No input field; only the label is drawn. |
+| 31 | `box_obs_requests` | Resizable OBS request selector/text box. |
+| 32 | `box_obs_pull` | OBS Event Pull selector. Lets users pick OBS event payload values. |
+| 33 | `box_select_deck` / `box_decks` | Deck selector. Supports normal deck names plus special entries such as next/previous deck. |
+| 34 | `box_password` | Password text box. Same value behavior as a normal text box, but displayed as hidden text. |
+| 35 | `box_twitch_account` | Twitch account selector. Returns the selected linked Twitch account login. |
+| 36 | `box_source_change_settings_request` | Resizable OBS source settings request selector/text box for source setting changes. |
+| 37 | `box_save_variable` | Save Variable box for async extension commands. SAMMI waits for the extension to return a value before continuing.<br><br>Options:<br>- `timeoutAfter`: custom timeout in milliseconds. Default: `30000`. |
+| 38 | `box_aitum_requests` | Resizable Aitum request selector/text box. |
+| 39 | `box_loadfolder` | Folder path picker. Returns the selected folder path. |
+| 40 | `box_meld_scene` | Meld scene selector. Shows scene names, stores the scene ID in the background. |
+| 41 | `box_meld_track` | Meld track selector. Shows track names, stores the track ID in the background. Can be filtered by a parent scene. |
+| 42 | `box_meld_layer` | Meld layer selector. Shows layer names, stores the layer ID in the background. Can be filtered by a parent scene. |
+| 43 | `box_meld_effect` | Meld effect selector. Shows effect names, stores the effect ID in the background. Can be filtered by a parent layer. |
+| 44 | `box_meld_item` | Generic Meld item selector. |
+| 45 | `box_meld_pull` | Meld Event Pull selector. Lets users pick Meld trigger payload values. |
+
+For `box_selectvalue`, `box_selectstring`, `box_selectstringwritable`, and `box_commands`, pass the option list as the fifth item in the box array:
+
+```js
+SAMMI.extCommand('Example: Select Action', 3355443, 52, {
+  action: ['Action', SAMMIVars.box_selectstring, 'Start', 1, ['Start', 'Stop', 'Toggle']]
+})
+```
 
 ![Example Box Types](https://i.imgur.com/LP4OICw.png)
 
@@ -233,6 +268,16 @@ SAMMI.extCommand("My Extension: Basic Math", 4467268, 52, {
 }, false, false);
 ```
 
+This extension command uses two command rows. The first row has two equal boxes (`[1, 1]` inside a row with `2` units), and the second row has one wider box inside a row with `1` unit.
+
+```js
+SAMMI.extCommand("My Extension: Two Row Command", 4467268, 132, [2, 1], [52, 80], {
+    scene: ["Scene", 14, "", 1],
+    action: ["Action", 19, "Start", 1, ["Start", "Stop"]],
+    message: ["Message", 0, "", 1]
+}, false, false);
+```
+
 ### Trigger Extension
 ```js
 SAMMI.triggerExt(trigger, pullData)
@@ -249,22 +294,39 @@ SAMMI.triggerButton(id)
 - `id` - button ID to trigger
 - example: `SAMMI.triggerButton('ID1')`
 
-
-ID to trigger
-- example: `SAMMI.triggerButton('ID1')`
+### Release Button
+```js
+SAMMI.releaseButton(id)
+```
+- Releases a button that was triggered and is still considered active
+- `id` - button ID to release
+- example: `SAMMI.releaseButton('ID1')`
 
 ### Modify Button
 ```js
-SAMMI.modifyButton(id, color, text, image, border)
+SAMMI.modifyButton(id, color, text, image, border, fontColor, borderColor, fontShadow)
+SAMMI.modifyButton(id, {
+  color,
+  text,
+  image,
+  border,
+  font_color,
+  border_color,
+  font_shadow
+})
 ```
 - Modifies a button appearance temporarily
 - `id` - button ID to modify
 - `color` - decimal button color (BGR)
 - `text` - button text
 -  `image` - button image file name
-- `border` - border size, 0-7
+- `border` - border size, 0-8
+- `fontColor` / `font_color` - decimal font color (BGR)
+- `borderColor` / `border_color` - decimal border color (BGR)
+- `fontShadow` / `font_shadow` - `true` to show the font shadow, `false` to hide it
 - leave parameters empty to reset button back to default values
-- example: `SAMMI.modifyButton('ID1', 4934525, 'Hello', 'buttonImage.png', 5)`
+- example: `SAMMI.modifyButton('ID1', 4934525, 'Hello', 'buttonImage.png', 5, 16777215, 0, true)`
+- object example: `SAMMI.modifyButton('ID1', { text: 'Hello', font_color: 16777215, border_color: 0, font_shadow: false })`
 
 ### Edit Button
 ```js
@@ -371,7 +433,9 @@ SAMMI.notification(message)
 SAMMI.getDeckList()
 ```
 - Request an array of all decks
-- Replies with an array `["Deck1 Name","Unique ID",crc32,"Deck2 Name","Unique ID",crc32,...]`
+- Replies with an array of deck objects. Each deck includes `deckName`, `deckId`, `crc`, `status`, and `buttons`.
+- `status` is a number: `1.0` for enabled decks and `0.0` for disabled decks.
+- Each button entry can include `id`, `group_id`, `text`, `queueable`, `border`, `border_color`, `font_color`, and `font_shadow`.
 
 ### Get Deck
 ```js
@@ -379,9 +443,7 @@ SAMMI.getDeck(id)
 ```
 - Request a deck params
 - provide `id` of the specified deck (retrieved from getDeckList command)
-- example: `SAMMI.getDeck('202
-
-11221163402196200595')`
+- example: `SAMMI.getDeck('20211221163402196200595')`
 
 ### Get Deck Status
 ```js
@@ -448,8 +510,7 @@ SAMMI.getTwitchList()
 SAMMI.trigger(type, data)
 ```
 - `type` - trigger number
-    - 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem, 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey, 8 Timer, 9 OBS Trigger, 10 SAMMI, 11 twitch moderation, 12 extension trigger
-- `data` - whatever data is required for the trigger
+- `data` - trigger payload object. It must contain a `trigger_data` object/map. SAMMI adds `trigger_type` into `trigger_data` while processing the trigger.
 - example for chat message trigger: 
     ```js
     SAMMI.trigger(0, {
@@ -472,6 +533,111 @@ SAMMI.trigger(type, data)
     })
     ```
 - This is a very complex command that is not recommended to use unless you know the exact payload you need to send. Bridge test triggers use this command, and the code is available in this repository.
+
+#### Trigger Types
+These are the current trigger IDs SAMMI Core exposes through `global.trigger_type` and accepts through `SAMMI.trigger(type, data)`.
+
+| ID | Type key | Trigger |
+|---:|---|---|
+| 0 | `twitchchat` | Twitch Chat Message |
+| 1 | `twitchsub` | Twitch Subscription |
+| 2 | `twitchcommunitygift` | Twitch Subscription - Community Gift |
+| 3 | `twitchredeem` | Twitch Channel Point Redemption |
+| 4 | `twitchraid` | Twitch Raid |
+| 5 | `twitchbits` | Twitch Bits |
+| 6 | `twitchfollower` | Twitch New Follower |
+| 7 | `hotkey` | Hotkey |
+| 8 | `timer` | Repeat Interval / Timer |
+| 9 | `obstrigger` | OBS Trigger |
+| 10 | `sammi` | SAMMI Trigger |
+| 11 | `twitchmoderation` | Twitch Moderation |
+| 12 | `extensiontrigger` | Extension Trigger |
+| 13 | `twitchwhispers` | Twitch Whisper |
+| 14 | `twitchhost[DEPRECATED]` | Twitch Host (deprecated) |
+| 15 | `twitchprediction` | Twitch Prediction |
+| 16 | `twitchpoll` | Twitch Poll |
+| 17 | `twitchhypetrain` | Twitch Hype Train |
+| 18 | `youtubechat` | YouTube Chat Message |
+| 19 | `youtubesubscriber` | YouTube Subscriber |
+| 20 | `youtubesuperchat` | YouTube Super Chat |
+| 21 | `youtubesupersticker` | YouTube Super Sticker |
+| 22 | `youtubemember` | YouTube Sponsor / Member |
+| 23 | `deckapp` | SAMMI Deck / Deck App |
+| 24 | `triggerbutton` | Trigger Button |
+| 25 | `triggerbuttondelay` | Trigger Button Delay |
+| 26 | `webhooktrigger` | Webhook Trigger |
+| 27 | `twitchlowtrust` | Twitch Low Trust Users |
+| 28 | `twitchshoutout` | Twitch Shoutout - Created |
+| 29 | `sammivoice` | SAMMI Voice |
+| 30 | `crowdcontrol` | Crowd Control |
+| 31 | `voicemod` | Voicemod |
+| 32 | `pulsoid` | Pulsoid |
+| 33 | `adbreak` | Twitch Ad Break |
+| 34 | `twitchcharity` | Twitch Charity |
+| 35 | `twitchannouncement` | Twitch Announcement |
+| 36 | `twitchgueststar` | Twitch Guest Star |
+| 37 | `twitchshoutoutreceive` | Twitch Shoutout - Received |
+| 38 | `twitchstream` | Twitch Stream |
+| 39 | `elgatostreamdeck` | Elgato Stream Deck |
+| 40 | `twitchautomcaticrewardredemption` | Twitch Automatic Reward Redemption |
+| 41 | `twitchchannelupdate` | Twitch Channel Information Updated |
+| 42 | `gamepad` | Gamepad |
+| 43 | `twitchwatchstreak` | Twitch Watch Streak |
+| 44 | `twitchdefaultpowerup` | Twitch Default Power-Ups |
+| 45 | `twitchcustomeventsubscription` | Twitch Custom EventSub Subscription |
+| 46 | `twitcheventsubstatus` | Twitch EventSub Status Changed |
+| 47 | `twitchcombo` | Twitch Combo |
+| 48 | `twitchextension` | Twitch Extension |
+| 49 | `twitchcustompowerup` | Twitch Custom Power-Ups |
+| 50 | `meldtrigger` | Meld Trigger |
+
+#### Trigger Payload Notes
+- `data.trigger_data` is required for all trigger types. It can contain strings, numbers, booleans, arrays, and objects.
+- For OBS and Meld triggers, SAMMI matches the top-level `updatetype` value against the trigger's selected event type. For example: `{ updatetype: 'RecordingChanged', trigger_data: { ... } }`.
+- Extension triggers can usually be sent more safely through `SAMMI.triggerExt(trigger, pullData)`, which wraps the data for trigger type `12`.
+- Bridge's own test-trigger UI uses `SAMMI.testTrigger`, described below, because it can add the broadcaster channel ID for Twitch pull values.
+
+#### Meld Trigger Payloads
+Meld trigger type `50` uses the top-level `updatetype` to select the event. Valid event names currently include:
+
+- `Connected`
+- `Disconnected`
+- `SessionChanged`
+- `SceneChanged`
+- `SceneCreated`
+- `SceneRemoved`
+- `LayerCreated`
+- `LayerRemoved`
+- `StreamingChanged`
+- `StreamStarted`
+- `StreamStopped`
+- `RecordingChanged`
+- `RecordingStarted`
+- `RecordingStopped`
+
+Common Meld pull values include `connected`, `webchannelReady`, `ip`, `port`, `isStreaming`, `isRecording`, `isReplayBufferActive`, `currentScene`, `currentSceneId`, `previousScene`, `previousSceneId`, `stagedScene`, `stagedSceneId`, `sceneCount`, `layerCount`, `trackCount`, `effectCount`, `event`, `trigger`, `type`, `updatetype`, and `trigger_type`.
+
+Scene/layer events can additionally include values such as `sceneId`, `sceneName`, `layerId`, `layerName`, `itemId`, `itemName`, `itemType`, `parentId`, and `parentName`. Session/signal events can include `args`, `signal`, and, for `SessionChanged`, `session`.
+
+### Test Trigger
+```js
+SAMMI.testTrigger(type, data)
+```
+- Sends a test trigger through the same trigger system as `SAMMI.trigger`
+- Uses the first linked Twitch account as the channel context for `from_channel_id` pull values
+- `type` - trigger number from the table above
+- `data` - trigger payload object with a required `trigger_data` object/map
+- example:
+  ```js
+  SAMMI.testTrigger(5, {
+    trigger_data: {
+      user_name: 'silverlink',
+      display_name: 'Silverlink',
+      amount: 100,
+      message: 'Cheer100 hello!'
+    }
+  })
+  ```
 
 ### Close
 ```js
