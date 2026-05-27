@@ -278,6 +278,42 @@ SAMMI.extCommand("My Extension: Two Row Command", 4467268, 132, {
 }, false, false, [2, 1], [52, 80]);
 ```
 
+#### Multi-Row Extension Commands in Depth
+
+By default, all boxes in an extension command share a single row. The `rowUnits` and `rowHeights` parameters let you distribute boxes across multiple rows, each with its own height.
+
+**How it works:**
+- `rowUnits` is an array where each entry is the total width budget for one row. Boxes are placed into a row, consuming their `sizeModifier` value, until the row's budget is used up — then SAMMI moves to the next row.
+- `rowHeights` is an array of pixel heights, one per row. Standard height is `52`; use `80` for a resizable text box row. If omitted, all rows use the command's default height.
+- The command's total `height` parameter must equal the **sum** of all row heights (e.g. two rows of `52` + `80` = `132`).
+
+**Example — a 3-row command:**
+
+```js
+// Row 1 (budget: 2 units, height: 52px): two side-by-side boxes of 1 unit each
+// Row 2 (budget: 2 units, height: 52px): a narrow label (0.5) + a wide text box (1.5)
+// Row 3 (budget: 1 unit, height: 80px): one full-width resizable text area
+//
+// Total height: 52 + 52 + 80 = 184
+
+SAMMI.extCommand("My Extension: Multiline Example", 4467268, 184, {
+    platform:  ["Platform",  19, "Twitch", 1,   ["Twitch", "YouTube", "TikTok"]],  // row 1, 1 unit
+    action:    ["Action",    19, "Start",  1,   ["Start", "Stop", "Toggle"]],       // row 1, 1 unit  → row 1 full (2/2)
+    labelBox:  ["Label",     30, "",       0.5],                                     // row 2, 0.5 units (no-input box, label only)
+    titleBox:  ["Title",     14, "Hello",  1.5],                                     // row 2, 1.5 units → row 2 full (2/2)
+    bodyText:  ["Message",    0, "",       1],                                       // row 3, 1 unit   → row 3 full (1/1)
+}, false, false,
+    [2, 2, 1],          // rowUnits:   row 1 = 2 units, row 2 = 2 units, row 3 = 1 unit
+    [52, 52, 80]        // rowHeights: row 1 = 52px,    row 2 = 52px,    row 3 = 80px
+);
+```
+
+**Key rules to keep in mind:**
+- The sum of `sizeModifier` values for boxes assigned to a row **must equal** that row's unit count exactly. If the numbers don't add up, boxes will overflow or be misaligned.
+- Boxes are assigned to rows in the order they appear in the `boxes` object — SAMMI fills each row from left to right before moving on.
+- Use `box_nobox` (type `30`) for label-only slots that take up space without showing an input field.
+- `rowHeights` is optional. If omitted, all rows inherit the command's default `height` value.
+
 ### Trigger Extension
 ```js
 SAMMI.triggerExt(trigger, pullData)
