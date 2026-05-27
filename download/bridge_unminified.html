@@ -2223,9 +2223,7 @@
                * @param {string} name - name of the extension command
                * @param {string} color - box color, accepts hex/dec colors (include # for hex), default 3355443
                * @param {string} height - height of the box in pixels, 52 for regular or 80 for resizable box, default 52
-               * @param {Object|number[]} boxes
-               * - one object per box, key = boxVariable, value = array of box params
-               * - or an optional row units array, for example `[3, 5, 2]`, followed by row heights and boxes
+               * @param {Object} boxes - one object per box, key = boxVariable, value = array of box params
                * - boxVariable = variable to save the box value under
                * - boxName = name of the box shown in the user interface
                * - boxType = type of the box, 0 = resizable, 2 = checkbox (true/false), 14 = regular box, 15 = variable box, 18 = select box, see extension guide for more
@@ -2233,27 +2231,18 @@
                * - (optional) sizeModifier = horizontal box size, 1 is normal
                * - (optional) [] selectOptions = array of options for the user to select (when using Select box type)
                * @param {[boxName: string, boxType: number, defaultValue: (string | number), sizeModifier: (number|undefined), selectOptions: Array|undefined]} boxes.boxVariable
+               * @param {boolean} [triggerButton=false] - when true, triggers an extension trigger within SAMMI instead of sending to Bridge
+               * @param {boolean} [hidden=false] - when true, hides the command from the extension menu
+               * @param {number[]} [rowUnits] - optional array defining how many width units each row uses, e.g. [3, 2, 1]
+               * @param {number[]} [rowHeights] - optional array defining the height of each row in pixels, e.g. [52, 80, 52]
                * */
-              async extCommand(name = '', color = 3355443, height = 52, boxes = {}, triggerButton = false, hidden = false) {
-                let rowUnits;
-                let rowHeights;
-                let commandBoxes = boxes || {};
-                let sendAsExtensionTrigger = triggerButton;
-                let hideCommand = hidden;
-                if (Array.isArray(boxes)) {
-                  rowUnits = boxes;
-                  if (Array.isArray(triggerButton)) {
-                    rowHeights = triggerButton;
-                    commandBoxes = arguments[5] || {};
-                    sendAsExtensionTrigger = arguments[6] || false;
-                    hideCommand = arguments[7] || false;
-                  } else {
-                    commandBoxes = triggerButton || {};
-                    sendAsExtensionTrigger = arguments[5] || false;
-                    hideCommand = arguments[6] || false;
-                  }
-                }
-                const ext = new SammiConstructExtCommand(name, color, height, sendAsExtensionTrigger, hideCommand, rowUnits, rowHeights);
+              async extCommand(name = '', color = 3355443, height = 52, boxes = {}, triggerButton = false, hidden = false, rowUnits = undefined, rowHeights = undefined) {
+                const commandBoxes = boxes || {};
+                const sendAsExtensionTrigger = triggerButton;
+                const hideCommand = hidden;
+                const ext = new SammiConstructExtCommand(name, color, height, sendAsExtensionTrigger, hideCommand,
+                  Array.isArray(rowUnits) ? rowUnits : undefined,
+                  Array.isArray(rowHeights) ? rowHeights : undefined);
                 for (const [key, value] of Object.entries(commandBoxes)) {
                   ext.addBox(key, value);
                 }

@@ -114,9 +114,9 @@ SAMMI.deleteArray(arrayName, slot, buttonId = 'global')
 
 ### Extension Command
 ```js
-SAMMI.extCommand(name, color = 3355443, height = 52, boxes, sendAsExtensionTrigger = false, hideCommand = false)
-SAMMI.extCommand(name, color, height, rowUnits, boxes, sendAsExtensionTrigger = false, hideCommand = false)
-SAMMI.extCommand(name, color, height, rowUnits, rowHeights, boxes, sendAsExtensionTrigger = false, hideCommand = false)
+SAMMI.extCommand(name, color = 3355443, height = 52, boxes, triggerButton = false, hidden = false)
+SAMMI.extCommand(name, color, height, boxes, triggerButton, hidden, rowUnits)
+SAMMI.extCommand(name, color, height, boxes, triggerButton, hidden, rowUnits, rowHeights)
 ```
 This function is used to send an extension command to SAMMI, e.g. what users see when they add the extension command to their button. 
 Here are the parameters:
@@ -124,8 +124,6 @@ Here are the parameters:
 - `name`: This is a string that represents the name of the extension command, as it will appear in SAMMI Core to the users.
 - `color` (optional): This parameter determines the color of the extension box, and it accepts colors in BGR hex format (e.g., `3355443`). If you don't provide this parameter, it defaults to `3355443`.
 - `height` (optional): This parameter sets the height of the extension box in pixels. You can use `52` for a regular box or `80` for a resizable text box. If you omit this parameter, it defaults to `52`.
-- `rowUnits` (optional): An array that defines how many width units each command row uses. For example `[3, 5, 2]` creates three command rows. Boxes are placed into each row until their `sizeModifier` values add up to that row's unit count, then SAMMI continues on the next row.
-- `rowHeights` (optional): An array that defines the height of each command row in pixels, for example `[52, 80, 52]`. If omitted, SAMMI uses the command's default row height for each row. Boxes are aligned to the top of their row.
 - `boxes`: This is an object containing all the extension boxes available inside the extension command. Each box is represented by a key-value pair within the `boxes` object.
    - The object key (`boxVariable`): This is a string that represents a variable name under which the box value will be saved, and passed to Bridge when the extension command is triggered. 
       - The following values are reserved variables and cannot be used as `boxVariable`: `cmd`, `dis`, `ext`, `extcmd`, `ms`, `obsid`, `pos`, `sef`, `vis`, `xpan`.   
@@ -135,8 +133,10 @@ Here are the parameters:
      - `defaultValue`: The default value for the variable associated with this box.
      - (optional) `sizeModifier`: An optional parameter that adjusts the horizontal size of the box. It defaults to `1`. 0.5 is half the size, 2 is double the size, etc. Note that by changing the size of one box, you will also change the size of all other boxes in the extension command, as the total sum of all boxes' sizes must be equal to the number boxes themselves to fit in the extension command.
      - (optional) `options`: An object of options for the `boxType` chosen. For box types with dropdown menus, this can instead be an array of options a user picks from.
- - (optional) `sendAsExtensionTrigger`: A boolean parameter (default is `false`) that, when set to `true`, triggers an extension within SAMMI instead of sending data to Bridge. This is useful for relaying information between buttons.
- - (optional) `hideCommand`: Another boolean parameter (default is `false`) that, when set to `true`, hides the command from the extension menu in SAMMI. Useful for commands that are only used internally.
+ - (optional) `triggerButton`: A boolean parameter (default is `false`) that, when set to `true`, triggers an extension within SAMMI instead of sending data to Bridge. This is useful for relaying information between buttons.
+ - (optional) `hidden`: Another boolean parameter (default is `false`) that, when set to `true`, hides the command from the extension menu in SAMMI. Useful for commands that are only used internally.
+ - (optional) `rowUnits`: An array that defines how many width units each command row uses. For example `[3, 5, 2]` creates three command rows. Boxes are placed into each row until their `sizeModifier` values add up to that row's unit count, then SAMMI continues on the next row.
+ - (optional) `rowHeights`: An array that defines the height of each command row in pixels, for example `[52, 80, 52]`. If omitted, SAMMI uses the command's default row height for each row. Boxes are aligned to the top of their row.
 
 #### Box Types
 You can use the numeric values directly, or use the helper constants exposed on `SAMMIVars` / `LBVars` where available, for example `SAMMIVars.box_selectstringwritable`.
@@ -271,11 +271,11 @@ SAMMI.extCommand("My Extension: Basic Math", 4467268, 52, {
 This extension command uses two command rows. The first row has two equal boxes (`[1, 1]` inside a row with `2` units), and the second row has one wider box inside a row with `1` unit.
 
 ```js
-SAMMI.extCommand("My Extension: Two Row Command", 4467268, 132, [2, 1], [52, 80], {
+SAMMI.extCommand("My Extension: Two Row Command", 4467268, 132, {
     scene: ["Scene", 14, "", 1],
     action: ["Action", 19, "Start", 1, ["Start", "Stop"]],
     message: ["Message", 0, "", 1]
-}, false, false);
+}, false, false, [2, 1], [52, 80]);
 ```
 
 ### Trigger Extension
