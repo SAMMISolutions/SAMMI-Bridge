@@ -1033,7 +1033,7 @@
           gap: 9px;
         }
       }
-
+    
 
       /* Force all Show Options controls to use the available panel width. */
       #extensions-tabContent #content-triggers .collapse,
@@ -1333,7 +1333,7 @@
 
   <body>
     <div class="container">
-<h1 class="text-center mt-1">SAMMI Bridge </h1>
+      <h1 class="text-center mt-1">SAMMI Bridge </h1>
       <!-- Connection Info -->
       <div class="row justify-content-center">
         <div class="col col-auto">
@@ -2122,6 +2122,7 @@
             force_close: false,
             force_open: false,
             box_newline: 0,
+            box_normal_bottom: 1,
             box_checkbox: 2,
             box_obs_scenes: 4,
             box_obs_sources: 5,
@@ -2129,22 +2130,48 @@
             box_keyboard: 7,
             box_compare: 8,
             box_math: 9,
+            box_sound: 10,
             cbox_sound: 10,
             box_slider: 11,
+            box_extension: 12,
+            box_variable_bottom: 13,
             box_normal: 14,
+            box_normal_top: 14,
             box_variable: 15,
+            box_variable_top: 15,
+            box_smooth_type: 16,
             box_color: 17,
             box_selectvalue: 18,
             box_selectstring: 19,
             box_selectstringwritable: 20,
+            box_triggerpull: 21,
             box_loadfile: 22,
             box_imagefile: 23,
             box_twitch_reward: 24,
+            box_redeemid: 24,
+            box_commands: 25,
+            box_youtube_category: 26,
+            box_youtube_account: 27,
+            box_sourcesettings: 28,
+            box_filtersettings: 29,
             box_nobox: 30,
+            box_nothing: 30,
+            box_obs_requests: 31,
             box_obs_pull: 32,
             box_select_deck: 33,
+            box_decks: 33,
             box_password: 34,
             box_twitch_account: 35,
+            box_source_change_settings_request: 36,
+            box_save_variable: 37,
+            box_aitum_requests: 38,
+            box_loadfolder: 39,
+            box_meld_scene: 40,
+            box_meld_track: 41,
+            box_meld_layer: 42,
+            box_meld_effect: 43,
+            box_meld_item: 44,
+            box_meld_pull: 45,
           };
           window.SAMMIVars = SAMMIVars;
           const LBVars = SAMMIVars;
@@ -2156,23 +2183,6 @@
            * Promise example: SAMMI.getVariable(myVariable, 'someButtonID').then(reply=>console.log(reply))
            */
           function SAMMICommands() {
-            const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
-            const normalizeTriggerPayload = (data = {}) => {
-              const payload = isPlainObject(data) ? data : {
-                value: data
-              };
-              if (!isPlainObject(payload.trigger_data)) {
-                payload.trigger_data = {
-                  ...payload
-                };
-              }
-              return payload;
-            };
-            const normalizeExtensionPayload = (data = {}) => {
-              return isPlainObject(data) ? data : {
-                value: data
-              };
-            };
             const SendCommand = {
               /**
                * Get a variable from SAMMI
@@ -2223,7 +2233,9 @@
                * @param {string} name - name of the extension command
                * @param {string} color - box color, accepts hex/dec colors (include # for hex), default 3355443
                * @param {string} height - height of the box in pixels, 52 for regular or 80 for resizable box, default 52
-               * @param {Object} boxes - one object per box, key = boxVariable, value = array of box params
+               * @param {Object|number[]} boxes
+               * - one object per box, key = boxVariable, value = array of box params
+               * - or an optional row units array, for example `[3, 5, 2]`, followed by row heights and boxes
                * - boxVariable = variable to save the box value under
                * - boxName = name of the box shown in the user interface
                * - boxType = type of the box, 0 = resizable, 2 = checkbox (true/false), 14 = regular box, 15 = variable box, 18 = select box, see extension guide for more
@@ -2231,10 +2243,6 @@
                * - (optional) sizeModifier = horizontal box size, 1 is normal
                * - (optional) [] selectOptions = array of options for the user to select (when using Select box type)
                * @param {[boxName: string, boxType: number, defaultValue: (string | number), sizeModifier: (number|undefined), selectOptions: Array|undefined]} boxes.boxVariable
-               * @param {boolean} [triggerButton=false] - when true, triggers an extension trigger within SAMMI instead of sending to Bridge
-               * @param {boolean} [hidden=false] - when true, hides the command from the extension menu
-               * @param {number[]} [rowUnits] - optional array defining how many width units each row uses, e.g. [3, 2, 1]
-               * @param {number[]} [rowHeights] - optional array defining the height of each row in pixels, e.g. [52, 80, 52]
                * */
               async extCommand(name = '', color = 3355443, height = 52, boxes = {}, triggerButton = false, hidden = false, rowUnits = undefined, rowHeights = undefined) {
                 const commandBoxes = boxes || {};
@@ -2341,9 +2349,20 @@
               /**
                * Sends a trigger
                * @param {number} type - type of trigger
-               * - trigger types: 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem
-               * 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey
-               * 8 Timer, 9 OBS Trigger, 10 SAMMI Bridge, 11 twitch moderation, 12 extension trigger
+               * - trigger types: 0 Twitch Chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch Redeem,
+               * 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey, 8 Timer,
+               * 9 OBS Trigger, 10 SAMMI Trigger, 11 Twitch Moderation, 12 Extension Trigger,
+               * 13 Twitch Whisper, 14 Twitch Host (deprecated), 15 Twitch Prediction,
+               * 16 Twitch Poll, 17 Twitch Hype Train, 18 YouTube Chat, 19 YouTube Subscriber,
+               * 20 YouTube Super Chat, 21 YouTube Super Sticker, 22 YouTube Member,
+               * 23 Deck App, 24 Trigger Button, 25 Trigger Button Delay, 26 Webhook,
+               * 27 Twitch Low Trust, 28 Twitch Shoutout, 29 SAMMI Voice, 30 Crowd Control,
+               * 31 Voicemod, 32 Pulsoid, 33 Twitch Ad Break, 34 Twitch Charity,
+               * 35 Twitch Announcement, 36 Twitch Guest Star, 37 Twitch Shoutout Received,
+               * 38 Twitch Stream, 39 Elgato Stream Deck, 40 Twitch Automatic Reward,
+               * 41 Twitch Channel Update, 42 Gamepad, 43 Twitch Watch Streak,
+               * 44 Twitch Default Power-Ups, 45 Twitch Custom EventSub, 46 Twitch EventSub Status,
+               * 47 Twitch Combo, 48 Twitch Extension, 49 Twitch Custom Power-Ups, 50 Meld Trigger
                * @param {object} data - whatever data is required for the trigger, see manual
                */
               async trigger(type = -1, data = {
@@ -2351,21 +2370,19 @@
               }) {
                 return sendToSAMMI('SendTrigger', {
                   Type: type,
-                  Data: normalizeTriggerPayload(data),
+                  Data: data,
                 });
               },
               /**
                * Sends a test trigger that will automatically include channel ID for from_channel_id pull value
                * @param {number} type - type of trigger
-               * - trigger types: 0 Twitch chat, 1 Twitch Sub, 2 Twitch Gift, 3 Twitch redeem
-               * 4 Twitch Raid, 5 Twitch Bits, 6 Twitch Follower, 7 Hotkey
-               * 8 Timer, 9 OBS Trigger, 10 SAMMI Bridge, 11 twitch moderation, 12 extension trigger
+               * - see SAMMI.trigger for the full trigger type list
                * @param {object} data - whatever data is required for the trigger, see manual
                */
               async testTrigger(type, data) {
                 return sendToSAMMI('SendTestTrigger', {
                   Type: type,
-                  Data: normalizeTriggerPayload(data),
+                  Data: data,
                 });
               },
               /**
@@ -2442,7 +2459,7 @@
               async triggerExt(trigger = '', data = {}) {
                 return sendToSAMMI('ExtensionTrigger', {
                   Trigger: trigger,
-                  Data: normalizeExtensionPayload(data),
+                  Data: data,
                 });
               },
               /**
@@ -5067,6 +5084,7 @@
         // Your main script will be inserted here
         /*INSERT PART 4*/
       </script>
+
       <script src="https://cdn.jsdelivr.net/gh/SAMMISolutions/SAMMI-Websocket@main/dist/sammi-websocket.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
