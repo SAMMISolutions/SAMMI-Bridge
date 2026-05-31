@@ -160,6 +160,32 @@ layout: default
             </div>
           </div>
         </form>
+          <form id="SAMMITestTwitchAnnouncement" class="SAMMITestTriggers">
+          <div>
+            <button type="submit" class="btn btn-primary btn-sm me-1">Announcement</button>
+            <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hideannouncement" role="button" aria-expanded="false" aria-controls="hideannouncement"></a>
+          </div>
+          <div class="collapse" id="hideannouncement" data-bs-parent="#content-triggers">
+            <div class="form-group mb-2">
+              <label>Username:</label>
+              <input type="text" class="form-control form-control-sm" name="name">
+            </div>
+            <div class="form-group mb-2">
+              <label>Color:</label>
+              <select class="form-select form-select-sm" name="announcementColor">
+                <option value="primary" selected>Primary</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+                <option value="orange">Orange</option>
+                <option value="purple">Purple</option>
+              </select>
+            </div>
+            <div class="form-group mb-2">
+              <label>Message:</label>
+              <textarea class="form-control form-control-sm" rows="1" name="announcementMessage"></textarea>
+            </div>
+          </div>
+        </form>
           <form id="SAMMITestTwitchWhisper" class="SAMMITestTriggers">
           <div>
             <button type="submit" class="btn btn-primary btn-sm me-1">Whisper</button>

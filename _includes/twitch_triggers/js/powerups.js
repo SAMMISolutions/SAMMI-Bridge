@@ -43,6 +43,7 @@ async SAMMITestTwitchPowerups(form) {
     amount,
     bits: amount,
     message,
+    message_no_emotes: message,
     power_up,
   };
   sendTriggerToSAMMI(

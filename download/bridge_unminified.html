@@ -1492,6 +1492,32 @@
             </div>
           </div>
         </form>
+          <form id="SAMMITestTwitchAnnouncement" class="SAMMITestTriggers">
+          <div>
+            <button type="submit" class="btn btn-primary btn-sm me-1">Announcement</button>
+            <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hideannouncement" role="button" aria-expanded="false" aria-controls="hideannouncement"></a>
+          </div>
+          <div class="collapse" id="hideannouncement" data-bs-parent="#content-triggers">
+            <div class="form-group mb-2">
+              <label>Username:</label>
+              <input type="text" class="form-control form-control-sm" name="name">
+            </div>
+            <div class="form-group mb-2">
+              <label>Color:</label>
+              <select class="form-select form-select-sm" name="announcementColor">
+                <option value="primary" selected>Primary</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+                <option value="orange">Orange</option>
+                <option value="purple">Purple</option>
+              </select>
+            </div>
+            <div class="form-group mb-2">
+              <label>Message:</label>
+              <textarea class="form-control form-control-sm" rows="1" name="announcementMessage"></textarea>
+            </div>
+          </div>
+        </form>
           <form id="SAMMITestTwitchWhisper" class="SAMMITestTriggers">
           <div>
             <button type="submit" class="btn btn-primary btn-sm me-1">Whisper</button>
@@ -3699,6 +3725,7 @@
               user_id: userID,
               amount: amount,
               message,
+              message_no_emotes: message,
             };
             sendTriggerToSAMMI(
               5,
@@ -3754,6 +3781,7 @@
               amount,
               bits: amount,
               message,
+              message_no_emotes: message,
               power_up,
             };
             sendTriggerToSAMMI(
@@ -3867,6 +3895,7 @@
             if (hasMessage) {
               pullData.message = messageInput;
               pullData.emote_list = '';
+              pullData.message_no_emotes = messageInput;
               pullData.fragments = [{
                 text: messageInput,
                 emote: null,
@@ -4110,6 +4139,7 @@
               reply_parent_msg_id: '',
               source_badge_info: '',
               emote_list: '',
+              message_no_emotes: message,
               is_founder: isFounder,
               is_broadcaster: isBroadcaster,
               source_id: '',
@@ -4136,6 +4166,34 @@
               is_own_chat: isOwnChat,
               trigger_data: pullData,
             });
+          }
+          ,
+              async SAMMITestTwitchAnnouncement(form) {
+            const [name, userID] = await getNameFromInput(form.elements.name);
+            const message = form.elements.announcementMessage.value || SAMMI.generateMessage();
+            const color = form.elements.announcementColor.value || 'primary';
+            const pullData = {
+              message_id: generateUUID(),
+              display_name: name,
+              user_name: name.toLowerCase(),
+              user_id: userID,
+              message,
+              announcement_color: color,
+              badge_list: '',
+              fragments: [{
+                text: message,
+                emote: null,
+                type: 'text',
+              }],
+              emote_list: '',
+              message_no_emotes: message,
+            };
+            sendTriggerToSAMMI(
+              35,
+              `${pullData.display_name} sent an announcement! [test trigger]`,
+              {},
+              pullData,
+            );
           }
           ,
               async SAMMITestTwitchWhisper(form) {

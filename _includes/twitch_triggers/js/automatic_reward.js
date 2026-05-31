@@ -37,6 +37,7 @@ async SAMMITestTwitchAutomaticReward(form) {
   if (hasMessage) {
     pullData.message = messageInput;
     pullData.emote_list = '';
+    pullData.message_no_emotes = messageInput;
     pullData.fragments = [{
       text: messageInput,
       emote: null,

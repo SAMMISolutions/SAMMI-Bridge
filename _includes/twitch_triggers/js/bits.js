@@ -8,6 +8,7 @@ async SAMMITestTwitchBits(form) {
     user_id: userID,
     amount: amount,
     message,
+    message_no_emotes: message,
   };
   sendTriggerToSAMMI(
     5,

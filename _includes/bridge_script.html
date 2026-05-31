@@ -1612,6 +1612,7 @@
               user_id: userID,
               amount: amount,
               message,
+              message_no_emotes: message,
             };
             sendTriggerToSAMMI(
               5,
@@ -1667,6 +1668,7 @@
               amount,
               bits: amount,
               message,
+              message_no_emotes: message,
               power_up,
             };
             sendTriggerToSAMMI(
@@ -1780,6 +1782,7 @@
             if (hasMessage) {
               pullData.message = messageInput;
               pullData.emote_list = '';
+              pullData.message_no_emotes = messageInput;
               pullData.fragments = [{
                 text: messageInput,
                 emote: null,
@@ -2023,6 +2026,7 @@
               reply_parent_msg_id: '',
               source_badge_info: '',
               emote_list: '',
+              message_no_emotes: message,
               is_founder: isFounder,
               is_broadcaster: isBroadcaster,
               source_id: '',
@@ -2049,6 +2053,34 @@
               is_own_chat: isOwnChat,
               trigger_data: pullData,
             });
+          }
+          ,
+              async SAMMITestTwitchAnnouncement(form) {
+            const [name, userID] = await getNameFromInput(form.elements.name);
+            const message = form.elements.announcementMessage.value || SAMMI.generateMessage();
+            const color = form.elements.announcementColor.value || 'primary';
+            const pullData = {
+              message_id: generateUUID(),
+              display_name: name,
+              user_name: name.toLowerCase(),
+              user_id: userID,
+              message,
+              announcement_color: color,
+              badge_list: '',
+              fragments: [{
+                text: message,
+                emote: null,
+                type: 'text',
+              }],
+              emote_list: '',
+              message_no_emotes: message,
+            };
+            sendTriggerToSAMMI(
+              35,
+              `${pullData.display_name} sent an announcement! [test trigger]`,
+              {},
+              pullData,
+            );
           }
           ,
               async SAMMITestTwitchWhisper(form) {

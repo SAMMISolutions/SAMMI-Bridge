@@ -46,6 +46,7 @@ async SAMMITestTwitchChat(form) {
     reply_parent_msg_id: '',
     source_badge_info: '',
     emote_list: '',
+    message_no_emotes: message,
     is_founder: isFounder,
     is_broadcaster: isBroadcaster,
     source_id: '',
