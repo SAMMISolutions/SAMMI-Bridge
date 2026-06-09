@@ -56,7 +56,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Extension to get a random clip from a username based on different parameters",
-                "latest_version": "2.1",
+                "latest_version": "3.0",
                 "download_link": "https://ko-fi.com/s/90575f1126"
             }
         },
@@ -76,7 +76,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Animates Hype Trains automatically",
-                "latest_version": "1.1",
+                "latest_version": "2.1",
                 "download_link": "https://ko-fi.com/s/97b445c6b7"
             }
         },
@@ -136,7 +136,7 @@
             "details": {
                 "author": "Chrizzz",
                 "description": "Small Pokemon Shoutout for Raids and the SO Command",
-                "latest_version": "2.0",
+                "latest_version": "3.0",
                 "download_link": "https://ko-fi.com/s/c729d284ce"
             }
         },
@@ -431,16 +431,6 @@
             }
         },
         {
-            "extension_name": "Channel Point Reward Animator",
-            "alternate_names": [],
-            "details": {
-                "author": "Chrizzz",
-                "description": "Animates channel point redemptions",
-                "latest_version": "1.0",
-                "download_link": "https://ko-fi.com/s/8c5c62f3a7"
-            }
-        },
-        {
             "extension_name": "Bingo",
             "alternate_names": [],
             "details": {
@@ -478,6 +468,130 @@
                 "description": "Stream Credits",
                 "latest_version": "1.0",
                 "download_link": "https://ko-fi.com/s/38cfebe823"
+            }
+        },
+        {
+            "extension_name": "Archipelago Tracker",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Connects SAMMI to an Archipelago server and reacts to item, hint, chat, player, room, and Death Link events",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/0d82f5dcb1"
+            }
+        },
+        {
+            "extension_name": "Birthday Notifications",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Automatically play a birthday animation on the users birthday",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/2c1c505a08"
+            }
+        },
+        {
+            "extension_name": "Clip Downloader",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Automatically download all clips generated on Twitch",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/6976f4ea03"
+            }
+        },
+        {
+            "extension_name": "Crowd Control",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Extension to trigger Crowd Control triggers",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/56084d80e5"
+            }
+        },
+        {
+            "extension_name": "Dice Roll",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Roll dice in OBS with simple chat commands and use the results in SAMMI",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/100f5389a1"
+            }
+        },
+        {
+            "extension_name": "Giveaway System",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Giveaway system for Twitch",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/14b15f04b1"
+            }
+        },
+        {
+            "extension_name": "HiLo",
+            "alternate_names": [
+                "Hi-Lo Cardgame"
+            ],
+            "details": {
+                "author": "Chrizzz",
+                "description": "HiLo (higher or lower) card game for Twitch",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/4b9995e296"
+            }
+        },
+        {
+            "extension_name": "Parachute Game",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Parachute minigame for Twitch",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/b165c9077d"
+            }
+        },
+        {
+            "extension_name": "PTCG Boosters",
+            "alternate_names": [
+                "Pokemon Booster Extension"
+            ],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Open random Pokemon cards from real TCG booster sets using the Pokemon TCG API",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/e1447e23d5"
+            }
+        },
+        {
+            "extension_name": "Pulsoid",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Measure heartrate with Pulsoid",
+                "latest_version": "1.1",
+                "download_link": "https://ko-fi.com/s/b4b2082f4d"
+            }
+        },
+        {
+            "extension_name": "Voicemod",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Extension to trigger Voicemod triggers and change Voicemod settings",
+                "latest_version": "3.0",
+                "download_link": "https://ko-fi.com/s/b2645013ca"
+            }
+        },
+        {
+            "extension_name": "Welcome Messages",
+            "alternate_names": [],
+            "details": {
+                "author": "Chrizzz",
+                "description": "Welcome your viewers to your stream",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/eb008de324"
             }
         },
         {
