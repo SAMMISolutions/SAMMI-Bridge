@@ -1,12 +1,19 @@
 <form id="SAMMITestTwitchShoutout" class="SAMMITestTriggers">
   <div class="form-group d-flex align-items-center">
-    <button type="submit" class="btn btn-primary btn-sm me-1">Shoutout Created</button>
+    <button type="submit" class="btn btn-primary btn-sm me-1">Shoutout</button>
     <a class="tslCollapse collapsed" data-bs-toggle="collapse" href="#hideshoutout" role="button" aria-expanded="false" aria-controls="hideshoutout"></a>
   </div>
   <div class="collapse" id="hideshoutout" data-bs-parent="#content-triggers">
     <div class="form-group mb-2">
+      <label>Shoutout Type:</label>
+      <select class="form-select form-select-sm me-2" aria-label="Shoutout Type" name="shoutoutType">
+        <option value="received" selected>Received</option>
+        <option value="created">Created</option>
+      </select>
+    </div>
+    <div class="form-group mb-2">
       <label>Username:</label>
-      <input type="text" class="form-control form-control-sm w-auto" name="name">
+      <input type="text" class="form-control form-control-sm" name="name">
     </div>
   </div>
 </form>

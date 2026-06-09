@@ -4230,8 +4230,19 @@
           }
           ,
               async SAMMITestTwitchShoutout(form) {
+            const typeSelect = form.elements['shoutoutType'];
+            const type = typeSelect.options[typeSelect.selectedIndex].value;
             const [name, userID] = await getNameFromInput(form.elements.name)
-            const pullData = {
+            const isReceived = type === 'received';
+            const pullData = isReceived
+              ? {
+              from_user_name: name.toLowerCase(),
+              from_display_name: name,
+              from_user_id: userID,
+              started_at: twitchTimestamp(Date.now()),
+              viewer_count: getRandomInt(1, 1000),
+            }
+              : {
               id: '33426a33-0454-4e00-a9ad-4ee5ca74d75d',
               user_name: name.toLowerCase(),
               display_name: name,
@@ -4246,24 +4257,11 @@
               viewer_count: getRandomInt(1, 1000),
             };
             sendTriggerToSAMMI(
-              28,
-              `Shoutout to ${pullData.display_name}! [test trigger]`, {},
-              pullData,
-            );
-          }
-          ,
-              async SAMMITestTwitchShoutoutReceive(form) {
-            const [name, userID] = await getNameFromInput(form.elements.name)
-            const pullData = {
-              from_user_name: name.toLowerCase(),
-              from_display_name: name,
-              from_user_id: userID,
-              started_at: twitchTimestamp(Date.now()),
-              viewer_count: getRandomInt(1, 1000),
-            };
-            sendTriggerToSAMMI(
-              37,
-              `Shoutout received from ${pullData.from_display_name}! [test trigger]`, {},
+              isReceived ? 37 : 28,
+              isReceived
+                ? `Shoutout received from ${pullData.from_display_name}! [test trigger]`
+                : `Shoutout to ${pullData.display_name}! [test trigger]`,
+              {},
               pullData,
             );
           }

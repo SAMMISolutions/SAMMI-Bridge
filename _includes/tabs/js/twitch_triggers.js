@@ -17,7 +17,6 @@ async function SAMMITestTriggers() {
     {% include twitch_triggers/js/announcement.js %},
     {% include twitch_triggers/js/whisper.js %},
     {% include twitch_triggers/js/shoutout.js %},
-    {% include twitch_triggers/js/shoutout_receive.js %},
     {% include twitch_triggers/js/adbreak.js %},
     {% include twitch_triggers/js/stream.js %},
     {% include twitch_triggers/js/charity.js %},
