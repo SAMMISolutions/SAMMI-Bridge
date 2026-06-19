@@ -1471,19 +1471,24 @@
             );
           }
           ,
-              async SAMMITestTwitchSubs(form, notUsed, gifted = false, gifterName = '') {
+              async SAMMITestTwitchSubs(form, notUsed, gifted = false, gifterName = '', overrides = {}) {
             const type = 1;
-            const month = parseInt(form.elements.submonths.value) || 1;
-            const subtype = form.elements.subgift.checked ?
+            // When triggered as part of a Community Gift, all of these come from `overrides`, so the
+            // shared Sub form is neither read nor changed. On a manual Sub trigger `overrides` is
+            // empty and every value is read from the form as before.
+            const isSubGift = overrides.subgift !== undefined ? overrides.subgift : form.elements.subgift.checked;
+            const isAnon = overrides.anon !== undefined ? overrides.anon : form.elements.anongift.checked;
+            const month = overrides.month !== undefined ? overrides.month : (parseInt(form.elements.submonths.value) || 1);
+            const subtype = isSubGift ?
               2 :
-              form.elements.anongift.checked ?
+              isAnon ?
               4 :
               gifted ?
               2 :
               1;
-            const context = form.elements.subgift.checked ?
+            const context = isSubGift ?
               'subgift' :
-              form.elements.anongift.checked ?
+              isAnon ?
               'anonsubgift' :
               gifted ?
               'subgift' :
@@ -1492,19 +1497,21 @@
             let userID;
             if (gifted) {
               name = gifterName;
-            } else if (form.elements.anongift.checked) {
+            } else if (isAnon) {
               name = ['Anonymous User'];
             } else {
               const [customName, customID] = await getNameFromInput(form.elements.name);
               name = [customName, customID];
             }
             const giftedName = subtype !== 1 ? generateName(name[0]) : [''];
-            const message = form.elements.submessage.value || SAMMI.generateMessage();
-            const tiers = form.querySelectorAll('input[name="tier"]');
-            let selectedTier;
-            for (const tier of tiers) {
-              if (tier.checked) {
-                selectedTier = tier.value;
+            const message = overrides.message !== undefined ? overrides.message : (form.elements.submessage.value || SAMMI.generateMessage());
+            let selectedTier = overrides.tier;
+            if (!selectedTier) {
+              const tiers = form.querySelectorAll('input[name="tier"]');
+              for (const tier of tiers) {
+                if (tier.checked) {
+                  selectedTier = tier.value;
+                }
               }
             }
             const selecterTierNum = selectedTier === 'Tier 1' ?
@@ -1565,8 +1572,12 @@
               selectedTier === 'Tier 2' ? 2 :
               selectedTier === 'Tier 3' ? 4 :
               1;
+            // Anonymous community gifts are opted into via the Sub form's "AnonGift" checkbox
+            // (the Community Gift form has no anon control of its own). This is only read here,
+            // never written, so it does not alter the Sub form.
+            const isAnon = subForm.querySelector('[value="anongift"]').checked;
             let gifterName;
-            if (subForm.querySelector('[value="anongift"]').checked) {
+            if (isAnon) {
               gifterName = ['Anonymous User', ''];
             } else if (form.elements.gifterName && form.elements.gifterName.value.trim().length > 0) {
               gifterName = await getNameFromInput(form.elements.gifterName);
@@ -1590,14 +1601,19 @@
               },
               pullData,
             );
-            const tierRadio = subForm.querySelector(`input[name="tier"][value="${selectedTier}"]`);
-            if (tierRadio) tierRadio.checked = true;
-            if (subForm.querySelector('[value="anongift"]').checked === false) {
-              subForm.querySelector('[value="subgift"]').checked = true;
-            }
+            // Spawn the individual gift subs entirely from this Community Gift's own data. We pass
+            // every value as an override so the shared Sub form is never read or mutated - that way
+            // the two test triggers stay independent (the Sub form's tier/months/message/checkboxes
+            // no longer leak into a Community Gift, and a Community Gift no longer changes them).
             for (let i = 0; i < amount; i++) {
               setTimeout(() => {
-                this.SAMMITestTwitchSubs(subForm, null, true, gifterName);
+                this.SAMMITestTwitchSubs(subForm, null, true, gifterName, {
+                  tier: selectedTier,
+                  anon: isAnon,
+                  subgift: false,
+                  month: 1,
+                  message: '',
+                });
               }, 1000 + i * 10);
             }
           }

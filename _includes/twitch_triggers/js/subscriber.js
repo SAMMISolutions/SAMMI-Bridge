@@ -1,16 +1,21 @@
-async SAMMITestTwitchSubs(form, notUsed, gifted = false, gifterName = '') {
+async SAMMITestTwitchSubs(form, notUsed, gifted = false, gifterName = '', overrides = {}) {
   const type = 1;
-  const month = parseInt(form.elements.submonths.value) || 1;
-  const subtype = form.elements.subgift.checked ?
+  // When triggered as part of a Community Gift, all of these come from `overrides`, so the
+  // shared Sub form is neither read nor changed. On a manual Sub trigger `overrides` is
+  // empty and every value is read from the form as before.
+  const isSubGift = overrides.subgift !== undefined ? overrides.subgift : form.elements.subgift.checked;
+  const isAnon = overrides.anon !== undefined ? overrides.anon : form.elements.anongift.checked;
+  const month = overrides.month !== undefined ? overrides.month : (parseInt(form.elements.submonths.value) || 1);
+  const subtype = isSubGift ?
     2 :
-    form.elements.anongift.checked ?
+    isAnon ?
     4 :
     gifted ?
     2 :
     1;
-  const context = form.elements.subgift.checked ?
+  const context = isSubGift ?
     'subgift' :
-    form.elements.anongift.checked ?
+    isAnon ?
     'anonsubgift' :
     gifted ?
     'subgift' :
@@ -19,19 +24,21 @@ async SAMMITestTwitchSubs(form, notUsed, gifted = false, gifterName = '') {
   let userID;
   if (gifted) {
     name = gifterName;
-  } else if (form.elements.anongift.checked) {
+  } else if (isAnon) {
     name = ['Anonymous User'];
   } else {
     const [customName, customID] = await getNameFromInput(form.elements.name);
     name = [customName, customID];
   }
   const giftedName = subtype !== 1 ? generateName(name[0]) : [''];
-  const message = form.elements.submessage.value || SAMMI.generateMessage();
-  const tiers = form.querySelectorAll('input[name="tier"]');
-  let selectedTier;
-  for (const tier of tiers) {
-    if (tier.checked) {
-      selectedTier = tier.value;
+  const message = overrides.message !== undefined ? overrides.message : (form.elements.submessage.value || SAMMI.generateMessage());
+  let selectedTier = overrides.tier;
+  if (!selectedTier) {
+    const tiers = form.querySelectorAll('input[name="tier"]');
+    for (const tier of tiers) {
+      if (tier.checked) {
+        selectedTier = tier.value;
+      }
     }
   }
   const selecterTierNum = selectedTier === 'Tier 1' ?
