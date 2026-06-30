@@ -9,6 +9,16 @@
                 "latest_version": "1.0",
                 "download_link": "https://ko-fi.com/s/74dbd41469"
             }
+        },
+        {
+            "extension_name": "Pokemon Race",
+            "alternate_names": [],
+            "details": {
+                "author": "KevinPorKevin",
+                "description": "An interactive Twitch chat minigame where viewers can join an open race through chat converted in a random Pokemon.",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/99150f651e"
+            }
         }
     ]
 }
