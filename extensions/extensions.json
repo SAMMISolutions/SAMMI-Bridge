@@ -595,6 +595,16 @@
             }
         },
         {
+            "extension_name": "Twitch Event Feed",
+            "alternate_names": [],
+            "details": {
+                "author": "KevinPorKevin",
+                "description": "Creates a customizable Twitch event overlay for OBS using an HTML file as a browser source displays the latest Twitch events.",
+                "latest_version": "1.0",
+                "download_link": "https://ko-fi.com/s/74dbd41469"
+            }
+        },
+        {
             "extension_name": "Zoom and Follow",
             "details": {
                 "author": "MisterK_Qc",
