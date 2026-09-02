@@ -20,6 +20,7 @@ async function SAMMITestTriggers() {
     {% include twitch_triggers/js/adbreak.js %},
     {% include twitch_triggers/js/stream.js %},
     {% include twitch_triggers/js/charity.js %},
+    {% include twitch_triggers/js/mod_anniversary.js %},
     {% include twitch_triggers/js/extension_trigger.js %},
     {% include twitch_triggers/js/custom_powerups.js %},
     {% include twitch_triggers/js/twitch_extension.js %}

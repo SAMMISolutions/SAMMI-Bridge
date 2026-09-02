@@ -15,7 +15,15 @@ function YTLiveTestEvent() {
     'ytLiveTestMilestone',
     'ytLiveTestSuperChat',
     'ytLiveTestSuperSticker',
-    'ytLiveTestChatMessage'
+    'ytLiveTestChatMessage',
+    'ytLiveTestJewels',
+    'ytLiveTestMembershipGiftSent',
+    'ytLiveTestMembershipGiftReceived',
+    'ytLiveTestMembersOnlyChatStarted',
+    'ytLiveTestMembersOnlyChatEnded',
+    'ytLiveTestUserBanned',
+    'ytLiveTestPollStarted',
+    'ytLiveTestPollClosed'
   ];
 
   buttonIds.forEach(id => {
@@ -36,6 +44,22 @@ function YTLiveTestEvent() {
           break;
         case 'ytLiveTestChatMessage': ytLiveTestChatMessage(pullData)
           break;
+        case 'ytLiveTestJewels': ytLiveTestJewels(pullData)
+          break;
+        case 'ytLiveTestMembershipGiftSent': ytLiveTestMembershipGiftSent(pullData)
+          break;
+        case 'ytLiveTestMembershipGiftReceived': ytLiveTestMembershipGiftReceived(pullData)
+          break;
+        case 'ytLiveTestMembersOnlyChatStarted': ytLiveTestMembersOnlyChat(pullData, 'Started')
+          break;
+        case 'ytLiveTestMembersOnlyChatEnded': ytLiveTestMembersOnlyChat(pullData, 'Ended')
+          break;
+        case 'ytLiveTestUserBanned': ytLiveTestUserBanned(pullData)
+          break;
+        case 'ytLiveTestPollStarted': ytLiveTestPoll(pullData, 'Started')
+          break;
+        case 'ytLiveTestPollClosed': ytLiveTestPoll(pullData, 'Closed')
+          break;
         default:
           break;
       }
@@ -49,7 +73,14 @@ function YTLiveTestEvent() {
   {% include youtube_triggers/js/superchat.js %}
   {% include youtube_triggers/js/supersticker.js %}
   {% include youtube_triggers/js/chat.js %}
+  {% include youtube_triggers/js/jewels.js %}
+  {% include youtube_triggers/js/membership_gift_sent.js %}
+  {% include youtube_triggers/js/membership_gift_received.js %}
+  {% include youtube_triggers/js/members_only_chat.js %}
+  {% include youtube_triggers/js/user_banned.js %}
+  {% include youtube_triggers/js/poll.js %}
 
   {% include youtube_triggers/helpers/generateName.js %}
+  {% include youtube_triggers/helpers/generateTestId.js %}
   {% include helpers/sendTriggerToSAMMI.js %}
 }

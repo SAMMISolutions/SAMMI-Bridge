@@ -1,6 +1,30 @@
 async SAMMITestTwitchChat(form) {
   const [name, userID] = await getNameFromInput(form.elements['name']);
-  const message = form.elements['chatMsg'].value || SAMMI.generateMessage();
+  const messageText = form.elements['chatMsg'].value || SAMMI.generateMessage();
+  const hasGif = form.elements['chatGif'].checked;
+  const gifId = 'joSNxeswxuc74Juo8X';
+  const gifText = '[Y A Y Yes GIF by Djemilah Birnie]';
+  const gifUrl = 'https://media4.giphy.com/media/joSNxeswxuc74Juo8X/giphy.gif?cid=095d7a5dzizsiwgabonagkmigggv8v1spfai91ac3x0dsiy0&ep=v1_gifs_trending&rid=giphy.gif&ct=g';
+  const message = hasGif ? `${messageText} ${gifText}` : messageText;
+  const fragments = [{
+    text: hasGif ? `${messageText} ` : messageText,
+    emote: null,
+    type: 'text',
+  }];
+  const gifList = hasGif
+    ? `${messageText.length + 1}-${message.length - 1}|${gifId}|${gifUrl}`
+    : '';
+  if (hasGif) {
+    fragments.push({
+      text: gifText,
+      type: 'gif',
+      gif: {
+        id: gifId,
+        gif_id: gifId,
+        url: gifUrl,
+      },
+    });
+  }
   const channelId = window.defaultTwitchUser.user_id;
   const channel = window.defaultTwitchUser.login;
   const color = '008000';
@@ -46,7 +70,9 @@ async SAMMITestTwitchChat(form) {
     reply_parent_msg_id: '',
     source_badge_info: '',
     emote_list: '',
-    message_no_emotes: message,
+    gif_list: gifList,
+    fragments,
+    message_no_emotes: messageText,
     is_founder: isFounder,
     is_broadcaster: isBroadcaster,
     source_id: '',

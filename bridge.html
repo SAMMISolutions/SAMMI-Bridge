@@ -131,6 +131,8 @@ layout: default
             </div>
           </div>
         <!--Twitch Triggers-->
+{% include tabs/html/twitch_triggers.html %}
+{% comment %}
         <div class="tab-pane" id="content-triggers" role="tabpanel" title="Twitch Triggers" data-type="default">
           <form id="SAMMITestTwitchChat" class="SAMMITestTriggers">
           <div>
@@ -662,7 +664,10 @@ layout: default
           </div>
         </form>
         </div>
+{% endcomment %}
         <!--YouTube Triggers-->
+{% include tabs/html/youtube_triggers.html %}
+{% comment %}
         <div class="tab-pane" id="content-yttriggers" role="tabpanel" title="YouTube Triggers" data-type="default">
             <div>
             <button type="button" class="btn btn-primary btn-sm" id="ytLiveTestSub">Subscriber</button>
@@ -754,6 +759,7 @@ layout: default
         </div>
         </div>
 
+{% endcomment %}
         <!--Your external script will be inserted here-->
         <!--<script src="example.js"></script>-->
         <!--INSERT PART 1-->
